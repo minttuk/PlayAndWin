@@ -1,4 +1,4 @@
-PlayAndWin (PAW) JJEEE
+PlayAndWin (PAW)
 
 The product is an interactive website, featuring an array of games that reward the player with points based on their performance. These points can then be used in an onsite webstore which features a variety of digital (or physical) goodies, such as player badges, virtual stickers and gift cards. The purpose of these offerings is to keep players hooked on the site and in competition with their peers. To promote these social interactions as well as grow the site and gain more active users, players will also receive points for recruiting others.
 
