@@ -2,3 +2,7 @@
     margin:auto;
     display:block;
 }
+.span3 {
+    border-bottom: none;
+    padding: 15px 0px;
+}
