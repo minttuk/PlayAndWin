@@ -500,6 +500,18 @@ padding: 70px 0 165px 0;
 	font-size:16px;
 	text-align:center;
 }
+a.sign_in{
+  border:2px solid #fff;
+  display:inline-block;
+  color: #237546;
+  font-weight: 700;
+  text-shadow: none;
+}
+a.sign_in:hover{
+	color:#fff;
+	border:2px solid #e91e63;
+	background: #e91e63;
+}
 a.learn{
 	color:#fff;
 	border:2px solid #fff;
