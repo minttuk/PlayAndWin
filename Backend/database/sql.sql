@@ -26,10 +26,10 @@ CREATE TABLE friendship (
 
 CREATE TABLE product (
   id INT(6) PRIMARY KEY AUTO_INCREMENT NOT NULL,
-  name VARCHAR(30) NOT NULL,
-  price FLOAT(6) NOT NULL,
+  name VARCHAR(100) NOT NULL,
+  price FLOAT(20) NOT NULL,
   description VARCHAR(500),
-  image_url VARCHAR(50)
+  image_url VARCHAR(500)
 );
 
 CREATE TABLE shoporder (
@@ -51,6 +51,6 @@ CREATE TABLE order_row (
 CREATE TABLE advertisement (
   id INT(6) PRIMARY KEY AUTO_INCREMENT NOT NULL,
   company_name VARCHAR(100) NOT NULL,
-  image_url VARCHAR(200) NOT NULL,
+  image_url VARCHAR(500) NOT NULL,
   views INT(6) DEFAULT 0
 );
