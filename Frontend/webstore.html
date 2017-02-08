@@ -322,6 +322,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		</div>
 	</div>
 </div>
+<!--form for adding products -->
 <div class="pop-up">
 	<div id="small-dialog8" class="mfp-hide book-form">
 		<div class="pop-up-content-agileits-w3layouts">
@@ -329,23 +330,26 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<img src="images/g8.jpg" alt=" " class="img-responsive zoom-img" />
 			</div>
 			<div class="col-md-6 w3ls-right">
-				<h4>Prize-8</h4>
-				<p>Duis sodales nibh vitae augue feugiat efficitur. Sed vel urna sollicitudin, interdum massa nec, sagittis massa. </p>
-				<p class="agileits">Etiam porttitor neque enim, sit amet mollis est sollicitudin sed.</p>
-				<div class="span span1">
-					<p class="left">NAME</p>
-					<p class="right">: Vehicula ligula</p>
-					<div class="clearfix"></div>
-				</div>
-				<div class="span span2">
-					<p class="left">COST</p>
-					<p class="right">: 1000 Coins</p>
-					<div class="clearfix"></div>
-				</div>
-				<div class="span span3">
-					<button type="button" class="button">BUY</button>
-					<div class="clearfix"></div>
-				</div>
+				<form>
+					<h4>Give the product information:</h4>
+					<p>Give the product description:</p>
+					<textarea id="description" rows="4" cols="40"></textarea>
+					<div class="span span1">
+						<p class="left">NAME:</p>
+						<input type="text" id="name">
+						<div class="clearfix"></div>
+					</div>
+					<div class="span span2">
+						<p class="left">COST:</p>
+						<input type="number" id="cost">
+						<div class="clearfix"></div>
+					</div>
+					<div class="span span3">
+						<button type="button" class="button">ADD</button>
+						<div class="clearfix"></div>
+					</div>
+				</form>
+
 			</div>
 			<div class="clearfix"></div>
 		</div>
