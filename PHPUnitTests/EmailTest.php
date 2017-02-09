@@ -2,6 +2,8 @@
 
 
 use phpunit\Framework\TestCase;
+echo "xxxxx" . getcwd();
+require './Email.php';
 
 /**
  * @covers Email
