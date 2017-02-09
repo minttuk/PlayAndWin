@@ -1,7 +1,7 @@
 <?php
 
 
-use PHPUnit\Framework\TestCase;
+use phpunit\Framework\TestCase;
 
 /**
  * @covers Email
