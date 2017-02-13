@@ -1,6 +1,8 @@
 <?php
 
 
+
+
 final class Email
 {
     private $email;
