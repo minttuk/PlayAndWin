@@ -54,3 +54,9 @@ CREATE TABLE advertisement (
   image_url VARCHAR(500) NOT NULL,
   views INT(6) DEFAULT 0
 );
+
+CREATE TABLE hs_reaction (
+  user_id INT(6) PRIMARY KEY AUTO_INCREMENT NOT NULL,
+  highscore INT(11) NOT NULL,
+  FOREIGN KEY (user_id) REFERENCES user(id)
+);
