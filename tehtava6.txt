@@ -1,0 +1,11 @@
+Tehtävä 6 - Jatkuva integrointi
+
+1) Projektimme koontitiedosto on phpunit.xml, joka löytyy develop haaran alta.
+
+2) Projektimme koonti tulee vaatimaan Doctrine ja PHPUnit -kirjaston. Projektissamme käytämme lisäksi
+Bootstrap ja JQuery -kirjastoja.
+
+3) Meidän projektistamme pyörii automaattikoonti Jenkins palvelussa. Koonti suoritetaan jokaisen Push operaation
+yhteydessä.
+
+4) http://195.148.80.216/jenkins/job/K2017-Ryhma-3/
