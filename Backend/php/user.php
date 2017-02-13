@@ -2,11 +2,6 @@
 require '/Users/sainipatala/Documents/PHP/playandwin/rb.php';
 R::setup( 'mysql:host=localhost;dbname=playandwin', 'root', '' );
 
-//Just for testing => remove later
-$user = new user();
-$user->setUser("newuser", "newuser@new.fi", "usernew", "John", "Doe");
-$user->getUser(5);
-
 class user {
 
 //This method is used when a user registers
@@ -30,7 +25,7 @@ class user {
 //This method is used to get user data by id
   function getUser ($id) {
     $user = R::load( 'user', $id );
-    echo $user;
+    return $user;
   }
 }
 ?>
