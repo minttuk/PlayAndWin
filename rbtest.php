@@ -12,6 +12,6 @@ require 'rb.php';
 
  $id = R::store( $user );
 
- $user = R::load( 'username', $id );
+ $user = R::load( 'user', 2 );
 
-echo $user;
+echo $user->username;
