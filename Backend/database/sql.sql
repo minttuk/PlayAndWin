@@ -55,8 +55,8 @@ CREATE TABLE advertisement (
   views INT(6) DEFAULT 0
 );
 
-CREATE TABLE g1_reaction (
-  id INT(6) PRIMARY KEY AUTO_INCREMENT NOT NULL,
+CREATE TABLE hs_reaction (
+  user_id INT(6) PRIMARY KEY AUTO_INCREMENT NOT NULL,
   highscore INT(11) NOT NULL,
   FOREIGN KEY (user_id) REFERENCES user(id)
 );
