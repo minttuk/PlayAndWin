@@ -2,16 +2,16 @@
 
 require 'rb.php';
 
- R::setup( 'mysql:host=localhost;dbname=playandwin', 'root', 'moi' );
+ R::setup( 'mysql:host=localhost;dbname=playandwin', 'root', '' );
 
- $user = R::dispense( 'user' );
+ /*$user = R::dispense( 'user' );
 
- $user->username = 'Ali';
- $user->email = 'ali@ali.com';
- $user->password = 'moi';
+ $user->username = 'Tuomas';
+ $user->email = 'tuomas@tuomas.com';
+ $user->password = 'salasana';
 
- $id = R::store( $user );
+ R::store( $user );*/
 
- $user = R::load( 'user', 2 );
+ $user = R::load( 'user', 1 );
 
 echo $user->username;
