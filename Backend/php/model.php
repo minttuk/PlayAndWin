@@ -1,5 +1,6 @@
 <?php
-
+header("Access-Control-Allow-Origin: *");
+include 'user.php';
 
 $resource = getResource();
 $request_method = getMethod();
@@ -75,5 +76,23 @@ function getMethod() {
     return $method;
 }
 
+if ($q == "getUserInfo"){
+    getUserInfo();
+}
 
+//WORK IN PROGRESS / NOT WORKING YET
+function getUserInfo() {
+  $value = json_decode(file_get_contents('php://input'), true);
+  $id = $value['id'];
+  $user = new User();
+  if ($userResult = $user->getUser($id)) {
+    //echo json_encode($userResult);
+    $msg[] = array('id'=>$user->id);
+    echo json_encode(array('success'=>'yay'));
+  }
+  else {
+    http_response_code(403);
+    echo json_encode(array('error'=>'No user found'));
+  }
+}
 ?>
