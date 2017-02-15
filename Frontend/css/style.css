@@ -93,6 +93,18 @@ img {
     color: #E91E63;
     background-color: transparent;
 }
+.sign-in a {
+	color: #237546;
+	font-weight: 700;
+	text-shadow: none;
+    font-family: 'Raleway', sans-serif;
+    cursor: pointer;
+    border:2px solid #fff;
+}
+.sign-in:hover a{
+	color:#E91E63;
+	border:2px solid #E91E63;
+}
 /*-- Link-Hover-Effect --*/
 .hover-effect a {
 	padding: 10px;
