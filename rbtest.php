@@ -4,14 +4,14 @@ require 'rb.php';
 
  R::setup( 'mysql:host=localhost;dbname=playandwin', 'root', '' );
 
- /*$user = R::dispense( 'user' );
+$user = R::dispense( 'user' );
 
- $user->username = 'Tuomas';
- $user->email = 'tuomas@tuomas.com';
- $user->password = 'salasana';
+$user->username = 'Tuomas';
+$user->email = 'tuomas@tuomas.com';
+$user->password = 'salasana';
 
- R::store( $user );*/
+R::store( $user );
 
- $user = R::load( 'user', 1 );
+$user = R::load( 'user', 1 );
 
 echo $user->username;
