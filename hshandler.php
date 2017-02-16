@@ -15,15 +15,15 @@ function highscore() {
         if ($newScore > $curScore) {
           $score->highscore=$newScore;
           R::store( $score );
-          echo 'New Highscore!';
+          echo json_encode(array('highscore'=>$newScore,'message'=>'New High Score!'));
           return;
         }
-        echo 'Not a highscore!';
+        echo json_encode(array('highscore'=>$curScore,'message'=>''));
         return;
       }
     }
   //}
-  echo 'Highscore not saved! (No user signed in.)';
+  echo json_encode(array('highscore'=>'','message'=>'Highscore not saved! (No user signed in.)'));
 }
 
 highscore();
