@@ -14,4 +14,4 @@ R::store( $user );
 
 $user = R::load( 'user', 1 );
 
-echo $user->username;
+echo $user;
