@@ -1,8 +1,19 @@
 .button{
     margin:auto;
     display:block;
+    padding: 7px 15px;
+    background-color: transparent;
+    border: 2px solid rgb(2, 24, 136);
+    outline: transparent;
+	color:rgb(2, 24, 136);
+}
+.button:hover {
+	color: #FFf;
+    border: 2px solid #FF166D;
+	background:#FF166D;
 }
 .span3 {
     border-bottom: none;
     padding: 15px 0px;
 }
+

@@ -1,5 +1,4 @@
 <?php
-
 require 'rb.php';
 
  R::setup( 'mysql:host=localhost;dbname=playandwin', 'root', '' );
@@ -12,6 +11,6 @@ require 'rb.php';
 
  R::store( $user );*/
 
- $user = R::load( 'user', 1 );
+ $products = json_encode(R::getAll( 'SELECT * FROM product' ));
 
-echo $user;
+echo $products;

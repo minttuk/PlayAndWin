@@ -19,8 +19,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <link href="css/profile.css" rel="stylesheet" type="text/css" media="all" />
 <!--// css -->
 <!-- font -->
-<link href='//fonts.googleapis.com/css?family=Josefin+Sans:400,100,100italic,300,300italic,400italic,600,600italic,700,700italic' rel='stylesheet' type='text/css'>
-<link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Josefin+Sans:400,100,100italic,300,300italic,400italic,600,600italic,700,700italic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
 <!-- //font -->
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.js"></script>
@@ -47,9 +47,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<li class="hover-effect"><a href="index.html">Home</a></li>
 						<li class="hover-effect"><a href="about.html">About</a></li>
 						<li class="hover-effect"><a href="webstore.html">Shop</a></li>
-						<li class="hover-effect active"><a href="news.html">Profile</a></li>
+						<li class="hover-effect active"><a href="profile.html">Profile</a></li>
 						<li class="hover-effect"><a href="contact.html">Community</a></li>
-					<li><a class="sign_in" data-toggle="modal" data-target="#myModal">Sign in</a></li>
+						<li class="sign-in"><a data-toggle="modal" data-target="#myModal">Sign in</a></li>
 					</ul>
 				</div>
 			</div>
@@ -68,6 +68,19 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </div>
           </div>
         </div>
+		<!-- Edit Profile Modal -->
+		<div id="editprofilemodal" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-body">
+							<form action="#" method="post">
+								<input type="text" class="text" name="Name" placeholder="Description" required="">
+								<input id="saveprofilebutton" type="submit" class="more_btn" value="Save">
+							</form>
+					</div>
+				</div>
+			</div>
+		</div>
   </div>
 <div class="events-section2-agileinfo">
 <div class="container">
@@ -112,7 +125,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		 </div>
 		 <div class="item_info">
 				 <ul>
-					 <li><a href="#"><i class="glyphicon glyphicon-pencil"></i>Edit Profile</a></li>
+					 <li id="editprofilebutton" data-toggle="modal" data-target="#editprofilemodal"><a href="#"><i class="glyphicon glyphicon-pencil"></i>Edit Profile</a></li>
 					 <li><a href="#"><i class="glyphicon glyphicon-plus"></i>Add Friend</a></li>
 					 <li><a href="#"><i class="glyphicon glyphicon-envelope"></i>Send Message</a></li>
 				 </ul>
@@ -183,5 +196,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<p>&copy; 2017 Games Zone. All Rights Reserved | Design by <a href="http://w3layouts.com/" target="_blank"> W3layouts </a></p>
 		</div>
 	</div>
+	<script type="text/javascript" src="js/profile.js"></script>
 </div>
 <!-- //footer -->
