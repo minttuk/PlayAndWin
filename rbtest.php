@@ -14,4 +14,4 @@ require 'rb.php';
 
  $user = R::load( 'user', 2 );
 
-echo $user->username;
+echo $user;
