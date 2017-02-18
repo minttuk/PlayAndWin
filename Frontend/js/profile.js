@@ -17,7 +17,7 @@ $(document).ready(function() {
           });
           //registration date
           $('#regdate').fadeOut(0, function() {
-              $(this).text(response[0].reg_date).fadeIn(500);
+              $(this).text(response[0].reg_date.slice(0,10)).fadeIn(500);
           });
           //description
           if (response[0].description != null) {
