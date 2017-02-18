@@ -9,7 +9,7 @@ $parameters = getParameters();
 //Methods used with REST
 
 # Redirect to appropriate handlers.
-if ($resource[0]=="PlayAndWin") {
+if ($resource[0]=="testi") {
     // These below are left just for an example of how to handle REST calls
 
     /*if ($request_method=="GET" && $resource[1]=="getMsgs") {
@@ -27,6 +27,10 @@ else {
     //Methods without rest
 
     $q = $_REQUEST["q"];
+
+    if ($q == "getUserInfo"){
+        getUserInfo();
+    }
 
     // This below is an example of how to handle non-REST calls
     /*if ($q == "getFrontSideMsgs"){
@@ -76,19 +80,14 @@ function getMethod() {
     return $method;
 }
 
-if ($q == "getUserInfo"){
-    getUserInfo();
-}
-
 //WORK IN PROGRESS / NOT WORKING YET
 function getUserInfo() {
   $value = json_decode(file_get_contents('php://input'), true);
   $id = $value['id'];
   $user = new User();
-  if ($userResult = $user->getUser($id)) {
-    //echo json_encode($userResult);
-    $msg[] = array('id'=>$user->id);
-    echo json_encode(array('success'=>'yay'));
+  $userResult = $user->getUser($id);
+  if ($userResult != -1) {
+    echo $userResult;
   }
   else {
     http_response_code(403);

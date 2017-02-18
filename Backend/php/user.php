@@ -24,7 +24,10 @@ class user {
 
 //This method is used to get user data by id
   function getUser ($id) {
-    $user = R::load( 'user', $id );
+    $id = 1;
+    //$user = json_encode(R::getAll("SELECT * FROM user WHERE id = 1" ));
+    $user = json_encode(R::getAll( 'SELECT * FROM user WHERE id = :id', [':id' => $id]));
+    //$user = json_encode(R::load( 'user' , 1));
     return $user;
   }
 }

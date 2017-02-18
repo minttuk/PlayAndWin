@@ -10,7 +10,9 @@ CREATE TABLE user (
   firstname VARCHAR(30),
   lastname VARCHAR(30),
   description VARCHAR(500),
+  location VARCHAR(500),
   reg_date TIMESTAMP,
+  last_online TIMESTAMP,
   coins INT(10) DEFAULT 0,
   admin BOOLEAN DEFAULT 0
 );
@@ -60,3 +62,6 @@ CREATE TABLE hs_reaction (
   highscore INT(11) NOT NULL,
   FOREIGN KEY (user_id) REFERENCES user(id)
 );
+
+INSERT INTO user(username, firstname, lastname, email, password, description, location, coins)
+VALUES ('john.doe','John','Doe','john@doe.fi','johndoepass', 'Hello World!', 'Helsinki', '5000');
