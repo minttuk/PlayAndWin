@@ -15,12 +15,14 @@ function addProduct(){
     $name = $value['name'];
     $price = $value['price'];
     $description = $value['description'];
+    $image_url = $value['image_url'];
 
     $product = R::dispense( 'product' );
 
     $product->name = $name;
     $product->price = $price;
     $product->description = $description;
+    $product->image_url = $image_url;
 
     R::store( $product );
 

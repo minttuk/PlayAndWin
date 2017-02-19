@@ -16,4 +16,7 @@
     border-bottom: none;
     padding: 15px 0px;
 }
+.errormsg {
+    color: red;
+}
 

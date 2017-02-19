@@ -3,6 +3,7 @@
  */
 
 var submitForm = document.getElementById("submitForm");
+var addProductModal = document.getElementById("addProductModal");
 submitForm.onclick = function(){
 
 //function addProduct(){
@@ -10,11 +11,12 @@ submitForm.onclick = function(){
     var description = document.getElementById('formDescription').value;
     var name = document.getElementById('formName').value;
     var price = document.getElementById('formPrice').value;
+    var image_url = document.getElementById("formImage_url").value;
     console.log("name " + name);
 
     if (checkName(name) && checkCost(price) && checkDescription(description)){
 
-        var array = {"name": name, "price": price, "description": description};
+        var array = {"name": name, "price": price, "description": description, "image_url": image_url};
         var dataString = JSON.stringify(array);
 
         try{
@@ -39,6 +41,9 @@ submitForm.onclick = function(){
             if (ajaxRequest.readyState == 4 && ajaxRequest.status == 200){
                 var text = ajaxRequest.responseText;
                 console.log(text);
+                //$('#addProductModal').hide();
+                addProductModal.style.display = "none";
+                window.location = 'webstore.html';
             }
         };
 
