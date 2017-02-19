@@ -1,6 +1,8 @@
 <?php
 header("Access-Control-Allow-Origin: *");
-include 'user.php';
+//include 'user.php'; kommentoin pois koska mulla ei toimi mikään modelin kautta, koska herjaa että ei löydä '/Users/sainipatala/Documents/PHP/playandwin/rb.php'
+include 'addProduct.php';
+
 
 $resource = getResource();
 $request_method = getMethod();
@@ -31,6 +33,10 @@ else {
     if ($q == "getUserInfo"){
         getUserInfo();
     }
+    if ($q == "addProduct"){
+        addProduct();
+    }
+
 
     // This below is an example of how to handle non-REST calls
     /*if ($q == "getFrontSideMsgs"){
@@ -94,4 +100,5 @@ function getUserInfo() {
     echo json_encode(array('error'=>'No user found'));
   }
 }
+
 ?>

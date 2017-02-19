@@ -1,6 +1,5 @@
 <?php
 require '/Users/sainipatala/Documents/PHP/playandwin/rb.php';
-//require 'C:/Users/minttu/PhpstormProjects/PlayAndWin/rb.php';
 R::setup( 'mysql:host=localhost;dbname=playandwin', 'root', '' );
 
 class user {

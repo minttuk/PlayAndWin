@@ -26,6 +26,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- //font -->
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.js"></script>
+
+
+
 </head>
 <body>
 <!-- banner -->
@@ -105,6 +108,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                               +'<a class="book popup-with-zoom-anim button-isi zoomIn animated" data-wow-delay=".5s" href="#small-dialog'+i+'">'
                               +'<img src="'+products[i].image_url+'" alt=" " class="img-responsive zoom-img" /></a></div>');
                           };
+
                         }).then(function(products) {
 						$('.popup-with-zoom-anim').magnificPopup({
 							type: 'inline',
@@ -120,9 +124,48 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 						})});
 </script>
+
+<!-- Add Product Modal -->
+<div id="addProductModal" class="modal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-body">
+				<form>
+					<h4>Give the product information:</h4>
+					<div class="span span1">
+						<p class="left">NAME:</p>
+						<input type="text" id="formName">
+						<div class="clearfix"></div>
+					</div>
+					<div class="span span2">
+						<p class="left">COST:</p>
+						<input type="number" id="formPrice">
+						<div class="clearfix"></div>
+					</div>
+					<div class="span span3">
+						<p class="left">Image URL:</p>
+						<input type="text" id="image_url">
+						<div class="clearfix"></div>
+					</div>
+					<p>Give the product description:</p>
+					<textarea id="formDescription" rows="4" cols="70"></textarea>
+					<div class="span span3">
+						<button type="button" class="button" id="submitForm">ADD</button>
+						<div class="clearfix"></div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<button type="button" class="button" id="addProductButton" data-toggle="modal" data-target="#addProductModal" >ADD PRODUCTS</button>
+<script src="js/addProduct.js"></script>
+
 <script src="js/jquery.magnific-popup.js" type="text/javascript"></script>
 <script type="text/javascript" src="js/modernizr.custom.53451.js"></script>
 <div class="infos"/>
+
 <!-- Malli siitä miten oli ennen
 <div class="pop-up">
 	<div id="small-dialog7" class="mfp-hide book-form">
@@ -155,6 +198,43 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </div>
 -->
 <!--form for adding products -->
+
+<div>
+	<!--<button type="button" class="button" data-toggle="modal" data-target="#small-dialog">ADD PRODUCTS</button>
+
+	<div class="pop-up">
+		<div id="small-dialog" class="mfp-hide book-form">
+			<div class="pop-up-content-agileits-w3layouts">
+				<div class="col-md-6 w3ls-left">
+					<img src="" alt=" " class="img-responsive zoom-img" />
+				</div>
+				<div class="col-md-6 w3ls-right">
+					<form>
+						<h4>Give the product information:</h4>
+						<p>Give the product description:</p>
+						<textarea id="description" rows="4" cols="40"></textarea>
+						<div class="span span1">
+							<p class="left">NAME:</p>
+							<input type="text" id="name">
+							<div class="clearfix"></div>
+						</div>
+						<div class="span span2">
+							<p class="left">COST:</p>
+							<input type="number" id="cost">
+							<div class="clearfix"></div>
+						</div>
+						<div class="span span3">
+							<button type="button" class="button">ADD</button>
+							<div class="clearfix"></div>
+						</div>
+					</form>
+
+				</div>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+	</div>
+</div> -->
 <!--
 <div class="pop-up">
 	<div id="small-dialog8" class="mfp-hide book-form">
@@ -188,6 +268,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		</div>
 	</div>
 </div> -->
+
+
+
 <!-- footer -->
 <div class="footer">
 	<div class="container">

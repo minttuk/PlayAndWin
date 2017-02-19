@@ -1,0 +1,27 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: minttu
+ * Date: 19-Feb-17
+ * Time: 10:14
+ */
+require 'rb.php';
+
+function addProduct(){
+
+    R::setup( 'mysql:host=localhost;dbname=playandwin', 'root', '' );
+
+    $value = json_decode(file_get_contents('php://input'), true);
+    $name = $value['name'];
+    $price = $value['price'];
+    $description = $value['description'];
+
+    $product = R::dispense( 'product' );
+
+    $product->name = $name;
+    $product->price = $price;
+    $product->description = $description;
+
+    R::store( $product );
+
+}
