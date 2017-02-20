@@ -1,7 +1,8 @@
 <?php
 header("Access-Control-Allow-Origin: *");
-//include 'user.php'; kommentoin pois koska mulla ei toimi mikään modelin kautta, koska herjaa että ei löydä '/Users/sainipatala/Documents/PHP/playandwin/rb.php'
+include 'user.php'; //kommentoin pois koska mulla ei toimi mikään modelin kautta, koska herjaa että ei löydä '/Users/sainipatala/Documents/PHP/playandwin/rb.php'
 include 'addProduct.php';
+require 'rb.php';
 
 
 $resource = getResource();
@@ -33,16 +34,14 @@ else {
     if ($q == "getUserInfo"){
         getUserInfo();
     }
+
+    if ($q == "setUserInfo"){
+        setUserInfo();
+    }
+
     if ($q == "addProduct"){
         addProduct();
     }
-
-
-    // This below is an example of how to handle non-REST calls
-    /*if ($q == "getFrontSideMsgs"){
-        getFrontSideMsgs();
-    }*/
-
 }
 
 // Tästä alkaa varsinaiset metodit.
@@ -85,20 +84,4 @@ function getMethod() {
     $method = $_SERVER['REQUEST_METHOD'];
     return $method;
 }
-
-//WORK IN PROGRESS / NOT WORKING YET
-function getUserInfo() {
-  $value = json_decode(file_get_contents('php://input'), true);
-  $id = $value['id'];
-  $user = new User();
-  $userResult = $user->getUser($id);
-  if ($userResult != -1) {
-    echo $userResult;
-  }
-  else {
-    http_response_code(403);
-    echo json_encode(array('error'=>'No user found'));
-  }
-}
-
 ?>

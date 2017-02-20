@@ -5,7 +5,6 @@
  * Date: 19-Feb-17
  * Time: 10:14
  */
-require 'rb.php';
 
 function addProduct(){
 

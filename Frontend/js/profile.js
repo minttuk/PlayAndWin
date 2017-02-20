@@ -1,8 +1,25 @@
 $( "#saveprofilebutton" ).click(function() {
   console.log("saveprofilebutton clicked");
-});
+  var str = "setUserInfo";
+  var $newfirstname = $('input[name="newfirstname"]').val();
+  var $newlastname = $('input[name="newlastname"]').val();
+  var $newdescription = $('input[name="newdescription"]').val();
+  var $newlocation = $('input[name="newlocation"]').val();
 
-// WORK IN PROGRESS / NOT WORKING YET
+  $.ajax({
+      url: "http://localhost/PlayAndWin/Backend/php/model.php?q=" + str,
+      type: "post",
+      dataType: "json",
+      data: JSON.stringify({"id": "1", "firstname": $newfirstname, "lastname": $newlastname, "description": $newdescription, "location": $newlocation}),
+      success: function (response){
+        console.log('success');
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        console.log(textStatus, errorThrown);
+      }
+  });
+})
+
 $(document).ready(function() {
     var str = "getUserInfo";
     $.ajax({
