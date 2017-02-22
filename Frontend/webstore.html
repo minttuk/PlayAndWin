@@ -102,8 +102,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                            +'<div class="clearfix"></div></div>'
 					                       +'<div class="span span2">'+'<p class="left">COST</p><p class="right">'+products[i].price+'</p>'
                                            +'<div class="clearfix"></div></div>'
-					                       +'<div class="span span3"><button type="button" class="button">BUY</button>'
+					                       +'<div class="span span3"><button type="button" class="button" onclick="buy('+products[i].id+')">BUY</button>'
                                            +'<div class="clearfix"></div></div></div><div class="clearfix"></div></div></div></div>');
+
                             $('.gallery-grids').append('<div class="gallery-grid">'
                               +'<a class="book popup-with-zoom-anim button-isi zoomIn animated" data-wow-delay=".5s" href="#small-dialog'+i+'">'
                               +'<img src="'+products[i].image_url+'" alt=" " class="img-responsive zoom-img" /></a></div>');
@@ -124,6 +125,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 						})});
 </script>
+<script src="js/buy.js"></script>
 
 <!-- Add Product Modal -->
 <div id="addProductModal" class="modal">
@@ -200,7 +202,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 -->
 <!--form for adding products -->
 
-<div>
+
 	<!--<button type="button" class="button" data-toggle="modal" data-target="#small-dialog">ADD PRODUCTS</button>
 
 	<div class="pop-up">

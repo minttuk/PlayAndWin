@@ -1,7 +1,8 @@
 <?php
 header("Access-Control-Allow-Origin: *");
-include 'user.php'; //kommentoin pois koska mulla ei toimi mikään modelin kautta, koska herjaa että ei löydä '/Users/sainipatala/Documents/PHP/playandwin/rb.php'
+include 'user.php';
 include 'addProduct.php';
+include 'buyProduct.php';
 require 'rb.php';
 
 
@@ -41,6 +42,9 @@ else {
 
     if ($q == "addProduct"){
         addProduct();
+    }
+    if ($q == "buyProduct"){
+        buyProduct();
     }
 }
 
