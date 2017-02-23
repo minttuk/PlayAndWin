@@ -37,7 +37,9 @@ function buy(product_id){
         }
     };
 
-    ajaxRequest.open("POST", "http://localhost:63342/PlayAndWin/Backend/php/model.php?q=buyProduct", true);
+    //ajaxRequest.open("POST", "http://localhost:63342/PlayAndWin/Backend/php/model.php?q=buyProduct", true);
+    ajaxRequest.open("POST", "/PlayAndWin/Backend/php/model.php?q=buyProduct", true);
+
     ajaxRequest.send(dataString);
 
 

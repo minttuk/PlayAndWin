@@ -18,6 +18,8 @@ function buyProduct(){
     //$user_coins = json_encode(R::getCell( 'SELECT coins FROM user WHERE id = :user_id', [':user_id' => $user_id]));
     $user_coins = R::getCell( 'SELECT coins FROM user WHERE id = :user_id', [':user_id' => $user_id]);
     $product_prise = R::getCell( 'SELECT prise FROM product WHERE id = :product_id', [':product_id' => $product_id]);
-    echo $user_coins;
+    $msg[] = array("user_coins"=> $user_coins);
+    echo $jsonformat=json_encode($msg);
+
 
 }
