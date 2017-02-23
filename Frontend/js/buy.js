@@ -10,6 +10,7 @@ function buy(product_id){
 
     var array = {"user_id": user_id, "product_id": product_id};
     var dataString = JSON.stringify(array);
+    //console.log(dataString);
 
     try{
         // Opera 8.0+, Firefox, Safari
@@ -38,8 +39,7 @@ function buy(product_id){
     };
 
     //ajaxRequest.open("POST", "http://localhost:63342/PlayAndWin/Backend/php/model.php?q=buyProduct", true);
-    ajaxRequest.open("POST", "/PlayAndWin/Backend/php/model.php?q=buyProduct", true);
-
+    ajaxRequest.open("POST", "/PlayAndWin/Backend/php/model.php/?q=buyProduct", true);
     ajaxRequest.send(dataString);
 
 

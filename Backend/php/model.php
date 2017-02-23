@@ -13,11 +13,11 @@ $parameters = getParameters();
 //Methods used with REST
 
 # Redirect to appropriate handlers.
-if ($resource[0]=="testi") {
+if ($resource[0]=="playandwin") {
     // These below are left just for an example of how to handle REST calls
 
-    /*if ($request_method=="GET" && $resource[1]=="getMsgs") {
-        getMsgs($resource[2]);
+    /*if ($request_method=="GET" && $resource[1]=="buyProduct") {
+        buyProduct($parameters);
     }
     else if ($request_method=="GET" && $resource[1]=="getDogs") {
         getDogs();
