@@ -16,20 +16,31 @@ function buyProduct(){
     $user_id = $value['user_id'];
     $product_id = $value['product_id'];
 
-    //$user_coins = json_encode(R::getCell( 'SELECT coins FROM user WHERE id = :user_id', [':user_id' => $user_id]));
     $user_coins = R::getCell( 'SELECT coins FROM user WHERE id = :user_id', [':user_id' => $user_id]);
     $product_price = R::getCell( 'SELECT price FROM product WHERE id = :product_id', [':product_id' => $product_id]);
+
+    // Does the user have enough coins to buy this product?
     if ($user_coins<$product_price){
-        echo "You do not have enough coins to buy this product";
+        echo json_encode(array('message'=>'You cannot buy this yet. You need more coins.'));
     }
-    //order id, order row etc... is to be added below.... in progress...
+    //If the user can buy the product:
     else{
+        //subtract price from user's coins
         $coins_left = $user_coins-$product_price;
         R::exec( 'UPDATE user SET coins = :coins_left WHERE id = :user_id', [':coins_left' => $coins_left,':user_id' => $user_id]);
-        echo "You have bought this product!";
-    }
-    //$msg[] = array("user_coins"=> $user_coins);
-    //echo $user_coins; //$jsonformat=json_encode($msg);
 
+        //make shoporder
+        $shoporder = R::dispense( 'shoporder' );
+        $shoporder->user_id = $user_id;
+        R::store( $shoporder );
+
+        //make order row
+        R::exec( 'INSERT INTO order_row (order_id, product_id, amount) VALUES (LAST_INSERT_ID(), :product_id, 1)', [':product_id' => $product_id]);
+
+        //add product to user's collection
+        //to be finished later when user's collection tables are created on registeration
+
+        echo json_encode(array('message'=>'You have bought this product! You have '.$coins_left.' coins left.'));
+    }
 
 }
