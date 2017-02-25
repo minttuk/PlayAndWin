@@ -168,7 +168,7 @@
                 else if (dir == "down") posY++;
 
                 if (posX == -1 || posX == w / cellWidth || posY == -1 || posY == h / cellWidth || check_collision(posX, posY, snake_array)) {
-                    var endScore = score / 2 * 25
+                    var endScore = Math.round(score / 2 * 25);
                     $('#again').html('Again?');
                     $('#result').html(endScore);
                     $('#start').css('display', 'block');
@@ -230,10 +230,10 @@
 
             $(document).keydown(function(e) {
                 var key = e.which;
-                if (key == "37" && dir != "right") dir = "left";
-                else if (key == "38" && dir != "down") dir = "up";
-                else if (key == "39" && dir != "left") dir = "right";
-                else if (key == "40" && dir != "up") dir = "down";
+                if (key == "37" || key == "65" && dir != "right") dir = "left";
+                else if (key == "38" || key == "87" && dir != "down") dir = "up";
+                else if (key == "39" || key == "68" && dir != "left") dir = "right";
+                else if (key == "40" || key == "83" && dir != "up") dir = "down";
             })
         })
     </script>
