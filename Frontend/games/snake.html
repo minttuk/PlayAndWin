@@ -1,0 +1,243 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Snake</title>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, Verdana, sans-serif;
+        }
+
+        #canvas {
+            width: 450px;
+            height: 450px;
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            max-width: 100%;
+            max-height: 100%;
+            overflow: auto;
+            display: none;
+        }
+
+        #start {
+            height: 300px;
+            width: 300px;
+            border-radius: 150px;
+            vertical-align: middle;
+            color: #f4f0ec;
+            text-align: center;
+            vertical-align: middle;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 80px;
+            line-height: 2;
+        }
+
+        #result {
+            font-weight: bold;
+        }
+
+        #start h1 {
+            font-weight: bold;
+            font-size: 3em;
+            line-height: 270px;
+            margin-bottom: 0px;
+        }
+
+        #start p {
+            margin-top: -110px;
+            font-size: 0.8em;
+        }
+
+        #text {
+            color: #f5f5f5;
+            background-color: #c4c4c4;
+            border-radius: 10px;
+            font-size: 1.1em;
+            margin-left: auto;
+            margin-right: auto;
+            width: 170px;
+            height: 65px;
+            padding-top: 1px;
+            padding-bottom: 4px;
+            margin-top: 5%;
+            display: none;
+            line-height: 1.2;
+            text-align: center;
+        }
+
+        #average {
+            margin-top: -15px;
+            font-size: 0.6em;
+        }
+    </style>
+
+</head>
+
+<body onLoad="startColor()">
+
+    <div id="text">
+        <p>Your score: <span id="result"></span></br>Your highscore: <span id="score"></span></p>
+    </div>
+
+    <div id="start">
+        <h1 id="again">START</h1>
+        <p>Use the arrow keys to move the snake and eat the blocks!</p>
+    </div>
+
+    <canvas id="canvas" width="450" height="450"></canvas>
+
+    <script>
+        boxColor = ["plum", "chartreuse", "magenta", "springgreen", "gold", "cyan",
+            "steelblue", "orange", "hotpink", "aqua", "coral", "tomato",
+        ];
+
+
+        var canvas = $("#canvas")[0];
+        var ctx = canvas.getContext("2d");
+        var w = $("#canvas").width();
+        var h = $("#canvas").height();
+        var cellWidth = 10;
+        var dir;
+        var food;
+        var score;
+        var snake_array;
+
+        function startColor() {
+            $('#start').css('background-color', boxColor[Math.round(Math.random() * boxColor.length)]);
+        }
+
+        $('#start').click(function() {
+
+            $('#start').css('display', 'none');
+            $('#text').css('display', 'none');
+            $('#canvas').css('display', 'block');
+
+            function init() {
+                dir = "right";
+                create_snake();
+                create_food();
+                score = 0;
+
+                if (typeof game_loop != "undefined") clearInterval(game_loop);
+                game_loop = setInterval(paint, 60);
+            }
+
+            init();
+
+            function create_snake() {
+                var length = 2;
+                snake_array = [];
+                for (var i = length - 1; i >= 0; i--) {
+                    snake_array.push({
+                        x: i,
+                        y: 0
+                    });
+                }
+            }
+
+            function create_food() {
+                food = {
+                    x: Math.round(Math.random() * (w - cellWidth) / cellWidth),
+                    y: Math.round(Math.random() * (h - cellWidth) / cellWidth),
+                };
+            }
+
+            function paint() {
+                ctx.fillStyle = "white";
+                ctx.fillRect(0, 0, w, h);
+                ctx.strokeStyle = "darkgrey";
+                ctx.strokeRect(0, 0, w, h);
+
+                var posX = snake_array[0].x;
+                var posY = snake_array[0].y;
+
+                if (dir == "right") posX++;
+                else if (dir == "left") posX--;
+                else if (dir == "up") posY--;
+                else if (dir == "down") posY++;
+
+                if (posX == -1 || posX == w / cellWidth || posY == -1 || posY == h / cellWidth || check_collision(posX, posY, snake_array)) {
+                    var endScore = score / 2 * 25
+                    $('#again').html('Again?');
+                    $('#result').html(endScore);
+                    $('#start').css('display', 'block');
+                    $('#text').css('display', 'block');
+                    $('#canvas').css('display', 'none');
+                    $.post("../../hshandler.php", {
+                        game: 'snake',
+                        score: endScore
+                    }, function(data) {
+                        if (data.highscore != 0) {
+                            $('#score').html(data.highscore);
+                        }
+                        if (data.message != '') {
+                            alert(data.message);
+                        }
+                    }, 'json');
+                    return;
+                }
+
+                if (posX == food.x && posY == food.y) {
+                    var tail = {
+                        x: posX,
+                        y: posY
+                    };
+                    score++;
+                    create_food();
+                } else {
+                    var tail = snake_array.pop();
+                    tail.x = posX;
+                    tail.y = posY;
+                }
+
+                snake_array.unshift(tail);
+
+                for (var i = 0; i < snake_array.length; i++) {
+                    var c = snake_array[i];
+                    paint_cell(c.x, c.y);
+                }
+
+                paint_cell(food.x, food.y);
+                //var score_text = "Score: " + score;
+                //ctx.fillText(score_text, 5, h-5);
+            }
+
+            function paint_cell(x, y) {
+                ctx.fillStyle = boxColor[Math.round(Math.random() * boxColor.length)];
+                ctx.fillRect(x * cellWidth, y * cellWidth, cellWidth, cellWidth);
+                ctx.strokeStyle = "white";
+                ctx.strokeRect(x * cellWidth, y * cellWidth, cellWidth, cellWidth);
+            }
+
+            function check_collision(x, y, array) {
+                for (var i = 0; i < array.length; i++) {
+                    if (array[i].x == x && array[i].y == y)
+                        return true;
+                }
+                return false;
+            }
+
+            $(document).keydown(function(e) {
+                var key = e.which;
+                if (key == "37" && dir != "right") dir = "left";
+                else if (key == "38" && dir != "down") dir = "up";
+                else if (key == "39" && dir != "left") dir = "right";
+                else if (key == "40" && dir != "up") dir = "down";
+            })
+        })
+    </script>
+
+</body>
+
+</html>

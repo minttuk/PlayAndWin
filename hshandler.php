@@ -1,7 +1,8 @@
 <?php
+ini_set('display_errors', 1);
 require 'rb.php';
 
-R::setup( 'mysql:host=localhost;dbname=playandwin', 'root', 'moi' );
+R::setup( 'mysql:host=localhost;dbname=playandwin', 'root', 'root' );
 
 function highscore() {
   //if ($_SESSION['id']) {

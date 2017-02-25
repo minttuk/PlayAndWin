@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title> Flappy Bird Clone </title>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/phaser/2.6.2/phaser.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, Verdana, sans-serif;
+        }
+
+        #start {
+            height: 300px;
+            width: 300px;
+            border-radius: 150px;
+            vertical-align: middle;
+            color: #f4f0ec;
+            text-align: center;
+            vertical-align: middle;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 80px;
+            line-height: 2;
+        }
+
+        #result {
+            font-weight: bold;
+        }
+
+        #start h1 {
+            font-weight: bold;
+            font-size: 3em;
+            line-height: 270px;
+            margin-bottom: 0px;
+        }
+
+        #start p {
+            margin-top: -110px;
+            font-size: 0.8em;
+        }
+
+        #text {
+            color: #f5f5f5;
+            background-color: #c4c4c4;
+            border-radius: 10px;
+            font-size: 1.1em;
+            margin-left: auto;
+            margin-right: auto;
+            width: 170px;
+            height: 65px;
+            padding-top: 1px;
+            padding-bottom: 4px;
+            margin-top: 5%;
+            display: none;
+            line-height: 1.2;
+            text-align: center;
+        }
+
+        #average {
+            margin-top: -15px;
+            font-size: 0.6em;
+        }
+    </style>
+
+</head>
+
+<body onload='startColor()'>
+    <div id="text">
+        <p>Your score: <span id="result"></span></br>Your highscore: <span id="score"></span></p>
+    </div>
+
+    <div id="start">
+        <h1 id="again">START</h1>
+        <p>Press space to jump the bird through the gaps!</p>
+    </div>
+
+    <script>
+        var score = 0;
+
+        boxColor = ["plum", "chartreuse", "magenta", "springgreen", "gold", "cyan",
+            "steelblue", "orange", "hotpink", "aqua", "coral", "tomato",
+        ];
+
+        $('#start').click(function() {
+            score = 0
+            hideMenu();
+            var mainState = {
+                preload: function() {
+                    game.load.image('pipe', 'res/pipe.png');
+                    game.load.image('bird', 'res/bird.png');
+                },
+
+                create: function() {
+                    game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
+                    game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+                    game.scale.refresh();
+                    this.pipes = game.add.group();
+                    game.stage.backgroundColor = '#ffffff';
+                    game.physics.startSystem(Phaser.Physics.ARCADE);
+
+                    this.bird = game.add.sprite(100, 245, 'bird');
+                    game.physics.arcade.enable(this.bird);
+                    this.bird.body.gravity.y = 1000;
+
+                    this.timer = game.time.events.loop(1500, this.addRowOfPipes, this);
+                    this.score = 0;
+                    this.labelScore = game.add.text(20, 20, "0", {
+                        font: "30px Arial",
+                        fill: "#aaaaaa"
+                    });
+
+                    var spaceKey = game.input.keyboard.addKey(
+                        Phaser.Keyboard.SPACEBAR);
+                    spaceKey.onDown.add(this.jump, this);
+                },
+
+                update: function() {
+                    game.physics.arcade.overlap(
+                        this.bird, this.pipes, this.restartGame, null, this);
+                    if (this.bird.y < 0 || this.bird.y > 490)
+                        this.restartGame();
+                },
+                jump: function() {
+                    this.bird.body.velocity.y = -350;
+                },
+
+                restartGame: function() {
+                    game.destroy();
+                    showMenu();
+                },
+
+                addOnePipe: function(x, y) {
+                    var pipe = game.add.sprite(x, y, 'pipe');
+                    this.pipes.add(pipe);
+                    game.physics.arcade.enable(pipe);
+                    pipe.body.velocity.x = -200;
+                    pipe.checkWorldBounds = true;
+                    pipe.outOfBoundsKill = true;
+                },
+
+                addRowOfPipes: function() {
+                    var hole = Math.floor(Math.random() * 5) + 1;
+                    score += 1;
+                    this.labelScore.text = score;
+                    for (var i = 0; i < 8; i++)
+                        if (i != hole && i != hole + 1)
+                            this.addOnePipe(490, i * 60 + 10);
+                },
+            };
+
+            var game = new Phaser.Game(490, 490, Phaser.CANVAS, 'canvas');
+            game.state.add('main', mainState);
+            game.state.start('main');
+        });
+
+        function startColor() {
+            $('#start').css('background-color', boxColor[Math.round(Math.random() * boxColor.length)]);
+        }
+
+        function hideMenu() {
+            $('#start').css('display', 'none');
+            $('#text').css('display', 'none');
+        }
+
+        function showMenu() {
+            $.post("../../hshandler.php", {
+                game: 'flappy',
+                score: score * 20
+            }, function(data) {
+                if (data.highscore != 0) {
+                    $('#score').html(data.highscore);
+                }
+                if (data.message != '') {
+                    alert(data.message);
+                }
+            }, 'json');
+            startColor();
+            $('#result').html(score * 20);
+            $('#start').css('display', 'block');
+            $('#text').css('display', 'block');
+        }
+    </script>
+</body>
+
+</html>

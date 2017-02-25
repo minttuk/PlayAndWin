@@ -58,9 +58,21 @@ CREATE TABLE advertisement (
 );
 
 CREATE TABLE hs_reaction (
-  user_id INT(6) PRIMARY KEY AUTO_INCREMENT NOT NULL,
+  id INT(6) PRIMARY KEY AUTO_INCREMENT NOT NULL,
   highscore INT(11) NOT NULL,
-  FOREIGN KEY (user_id) REFERENCES user(id)
+  FOREIGN KEY (id) REFERENCES user(id)
+);
+
+CREATE TABLE hs_snake (
+  id INT(6) PRIMARY KEY AUTO_INCREMENT NOT NULL,
+  highscore INT(11) NOT NULL,
+  FOREIGN KEY (id) REFERENCES user(id)
+);
+
+CREATE TABLE hs_flappy (
+  id INT(6) PRIMARY KEY AUTO_INCREMENT NOT NULL,
+  highscore INT(11) NOT NULL,
+  FOREIGN KEY (id) REFERENCES user(id)
 );
 
 INSERT INTO user(username, firstname, lastname, email, password, description, location, coins)
