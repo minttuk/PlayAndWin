@@ -8,95 +8,8 @@
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
-    <style>
-        body {
-            font-family: Arial, Verdana, sans-serif;
-        }
-
-        #box {
-            position: absolute;
-            height: 100px;
-            width: 100px;
-            display: none;
-            -webkit-animation: fadein 2s;
-        }
-
-        @-webkit-keyframes fadein {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        #start {
-            height: 300px;
-            width: 300px;
-            border-radius: 150px;
-            vertical-align: middle;
-            color: #f4f0ec;
-            text-align: center;
-            vertical-align: middle;
-            margin-left: auto;
-            margin-right: auto;
-            margin-top: 80px;
-            line-height: 2;
-        }
-
-        #result {
-            font-weight: bold;
-        }
-
-        #start h1 {
-            font-weight: bold;
-            font-size: 3em;
-            line-height: 270px;
-            margin-bottom: 0px;
-        }
-
-        #start p {
-            margin-top: -110px;
-            font-size: 0.8em;
-        }
-
-        #text {
-            color: #f5f5f5;
-            background-color: #c4c4c4;
-            border-radius: 10px;
-            font-size: 1.1em;
-            margin-left: auto;
-            margin-right: auto;
-            width: 170px;
-            height: 65px;
-            padding-top: 1px;
-            padding-bottom: 4px;
-            margin-top: 5%;
-            display: none;
-            line-height: 1.2;
-            text-align: center;
-        }
-
-        #average {
-            margin-top: -15px;
-            font-size: 0.6em;
-        }
-
-        #highscore {
-            display: none;
-            color: #f5f5f5;
-            background-color: #c4c4c4;
-            height: 50px;
-            width: 170px;
-            margin-top: 10%;
-            margin-left: auto;
-            margin-right: auto;
-            text-align: center;
-            border-radius: 10px;
-            padding-top: 3px;
-        }
-    </style>
+    <script src="script.js"></script>
+    <link href='styles.css' rel='stylesheet' type='text/css'>
 </head>
 
 <body onLoad="startColor()">
@@ -122,14 +35,6 @@
         var boxStyle = document.getElementById("box").style;
         var startCircle = document.getElementById("start").style;
         var dialog = document.getElementById("text").style;
-
-        boxColor = ["plum", "chartreuse", "magenta", "springgreen", "gold", "cyan",
-            "steelblue", "orange", "hotpink", "aqua", "coral", "tomato",
-        ];
-
-        function startColor() {
-            startCircle.background = boxColor[Math.round(Math.random() * boxColor.length)]
-        }
 
         function makeBox() {
 
@@ -166,7 +71,6 @@
                 }
                 document.getElementById("again").innerHTML = "Again?";
                 document.getElementById("result").innerHTML = Math.round(1000 / reactionTotal);
-                //document.getElementById("score").innerHTML = highScore.toFixed(2) +"s";
                 $.post("../../hshandler.php", {
                     game: 'reaction',
                     score: Math.round(1000 / highScore)
