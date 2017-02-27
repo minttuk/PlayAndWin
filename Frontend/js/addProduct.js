@@ -88,3 +88,4 @@ function checkCost(price) {
         return false;
     }
 }
+

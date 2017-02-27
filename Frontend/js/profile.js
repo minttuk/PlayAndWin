@@ -1,3 +1,5 @@
+var userId;
+
 $( "#saveprofilebutton" ).click(function() {
   console.log("saveprofilebutton clicked");
   var str = "setUserInfo";
@@ -10,7 +12,7 @@ $( "#saveprofilebutton" ).click(function() {
       url: "http://localhost/PlayAndWin/Backend/php/model.php?q=" + str,
       type: "post",
       dataType: "json",
-      data: JSON.stringify({"id": "1", "firstname": $newfirstname, "lastname": $newlastname, "description": $newdescription, "location": $newlocation}),
+      data: JSON.stringify({"id": userId, "firstname": $newfirstname, "lastname": $newlastname, "description": $newdescription, "location": $newlocation}),
       success: function (response){
         console.log('success');
       },
@@ -21,12 +23,16 @@ $( "#saveprofilebutton" ).click(function() {
 })
 
 $(document).ready(function() {
+    userId = parseUri(window.location.search).queryKey['id'];
+    if (!userId) {
+      window.location = "index.html";
+    }
     var str = "getUserInfo";
     $.ajax({
         url: "http://localhost/PlayAndWin/Backend/php/model.php?q=" + str,
         type: "post",
         dataType: "json",
-        data: JSON.stringify({"id": "1"}),
+        data: JSON.stringify({"id": userId}),
         success: function (response){
           //usernmae
           $('#username').fadeOut(0, function() {
@@ -35,6 +41,10 @@ $(document).ready(function() {
           //registration date
           $('#regdate').fadeOut(0, function() {
               $(this).text(response[0].reg_date.slice(0,10)).fadeIn(500);
+          });
+          //registration date
+          $('#membersince').fadeOut(0, function() {
+              $(this).text('Member since: ' + response[0].reg_date.slice(0,10)).fadeIn(500);
           });
           //description
           if (response[0].description != null) {
@@ -67,3 +77,38 @@ $(document).ready(function() {
         }
     });
 })
+
+// parseUri 1.2.2
+// (c) Steven Levithan <stevenlevithan.com>
+// MIT License
+
+// Valmis url:n parsetusscripti. Tätä hyödynnetään dog.html:n urlin parsettamisessa. Urlissa määritetään kenen koiran tiedot sivu näyttää dynaamisesti.
+
+function parseUri (str) {
+	var	o   = parseUri.options,
+		m   = o.parser[o.strictMode ? "strict" : "loose"].exec(str),
+		uri = {},
+		i   = 14;
+
+	while (i--) uri[o.key[i]] = m[i] || "";
+
+	uri[o.q.name] = {};
+	uri[o.key[12]].replace(o.q.parser, function ($0, $1, $2) {
+		if ($1) uri[o.q.name][$1] = $2;
+	});
+
+	return uri;
+};
+
+parseUri.options = {
+	strictMode: false,
+	key: ["source","protocol","authority","userInfo","user","password","host","port","relative","path","directory","file","query","anchor"],
+	q:   {
+		name:   "queryKey",
+		parser: /(?:^|&)([^&=]*)=?([^&]*)/g
+	},
+	parser: {
+		strict: /^(?:([^:\/?#]+):)?(?:\/\/((?:(([^:@]*)(?::([^:@]*))?)?@)?([^:\/?#]*)(?::(\d*))?))?((((?:[^?#\/]*\/)*)([^?#]*))(?:\?([^#]*))?(?:#(.*))?)/,
+		loose:  /^(?:(?![^:@]+:[^:@\/]*@)([^:\/?#.]+):)?(?:\/\/)?((?:(([^:@]*)(?::([^:@]*))?)?@)?([^:\/?#]*)(?::(\d*))?)(((\/(?:[^?#](?![^?#\/]*\.[^?#\/.]+(?:[?#]|$)))*\/?)?([^?#\/]*))(?:\?([^#]*))?(?:#(.*))?)/
+	}
+};
