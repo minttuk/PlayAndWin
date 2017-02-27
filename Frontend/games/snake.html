@@ -98,9 +98,7 @@
                         game: 'snake',
                         score: endScore
                     }, function(data) {
-                        if (data.highscore != 0) {
-                            $('#score').html(data.highscore);
-                        }
+                        $('#score').html(data.highscore);
                         if (data.message != '') {
                             alert(data.message);
                         }
