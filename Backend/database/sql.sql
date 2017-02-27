@@ -77,3 +77,9 @@ CREATE TABLE hs_flappy (
 
 INSERT INTO user(username, firstname, lastname, email, password, description, location, coins)
 VALUES ('john.doe','John','Doe','john@doe.fi','johndoepass', 'Hello World!', 'Helsinki', '5000');
+
+INSERT INTO user(username, firstname, lastname, email, password, description, location, coins)
+VALUES ('matti','Matti','Meikalainen','matti@gmail.fi','mattipass', 'Hello World!', 'Lappi', '2000');
+
+INSERT INTO friendship (user1_id, user2_id, approved)
+VALUES (1, 2, 1);

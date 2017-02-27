@@ -46,6 +46,10 @@ else {
     if ($q == "buyProduct"){
         buyProduct();
     }
+
+    if ($q == "getFriends"){
+        getFriends();
+    }
 }
 
 // Tästä alkaa varsinaiset metodit.

@@ -30,4 +30,11 @@ function setUserInfo() {
   echo $user;
 }
 
+// getFriends() gets all the friendship rows that have the userid and are approved
+function getFriends() {
+  R::setup( 'mysql:host=localhost;dbname=playandwin', 'root', '' );
+  $value = json_decode(file_get_contents('php://input'), true);
+  $id = $value['id'];
+  $friends = json_encode(R::getAll( 'SELECT * FROM friendship WHERE user1_id = :id OR user2_id = :id AND approved = 1', [':id' => $id]));
+  echo $friends;
 ?>
