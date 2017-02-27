@@ -42,6 +42,10 @@ $(document).ready(function() {
           $('#regdate').fadeOut(0, function() {
               $(this).text(response[0].reg_date.slice(0,10)).fadeIn(500);
           });
+          //registration date
+          $('#membersince').fadeOut(0, function() {
+              $(this).text('Member since: ' + response[0].reg_date.slice(0,10)).fadeIn(500);
+          });
           //description
           if (response[0].description != null) {
             $('#userdescription').fadeOut(0, function() {
