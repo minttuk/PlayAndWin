@@ -37,4 +37,5 @@ function getFriends() {
   $id = $value['id'];
   $friends = json_encode(R::getAll( 'SELECT * FROM friendship WHERE user1_id = :id OR user2_id = :id AND approved = 1', [':id' => $id]));
   echo $friends;
+}
 ?>
