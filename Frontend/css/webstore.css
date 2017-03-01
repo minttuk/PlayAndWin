@@ -12,6 +12,19 @@
     border: 2px solid #FF166D;
 	background:#FF166D;
 }
+.buy-button{
+    margin:auto;
+    display:block;
+    padding: 7px 15px;
+    background-color: transparent;
+    border: 2px solid #FFf;
+    outline: transparent;
+  	color: #FFF;
+}
+.buy-button:hover {
+    color: rgb(2, 24, 136);
+    border: 2px solid rgb(2, 24, 136);
+}
 .span3 {
     border-bottom: none;
     padding: 15px 0px;
