@@ -136,6 +136,11 @@ $(document).ready(function() {
                 $(this).text(response[0].location).fadeIn(500);
               }
           });
+          if (response[0].profilepicture != 'default.png') {
+            $('.profilepicture').fadeOut(0, function() {
+              $(this).src = response[0].profilepicture.fadeIn(500);
+            });
+          }
           //editprofilebutton, only visible in your own profile
           if (userId == sessionId) {
             $('#editprofilebutton').fadeOut(0, function() {
