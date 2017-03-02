@@ -11,12 +11,13 @@ CREATE TABLE user (
   lastname VARCHAR(30),
   description VARCHAR(500),
   location VARCHAR(500),
-  reg_date TIMESTAMP,
-  last_online TIMESTAMP,
+  reg_date TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00',
+  last_online TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00',
   image VARCHAR(100) DEFAULT 'default.jpg',
   coins INT(10) DEFAULT 0,
   admin BOOLEAN DEFAULT 0
 );
+
 
 CREATE TABLE friendship (
   user1_id INT(6) NOT NULL,

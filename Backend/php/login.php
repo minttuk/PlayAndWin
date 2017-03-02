@@ -28,6 +28,7 @@ if (isset($_POST['Email'])) {
   if(isset($player) ? ($player->password==$password) : false) {
     //$message = 'Logged in!';
     startSession($player->id);
+    updateLastOnline();
   } else  $message = 'Nope, wrong password!';
 } else {
   $message = isset($_SESSION['id']) ? $_SESSION['id'] : -1;
@@ -46,13 +47,12 @@ echo $message;
     $user->firstname = $firstname;
     $user->lastname = $lastname;
     $newuser = R::store( $user );
+    R::exec( 'update user set reg_date=NOW() where username = :username', [':username' => $username]);
   }
 
-//This method is used to update an excisting user. So far only description will be updated, but other values will be updated later too
-  function updateUser ($id, $description) {
-    $user = getUser($id);
-    $user->description = $description;
-    R::store($user);
+//This method is used to update last_online in user table
+  function updateLastOnline() {
+    R::exec( 'update user set last_online=NOW() where id = :id', [':id' => $_SESSION['id']]);
   }
 
 //This method is used to get user data by id

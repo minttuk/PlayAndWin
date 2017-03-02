@@ -118,9 +118,7 @@ $(document).ready(function() {
           });
           //last online time
           $('#lastonline').fadeOut(0, function() {
-            //$(this).text('Last seen: ' + response[0].last_online).fadeIn(500);
-            var d = new Date();
-            $(this).text('Last seen: ' + d.getFullYear() + '-' + d.getMonth() + '-' + d.getDate() + '-' + d.getHours() + '-' + d.getMinutes() + '-' + d.getSeconds()).fadeIn(500);
+            $(this).text('Last seen: ' + response[0].last_online).fadeIn(500);
           });
           //description
           if (response[0].description != null) {
