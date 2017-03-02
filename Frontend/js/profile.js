@@ -1,11 +1,14 @@
 var userId;
-var session;
+var sessionId;
 // Sainin
 var model = "../Backend/php/model.php?q=";
 // Mintun
 //var url = "../../Backend/php/model.php?q=";
+getSession();
+
 
 // Work in progress... Not working yet
+
 $( "#addfriendbutton" ).click(function() {
   console.log("addfriendbutton clicked");
   var str = "addFriend";
@@ -30,20 +33,32 @@ $( "#saveprofilebutton" ).click(function() {
   var $newlastname = $('input[name="newlastname"]').val();
   var $newdescription = $('input[name="newdescription"]').val();
   var $newlocation = $('input[name="newlocation"]').val();
-
-  $.ajax({
-      url: model + str,
-      type: "post",
-      dataType: "json",
-      data: JSON.stringify({"id": userId, "firstname": $newfirstname, "lastname": $newlastname, "description": $newdescription, "location": $newlocation}),
-      success: function (response){
-        console.log('success');
-      },
-      error: function(jqXHR, textStatus, errorThrown) {
-        console.log(textStatus, errorThrown);
-      }
-  });
+  var inputOk = checkEditedProfile($newfirstname, $newlastname);
+  if (inputOk) {
+    $.ajax({
+        url: model + str,
+        type: "post",
+        dataType: "json",
+        data: JSON.stringify({"id": userId, "firstname": $newfirstname, "lastname": $newlastname, "description": $newdescription, "location": $newlocation}),
+        success: function (response){
+          console.log('success');
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+          console.log(textStatus, errorThrown);
+        }
+    });
+  }
+  else {
+    $('.errormessage').text("Please fill in your first and last name.");
+  }
 })
+
+function checkEditedProfile(firstname, lastname) {
+  if (firstname.length > 0 && lastname.length > 0) {
+    return true;
+  }
+  return false;
+}
 
 function getSession() {
   $.ajax({
@@ -52,10 +67,13 @@ function getSession() {
       dataType: "json",
       //data: JSON.stringify({"id": userId}),
       success: function (response){
-        console.log(response);
+        //console.log(response);
+        sessionId = response;
+        console.log('session is ' + sessionId);
       },
       error: function(jqXHR, textStatus, errorThrown) {
         console.log(textStatus, errorThrown);
+        sessionId = null;
       }
   });
 }
@@ -80,7 +98,7 @@ function getFriends(){
 
 $(document).ready(function() {
     userId = parseUri(window.location.search).queryKey['user'];
-    if (!userId) {
+    if (!userId && !sessionId) {
       window.location = "index.html";
     }
     var str = "getUserInfo";
@@ -95,12 +113,12 @@ $(document).ready(function() {
               $(this).text(response[0].username).fadeIn(500);
           });
           //registration date
-          $('#regdate').fadeOut(0, function() {
-              $(this).text(response[0].reg_date.slice(0,10)).fadeIn(500);
-          });
-          //registration date
           $('#membersince').fadeOut(0, function() {
               $(this).text('Member since: ' + response[0].reg_date.slice(0,10)).fadeIn(500);
+          });
+          //last online time
+          $('#lastonline').fadeOut(0, function() {
+            $(this).text('Last seen: ' + response[0].last_online).fadeIn(500);
           });
           //description
           if (response[0].description != null) {
@@ -118,6 +136,21 @@ $(document).ready(function() {
                 $(this).text(response[0].location).fadeIn(500);
               }
           });
+          //editprofilebutton, only visible in your own profile
+          if (userId == sessionId) {
+            $('#editprofilebutton').fadeOut(0, function() {
+              $(this).css('display', 'inline-block').fadeIn(500);
+            });
+          }
+          //addfriendbutton and sendmessagebutton only visible in other users profiles
+          if (userId != sessionId) {
+            $('#sendmessagebutton').fadeOut(0, function() {
+              $(this).css('display', 'inline-block').fadeIn(500);
+            });
+            $('#addfriendbutton').fadeOut(0, function() {
+              $(this).css('display', 'inline-block').fadeIn(500);
+            });
+          }
           //firstname
           if (response[0].firstname != null) {
             $('input[name="newfirstname"]').val(response[0].firstname);
@@ -140,7 +173,7 @@ $(document).ready(function() {
 })
 
 //getFriends();
-getSession();
+
 
 
 // parseUri 1.2.2

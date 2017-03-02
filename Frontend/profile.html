@@ -79,9 +79,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								Last name:
 								<input type="text" class="text" name="newlastname" placeholder="" required="" value="">
 								Description:
-								<input type="text" class="text" name="newdescription" placeholder="" required="" value="">
+								<input type="text" class="text" name="newdescription" placeholder="" value="">
 								Location:
-								<input type="text" class="text" name="newlocation" placeholder="" required="" value="">
+								<input type="text" class="text" name="newlocation" placeholder=""  value="">
+								<p class="errormessage">&nbsp;</p>
 								<input id="saveprofilebutton" type="submit" class="more_btn" value="Save">
 							</form>
 					</div>
@@ -98,12 +99,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<div class="col-md-8 blog-text-w3ls">
 			<h4 id="username">&nbsp;</h4>
 			<h6 id="membersince">&nbsp;</h6>
+			<h6 id="lastonline">&nbsp;</h6>
 			<div class="item_info">
 					<ul>
-						<li><i class="glyphicon glyphicon-calendar"></i><span id="regdate">&nbsp;</span></li>
 						<li><a href="#"><i class="glyphicon glyphicon-user"></i>20 Friends</a></li>
 						<li><a href="#"><i class="glyphicon glyphicon-map-marker"></i><span id="userlocation">&nbsp;</span></a></li>
 						<li><i class="glyphicon glyphicon-off"></i>Online</li>
+						<li id="editprofilebutton" data-toggle="modal" data-target="#editprofilemodal"><a href="#"><i class="glyphicon glyphicon-pencil"></i>Edit Profile</a></li>
+						<li id="addfriendbutton"><a href="#"><i class="glyphicon glyphicon-plus"></i>Add Friend</a></li>
+						<li id="sendmessagebutton"><a href="#"><i class="glyphicon glyphicon-envelope"></i>Send Message</a></li>
 					</ul>
 			 </div>
 			 <div class="row">
@@ -130,13 +134,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					 </div>
 				 </div>
 		 </div>
-		 <div class="item_info">
-				 <ul>
-					 <li id="editprofilebutton" data-toggle="modal" data-target="#editprofilemodal"><a href="#"><i class="glyphicon glyphicon-pencil"></i>Edit Profile</a></li>
-					 <li id="addfriendbutton"><a href="#"><i class="glyphicon glyphicon-plus"></i>Add Friend</a></li>
-					 <li><a href="#"><i class="glyphicon glyphicon-envelope"></i>Send Message</a></li>
-				 </ul>
-			</div>
 		</div>
 		<div class="clearfix"></div>
 	</div>

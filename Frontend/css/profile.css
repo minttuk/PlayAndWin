@@ -16,3 +16,19 @@ h6 {
   text-align: left;
   padding: 5px;
 }
+
+#editprofilebutton {
+  display: none;
+}
+
+#addfriendbutton {
+  display: none;
+}
+
+#sendmessagebutton {
+  display: none;
+}
+
+.errormessage {
+  color: red;
+}
