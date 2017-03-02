@@ -45,4 +45,6 @@ function addFriend() {
   $value = json_decode(file_get_contents('php://input'), true);
   $friendId = $value['friendId'];
 }
+
+
 ?>

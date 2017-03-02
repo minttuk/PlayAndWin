@@ -1,6 +1,7 @@
 var userId;
+var session;
 // Sainin
-var model = "http://localhost/PlayAndWin/Backend/php/model.php?q=";
+var model = "../Backend/php/model.php?q=";
 // Mintun
 //var url = "../../Backend/php/model.php?q=";
 
@@ -44,6 +45,21 @@ $( "#saveprofilebutton" ).click(function() {
   });
 })
 
+function getSession() {
+  $.ajax({
+      url: "../Backend/php/login.php",
+      type: "get",
+      dataType: "json",
+      //data: JSON.stringify({"id": userId}),
+      success: function (response){
+        console.log(response);
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        console.log(textStatus, errorThrown);
+      }
+  });
+}
+
 //Work in progress... Not working yet.
 function getFriends(){
   console.log('mentiin functioon getFriends()')
@@ -63,7 +79,7 @@ function getFriends(){
 }
 
 $(document).ready(function() {
-    userId = parseUri(window.location.search).queryKey['id'];
+    userId = parseUri(window.location.search).queryKey['user'];
     if (!userId) {
       window.location = "index.html";
     }
@@ -123,9 +139,8 @@ $(document).ready(function() {
     });
 })
 
-
-
-getFriends();
+//getFriends();
+getSession();
 
 
 // parseUri 1.2.2
