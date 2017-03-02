@@ -10,7 +10,7 @@ if (isset($_POST['Username']))  {
   $password = md5(md5($uname.$_POST['Password']));
 }
 
-$message;
+$message = 'success';
 
 if (isset($_POST['Email'])) {
   $newuser = findUser($uname);
@@ -18,14 +18,15 @@ if (isset($_POST['Email'])) {
     regUser($uname,$_POST['Email'],$password,$_POST['Firstname'],$_POST['Lastname']);
     $newuser = findUser($uname);
     startSession($newuser->id);
-    $message = 'Welcome to Play and Win, '.$uname.'!';
+    R::exec('CREATE TABLE collection_'.$newuser->id.' (product_id INT(6) PRIMARY KEY NOT NULL, amount INT(6) NOT NULL);');
+    //$message = 'Welcome to Play and Win, '.$uname.'!';
   } else $message = 'Username taken, try again!';
 
 } else if (isset($_POST['Username'])) {
   $player = findUser($uname);
 
-  if($player->password==$password) {
-    $message = 'Logged in!';
+  if(isset($player) ? ($player->password==$password) : false) {
+    //$message = 'Logged in!';
     startSession($player->id);
   } else  $message = 'Nope, wrong password!';
 } else {

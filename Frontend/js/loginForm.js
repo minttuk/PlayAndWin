@@ -2,7 +2,10 @@ $(document).ready(function() {
   $("#signForm").submit(function(e) {
     e.preventDefault();
     $.post( "../Backend/php/login.php", $( "#signForm" ).serialize(), function(data) {
-      alert(data);
+      if(data!='success') {
+        $("#signForm").append('<p>'+data+'</p>');
+
+      } else location.reload();
     });
   });
 });
