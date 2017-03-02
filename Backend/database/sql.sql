@@ -12,7 +12,7 @@ CREATE TABLE user (
   description VARCHAR(500),
   location VARCHAR(500),
   reg_date TIMESTAMP,
-  last_online VARCHAR(100),
+  last_online TIMESTAMP,
   image VARCHAR(100) DEFAULT 'default.jpg',
   coins INT(10) DEFAULT 0,
   admin BOOLEAN DEFAULT 0
