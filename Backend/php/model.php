@@ -50,6 +50,10 @@ else {
     if ($q == "getFriends"){
         getFriends();
     }
+
+    if ($q == "addFriend"){
+        addFriend();
+    }
 }
 
 // Tästä alkaa varsinaiset metodit.

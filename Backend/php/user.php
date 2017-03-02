@@ -38,4 +38,11 @@ function getFriends() {
   $friends = json_encode(R::getAll( 'SELECT * FROM friendship WHERE user1_id = :id OR user2_id = :id AND approved = 1', [':id' => $id]));
   echo $friends;
 }
+
+//Work in progress... Not working yet
+function addFriend() {
+  R::setup( 'mysql:host=localhost;dbname=playandwin', 'root', '' );
+  $value = json_decode(file_get_contents('php://input'), true);
+  $friendId = $value['friendId'];
+}
 ?>
