@@ -5,9 +5,8 @@ function getUserInfo() {
 
   $value = json_decode(file_get_contents('php://input'), true);
   $id = $value['id'];
-  $user = json_encode(R::getAll( 'SELECT * FROM user WHERE id = :id', [':id' => $id]));
-  //$user = json_encode(R::getAll( 'SELECT * FROM user WHERE id = 1'));
-  if ($user != -1) {
+  $user = R::load('user', $id);
+  if ($user->id != 0) {
     echo $user;
   }
   else {
