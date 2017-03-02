@@ -95,7 +95,12 @@ $(document).ready(function() {
           }
           //location
           $('#userlocation').fadeOut(0, function() {
-              $(this).text(response[0].location).fadeIn(500);
+              if (response[0].location == null) {
+                $(this).text("N/A").fadeIn(500);
+              }
+              else {
+                $(this).text(response[0].location).fadeIn(500);
+              }
           });
           //firstname
           if (response[0].firstname != null) {

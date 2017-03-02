@@ -5,6 +5,7 @@ include 'addProduct.php';
 include 'buyProduct.php';
 require 'rb.php';
 
+session_start();
 
 $resource = getResource();
 $request_method = getMethod();
