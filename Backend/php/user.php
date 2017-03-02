@@ -24,10 +24,20 @@ function setUserInfo() {
   $user = R::load( 'user', $id);
   $user->firstname = $value['firstname'];
   $user->lastname = $value['lastname'];
-  $user->description = $value['description'];
-  $user->location = $value['location'];
+  $user->description = checkEmpty($value['description']);
+  $user->location = checkEmpty($value['location']);
   R::store( $user );
   echo $user;
+}
+
+//make a test of this
+function checkEmpty($stringToCheck) {
+  if ($stringToCheck == '') {
+    return null;
+  }
+  else {
+    return $stringToCheck;
+  }
 }
 
 // getFriends() gets all the friendship rows that have the userid and are approved
