@@ -33,8 +33,9 @@ function buy(product_id){
     ajaxRequest.onreadystatechange = function(){
         if (ajaxRequest.readyState == 4 && ajaxRequest.status == 200){
             var text = ajaxRequest.responseText;
-            console.log("response teksti on "+text+" ja ending here"); //why oh why???
-            $('.buyMessage').html(text['message']);
+            var object = JSON.parse(text);
+            //console.log("response teksti on "+object['message']+" ja ending here"); //why oh why???
+            $('.buyMessage').html(object['message']);
             //window.location = 'webstore.html';
         }
     };

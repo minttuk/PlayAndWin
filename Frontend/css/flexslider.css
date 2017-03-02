@@ -15,17 +15,17 @@
 .flexslider a:focus  {outline: none;}
 .slides,
 .flex-control-nav,
-.flex-direction-nav {margin: 0; padding: 0; list-style: none;} 
+.flex-direction-nav {margin: 0; padding: 0; list-style: none;}
 
 /* FlexSlider Necessary Styles
-*********************************/ 
+*********************************/
 .flexslider .slides > li {display: none; -webkit-backface-visibility: hidden;} /* Hide the slides before the JS is loaded. Avoids image jumping */
 .flexslider .slides img {width: 100%; display: block;}
 .flex-pauseplay span {text-transform: capitalize;}
 
 /* Clearfix for the .slides element */
-.slides:after {content: "."; display: block; clear: both; visibility: hidden; line-height: 0; height: 0;} 
-html[xmlns] .slides {display: block;} 
+.slides:after {content: "."; display: block; clear: both; visibility: hidden; line-height: 0; height: 0;}
+html[xmlns] .slides {display: block;}
 * html .slides {height: 1%;}
 
 /* No JavaScript Fallback */
@@ -49,7 +49,7 @@ html[xmlns] .slides {display: block;}
 
 
 /* Direction Nav */
-.flex-direction-nav {*height: 0;}
+.flex-direction-nav {height: 0;}
 .flex-direction-nav a {
 	width: 25px;
     height: 15px;
@@ -102,10 +102,10 @@ html[xmlns] .slides {display: block;}
 .flex-control-thumbs img:hover {opacity: 1;}
 .flex-control-thumbs .flex-active {opacity: 1; cursor: default;}
 @media screen and (max-width:1440px) {
-	
+
 }
 @media screen and (max-width: 1366px){
-	
+
 }
 @media screen and (max-width: 1080px){
 	.flex-control-nav {
@@ -137,7 +137,7 @@ html[xmlns] .slides {display: block;}
 	.flexslider {
 		padding: 0px 0px;
 	}
-		
+
 }
 @media screen and (max-width: 414px){
 	.flex-direction-nav .flex-next {
