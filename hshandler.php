@@ -2,6 +2,7 @@
 ini_set('display_errors', 1);
 require 'rb.php';
 session_start();
+
 R::setup( 'mysql:host=localhost;dbname=playandwin', 'root', '' );
 
 function highscore() {
@@ -10,8 +11,11 @@ function highscore() {
       if (isset($_REQUEST['score'])) {
         $tableName = 'hs_'.$_REQUEST['game'];
         $newScore = $_REQUEST['score'];
+        try {
+          R::exec( 'insert into '.$tableName.' (id) Values ('.$_SESSION['id'].')' );
+        } catch(Exception $e) {}
         $id = $_SESSION['id'];
-        $score = R::load( $tableName, $id );
+        $score = R::load( $tableName, 10 );
         $curScore = $score->highscore;
         if ($newScore > $curScore) {
           $score->highscore=$newScore;
