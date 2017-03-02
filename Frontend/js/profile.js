@@ -98,9 +98,6 @@ function getFriends(){
 
 $(document).ready(function() {
     userId = parseUri(window.location.search).queryKey['user'];
-    if (!userId && !sessionId) {
-      window.location = "index.html";
-    }
     var str = "getUserInfo";
     $.ajax({
         url: model + str,
@@ -108,74 +105,77 @@ $(document).ready(function() {
         dataType: "json",
         data: JSON.stringify({"id": userId}),
         success: function (response){
-          //usernmae
-          $('#username').fadeOut(0, function() {
-              $(this).text(response[0].username).fadeIn(500);
-          });
-          //registration date
-          $('#membersince').fadeOut(0, function() {
-              $(this).text('Member since: ' + response[0].reg_date.slice(0,10)).fadeIn(500);
-          });
-          //last online time
-          $('#lastonline').fadeOut(0, function() {
-            $(this).text('Last seen: ' + response[0].last_online).fadeIn(500);
-          });
-          //description
-          if (response[0].description != null) {
-            $('#userdescription').fadeOut(0, function() {
-                $(this).text(response[0].description).fadeIn(500);
-            });
-            $('input[name="newdescription"]').val(response[0].description);
-          }
-          //location
-          $('#userlocation').fadeOut(0, function() {
-              if (response[0].location == null) {
-                $(this).text("N/A").fadeIn(500);
-              }
-              else {
-                $(this).text(response[0].location).fadeIn(500);
-              }
-          });
-          if (response[0].profilepicture != 'default.png') {
-            $('.profilepicture').fadeOut(0, function() {
-              $(this).src = response[0].profilepicture.fadeIn(500);
-            });
-          }
-          //editprofilebutton, only visible in your own profile
-          if (userId == sessionId) {
-            $('#editprofilebutton').fadeOut(0, function() {
-              $(this).css('display', 'inline-block').fadeIn(500);
-            });
-          }
-          //addfriendbutton and sendmessagebutton only visible in other users profiles
-          if (userId != sessionId) {
-            $('#sendmessagebutton').fadeOut(0, function() {
-              $(this).css('display', 'inline-block').fadeIn(500);
-            });
-            $('#addfriendbutton').fadeOut(0, function() {
-              $(this).css('display', 'inline-block').fadeIn(500);
-            });
-          }
-          //firstname
-          if (response[0].firstname != null) {
-            $('input[name="newfirstname"]').val(response[0].firstname);
-          }
-          //lastname
-          if (response[0].lastname != null) {
-            $('input[name="newlastname"]').val(response[0].lastname);
-          }
-          //location
-          if (response[0].location != null) {
-            $('input[name="newlocation"]').val(response[0].location);
-          }
-          console.log(response[0].id);
-          console.log(response[0].username);
+          console.log(response);
+          updateProfile(response);
         },
         error: function(jqXHR, textStatus, errorThrown) {
           console.log(textStatus, errorThrown);
+          window.location = "index.html";
         }
     });
 })
+
+function updateProfile(response) {
+  $('#username').fadeOut(0, function() {
+      $(this).text(response.username).fadeIn(500);
+  });
+  //registration date
+  $('#membersince').fadeOut(0, function() {
+      $(this).text('Member since: ' + response.reg_date.slice(0,10)).fadeIn(500);
+  });
+  //last online time
+  $('#lastonline').fadeOut(0, function() {
+    $(this).text('Last seen: ' + response.last_online).fadeIn(500);
+  });
+  //description
+  if (response.description != null) {
+    $('#userdescription').fadeOut(0, function() {
+        $(this).text(response.description).fadeIn(500);
+    });
+    $('input[name="newdescription"]').val(response.description);
+  }
+  //location
+  $('#userlocation').fadeOut(0, function() {
+      if (response.location == null) {
+        $(this).text("N/A").fadeIn(500);
+      }
+      else {
+        $(this).text(response.location).fadeIn(500);
+      }
+  });
+  if (response.profilepicture != 'default.png') {
+    $('.profilepicture').fadeOut(0, function() {
+      $(this).src = response.profilepicture.fadeIn(500);
+    });
+  }
+  //editprofilebutton, only visible in your own profile
+  if (userId == sessionId) {
+    $('#editprofilebutton').fadeOut(0, function() {
+      $(this).css('display', 'inline-block').fadeIn(500);
+    });
+  }
+  //addfriendbutton and sendmessagebutton only visible in other users profiles
+  if (userId != sessionId) {
+    $('#sendmessagebutton').fadeOut(0, function() {
+      $(this).css('display', 'inline-block').fadeIn(500);
+    });
+    $('#addfriendbutton').fadeOut(0, function() {
+      $(this).css('display', 'inline-block').fadeIn(500);
+    });
+  }
+  //firstname
+  if (response.firstname != null) {
+    $('input[name="newfirstname"]').val(response.firstname);
+  }
+  //lastname
+  if (response.lastname != null) {
+    $('input[name="newlastname"]').val(response.lastname);
+  }
+  //location
+  if (response.location != null) {
+    $('input[name="newlocation"]').val(response.location);
+  }
+}
 
 //getFriends();
 

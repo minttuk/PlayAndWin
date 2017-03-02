@@ -48,6 +48,7 @@ echo $message;
     $user->lastname = $lastname;
     $newuser = R::store( $user );
     R::exec( 'update user set reg_date=NOW() where username = :username', [':username' => $username]);
+    R::exec( 'update user set last_online=NOW() where username = :username', [':username' => $username]);
   }
 
 //This method is used to update last_online in user table
