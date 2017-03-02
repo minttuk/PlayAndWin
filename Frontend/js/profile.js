@@ -1,4 +1,26 @@
 var userId;
+// Sainin
+var model = "http://localhost/PlayAndWin/Backend/php/model.php?q=";
+// Mintun
+//var url = "../../Backend/php/model.php?q=";
+
+// Work in progress... Not working yet
+$( "#addfriendbutton" ).click(function() {
+  console.log("addfriendbutton clicked");
+  var str = "addFriend";
+  $.ajax({
+      url: model + str,
+      type: "post",
+      dataType: "json",
+      data: JSON.stringify({"friendId": userId}),
+      success: function (response){
+        console.log(response);
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        console.log(textStatus, errorThrown);
+      }
+  });
+})
 
 $( "#saveprofilebutton" ).click(function() {
   console.log("saveprofilebutton clicked");
@@ -9,7 +31,7 @@ $( "#saveprofilebutton" ).click(function() {
   var $newlocation = $('input[name="newlocation"]').val();
 
   $.ajax({
-      url: "http://localhost/PlayAndWin/Backend/php/model.php?q=" + str,
+      url: model + str,
       type: "post",
       dataType: "json",
       data: JSON.stringify({"id": userId, "firstname": $newfirstname, "lastname": $newlastname, "description": $newdescription, "location": $newlocation}),
@@ -22,6 +44,24 @@ $( "#saveprofilebutton" ).click(function() {
   });
 })
 
+//Work in progress... Not working yet.
+function getFriends(){
+  console.log('mentiin functioon getFriends()')
+  var str = "getFriends";
+  $.ajax({
+      url: model + str,
+      type: "post",
+      dataType: "json",
+      data: JSON.stringify({"id": userId}),
+      success: function (response){
+        console.log(response);
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        console.log(textStatus, errorThrown);
+      }
+  });
+}
+
 $(document).ready(function() {
     userId = parseUri(window.location.search).queryKey['id'];
     if (!userId) {
@@ -29,7 +69,7 @@ $(document).ready(function() {
     }
     var str = "getUserInfo";
     $.ajax({
-        url: "http://localhost/PlayAndWin/Backend/php/model.php?q=" + str,
+        url: model + str,
         type: "post",
         dataType: "json",
         data: JSON.stringify({"id": userId}),
@@ -77,6 +117,11 @@ $(document).ready(function() {
         }
     });
 })
+
+
+
+getFriends();
+
 
 // parseUri 1.2.2
 // (c) Steven Levithan <stevenlevithan.com>
