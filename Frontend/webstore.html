@@ -26,9 +26,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- //font -->
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.js"></script>
-
-
-
+<script src="js/loginForm.js"></script>
 </head>
 <body>
 <!-- banner -->
@@ -54,21 +52,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<li class="hover-effect active"><a href="webstore.html">Shop</a></li>
 						<li class="hover-effect"><a href="profile.html">Profile</a></li>
 						<li class="hover-effect"><a href="contact.html">Community</a></li>
-				        <li class="sign-in"><a data-toggle="modal" data-target="#myModal">Sign in</a></li>
+				        <li class="sign-in"><a data-toggle="modal" data-target="#LoginModal" onclick="signInForm()">Sign in</a></li>
+                        <li class="sign-in"><a data-toggle="modal" data-target="#LoginModal" onclick="signUpForm()">Sign up</a></li>
 					</ul>
 				</div>
 			</div>
 		</nav>
 		<!-- //Navbar -->
-        <div id="myModal" class="modal fade" role="dialog">
+        <div id="LoginModal" class="modal fade" role="dialog">
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-body">
-                  <form action="#" method="post">
-                    <input type="text" class="text" name="Name" placeholder="Username" required="">
-				    <input type="text" class="text" name="Email" placeholder="Email" required="">
-				    <input type="submit" class="more_btn" value="Sign in">
-                  </form>
+                <form id="signForm" method="post"/>
               </div>
             </div>
           </div>
@@ -86,45 +81,42 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<!--//gallery -->
 
  <script>
-						$(document).ready(function() {
-                        fetch('../Backend/php/products.php').then(function(responce) {
-                          return responce.json();
-                        }).then(function(products) {
-                          for (var i = 0; i < products.length; i++) {
+  $(document).ready(function() {
+  $.get('../Backend/php/products.php', function(products) {
+    for (var i = 0; i < products.length; i++) {
 
-                            $('.infos').append('<div class="pop-up"><div id="small-dialog'+i+'" class="mfp-hide book-form"><div class="pop-up-content-agileits-w3layouts"><div class="col-md-6 w3ls-left">'
-                                           +'<img src="'+products[i].image_url+'" alt=" " class="img-responsive zoom-img" /></div>'
-			                               +'<div class="col-md-6 w3ls-right">'
-					                       +'<h4>'+products[i].name+'</h4>'
-					                       +'<p>'+products[i].description+'</p>'
-					                       +'<div class="span span1">'
-                                           +'<p class="left">NAME</p>'+'<p class="right">'+products[i].name+'</p>'
-                                           +'<div class="clearfix"></div></div>'
-					                       +'<div class="span span2">'+'<p class="left">COST</p><p class="right">'+products[i].price+'</p>'
-                                           +'<div class="clearfix"></div></div>'
-					                       +'<div class="span span3"><button type="button" class="button" onclick="buy('+products[i].id+')">BUY</button>'
-                                           +'<p class="buyMessage"></p>'
-											+'<div class="clearfix"></div></div></div><div class="clearfix"></div></div></div></div>');
+    $('.infos').append('<div class="pop-up"><div id="small-dialog'+i+'" class="mfp-hide book-form"><div class="pop-up-content-agileits-w3layouts"><div class="col-md-6 w3ls-left">'
+                   +'<img src="'+products[i].image_url+'" alt=" " class="img-responsive zoom-img" /></div>'
+                   +'<div class="col-md-6 w3ls-right">'
+                   +'<h4>'+products[i].name+'</h4>'
+                   +'<p>'+products[i].description+'</p>'
+                   +'<div class="span span1">'
+                   +'<p class="left">NAME</p>'+'<p class="right">'+products[i].name+'</p>'
+                   +'<div class="clearfix"></div></div>'
+                   +'<div class="span span2">'+'<p class="left">COST</p><p class="right">'+products[i].price+'</p>'
+                   +'<div class="clearfix"></div></div>'
+                   +'<div class="span span3"><button type="button" class="buy-button" onclick="buy('+products[i].id+')">BUY</button>'
+                   +'<p class="buyMessage"></p>'
+                    +'<div class="clearfix"></div></div></div><div class="clearfix"></div></div></div></div>');
+    $('.gallery-grids').append('<div class="gallery-grid">'
+      +'<a class="book popup-with-zoom-anim button-isi zoomIn animated" data-wow-delay=".5s" href="#small-dialog'+i+'">'
+      +'<img src="'+products[i].image_url+'" alt=" " class="img-responsive zoom-img" /></a></div>');
+  };
+  $('.gallery-grids').append('<div class="clearfix"></div>');
+  }, 'json').then(function() {
+  $('.popup-with-zoom-anim').magnificPopup({
+      type: 'inline',
+      fixedContentPos: false,
+      fixedBgPos: true,
+      overflowY: 'auto',
+      closeBtnInside: true,
+      preloader: false,
+      midClick: true,
+      removalDelay: 300,
+      mainClass: 'my-mfp-zoom-in'
+  });
+  })});
 
-                            $('.gallery-grids').append('<div class="gallery-grid">'
-                              +'<a class="book popup-with-zoom-anim button-isi zoomIn animated" data-wow-delay=".5s" href="#small-dialog'+i+'">'
-                              +'<img src="'+products[i].image_url+'" alt=" " class="img-responsive zoom-img" /></a></div>');
-                          };
-
-                        }).then(function(products) {
-						$('.popup-with-zoom-anim').magnificPopup({
-							type: 'inline',
-							fixedContentPos: false,
-							fixedBgPos: true,
-							overflowY: 'auto',
-							closeBtnInside: true,
-							preloader: false,
-							midClick: true,
-							removalDelay: 300,
-							mainClass: 'my-mfp-zoom-in'
-						});
-
-						})});
 </script>
 <script src="js/buy.js"></script>
 
