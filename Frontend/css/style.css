@@ -589,7 +589,8 @@ p.agileinfo{
 
 /*-- sub-banner --*/
 	.sub-banner{
-		background:url(../images/banner3.jpg) no-repeat 0px 0px;
+		background:url(../images/banner3.jpg) 0px 0px;
+		background-size: cover;
 		min-height:87px;
 	}
 /*-- //sub-banner--*/
@@ -2013,7 +2014,7 @@ color:rgb(2, 24, 136) !important;
 		padding: 0 10px;
 	}
 }
-@media screen and (max-width: 736px){
+@media screen and (max-width: 1200px){
 
 	.navbar-header h1 {
 		text-align: left;

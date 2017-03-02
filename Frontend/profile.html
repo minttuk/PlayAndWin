@@ -28,32 +28,32 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <body>
 <!-- banner -->
 <div class="sub-banner">
-		<!-- Navbar -->
-		<nav class="navbar navbar-default">
-			<div class="container">
+	<!-- Navbar -->
+	<nav class="navbar navbar-default">
+		<div class="container">
 
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-					<a  href="index.html"><h1>Play and Win <img src="images/c1.png" alt=" " /></h1></a>
-				</div>
-
-				<div id="navbar" class="navbar-collapse collapse">
-					<ul class="nav navbar-nav navbar-right">
-						<li class="hover-effect"><a href="index.html">Home</a></li>
-						<li class="hover-effect"><a href="about.html">About</a></li>
-						<li class="hover-effect"><a href="webstore.html">Shop</a></li>
-						<li class="hover-effect active"><a href="profile.html">Profile</a></li>
-						<li class="hover-effect"><a href="contact.html">Community</a></li>
-						<li class="sign-in"><a data-toggle="modal" data-target="#myModal">Sign in</a></li>
-					</ul>
-				</div>
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a href="index.html"><h1>Play and win <img src="images/c1.png" alt=" " /></h1></a>
 			</div>
-		</nav>
+
+			<div id="navbar" class="navbar-collapse collapse">
+				<ul class="nav navbar-nav navbar-right">
+					<li class="hover-effect"><a href="index.html">Home</a></li>
+					<li class="hover-effect"><a href="about.html">About</a></li>
+					<li class="hover-effect"><a href="webstore.html">Shop</a></li>
+					<li class="hover-effect"><a href="profile.html">Profile</a></li>
+					<li class="hover-effect"><a href="community.html">Community</a></li>
+					<li class="sign-in"><a data-toggle="modal" data-target="#myModal">Sign in</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
 		<!-- //Navbar -->
         <div id="myModal" class="modal fade" role="dialog">
           <div class="modal-dialog">
@@ -115,20 +115,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					</div>
 					<div class="col-md-4">
 					 <div class="personal-score">
-						 <table>
+						 <table id='highscores'>
 							 <h3>Personal record</h3>
-							 <tr>
-								 <th><a href="#">Game 1 </a></th>
-								 <td> 10496 </td>
-							 </tr>
-							 <tr>
-								 <th><a href="#">Game 2 </a></th>
-								 <td> 583</td>
-							 </tr>
-							 <tr>
-								 <th><a href="#">Game 3 </a></th>
-								 <td> 4938 </td>
-							 </tr>
 						 </table>
 					 </div>
 				 </div>
@@ -200,5 +188,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		</div>
 	</div>
 	<script type="text/javascript" src="js/profile.js"></script>
+	<script src="js/gamelist.js"></script>
+	<script>
+	$(document).ready(function(){
+    $.getJSON("../Backend/php/highscore.php", function(result){
+        $.each(result, function(i, field){
+          $("#highscores").append('<tr><th><a href="game.html#'+Object.keys(field)[0]+'">'+
+					gamelist[Object.keys(field)[0]]+'</a></th><td>'+field[Object.keys(field)[0]]+'</td></tr>');
+        });
+    });
+});
+	</script>
 </div>
 <!-- //footer -->

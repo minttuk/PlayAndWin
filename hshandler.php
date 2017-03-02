@@ -15,7 +15,7 @@ function highscore() {
           R::exec( 'insert into '.$tableName.' (id) Values ('.$_SESSION['id'].')' );
         } catch(Exception $e) {}
         $id = $_SESSION['id'];
-        $score = R::load( $tableName, 10 );
+        $score = R::load( $tableName, $id );
         $curScore = $score->highscore;
         if ($newScore > $curScore) {
           $score->highscore=$newScore;

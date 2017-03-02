@@ -36,6 +36,7 @@
         var food;
         var score;
         var snake_array;
+        var game_loop;
 
         $('#start').click(function() {
 
@@ -43,17 +44,13 @@
             $('#text').css('display', 'none');
             $('#canvas').css('display', 'block');
 
-            function init() {
-                dir = "right";
-                create_snake();
-                create_food();
-                score = 0;
+            dir = "right";
+            create_snake();
+            create_food();
+            score = 0;
 
-                if (typeof game_loop != "undefined") clearInterval(game_loop);
-                game_loop = setInterval(paint, 60);
-            }
-
-            init();
+            if (typeof game_loop != "undefined") clearInterval(game_loop);
+            game_loop = setInterval(paint, 60);
 
             function create_snake() {
                 var length = 2;
@@ -89,6 +86,8 @@
 
                 if (posX == -1 || posX == w / cellWidth || posY == -1 || posY == h / cellWidth || check_collision(posX, posY, snake_array)) {
                     var endScore = Math.round(score / 2 * 25);
+                    clearInterval(game_loop);
+                    startColor();
                     $('#again').html('Again?');
                     $('#result').html(endScore);
                     $('#start').css('display', 'block');
