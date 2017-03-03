@@ -57,14 +57,32 @@ function addFriend() {
 // returns at most 8 users that have the most recent date in last_online
 function getLastLoggedIn() {
   R::setup( 'mysql:host=localhost;dbname=playandwin', 'root', '' );
-  $users = R::findAll('user',' ORDER BY last_online DESC LIMIT 8');
-  echo json_encode($users);
+  $users = R::findAll('user', 'ORDER BY last_online DESC LIMIT 8');
+  $response = array();
+  foreach ($users as $id => $user) {
+    $response[] = array(
+      'id' => $user->id,
+      'username' => $user->username,
+      'profilepicture' => $user->profilepicture,
+    );
+  }
+  header('Content-Type: application/json');
+  echo json_encode($response);
 }
 
 function getNewUsers() {
   R::setup( 'mysql:host=localhost;dbname=playandwin', 'root', '' );
-  $users = R::findAll('user',' ORDER BY reg_date DESC LIMIT 8');
-  echo json_encode($users);
+  $users = R::findAll('user', 'ORDER BY reg_date DESC LIMIT 8');
+  $response = array();
+  foreach ($users as $id => $user) {
+    $response[] = array(
+      'id' => $user->id,
+      'username' => $user->username,
+      'profilepicture' => $user->profilepicture,
+    );
+  }
+  header('Content-Type: application/json');
+  echo json_encode($response);
 }
 
 

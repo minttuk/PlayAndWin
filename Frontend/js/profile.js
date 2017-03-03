@@ -177,6 +177,9 @@ function updateProfile(response) {
     $('#editprofilebutton').fadeOut(0, function() {
       $(this).css('display', 'inline-block').fadeIn(500);
     });
+    $('#editpicturebutton').fadeOut(0, function() {
+      $(this).css('display', 'inline-block').fadeIn(500);
+    });
   }
   //addfriendbutton and sendmessagebutton only visible in other users profiles
   if (userId != sessionId) {
@@ -250,7 +253,7 @@ function showLastUsers(response, who) {
     var name = $('<p></p>');
     name.append(response[i].username);
     div.append(a, name);
-    $('#' + who + '').prepend(div);
+    $('#' + who + '').append(div);
   }
 }
 

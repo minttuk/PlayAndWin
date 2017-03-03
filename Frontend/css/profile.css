@@ -29,6 +29,10 @@ h6 {
   display: none;
 }
 
+#editpicturebutton {
+  display: none;
+}
+
 .errormessage {
   color: red;
 }
