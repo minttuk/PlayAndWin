@@ -130,7 +130,6 @@ function getUserInfo() {
         dataType: "json",
         data: JSON.stringify({"id": userId}),
         success: function (response){
-          console.log(response);
           updateProfile(response);
         },
         error: function(jqXHR, textStatus, errorThrown) {
@@ -209,8 +208,9 @@ function getLastLoggedIn() {
       type: "get",
       dataType: "json",
       success: function (response){
-        console.log(response);
-        showLastLoggedIn(response);
+        //passes also div name to function because the same function is used to show new users
+        var who = 'lastloggedin';
+        showLastUsers(response, who);
       },
       error: function(jqXHR, textStatus, errorThrown) {
         console.log(textStatus, errorThrown);
@@ -218,11 +218,25 @@ function getLastLoggedIn() {
   });
 }
 
-function showLastLoggedIn(response) {
+function getNewUsers() {
+  var str = 'getNewUsers';
+  $.ajax({
+      url: model + str,
+      type: "get",
+      dataType: "json",
+      success: function (response){
+        //passes also div name to function because the same function is used to show new users
+        var who = 'newusers';
+        showLastUsers(response, who);
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        console.log(textStatus, errorThrown);
+      }
+  });
+}
+
+function showLastUsers(response, who) {
   for (var i in response) {
-    console.log(i);
-    console.log(response[i].username);
-    console.log(response[i].profilepicture);
     var div = $('<div></div>');
     div.addClass('col-md-3 img-w3-agile');
     var a = $('<a></a>');
@@ -235,7 +249,7 @@ function showLastLoggedIn(response) {
     var name = $('<p></p>');
     name.append(response[i].username);
     div.append(a, name);
-    $('#lastloggedin').prepend(div);
+    $('#' + who + '').prepend(div);
   }
 }
 
@@ -279,3 +293,4 @@ parseUri.options = {
 getSession();
 getUserInfo();
 getLastLoggedIn();
+getNewUsers();

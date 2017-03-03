@@ -59,6 +59,10 @@ else {
     if ($q == "getLastLoggedIn"){
         getLastLoggedIn();
     }
+
+    if ($q == "getNewUsers"){
+      getNewUsers();
+    }
 }
 
 // Tästä alkaa varsinaiset metodit.

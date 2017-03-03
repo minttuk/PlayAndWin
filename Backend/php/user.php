@@ -61,5 +61,11 @@ function getLastLoggedIn() {
   echo json_encode($users);
 }
 
+function getNewUsers() {
+  R::setup( 'mysql:host=localhost;dbname=playandwin', 'root', '' );
+  $users = R::findAll('user',' ORDER BY reg_date DESC LIMIT 8');
+  echo json_encode($users);
+}
+
 
 ?>
