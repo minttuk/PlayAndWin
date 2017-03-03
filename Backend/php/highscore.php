@@ -5,9 +5,9 @@ session_start();
 
 R::setup( 'mysql:host=localhost;dbname=playandwin', 'root', '' );
 
-function jsonBuilder($game) {
+function jsonBuilder($game,$userid) {
   $tableName = 'hs_'.$game;
-  $score = R::load( $tableName, $_SESSION['id'] );
+  $score = R::load( $tableName, $userid );
   if ($score->highscore == '') {
     $hs = 0;
   } else {
@@ -18,9 +18,14 @@ function jsonBuilder($game) {
 }
 
 $gamelist = array('reaction','snake','flappy');
-if (isset($_SESSION['id'])) {
+if (isset($_SESSION['id']) || isset($_REQUEST['id'])) {
+  if (isset($_REQUEST['id'])) {
+    $user = $_REQUEST['id'];
+  } else {
+    $user = $_SESSION['id'];
+  }
   foreach ($gamelist as $game) {
-    $json[] = jsonBuilder($game);
+    $json[] = jsonBuilder($game,$user);
 }
   echo(json_encode($json));
 }

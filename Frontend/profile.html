@@ -171,7 +171,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<script src="js/gamelist.js"></script>
 	<script>
 	$(document).ready(function(){
-    $.getJSON("../Backend/php/highscore.php", function(result){
+		var userId = '';
+		if (parseUri(window.location.search).queryKey['user']) {
+			userId = '?id='+parseUri(window.location.search).queryKey['user'];
+			console.log(userId);
+		}
+    $.getJSON("../Backend/php/highscore.php"+userId, function(result){
         $.each(result, function(i, field){
           $("#highscores").append('<tr><th><a href="game.html#'+Object.keys(field)[0]+'">'+
 					gamelist[Object.keys(field)[0]]+'</a></th><td>'+field[Object.keys(field)[0]]+'</td></tr>');
