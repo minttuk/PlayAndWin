@@ -1,13 +1,24 @@
 var userId;
-var sessionId;
-// Sainin
 var model = "../Backend/php/model.php?q=";
-// Mintun
-//var url = "../../Backend/php/model.php?q=";
-getSession();
+var sessionId;
 
-
-// Work in progress... Not working yet
+function getSession() {
+  $.ajax({
+      url: "../Backend/php/login.php",
+      type: "get",
+      dataType: "json",
+      async: false,
+      success: function (response){
+        sessionId = response;
+        console.log('session is ' + response);
+        return response;
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        console.log(textStatus, errorThrown);
+        sessionId = null;
+      }
+  });
+}
 
 $( "#addfriendbutton" ).click(function() {
   console.log("addfriendbutton clicked");
@@ -60,6 +71,7 @@ function checkEditedProfile(firstname, lastname) {
   return false;
 }
 
+/*
 function getSession() {
   $.ajax({
       url: "../Backend/php/login.php",
@@ -74,9 +86,11 @@ function getSession() {
       error: function(jqXHR, textStatus, errorThrown) {
         console.log(textStatus, errorThrown);
         sessionId = null;
+        window.location = "index.html";
       }
   });
 }
+*/
 
 //Work in progress... Not working yet.
 function getFriends(){
@@ -96,8 +110,19 @@ function getFriends(){
   });
 }
 
-$(document).ready(function() {
-    userId = parseUri(window.location.search).queryKey['user'];
+function getUserInfo() {
+    if (parseUri(window.location.search).queryKey['user']) {
+      userId = parseUri(window.location.search).queryKey['user']
+      console.log('parse ' + userId);
+    }
+    else if (sessionId != -1) {
+      userId = sessionId;
+      console.log('else if ' + userId);
+    }
+    else {
+      console.log('else');
+      window.location = "index.html";
+    }
     var str = "getUserInfo";
     $.ajax({
         url: model + str,
@@ -113,7 +138,7 @@ $(document).ready(function() {
           window.location = "index.html";
         }
     });
-})
+}
 
 function updateProfile(response) {
   $('#username').fadeOut(0, function() {
@@ -215,3 +240,6 @@ parseUri.options = {
 		loose:  /^(?:(?![^:@]+:[^:@\/]*@)([^:\/?#.]+):)?(?:\/\/)?((?:(([^:@]*)(?::([^:@]*))?)?@)?([^:\/?#]*)(?::(\d*))?)(((\/(?:[^?#](?![^?#\/]*\.[^?#\/.]+(?:[?#]|$)))*\/?)?([^?#\/]*))(?:\?([^#]*))?(?:#(.*))?)/
 	}
 };
+
+getSession();
+getUserInfo();

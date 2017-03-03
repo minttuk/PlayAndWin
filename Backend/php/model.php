@@ -1,11 +1,11 @@
 <?php
 header("Access-Control-Allow-Origin: *");
+session_start();
 include 'user.php';
 include 'addProduct.php';
 include 'buyProduct.php';
 require 'rb.php';
 
-session_start();
 
 $resource = getResource();
 $request_method = getMethod();
