@@ -1,0 +1,24 @@
+<head>
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href='//fonts.googleapis.com/css?family=Josefin+Sans:400,100,300,600,700' rel='stylesheet' type='text/css'>
+    <link href="chatstyle.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/0.6.16/css/perfect-scrollbar.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.perfect-scrollbar/0.6.16/js/perfect-scrollbar.jquery.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div id='chatbox' class="message-wrap col-lg-8">
+            <div class="msg-wrap"></div>
+            <div class="input-group">
+                <input id='msgbox' type="text" placeholder="Write a message..." class="form-control">
+                <span class="input-group-btn">
+                <button class="btn btn-default" onclick='sendMsg()' type="button"><span id=blue><i class="fa fa-plus"></i> Send Message</span></button>
+                </span>
+            </div>
+        </div>
+    </div>
+    <script src="chat.js"></script>
+</body>

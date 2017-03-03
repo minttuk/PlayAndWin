@@ -77,6 +77,13 @@ CREATE TABLE hs_flappy (
   FOREIGN KEY (id) REFERENCES user(id)
 );
 
+CREATE TABLE chatroom (
+  id INT(10) PRIMARY KEY AUTO_INCREMENT NOT NULL,
+  username VARCHAR(30) NOT NULL,
+  msg VARCHAR(255) NOT NULL,
+  ts TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
 INSERT INTO user(username, firstname, lastname, email, password, description, location, coins)
 VALUES ('john.doe','John','Doe','john@doe.fi','johndoepass', 'Hello World!', 'Helsinki', '5000');
 
