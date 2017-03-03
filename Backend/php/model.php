@@ -55,6 +55,10 @@ else {
     if ($q == "addFriend"){
         addFriend();
     }
+
+    if ($q == "getLastLoggedIn"){
+        getLastLoggedIn();
+    }
 }
 
 // Tästä alkaa varsinaiset metodit.

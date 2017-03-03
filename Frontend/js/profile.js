@@ -170,7 +170,7 @@ function updateProfile(response) {
   });
   if (response.profilepicture != 'default.png') {
     $('.profilepicture').fadeOut(0, function() {
-      $(this).src = response.profilepicture.fadeIn(500);
+      $(this).attr("src", "images/user/" + response.profilepicture).fadeIn(500);
     });
   }
   //editprofilebutton, only visible in your own profile
@@ -202,7 +202,42 @@ function updateProfile(response) {
   }
 }
 
-//getFriends();
+function getLastLoggedIn() {
+  var str = 'getLastLoggedIn';
+  $.ajax({
+      url: model + str,
+      type: "get",
+      dataType: "json",
+      success: function (response){
+        console.log(response);
+        showLastLoggedIn(response);
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        console.log(textStatus, errorThrown);
+      }
+  });
+}
+
+function showLastLoggedIn(response) {
+  for (var i in response) {
+    console.log(i);
+    console.log(response[i].username);
+    console.log(response[i].profilepicture);
+    var div = $('<div></div>');
+    div.addClass('col-md-3 img-w3-agile');
+    var a = $('<a></a>');
+    a.attr("href", "profile.html?user=" + response[i].id);
+    a.attr("target", "_blank");
+    var img = $('<img></img>');
+    img.attr("src", "images/user/" + response[i].profilepicture);
+    img.attr("alt", " ");
+    a.append(img);
+    var name = $('<p></p>');
+    name.append(response[i].username);
+    div.append(a, name);
+    $('#lastloggedin').prepend(div);
+  }
+}
 
 
 
@@ -243,3 +278,4 @@ parseUri.options = {
 
 getSession();
 getUserInfo();
+getLastLoggedIn();

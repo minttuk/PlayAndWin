@@ -2,7 +2,6 @@
 
 function getUserInfo() {
   R::setup( 'mysql:host=localhost;dbname=playandwin', 'root', '' );
-
   $value = json_decode(file_get_contents('php://input'), true);
   $id = $value['id'];
   $user = R::load('user', $id);
@@ -53,6 +52,13 @@ function addFriend() {
   R::setup( 'mysql:host=localhost;dbname=playandwin', 'root', '' );
   $value = json_decode(file_get_contents('php://input'), true);
   $friendId = $value['friendId'];
+}
+
+// returns at most 8 users that have the most recent date in last_online
+function getLastLoggedIn() {
+  R::setup( 'mysql:host=localhost;dbname=playandwin', 'root', '' );
+  $users = R::findAll('user',' ORDER BY last_online DESC LIMIT 8');
+  echo json_encode($users);
 }
 
 
