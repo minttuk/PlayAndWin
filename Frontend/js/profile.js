@@ -235,6 +235,7 @@ function getNewUsers() {
   });
 }
 
+//the order shown so far is in id order, gotta fix it at some point...
 function showLastUsers(response, who) {
   for (var i in response) {
     var div = $('<div></div>');
