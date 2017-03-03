@@ -32,3 +32,7 @@ h6 {
 .errormessage {
   color: red;
 }
+
+.copyright p {
+  border-top: 0px;
+}
