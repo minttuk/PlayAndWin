@@ -103,6 +103,12 @@ function getFriends(){
       data: JSON.stringify({"id": userId}),
       success: function (response){
         console.log(response);
+        return response;
+        /*        var count = 0;
+                for (var friend in response) {
+                  count++;
+                }
+                console.log(count);*/
       },
       error: function(jqXHR, textStatus, errorThrown) {
         console.log(textStatus, errorThrown);
@@ -123,18 +129,16 @@ function getUserInfo() {
       console.log('else');
       window.location = "index.html";
     }
-    var str = "getUserInfo";
+    var str = "getUserInfo&id=" + userId;
     $.ajax({
         url: model + str,
-        type: "post",
         dataType: "json",
-        data: JSON.stringify({"id": userId}),
         success: function (response){
           updateProfile(response);
         },
         error: function(jqXHR, textStatus, errorThrown) {
           console.log(textStatus, errorThrown);
-          window.location = "index.html";
+          //window.location = "index.html";
         }
     });
 }
@@ -166,6 +170,9 @@ function updateProfile(response) {
       else {
         $(this).text(response.location).fadeIn(500);
       }
+  });
+  $('#userfriendsbutton').fadeOut(0, function() {
+    $(this).text(response.friends).fadeIn(500);
   });
   if (response.profilepicture != 'default.png') {
     $('.profilepicture').fadeOut(0, function() {
@@ -298,3 +305,4 @@ getSession();
 getUserInfo();
 getLastLoggedIn();
 getNewUsers();
+getFriends();

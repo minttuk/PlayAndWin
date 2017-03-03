@@ -2,12 +2,29 @@
 
 function getUserInfo() {
   R::setup( 'mysql:host=localhost;dbname=playandwin', 'root', '' );
-  $value = json_decode(file_get_contents('php://input'), true);
-  $id = $value['id'];
+  $id = $_REQUEST['id'];
   $user = R::load('user', $id);
+
+  if ($user->id != 0) {
+    $friends = getFriendsCount($id);
+    $response = array(
+      'id' => $user->id,
+      'username' => $user->username,
+      'profilepicture' => $user->profilepicture,
+      'firstname' => $user->firstname,
+      'lastname' => $user->lastname,
+      'description' => $user->description,
+      'location' => $user->location,
+      'reg_date' => $user->reg_date,
+      'last_online' => $user->last_online,
+      'friends' => $friends,
+    );
+    header('Content-Type: application/json');
+    echo json_encode($response);
+  }/*
   if ($user->id != 0) {
     echo $user;
-  }
+  }*/
   else {
     http_response_code(403);
     echo json_encode(array('error'=>'No user found'));
@@ -39,12 +56,18 @@ function checkEmpty($stringToCheck) {
 }
 
 // getFriends() gets all the friendship rows that have the userid and are approved
-function getFriends() {
-  R::setup( 'mysql:host=localhost;dbname=playandwin', 'root', '' );
-  $value = json_decode(file_get_contents('php://input'), true);
-  $id = $value['id'];
-  $friends = json_encode(R::getAll( 'SELECT * FROM friendship WHERE user1_id = :id OR user2_id = :id AND approved = 1', [':id' => $id]));
-  echo $friends;
+function getFriends($id) {
+  //R::setup( 'mysql:host=localhost;dbname=playandwin', 'root', '' );
+  //$value = json_decode(file_get_contents('php://input'), true);
+  //$id = $value['id'];
+  //$id = '1';
+  $friends = R::getAll( 'SELECT * FROM friendship WHERE user1_id = :id OR user2_id = :id AND approved = 1', [':id' => $id]);
+  return $friends;
+}
+
+function getFriendsCount($id) {
+  $friends = R::getAll( 'SELECT COUNT(*) AS friendcount FROM friendship WHERE user1_id = :id OR user2_id = :id AND approved = 1', [':id' => $id]);
+  return $friends[0]['friendcount'];
 }
 
 //Work in progress... Not working yet
