@@ -17,7 +17,7 @@ function jsonBuilder($game,$userid) {
   return $json;
 }
 
-$gamelist = array('reaction','snake','flappy');
+$gamelist = array('reaction','snake','flappy','jumper');
 if (isset($_SESSION['id']) || isset($_REQUEST['id'])) {
   if (isset($_REQUEST['id'])) {
     $user = $_REQUEST['id'];

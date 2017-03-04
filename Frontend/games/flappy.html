@@ -68,7 +68,7 @@
 
                 gameOver: function() {
                     game.destroy();
-                    showMenu();
+                    showMenu('flappy',20);
                 },
 
                 addOnePipe: function(x, y) {
@@ -95,26 +95,6 @@
             game.state.start('main');
         });
 
-        function hideMenu() {
-            $('#start').css('display', 'none');
-            $('#text').css('display', 'none');
-        }
-
-        function showMenu() {
-            $.post("../../hshandler.php", {
-                game: 'flappy',
-                score: score * 20
-            }, function(data) {
-                $('#score').html(data.highscore);
-                if (data.message != '') {
-                    alert(data.message);
-                }
-            }, 'json');
-            startColor();
-            $('#result').html(score * 20);
-            $('#start').css('display', 'block');
-            $('#text').css('display', 'block');
-        }
     </script>
 </body>
 

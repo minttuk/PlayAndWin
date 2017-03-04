@@ -113,11 +113,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	</div>
 
 	<!-- //footer -->
+	<script src="js/gamelist.js"></script>
 	<script>
-		var games = ["snake", "reaction", 'flappy'];
 		var s = location.href;
 		s = s.substring(s.indexOf('#') + 1, s.length);
-		if ($.inArray(s, games) != -1) {
+		if ($.inArray(s, Object.keys(gamelist)) != -1) {
 			$('#game').attr("src", 'games/' + s + '.html');
 		} else {
 			$('#game').attr("src", 'games/nogame.html');
