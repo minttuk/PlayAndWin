@@ -35,3 +35,7 @@ img {
     display: block;
     margin: 0 auto;
 }
+
+#padding{
+  padding-top: 30vh;
+}
