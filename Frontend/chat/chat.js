@@ -7,7 +7,7 @@ $(document).ready(function() {
     setInterval(update, 1000);
     $.getJSON("../../Backend/php/getchat.php", function(result) {
         prevResult = result;
-        for (i = result.length - 30; i < result.length; i++) {
+        for (i = Math.max(0,result.length - 30); i < result.length; i++) {
             $(".msg-wrap").append('' +
                 '<div class="media msg" style='+cardColor()+'>' +
                 '<div class="media-body">' +

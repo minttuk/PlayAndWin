@@ -84,6 +84,8 @@ CREATE TABLE chatroom (
   ts TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
+INSERT INTO playandwin.chatroom (username, msg) VALUES ('guest', 'hello');
+
 INSERT INTO user(username, firstname, lastname, email, password, description, location, coins)
 VALUES ('john.doe','John','Doe','john@doe.fi','johndoepass', 'Hello World!', 'Helsinki', '5000');
 
