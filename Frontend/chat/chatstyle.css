@@ -30,3 +30,8 @@ p {
   position: relative;
   height: 100%; /* Or whatever you want (eg. 400px) */
 }
+
+img {
+    display: block;
+    margin: 0 auto;
+}

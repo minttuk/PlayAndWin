@@ -18,6 +18,7 @@ $(document).ready(function() {
                 '</div>'
             );
         }
+        $('#loading').remove();
         $('.input-group').css('visibility','visible');
         $('#chatbox').scrollTop($('#chatbox')[0].scrollHeight);
         $('#chatbox').perfectScrollbar('update');
