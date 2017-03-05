@@ -33,6 +33,10 @@ if (isset($_POST['Email'])) {
 } else {
   $message = isset($_SESSION['id']) ? $_SESSION['id'] : -1;
 }
+if(isset($_REQUEST['logout'])) {
+  session_destroy();
+  $message  = json_encode('You have been logged out.');
+}
 echo $message;
 //---------------funktiot:
   function startSession($id) {

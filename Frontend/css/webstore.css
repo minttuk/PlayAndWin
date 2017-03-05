@@ -32,7 +32,7 @@
 .errormsg {
     color: red;
 }
-
+/*
 @media (min-width: 601px) and (min-height: 1100px){
   .copyright {
     bottom: 25px;

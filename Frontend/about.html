@@ -46,25 +46,23 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<li class="hover-effect"><a href="webstore.html">Shop</a></li>
 					<li class="hover-effect"><a href="profile.html">Profile</a></li>
 					<li class="hover-effect"><a href="community.html">Community</a></li>
-					<li class="sign-in"><a data-toggle="modal" data-target="#myModal">Sign in</a></li>
+					<li class="sign-in"><a class='signIn' data-toggle="modal" data-target="#loginModal" onclick="signInForm()">Sign in</a></li>
+					<li class="sign-in signUp"><a data-toggle="modal" data-target="#loginModal" onclick="signUpForm()">Sign up</a></li>
 				</ul>
 			</div>
 		</div>
 	</nav>
-		<!-- //Navbar -->
-        <div id="myModal" class="modal fade" role="dialog">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-body">
-                  <form action="#" method="post">
-                    <input type="text" class="text" name="Name" placeholder="Username" required="">
-				    <input type="text" class="text" name="Email" placeholder="Email" required="">
-				    <input type="submit" class="more_btn" value="Sign in">
-                  </form>
-              </div>
-            </div>
-          </div>
-        </div>
+	<!-- //Navbar -->
+	<div id="loginModal" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<div id="login" class="modal-content">
+				<div class="modal-body">
+					<form id="signForm" method="post"/>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="js/loginForm.js"></script>
 </div>
 <!-- banner -->
 
