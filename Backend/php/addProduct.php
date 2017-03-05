@@ -28,8 +28,15 @@ function addProduct(){
 }
 
 function getAdmin(){
-    //R::setup( 'mysql:host=localhost;dbname=playandwin', 'root', '' );
+    R::setup( 'mysql:host=localhost;dbname=playandwin', 'root', '' );
+    if (isset($_SESSION['id'])!=null){
+        $user = R::load('user',$_SESSION['id']);
+        $admin = $user->admin;
+    }
+    else{
+        $admin = null;
+    }
     //$user = R::load('user',$_SESSION['id']);
     //$admin = $user->admin;
-    echo json_encode(array('admin'=>1));
+    echo json_encode(array('admin'=>$admin));
 }
