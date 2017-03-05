@@ -4,6 +4,51 @@
 
 var submitForm = document.getElementById("submitForm");
 var addProductModal = document.getElementById("addProductModal");
+
+window.onload = function displayAddProductButton() {
+
+    var ajaxRequest;
+    var button = document.getElementById('addProductButton');
+
+    try{
+        // Opera 8.0+, Firefox, Safari
+        ajaxRequest = new XMLHttpRequest();
+    } catch (e){
+        // Internet Explorer Browsers
+        try{
+            ajaxRequest = new ActiveXObject("Msxml2.XMLHTTP");
+        } catch (e) {
+            try{
+                ajaxRequest = new ActiveXObject("Microsoft.XMLHTTP");
+            } catch (e){
+                // Something went wrong
+                alert("Your browser broke!");
+                return false;
+            }
+        }
+    }
+
+    ajaxRequest.onreadystatechange = function() {
+        if (ajaxRequest.readyState == 4 && ajaxRequest.status == 200) {
+            var text = ajaxRequest.responseText;
+            console.log(text);
+            var object = JSON.parse(text);
+            console.log("admin arvo on " + object['admin']);
+
+            if (object['admin'] == 1) {
+                button.style.display = "block";
+            }
+            else {
+                button.style.display = "none";
+            }
+        }
+        ;
+    }
+
+    ajaxRequest.open("GET", "../Backend/php/model.php?q=getAdmin", true);
+    ajaxRequest.send(null);
+    }
+
 submitForm.onclick = function(){
 
 //function addProduct(){
