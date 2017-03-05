@@ -2,6 +2,22 @@ var userId;
 var model = "../Backend/php/model.php?q=";
 var sessionId;
 
+function getScoreTable() {
+  var idParam = '';
+  if (uriParse('user'))
+    idParam = 'id='+uriParse('user')+'&';
+  $.ajax({url: '../Backend/php/highscore.php?'+idParam+'table',
+    datatype:'html',success: function(result){$("#highscores").html(result);
+  }});
+}
+
+function uriParse(param){
+  var results = new RegExp('[\?&]' + param + '=([^&#]*)').exec(window.location.href);
+  if (results==null)
+    return null;
+  return results[1] || 0;
+}
+
 function getSession() {
   $.ajax({
       url: "../Backend/php/login.php",
@@ -301,6 +317,7 @@ parseUri.options = {
 	}
 };
 
+getScoreTable()
 getSession();
 getUserInfo();
 getLastLoggedIn();

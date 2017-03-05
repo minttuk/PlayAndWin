@@ -1,9 +1,3 @@
-<!--A Design by W3layouts
-Author: W3layout
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -131,7 +125,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<div class="col-md-4">
 					 <div class="personal-score">
 						 <table id='highscores'>
-							 <h3>Personal record</h3>
+							 <h3>High Scores</h3>
 						 </table>
 					 </div>
 				 </div>
@@ -170,20 +164,5 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	</div>
 	<script type="text/javascript" src="js/profile.js"></script>
 	<script src="js/gamelist.js"></script>
-	<script>
-	$(document).ready(function(){
-		var userId = '';
-		if (parseUri(window.location.search).queryKey['user']) {
-			userId = '?id='+parseUri(window.location.search).queryKey['user'];
-			console.log(userId);
-		}
-    $.getJSON("../Backend/php/highscore.php"+userId, function(result){
-        $.each(result, function(i, field){
-          $("#highscores").append('<tr><th><a href="game.html#'+Object.keys(field)[0]+'">'+
-					gamelist[Object.keys(field)[0]]+'</a></th><td>'+field[Object.keys(field)[0]]+'</td></tr>');
-        });
-    });
-});
-	</script>
 </div>
 <!-- //footer -->
