@@ -5,10 +5,12 @@
 
 function buy(product_id){
     var ajaxRequest;
-    var user_id = "1"; //hardcoded for now.... to be changed when sessions or whatever is finished.. =)
+    //var user_id = "1"; //hardcoded for now.... to be changed when sessions or whatever is finished.. =)
     console.log("product id = " + product_id);
 
-    var array = {"user_id": user_id, "product_id": product_id};
+    //var array = {"user_id": user_id, "product_id": product_id};
+    var array = {"product_id": product_id};
+
     var dataString = JSON.stringify(array);
     //console.log(dataString);
 
@@ -33,8 +35,9 @@ function buy(product_id){
     ajaxRequest.onreadystatechange = function(){
         if (ajaxRequest.readyState == 4 && ajaxRequest.status == 200){
             var text = ajaxRequest.responseText;
-            var object = JSON.parse(text);
+            console.log(text);
             //console.log("response teksti on "+object['message']+" ja ending here"); //why oh why???
+            var object = JSON.parse(text);
             $('.buyMessage').html(object['message']);
             //window.location = 'webstore.html';
         }

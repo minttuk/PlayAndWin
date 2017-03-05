@@ -18,7 +18,7 @@ if (isset($_POST['Email'])) {
     regUser($uname,$_POST['Email'],$password,$_POST['Firstname'],$_POST['Lastname']);
     $newuser = findUser($uname);
     startSession($newuser->id);
-    R::exec('CREATE TABLE collection_'.$newuser->id.' (product_id INT(6) PRIMARY KEY NOT NULL, amount INT(6) NOT NULL);');
+    R::exec('CREATE TABLE collection_'.$newuser->id.' (id INT(6) PRIMARY KEY NOT NULL, amount INT(6), FOREIGN KEY (id) REFERENCES product(id));');
     //$message = 'Welcome to Play and Win, '.$uname.'!';
   } else $message = 'Username taken, try again!';
 
