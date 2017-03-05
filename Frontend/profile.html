@@ -18,6 +18,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- //font -->
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.js"></script>
+<script src="js/bootstrap-filestyle.min.js"></script>
 
 </head>
 <body>
@@ -89,9 +90,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-body">
-						<form action="../Backend/php/uploadpicture.php" method="post" enctype="multipart/form-data" id="upload_form">
-								<input name="fileToUpload" type="file"/>
-								<input type="submit" value="Upload"/>
+						<form class="" action="../Backend/php/uploadpicture.php" method="post" enctype="multipart/form-data" id="upload_form">
+							<div class="form-group">
+								<input name="fileToUpload" type="file" class="filestyle form-control"  data-iconName="glyphicon glyphicon-inbox">
+								<input type="submit" value="Upload" style='margin-top:20px;' class="btn btn-primary form-control"/>
+							</div>
 						</form>
 					</div>
 				</div>
