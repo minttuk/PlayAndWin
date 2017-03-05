@@ -26,3 +26,10 @@ function addProduct(){
     R::store( $product );
 
 }
+
+function getAdmin(){
+    //R::setup( 'mysql:host=localhost;dbname=playandwin', 'root', '' );
+    //$user = R::load('user',$_SESSION['id']);
+    //$admin = $user->admin;
+    echo json_encode(array('admin'=>1));
+}

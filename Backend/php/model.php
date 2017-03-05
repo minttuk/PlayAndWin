@@ -63,6 +63,9 @@ else {
     if ($q == "getNewUsers"){
       getNewUsers();
     }
+    if ($q == "getAdmin"){
+        getAdmin();
+    }
 }
 
 // Tästä alkaa varsinaiset metodit.

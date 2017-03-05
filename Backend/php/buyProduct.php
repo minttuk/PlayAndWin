@@ -58,7 +58,7 @@ function buyProduct(){
             }
 
 
-            echo json_encode(array('message'=>'You have bought this product! You have '.$coins_left.' coins left.' .$id ));
+            echo json_encode(array('message'=>'You have bought this product! You have '.$coins_left.' coins left.' ));
         }
     }
     else {
