@@ -268,7 +268,7 @@ function showLastUsers(response, who) {
     div.addClass('col-md-3 img-w3-agile');
     var a = $('<a></a>');
     a.attr("href", "profile.html?user=" + response[i].id);
-    a.attr("target", "_blank");
+    //a.attr("target", "_blank");
     var img = $('<img></img>');
     img.attr("src", "images/user/" + response[i].profilepicture);
     img.attr("alt", " ");
