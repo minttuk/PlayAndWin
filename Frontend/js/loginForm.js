@@ -13,24 +13,22 @@ $(document).ready(function() {
   });
 });
 function signUpForm() {
-  $("#signForm").html('');
-  $("#signForm").append('<input type="text" class="text" name="Username" placeholder="Username" required="">'
-				    +'<input type="text" class="text" name="Firstname" placeholder="First Name" required="">'
-            +'<input type="text" class="text" name="Lastname" placeholder="Last Name" required="">'
-            +'<input type="text" class="text" name="Email" placeholder="Email" required="">'
-            +'<input type="password" class="text" name="Password" placeholder="Password" required="">'
-            +'<input type="text" class="text" name="ConfirmPassword" placeholder="Confirm Password" required="">'
+  $("#signForm").html('<input type="text" class="text" name="Username" placeholder="Username" required="">'
+				    +'<input type="text" class="text" name="Firstname" placeholder="First Name" pattern="[A-Z]+" required="">'
+                    +'<input type="text" class="text" name="Lastname" placeholder="Last Name" pattern="[A-Z]+" required="">'
+                    +'<input type="email" class="text" name="Email" placeholder="Email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required="">'
+                    +'<input type="password" class="text" name="Password" placeholder="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" required="">'
+                    +'<input type="password" class="text" name="ConfirmPassword" placeholder="Confirm Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" required="">'
 				    +'<input type="submit" class="more_btn" name="submit" value="Sign up">');
 }
 function signInForm() {
   if(signedIn) {
-    $.getJSON('../Backend/php/login.php?logout', function(result){
-      $('.signIn').removeAttr('data-toggle');
+    $('.signIn').removeAttr('data-toggle');
+    $.get('../Backend/php/login.php?logout', function(result){
       location.reload();
     });
   } else {
-    $("#signForm").html('');
-    $("#signForm").append('<input type="text" class="text" name="Username" placeholder="Username" required="">'
+    $("#signForm").html('<input type="text" class="text" name="Username" placeholder="Username" required="">'
                       +'<input type="password" class="text" name="Password" placeholder="Password" required="">'
                       +'<input type="submit" class="more_btn" name="submit" value="Sign in">');
   }
@@ -41,7 +39,8 @@ function isSignedIn() {
     success: function (id) { if (id != -1) signedIn = true;}
   });
   if (signedIn) {
-    $('.signUp').css('display','none');
+    $('#prof').css('display','block');
+    $('.signUp').remove();
     $('.signIn').html('Log out');
   }
 }

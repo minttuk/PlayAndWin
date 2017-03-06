@@ -157,6 +157,9 @@ img {
 	-moz-transform: translateY(0px);
 	transform: translateY(0px);
 }
+#prof {
+  display: none;
+}
 /*-- //Link-Hover-Effect --*/
 /*-- //Navbar --*/
 
