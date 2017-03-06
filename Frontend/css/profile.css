@@ -33,6 +33,14 @@ h6 {
   display: none;
 }
 
+#friendrequeststab {
+  display: none;
+}
+
+#pendingfriendstab {
+  display: none;
+}
+
 .errormessage {
   color: red;
 }

@@ -48,8 +48,12 @@ else {
         buyProduct();
     }
 
-    if ($q == "getFriends"){
-        getFriends();
+    if ($q == "getMutualFriends"){
+        getMutualFriends();
+    }
+
+    if ($q == "getPendingFriends"){
+        getPendingFriends();
     }
 
     if ($q == "addFriend"){
@@ -64,7 +68,7 @@ else {
       getNewUsers();
     }
     if ($q == "getAdmin"){
-        getAdmin();
+      getAdmin();
     }
 }
 

@@ -56,10 +56,17 @@ function checkEmpty($stringToCheck) {
 }
 
 // getFriends() gets all the friendship rows that have the userid and are approved
-function getFriends() {
+function getMutualFriends() {
   R::setup( 'mysql:host=localhost;dbname=playandwin', 'root', '' );
   $id = $_REQUEST['id'];
   $friends = R::getAll( 'SELECT user1_id, user2_id FROM friendship WHERE user1_id = :id OR user2_id = :id AND approved = 1', [':id' => $id]);
+  echo json_encode($friends);
+}
+
+function getPendingFriends() {
+  R::setup( 'mysql:host=localhost;dbname=playandwin', 'root', '' );
+  $id = $_REQUEST['id'];
+  $friends = R::getAll( 'SELECT user1_id, user2_id FROM friendship WHERE user1_id = :id OR user2_id = :id AND approved = 0', [':id' => $id]);
   echo json_encode($friends);
 }
 

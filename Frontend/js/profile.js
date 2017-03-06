@@ -87,44 +87,38 @@ function checkEditedProfile(firstname, lastname) {
   return false;
 }
 
-/*
-function getSession() {
-  $.ajax({
-      url: "../Backend/php/login.php",
-      type: "get",
-      dataType: "json",
-      //data: JSON.stringify({"id": userId}),
-      success: function (response){
-        //console.log(response);
-        sessionId = response;
-        console.log('session is ' + sessionId);
-      },
-      error: function(jqXHR, textStatus, errorThrown) {
-        console.log(textStatus, errorThrown);
-        sessionId = null;
-        window.location = "index.html";
-      }
-  });
-}
-*/
-
 //Work in progress... Not working yet.
-function getFriends(){
+function showFriends(){
   console.log('mentiin functioon getFriends()')
-  var str = "getFriends";
+  getMutualFriends();
+  if (userId == sessionId) {
+    //getPendingFriends();
+  }
+}
+
+function getMutualFriends() {
+  var str = "getMutualFriends&id=";
   $.ajax({
-      url: model + str,
-      type: "post",
+      url: model + str + userId,
       dataType: "json",
-      data: JSON.stringify({"id": userId}),
       success: function (response){
         console.log(response);
         return response;
-        /*        var count = 0;
-                for (var friend in response) {
-                  count++;
-                }
-                console.log(count);*/
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        console.log(textStatus, errorThrown);
+      }
+  });
+}
+
+function getPendingFriends() {
+  var str = "getFriends";
+  $.ajax({
+      url: model + str + userId,
+      dataType: "json",
+      success: function (response){
+        console.log(response);
+        return response;
       },
       error: function(jqXHR, textStatus, errorThrown) {
         console.log(textStatus, errorThrown);
@@ -203,6 +197,8 @@ function updateProfile(response) {
     $('#editpicturebutton').fadeOut(0, function() {
       $(this).css('display', 'inline-block').fadeIn(500);
     });
+    $('#friendrequeststab').css("display", "inline-block");
+    $('#pendingfriendstab').css("display", "inline-block");
   }
   //addfriendbutton and sendmessagebutton only visible in other users profiles
   if (userId != sessionId) {
@@ -226,6 +222,24 @@ function updateProfile(response) {
     $('input[name="newlocation"]').val(response.location);
   }
 }
+
+$('#friendrequeststab').click(function() {
+  $('#friendrequeststab').attr('class', 'active');
+  $('#mutualfriendstab').removeClass('active');
+  $('#pendingfriendstab').removeClass('active');
+})
+
+$('#pendingfriendstab').click(function() {
+  $('#pendingfriendstab').attr('class', 'active');
+  $('#mutualfriendstab').removeClass('active');
+  $('#friendrequeststab').removeClass('active');
+})
+
+$('#mutualfriendstab').click(function() {
+  $('#mutualfriendstab').attr('class', 'active');
+  $('#pendingfriendstab').removeClass('active');
+  $('#friendrequeststab').removeClass('active');
+})
 
 function getLastLoggedIn() {
   var str = 'getLastLoggedIn';
@@ -285,4 +299,4 @@ getSession();
 getUserInfo();
 getLastLoggedIn();
 getNewUsers();
-getFriends();
+showFriends();

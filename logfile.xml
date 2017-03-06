@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="Test" tests="4" assertions="5" failures="0" errors="0" time="0.002378">
+    <testsuite name="EmailTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/EmailTest.php" tests="3" assertions="3" failures="0" errors="0" time="0.002013">
+      <testcase name="testCanBeCreatedFromValidEmailAddress" class="EmailTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/EmailTest.php" line="13" assertions="1" time="0.000846"/>
+      <testcase name="testCannotBeCreatedFromInvalidEmailAddress" class="EmailTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/EmailTest.php" line="21" assertions="1" time="0.000429"/>
+      <testcase name="testCanBeUsedAsString" class="EmailTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/EmailTest.php" line="28" assertions="1" time="0.000738"/>
+    </testsuite>
+    <testsuite name="userTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/userTest.php" tests="1" assertions="2" failures="0" errors="0" time="0.000365">
+      <testcase name="testcheckEmpty" class="userTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/userTest.php" line="9" assertions="2" time="0.000365"/>
+    </testsuite>
+  </testsuite>
+</testsuites>
