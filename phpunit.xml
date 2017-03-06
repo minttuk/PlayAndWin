@@ -4,4 +4,18 @@
             <directory>./PHPUnitTests</directory>
         </testsuite>
     </testsuites>
+
+    <filter>
+      <whitelist>
+          <directory suffix=".php">./Backend/php/</directory>
+      </whitelist>
+  </filter>
+
+  <logging>
+      <log type="testdox-html" target="testdox.html"/>
+      <log type="coverage-clover" target="report.xml" charset="UTF-8"
+          yui="true" highlight="true"
+          lowUpperBound="50" highLowerBound="80"/>
+      <log type="junit" target="logfile.xml" logIncompleteSkipped="false"/>
+  </logging>
 </phpunit>
