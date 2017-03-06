@@ -7,7 +7,7 @@
  * Time: 21:01
  */
 
-//in progress....
+
 function buyProduct(){
 
     R::setup( 'mysql:host=localhost;dbname=playandwin', 'root', '' );
