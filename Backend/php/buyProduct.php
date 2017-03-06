@@ -42,8 +42,6 @@ function buyProduct(){
             R::exec( 'INSERT INTO order_row (order_id, product_id, amount) VALUES (LAST_INSERT_ID(), :product_id, 1)', [':product_id' => $product_id]);
 
             //add product to user's collection
-
-
             $collection = 'collection_'.$_SESSION['id'];
 
             $product = R::load( 'collection_'.$_SESSION['id'], $product_id );
