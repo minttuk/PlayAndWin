@@ -1,6 +1,6 @@
 <?php
 ini_set('display_errors', 1);
-require '../../rb.php';
+require 'rb.php';
 session_start();
 
 R::setup( 'mysql:host=localhost;dbname=playandwin', 'root', '' );
