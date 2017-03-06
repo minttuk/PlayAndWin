@@ -45,7 +45,7 @@ function setUserInfo() {
   echo $user;
 }
 
-//make a test of this
+//TEST OK. If string is empty, it will be changed into NULL.
 function checkEmpty($stringToCheck) {
   if ($stringToCheck == '') {
     return null;
@@ -59,10 +59,6 @@ function checkEmpty($stringToCheck) {
 function getFriends() {
   R::setup( 'mysql:host=localhost;dbname=playandwin', 'root', '' );
   $id = $_REQUEST['id'];
-  //R::setup( 'mysql:host=localhost;dbname=playandwin', 'root', '' );
-  //$value = json_decode(file_get_contents('php://input'), true);
-  //$id = $value['id'];
-  //$id = '1';
   $friends = R::getAll( 'SELECT user1_id, user2_id FROM friendship WHERE user1_id = :id OR user2_id = :id AND approved = 1', [':id' => $id]);
   echo json_encode($friends);
 }
@@ -95,6 +91,7 @@ function getLastLoggedIn() {
   echo json_encode($response);
 }
 
+// returns at most 8 users that have the most recent date in reg_date
 function getNewUsers() {
   R::setup( 'mysql:host=localhost;dbname=playandwin', 'root', '' );
   $users = R::findAll('user', 'ORDER BY reg_date DESC LIMIT 8');
@@ -109,6 +106,5 @@ function getNewUsers() {
   header('Content-Type: application/json');
   echo json_encode($response);
 }
-
 
 ?>
