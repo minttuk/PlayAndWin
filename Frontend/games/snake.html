@@ -93,7 +93,7 @@
                     $('#start').css('display', 'block');
                     $('#text').css('display', 'block');
                     $('#canvas').css('display', 'none');
-                    $.post("../../hshandler.php", {
+                    $.post("../../Backend/php/hshandler.php", {
                         game: 'snake',
                         score: endScore
                     }, function(data) {

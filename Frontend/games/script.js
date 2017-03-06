@@ -12,7 +12,7 @@ function hideMenu() {
 }
 
 function showMenu(gameID,multiplier) {
-    $.post("../../hshandler.php", {
+    $.post("../../Backend/php/hshandler.php", {
         game: gameID,
         score: score * multiplier
     }, function(data) {

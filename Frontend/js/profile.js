@@ -4,14 +4,14 @@ var sessionId;
 
 function getScoreTable() {
   var idParam = '';
-  if (uriParse('user'))
-    idParam = 'id='+uriParse('user')+'&';
+  if (parseURL('user'))
+    idParam = 'id='+parseURL('user')+'&';
   $.ajax({url: '../Backend/php/highscore.php?'+idParam+'table',
     datatype:'html',success: function(result){$("#highscores").html(result);
   }});
 }
 
-function uriParse(param){
+function parseURL(param){
   var results = new RegExp('[\?&]' + param + '=([^&#]*)').exec(window.location.href);
   if (results==null)
     return null;
@@ -133,8 +133,8 @@ function getFriends(){
 }
 
 function getUserInfo() {
-    if (parseUri(window.location.search).queryKey['user']) {
-      userId = parseUri(window.location.search).queryKey['user']
+    if (parseURL('user')) {
+      userId = parseURL('user');
       console.log('parse ' + userId);
     }
     else if (sessionId != -1) {
@@ -279,43 +279,6 @@ function showLastUsers(response, who) {
     $('#' + who + '').append(div);
   }
 }
-
-
-
-// parseUri 1.2.2
-// (c) Steven Levithan <stevenlevithan.com>
-// MIT License
-
-// Valmis url:n parsetusscripti. Tätä hyödynnetään dog.html:n urlin parsettamisessa. Urlissa määritetään kenen koiran tiedot sivu näyttää dynaamisesti.
-
-function parseUri (str) {
-	var	o   = parseUri.options,
-		m   = o.parser[o.strictMode ? "strict" : "loose"].exec(str),
-		uri = {},
-		i   = 14;
-
-	while (i--) uri[o.key[i]] = m[i] || "";
-
-	uri[o.q.name] = {};
-	uri[o.key[12]].replace(o.q.parser, function ($0, $1, $2) {
-		if ($1) uri[o.q.name][$1] = $2;
-	});
-
-	return uri;
-};
-
-parseUri.options = {
-	strictMode: false,
-	key: ["source","protocol","authority","userInfo","user","password","host","port","relative","path","directory","file","query","anchor"],
-	q:   {
-		name:   "queryKey",
-		parser: /(?:^|&)([^&=]*)=?([^&]*)/g
-	},
-	parser: {
-		strict: /^(?:([^:\/?#]+):)?(?:\/\/((?:(([^:@]*)(?::([^:@]*))?)?@)?([^:\/?#]*)(?::(\d*))?))?((((?:[^?#\/]*\/)*)([^?#]*))(?:\?([^#]*))?(?:#(.*))?)/,
-		loose:  /^(?:(?![^:@]+:[^:@\/]*@)([^:\/?#.]+):)?(?:\/\/)?((?:(([^:@]*)(?::([^:@]*))?)?@)?([^:\/?#]*)(?::(\d*))?)(((\/(?:[^?#](?![^?#\/]*\.[^?#\/.]+(?:[?#]|$)))*\/?)?([^?#\/]*))(?:\?([^#]*))?(?:#(.*))?)/
-	}
-};
 
 getScoreTable()
 getSession();
