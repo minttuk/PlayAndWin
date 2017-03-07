@@ -52,6 +52,10 @@ else {
         getMutualFriends();
     }
 
+    if ($q == "getFriendRequests") {
+        getFriendRequests();
+    }
+
     if ($q == "getPendingFriends"){
         getPendingFriends();
     }
