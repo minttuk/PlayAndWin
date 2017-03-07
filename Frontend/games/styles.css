@@ -42,7 +42,7 @@ body {
       margin-bottom: 0px;
   }
   #start p {
-      margin-top: -8em;
+      margin-top: -7.5em;
       font-size: 0.5em;
   }
 }
@@ -57,16 +57,11 @@ body {
     width: 170px;
     height: 65px;
     padding-top: 1px;
-    padding-bottom: 4px;
+    padding-bottom: 16px;
     margin-top: 5%;
     display: none;
-    line-height: 1.2;
+    line-height: 1.3;
     text-align: center;
-}
-
-#average {
-    margin-top: -15px;
-    font-size: 0.6em;
 }
 
 #box {
