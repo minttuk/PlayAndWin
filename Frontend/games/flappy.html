@@ -51,9 +51,9 @@
                         fill: "#aaaaaa"
                     });
 
-                    var spaceKey = game.input.keyboard.addKey(
-                        Phaser.Keyboard.SPACEBAR);
-                    spaceKey.onDown.add(this.jump, this);
+                    game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+                    game.input.addPointer();
+                    game.input.onDown.add(this.jump, this);
                 },
 
                 update: function() {

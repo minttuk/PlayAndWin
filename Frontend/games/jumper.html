@@ -37,6 +37,8 @@
                 },
 
                 create: function() {
+
+
                     game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
                     game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
                     game.scale.refresh();
@@ -47,6 +49,8 @@
                     this.platformYMin = 99999;
                     this.platformsCreate();
                     this.heroCreate();
+                    game.input.addPointer();
+                    this.touch = this.input.addPointer();
                     this.cursor = this.input.keyboard.createCursorKeys();
                     this.wasd = {
                       up: this.input.keyboard.addKey(Phaser.Keyboard.W),
@@ -56,6 +60,9 @@
                 },
 
                 update: function() {
+                   if (game.input.pointer1.isDown){
+                     console.log('clicked');
+                   }
                     this.world.setBounds(0, -this.hero.yChange, this.world.width, this.game.height + this.hero.yChange);
                     this.cameraYMin = Math.min(this.cameraYMin, this.hero.y - this.game.height + 130);
                     this.camera.y = this.cameraYMin;
@@ -109,15 +116,17 @@
                 },
 
                 heroMove: function() {
-                    if (this.cursor.left.isDown || this.wasd.left.isDown) {
+                    if (this.cursor.left.isDown || this.wasd.left.isDown || (game.input.x < 245 && game.input.activePointer.isDown)) {
                         this.hero.body.velocity.x = -200;
-                    } else if (this.cursor.right.isDown || this.wasd.right.isDown) {
+                    } else if (this.cursor.right.isDown || this.wasd.right.isDown || (game.input.x > 245 && game.input.activePointer.isDown)) {
                         this.hero.body.velocity.x = 200;
                     } else {
                         this.hero.body.velocity.x = 0;
                     }
 
-                    if ((this.cursor.up.isDown || this.wasd.up.isDown) && this.hero.body.touching.down) {
+                    if ((this.cursor.up.isDown || this.wasd.up.isDown || (game.input.activePointer.isDown &&
+                        game.input.y < 350)) && this.hero.body.touching.down) {
+                        //console.log('p:y='+this.hero.y+' m:y='+game.input.y)
                         hasLanded = true;
                         this.hero.body.velocity.y = -350;
                     }
