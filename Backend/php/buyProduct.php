@@ -11,9 +11,7 @@
 function buyProduct(){
 
     R::setup( 'mysql:host=localhost;dbname=playandwin', 'root', '' );
-
     $value = json_decode(file_get_contents('php://input'), true);
-    //$user_id = $value['user_id'];
     $product_id = $value['product_id'];
 
     if (isset($_SESSION['id'])) {
@@ -33,35 +31,37 @@ function buyProduct(){
             $coins_left = $user_coins-$product_price;
             R::exec( 'UPDATE user SET coins = :coins_left WHERE id = :user_id', [':coins_left' => $coins_left,':user_id' => $user_id]);
 
-            //make shoporder
-            $shoporder = R::dispense( 'shoporder' );
-            $shoporder->user_id = $user_id;
-            R::store( $shoporder );
-
-            //make order row
-            R::exec( 'INSERT INTO order_row (order_id, product_id, amount) VALUES (LAST_INSERT_ID(), :product_id, 1)', [':product_id' => $product_id]);
-
-            //add product to user's collection
-            $collection = 'collection_'.$_SESSION['id'];
-
-            $product = R::load( 'collection_'.$_SESSION['id'], $product_id );
-            $id = $product->id;
-            if ($id == 0){
-                R::exec( 'INSERT INTO '.$collection.'(id, amount) VALUES (:product_id, 1)', [':product_id' => $product_id]);
-            }
-            else{
-                $amount = R::getCell( 'SELECT amount FROM '.$collection.' WHERE id = '.$product_id.'');
-                $newAmount = $amount+1;
-                R::exec( 'UPDATE '.$collection.' SET amount = '.$newAmount.' WHERE id = '.$product_id.'');
-            }
-
-
-            echo json_encode(array('message'=>'You have bought this product! You have '.$coins_left.' coins left.' ));
+            makeShopOrder($user_id);
+            makeOrderRow($product_id);
+            addToCollection($product_id, $coins_left);
         }
     }
     else {
         echo json_encode(array('message'=>'You need to sign in first!'));
     }
+}
 
+function makeShopOrder($user_id){
+    $shoporder = R::dispense( 'shoporder' );
+    $shoporder->user_id = $user_id;
+    R::store( $shoporder );
+}
 
+function makeOrderRow($product_id){
+    R::exec( 'INSERT INTO order_row (order_id, product_id, amount) VALUES (LAST_INSERT_ID(), :product_id, 1)', [':product_id' => $product_id]);
+
+}
+function addToCollection($product_id, $coins_left){
+    $collection = 'collection_'.$_SESSION['id'];
+    $product = R::load( 'collection_'.$_SESSION['id'], $product_id );
+    $id = $product->id;
+    if ($id == 0){
+        R::exec( 'INSERT INTO '.$collection.'(id, amount) VALUES (:product_id, 1)', [':product_id' => $product_id]);
+    }
+    else{
+        $amount = R::getCell( 'SELECT amount FROM '.$collection.' WHERE id = '.$product_id.'');
+        $newAmount = $amount+1;
+        R::exec( 'UPDATE '.$collection.' SET amount = '.$newAmount.' WHERE id = '.$product_id.'');
+    }
+    echo json_encode(array('message'=>'You have bought this product! You have '.$coins_left.' coins left.' ));
 }
