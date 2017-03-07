@@ -26,16 +26,6 @@
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.js"></script>
 	<style>
-		#game {
-			max-width: 1000px;
-			max-height: 800px;
-			width: 70vw;
-			height: 45vw;
-			border: none;
-			overflow: hidden;
-			margin: auto;
-		}
-
 		@media (min-width: 601px) and (min-height: 900px){
 		  .copyright {
 		    bottom: 25px;
@@ -97,8 +87,18 @@
 
 	<!-- trend -->
 
-	<div class="container text-center">
-		<iframe id='game' scrolling='no' style='width:70vw;height:45vw;border:none;overflow:hidden;'></iframe>
+	<div class="container-fluid text-center">
+		<div class='row'>
+			<div class=col-xs-2>
+				<img class ='advertisement' src="images/ad2.png">
+			</div>
+			<div class=col-xs-8>
+				<iframe id='game' scrolling='no'></iframe>
+			</div>
+			<div class=col-xs-2>
+				<img class ='advertisement' src="images/ad1.png">
+			</div>
+		</div>
 	</div>
 
 	<!-- //trend -->
@@ -107,7 +107,7 @@
 	<!-- //services-->
 
 	<div class="clearfix"></div>
-	<div class="copyright">
+	<div class="copyright" id='game-cr'>
 		<p>&copy; 2017 Play and Win. All Rights Reserved <span style='color:#cccccc'>| Design by <a style='color:#cccccc' href="http://w3layouts.com/" target="_blank"> W3layouts </span></a></p>
 	</div>
 	</div>

@@ -3,10 +3,13 @@ body {
 }
 
 #start {
-    height: 300px;
-    width: 300px;
+    height: 97vw;
+    width: 97vw;
+    max-height: 300px;
+    max-width: 300px;
     border-radius: 150px;
     vertical-align: middle;
+    background-color: #1b6efc;
     color: #f4f0ec;
     text-align: center;
     vertical-align: middle;
@@ -30,6 +33,18 @@ body {
 #start p {
     margin-top: -110px;
     font-size: 0.8em;
+}
+
+@media (max-width: 290px){
+  #start h1 {
+      font-size: 2.5em;
+      line-height: 4.5em;
+      margin-bottom: 0px;
+  }
+  #start p {
+      margin-top: -8em;
+      font-size: 0.5em;
+  }
 }
 
 #text {

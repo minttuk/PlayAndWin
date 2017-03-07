@@ -1,11 +1,34 @@
-/*--
-	Author: W3layouts
-	Author URL: http://w3layouts.com
-	License: Creative Commons Attribution 3.0 Unported
-	License URL: http://creativecommons.org/licenses/by/3.0/
---*/
+@media (max-width: 900px){
+	.advertisement {
+		display: none;
+	}
+}
 
-/*-- Reset Code --*/
+#chatwindow {
+	display:block;
+	width:100%;
+	height: 85vh;
+	border: none;
+	overflow: hidden;
+	margin: auto;
+}
+
+#game {
+	max-width: 1000px;
+	max-height: 800px;
+	width: 100%;
+	height: 70vh;
+	border: none;
+	overflow: hidden;
+	margin: auto;
+}
+
+.advertisement {
+	max-height:500px;
+	max-width:142px;
+	padding-top:4vh;
+}
+
 body {
 	padding: 0;
 	margin: 0;
