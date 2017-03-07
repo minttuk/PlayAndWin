@@ -64,30 +64,31 @@ function getMutualFriends() {
   echo json_encode($response);
 }
 
-function filterOwnIdFriendship($friendships, $ownid) {
-
-}
-
-
 function getPendingFriends() {
   R::setup( 'mysql:host=localhost;dbname=playandwin', 'root', '' );
   $id = $_REQUEST['id'];
   $pendingfriends = R::getAll( 'SELECT user2_id FROM friendship WHERE user1_id = :id AND approved = 0', [':id' => $id]);
-  $friendsinfo = getFriendsInfo($pendingfriends);
-  echo json_encode($friendsinfo);
+  $response = getFriendsInfo($pendingfriends);
+  echo json_encode($response);
 }
 
 function getFriendRequests() {
   R::setup( 'mysql:host=localhost;dbname=playandwin', 'root', '' );
   $id = $_REQUEST['id'];
   $friendrequests = R::getAll( 'SELECT user1_id FROM friendship WHERE user2_id = :id AND approved = 0', [':id' => $id]);
-  echo json_encode($friendrequests);
+  $response = getFriendsInfo($friendrequests);
+  echo json_encode($response);
 }
 
 function getFriendsInfo($friends) {
   $response = array();
   foreach ($friends as $friend) {
-    $userid = $friend['user2_id'];
+    if ($friend['user2_id']) {
+      $userid = $friend['user2_id'];
+    }
+    else {
+      $userid = $friend['user1_id'];
+    }
     $friendsinfo = R::getAll('SELECT id, username, profilepicture FROM user WHERE id = :id', [':id' => $userid]);
     $response[] = array(
       'id' => $friendsinfo[0]['id'],
