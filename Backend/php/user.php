@@ -59,19 +59,47 @@ function checkEmpty($stringToCheck) {
 function getMutualFriends() {
   R::setup( 'mysql:host=localhost;dbname=playandwin', 'root', '' );
   $id = $_REQUEST['id'];
-  $friends = R::getAll( 'SELECT user1_id, user2_id FROM friendship WHERE user1_id = :id OR user2_id = :id AND approved = 1', [':id' => $id]);
-  echo json_encode($friends);
+  $friends = R::getAll('SELECT user2_id FROM friendship WHERE user1_id = :id AND approved = 1', [':id' => $id]);
+  $response = getFriendsInfo($friends);
+  echo json_encode($response);
 }
+
+function filterOwnIdFriendship($friendships, $ownid) {
+
+}
+
 
 function getPendingFriends() {
   R::setup( 'mysql:host=localhost;dbname=playandwin', 'root', '' );
   $id = $_REQUEST['id'];
-  $friends = R::getAll( 'SELECT user1_id, user2_id FROM friendship WHERE user1_id = :id OR user2_id = :id AND approved = 0', [':id' => $id]);
-  echo json_encode($friends);
+  $pendingfriends = R::getAll( 'SELECT user2_id FROM friendship WHERE user1_id = :id AND approved = 0', [':id' => $id]);
+  $friendsinfo = getFriendsInfo($pendingfriends);
+  echo json_encode($friendsinfo);
+}
+
+function getFriendRequests() {
+  R::setup( 'mysql:host=localhost;dbname=playandwin', 'root', '' );
+  $id = $_REQUEST['id'];
+  $friendrequests = R::getAll( 'SELECT user1_id FROM friendship WHERE user2_id = :id AND approved = 0', [':id' => $id]);
+  echo json_encode($friendrequests);
+}
+
+function getFriendsInfo($friends) {
+  $response = array();
+  foreach ($friends as $friend) {
+    $userid = $friend['user2_id'];
+    $friendsinfo = R::getAll('SELECT id, username, profilepicture FROM user WHERE id = :id', [':id' => $userid]);
+    $response[] = array(
+      'id' => $friendsinfo[0]['id'],
+      'username' => $friendsinfo[0]['username'],
+      'profilepicture' => $friendsinfo[0]['profilepicture'],
+    );
+  }
+  return $response;
 }
 
 function getFriendsCount($id) {
-  $friends = R::getAll( 'SELECT COUNT(*) AS friendcount FROM friendship WHERE user1_id = :id OR user2_id = :id AND approved = 1', [':id' => $id]);
+  $friends = R::getAll( 'SELECT COUNT(*) AS friendcount FROM friendship WHERE user1_id = :id AND approved = 1', [':id' => $id]);
   return $friends[0]['friendcount'];
 }
 

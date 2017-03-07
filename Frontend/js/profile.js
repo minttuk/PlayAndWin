@@ -90,35 +90,41 @@ function checkEditedProfile(firstname, lastname) {
 //Work in progress... Not working yet.
 function showFriends(){
   console.log('mentiin functioon getFriends()')
-  getMutualFriends();
+  getMutualFriends(function(error, response) {
+    if (error) {
+      console.log(error);
+    }
+    console.log("friends " + response);
+    showLastUsers(response, 'showfriendsdiv');
+  });
   if (userId == sessionId) {
     //getPendingFriends();
   }
 }
 
-function getMutualFriends() {
+function getMutualFriends(callback) {
   var str = "getMutualFriends&id=";
   $.ajax({
       url: model + str + userId,
       dataType: "json",
       success: function (response){
-        console.log(response);
-        return response;
+        console.log("friends " + response);
+        callback(null, response);
       },
       error: function(jqXHR, textStatus, errorThrown) {
         console.log(textStatus, errorThrown);
+        callback(errorThrown);
       }
   });
 }
 
 function getPendingFriends() {
-  var str = "getFriends";
+  var str = "getPendingFriends&id=";
   $.ajax({
       url: model + str + userId,
       dataType: "json",
       success: function (response){
         console.log(response);
-        return response;
       },
       error: function(jqXHR, textStatus, errorThrown) {
         console.log(textStatus, errorThrown);
@@ -230,6 +236,7 @@ $('#friendrequeststab').click(function() {
 })
 
 $('#pendingfriendstab').click(function() {
+  getPendingFriends();
   $('#pendingfriendstab').attr('class', 'active');
   $('#mutualfriendstab').removeClass('active');
   $('#friendrequeststab').removeClass('active');
@@ -265,6 +272,7 @@ function getNewUsers() {
       type: "get",
       dataType: "json",
       success: function (response){
+        console.log("new users " + response);
         //passes also div name to function because the same function is used to show new users
         var who = 'newusers';
         showLastUsers(response, who);
@@ -275,8 +283,9 @@ function getNewUsers() {
   });
 }
 
-//the order shown so far is in id order, gotta fix it at some point...
 function showLastUsers(response, who) {
+  console.log(response);
+  console.log(who);
   for (var i in response) {
     var div = $('<div></div>');
     div.addClass('col-md-3 img-w3-agile');
