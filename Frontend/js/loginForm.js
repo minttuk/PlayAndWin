@@ -6,7 +6,7 @@ $(document).ready(function() {
     e.preventDefault();
     $.post( "../Backend/php/login.php", $( "#signForm" ).serialize(), function(data) {
       if(data!='success') {
-        $("#signForm").append('</br><p>'+data+'</p>');
+        $("#errorMsg").html('</br>'+data);
 
       } else location.reload();
     });
@@ -14,12 +14,16 @@ $(document).ready(function() {
 });
 function signUpForm() {
   $("#signForm").html('<input type="text" class="text" name="Username" placeholder="Username" required="">'
-				    +'<input type="text" class="text" name="Firstname" placeholder="First Name" pattern="[a-zA-Z]+" required="">'
-                    +'<input type="text" class="text" name="Lastname" placeholder="Last Name" pattern="[a-zA-Z]+" required="">'
-                    +'<input type="email" class="text" name="Email" placeholder="Email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required="">'
-                    +'<input type="password" class="text" name="Password" placeholder="Password" required="">'
-                    +'<input type="password" class="text" name="ConfirmPassword" placeholder="Confirm Password" required="">'
-				    +'<input type="submit" class="more_btn" name="submit" value="Sign up">');
+				    +'<input type="text" class="text" name="Firstname" placeholder="First Name"'
+              +'pattern="[a-zA-Z]+" required="" title="Please enter a valid name.">'
+            +'<input type="text" class="text" name="Lastname" placeholder="Last Name"'
+            +'pattern="[a-zA-Z]+" required="" title="Please enter a valid name.">'
+            +'<input type="email" class="text" name="Email" placeholder="Email"'
+              +'pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required="" title="Please enter a valid email.">'
+            +'<input type="password" class="text" name="Password" placeholder="Password"'
+            +'pattern="(?=.*\\d).{6,}" required="" title="Password must contain at least one number and at least 6 or more characters.">'
+            +'<input type="password" class="text" name="ConfirmPassword" placeholder="Confirm Password" required="">'
+				    +'<input type="submit" class="more_btn" name="submit" value="Sign up"><p id="errorMsg"></p>');
 }
 function signInForm() {
   if(signedIn) {
