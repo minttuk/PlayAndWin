@@ -37,12 +37,30 @@ function getSession() {
 
 $( "#addfriendbutton" ).click(function() {
   console.log("addfriendbutton clicked");
-  var str = "addFriend";
+  var str = "addFriend&id=";
+  console.log(userId);
   $.ajax({
-      url: model + str,
-      type: "post",
+      url: model + str + userId,
+      //type: "post",
       dataType: "json",
-      data: JSON.stringify({"friendId": userId}),
+      //data: JSON.stringify({"friendid": userId}),
+      success: function (response){
+        console.log(response);
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        console.log(textStatus, errorThrown);
+      }
+  });
+})
+
+$("#deletefriendbutton").click(function() {
+  console.log("deletefriendbutton clicked");
+  var str = "deleteFriend&id=";
+  $.ajax({
+      url: model + str + userId,
+      //type: "post",
+      dataType: "json",
+      //data: JSON.stringify({"friendid": userId}),
       success: function (response){
         console.log(response);
       },
@@ -68,6 +86,7 @@ $( "#saveprofilebutton" ).click(function() {
         data: JSON.stringify({"id": userId, "firstname": $newfirstname, "lastname": $newlastname, "description": $newdescription, "location": $newlocation}),
         success: function (response){
           console.log('success');
+          window.location ="profile.html";
         },
         error: function(jqXHR, textStatus, errorThrown) {
           console.log(textStatus, errorThrown);
@@ -133,6 +152,37 @@ function getFriendRequests(callback) {
       dataType: "json",
       success: function (response){
         console.log(response);
+        callback(null, response);
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        console.log(textStatus, errorThrown);
+        callback(errorThrown);
+      }
+  });
+}
+
+function showFriendActionButton() {
+  getFriendship(function(error, response) {
+    if (error) {
+      console.log(error);
+    }
+    else {
+      console.log(response);
+      if (response == null) {
+        $('#addfriendbutton').fadeOut(0, function() {
+          $(this).css('display', 'inline-block').fadeIn(500);
+        });
+      }
+    }
+  });
+}
+
+function getFriendship(callback) {
+  var str = "getFriendship&id=";
+  $.ajax({
+      url: model + str + userId,
+      dataType: "json",
+      success: function (response){
         callback(null, response);
       },
       error: function(jqXHR, textStatus, errorThrown) {
@@ -218,9 +268,13 @@ function updateProfile(response) {
     /*$('#sendmessagebutton').fadeOut(0, function() {
       $(this).css('display', 'inline-block').fadeIn(500);
     });*/
-    $('#addfriendbutton').fadeOut(0, function() {
+    /*$('#deletefriendbutton').fadeOut(0, function() {
       $(this).css('display', 'inline-block').fadeIn(500);
     });
+    $('#addfriendbutton').fadeOut(0, function() {
+      $(this).css('display', 'inline-block').fadeIn(500);
+    });*/
+    showFriendActionButton();
   }
   //firstname
   if (response.firstname != null) {

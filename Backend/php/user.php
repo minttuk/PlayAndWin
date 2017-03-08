@@ -104,19 +104,37 @@ function getFriendsCount($id) {
   $friends = R::getAll('SELECT COUNT(*) AS friendcount FROM friendship WHERE user1_id = :id AND approved = 1', [':id' => $id]);
   return $friends[0]['friendcount'];
 }
- /*
-//Work in progress... Not working yet
+
 function addFriend() {
   R::setup( 'mysql:host=localhost;dbname=playandwin', 'root', '' );
-  $value = json_decode(file_get_contents('php://input'), true);
-  $friendId = $value['friendId'];
-  R::exec('INSERT INTO friendship (:sessionid, :friendid, 0)', [':sessionid' => $_SESSION['id'], ':friendif' => $friendId]);
-  $mutual = R::exec('SELECT * FROM friendship WHERE user1_id = :friendid AND user2_id = :sessionid', [':friendid' => $friendid, ':sessionid' => $_SESSION['id']] );
-  if ($mutual) {
-    echo json_encode('message' => 'moi');
+  $friendId = $_REQUEST['id'];
+  $approved = 0;
+  $mutualAdd =  R::getAll('SELECT * FROM friendship WHERE user1_id = :friendid AND user2_id = :sessionid', [':friendid' => $friendId, ':sessionid' => $_SESSION['id']]);
+  echo json_encode($mutualAdd);
+  if ($mutualAdd != null) {
+    $approved = 1;
+    R::exec('UPDATE friendship SET approved = :approved WHERE user1_id = :friendid AND user2_id = :sessionid', [':sessionid' => $_SESSION['id'], ':friendid' => $friendId, ':approved' => $approved]);
   }
+  R::exec('INSERT INTO friendship (user1_id, user2_id, approved) VALUES (:sessionid, :friendid, :approved)', [':sessionid' => $_SESSION['id'], ':friendid' => $friendId, ':approved' => $approved]);
+  $response = array('message' => 'Friend added succesfully!');
+  echo json_encode($response);
 }
-*/
+
+function deleteFriend() {
+  R::setup( 'mysql:host=localhost;dbname=playandwin', 'root', '' );
+  $friendId = $_REQUEST['id'];
+  R::exec('DELETE FROM friendship WHERE (user1_id = :sessionid AND user2_id = :friendid) OR (user2_id = :sessionid AND user1_id = :friendid)', [':friendid' => $friendId, ':sessionid' => $_SESSION['id']]);
+  $response = array('message' => 'Friend deleted succesfully!');
+  echo json_encode($response);
+}
+
+function getFriendship() {
+  R::setup( 'mysql:host=localhost;dbname=playandwin', 'root', '' );
+  $friendId = $_REQUEST['id'];
+  $eresult = R::getAll('SELECT * FROM friendship WHERE (user1_id = :sessionid AND user2_id = :friendid) OR (user2_id = :sessionid AND user1_id = :friendid)', [':friendid' => $friendId, ':sessionid' => $_SESSION['id']]);
+  echo json_encode($result);
+}
+
 // returns at most 8 users that have the most recent date in last_online
 function getLastLoggedIn() {
   R::setup( 'mysql:host=localhost;dbname=playandwin', 'root', '' );

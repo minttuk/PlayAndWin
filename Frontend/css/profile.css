@@ -25,6 +25,10 @@ h6 {
   display: none;
 }
 
+#deletefriendbutton {
+  display: none;
+}
+
 #sendmessagebutton {
   display: none;
 }

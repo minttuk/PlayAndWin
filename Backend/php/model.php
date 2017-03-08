@@ -64,8 +64,16 @@ else {
         addFriend();
     }
 
+    if ($q == "deleteFriend"){
+        deleteFriend();
+    }
+
     if ($q == "getLastLoggedIn"){
         getLastLoggedIn();
+    }
+
+    if ($q == "getFriendship"){
+        getFriendship();
     }
 
     if ($q == "getNewUsers"){

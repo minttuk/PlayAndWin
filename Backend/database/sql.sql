@@ -20,10 +20,10 @@ CREATE TABLE user (
 
 
 CREATE TABLE friendship (
+  id INT(6) PRIMARY KEY AUTO_INCREMENT NOT NULL,
   user1_id INT(6) NOT NULL,
   user2_id INT(6) NOT NULL,
   approved BOOLEAN DEFAULT 0,
-  CONSTRAINT friendship_id PRIMARY KEY (user1_id, user2_id),
   FOREIGN KEY (user1_id) REFERENCES user(id),
   FOREIGN KEY (user2_id) REFERENCES user(id)
 );
