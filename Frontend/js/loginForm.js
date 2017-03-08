@@ -58,8 +58,8 @@ function updateCoins() {
       var newCoins = coins-sessionStorage.coins;
       if (coins != sessionStorage.coins) {
         $('.signUp').fadeOut(function() {
-          $(this).html(html + ' + '+ newCoins).fadeIn(function() {
-            $('.signUp').fadeOut(function() {
+          $(this).html(html + '&nbsp;+'+ newCoins).fadeIn(function() {
+            $(this).fadeOut(function() {
               $(this).html(html + coins).fadeIn('slow');
             });
           });
