@@ -13,9 +13,20 @@ if (isset($_POST['Username']))  {
 $message = 'success';
 
 if (isset($_POST['Email'])) {
-    if ($_POST['Password'] != $_POST['ConfirmPassword']) {
-      echo "Passwords not identical";
-    } else {
+      if($_POST["Password"] != $_POST["ConfirmPassword"]) {
+        $message = "Your Passwords Must Match!";
+      } elseif (strlen($_POST["Password"]) <= '8') {
+          $message = "Your Password Must Contain At Least 8 Characters!";
+      }
+      elseif(!preg_match("#[0-9]+#",$_POST["Password"])) {
+          $message = "Your Password Must Contain At Least 1 Number!";
+      }
+      elseif(!preg_match("#[A-Z]+#",$_POST["Password"])) {
+          $message = "Your Password Must Contain At Least 1 Capital Letter!";
+      }
+      elseif(!preg_match("#[a-z]+#",$_POST["Password"])) {
+          $message = "Your Password Must Contain At Least 1 Lowercase Letter!";
+     } else {
       $newuser = findUser($uname);
       if (!$newuser) {
         regUser($uname,$_POST['Email'],$password,$_POST['Firstname'],$_POST['Lastname']);

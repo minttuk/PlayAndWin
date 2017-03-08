@@ -17,8 +17,8 @@ function signUpForm() {
 				    +'<input type="text" class="text" name="Firstname" placeholder="First Name" pattern="[a-zA-Z]+" required="">'
                     +'<input type="text" class="text" name="Lastname" placeholder="Last Name" pattern="[a-zA-Z]+" required="">'
                     +'<input type="email" class="text" name="Email" placeholder="Email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required="">'
-                    +'<input type="password" class="text" name="Password" placeholder="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" required="">'
-                    +'<input type="password" class="text" name="ConfirmPassword" placeholder="Confirm Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" required="">'
+                    +'<input type="password" class="text" name="Password" placeholder="Password" required="">'
+                    +'<input type="password" class="text" name="ConfirmPassword" placeholder="Confirm Password" required="">'
 				    +'<input type="submit" class="more_btn" name="submit" value="Sign up">');
 }
 function signInForm() {
