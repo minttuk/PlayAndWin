@@ -46,6 +46,8 @@ $( "#addfriendbutton" ).click(function() {
       //data: JSON.stringify({"friendid": userId}),
       success: function (response){
         console.log(response);
+        showFriends();
+        getUserInfo();
       },
       error: function(jqXHR, textStatus, errorThrown) {
         console.log(textStatus, errorThrown);
@@ -63,6 +65,8 @@ $("#deletefriendbutton").click(function() {
       //data: JSON.stringify({"friendid": userId}),
       success: function (response){
         console.log(response);
+        showFriends();
+        getUserInfo();
       },
       error: function(jqXHR, textStatus, errorThrown) {
         console.log(textStatus, errorThrown);
@@ -86,7 +90,7 @@ $( "#saveprofilebutton" ).click(function() {
         data: JSON.stringify({"id": userId, "firstname": $newfirstname, "lastname": $newlastname, "description": $newdescription, "location": $newlocation}),
         success: function (response){
           console.log('success');
-          window.location ="profile.html";
+          getUserInfo();
         },
         error: function(jqXHR, textStatus, errorThrown) {
           console.log(textStatus, errorThrown);
@@ -168,8 +172,27 @@ function showFriendActionButton() {
     }
     else {
       console.log(response);
-      if (response == null) {
+      if (response.length == 0) {
         $('#addfriendbutton').fadeOut(0, function() {
+          $(this).css('display', 'inline-block').fadeIn(500);
+        });
+      }
+      else if (response.length == 1) {
+        if (response[0]['user1_id'] == userId) {
+          $('#addfriendbuttontext').text('Accept Request');
+          $('#addfriendbutton').fadeOut(0, function() {
+            $(this).css('display', 'inline-block').fadeIn(500);
+          });
+        }
+        else if (response[0]['user2_id'] == userId) {
+          $('#deletefriendbuttontext').text('Cancel Request');
+          $('#deletefriendbutton').fadeOut(0, function() {
+            $(this).css('display', 'inline-block').fadeIn(500);
+          });
+        }
+      }
+      else if (response.length >= 2) {
+        $('#deletefriendbutton').fadeOut(0, function() {
           $(this).css('display', 'inline-block').fadeIn(500);
         });
       }
@@ -265,15 +288,8 @@ function updateProfile(response) {
   }
   //addfriendbutton and sendmessagebutton only visible in other users profiles
   if (userId != sessionId) {
-    /*$('#sendmessagebutton').fadeOut(0, function() {
-      $(this).css('display', 'inline-block').fadeIn(500);
-    });*/
-    /*$('#deletefriendbutton').fadeOut(0, function() {
-      $(this).css('display', 'inline-block').fadeIn(500);
-    });
-    $('#addfriendbutton').fadeOut(0, function() {
-      $(this).css('display', 'inline-block').fadeIn(500);
-    });*/
+    $('#addfriendbutton').css('display', 'none');
+    $('#deletefriendbutton').css('display', 'none');
     showFriendActionButton();
   }
   //firstname

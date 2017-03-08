@@ -110,7 +110,7 @@ function addFriend() {
   $friendId = $_REQUEST['id'];
   $approved = 0;
   $mutualAdd =  R::getAll('SELECT * FROM friendship WHERE user1_id = :friendid AND user2_id = :sessionid', [':friendid' => $friendId, ':sessionid' => $_SESSION['id']]);
-  echo json_encode($mutualAdd);
+  //echo json_encode($mutualAdd);
   if ($mutualAdd != null) {
     $approved = 1;
     R::exec('UPDATE friendship SET approved = :approved WHERE user1_id = :friendid AND user2_id = :sessionid', [':sessionid' => $_SESSION['id'], ':friendid' => $friendId, ':approved' => $approved]);
@@ -131,7 +131,7 @@ function deleteFriend() {
 function getFriendship() {
   R::setup( 'mysql:host=localhost;dbname=playandwin', 'root', '' );
   $friendId = $_REQUEST['id'];
-  $eresult = R::getAll('SELECT * FROM friendship WHERE (user1_id = :sessionid AND user2_id = :friendid) OR (user2_id = :sessionid AND user1_id = :friendid)', [':friendid' => $friendId, ':sessionid' => $_SESSION['id']]);
+  $result = R::getAll('SELECT * FROM friendship WHERE (user1_id = :sessionid AND user2_id = :friendid) OR (user2_id = :sessionid AND user1_id = :friendid)', [':friendid' => $friendId, ':sessionid' => $_SESSION['id']]);
   echo json_encode($result);
 }
 
