@@ -6,7 +6,7 @@ $(document).ready(function() {
     e.preventDefault();
     $.post( "../Backend/php/login.php", $( "#signForm" ).serialize(), function(data) {
       if(data!='success') {
-        $("#signForm").append('<p>'+data+'</p>');
+        $("#signForm").append('</br><p>'+data+'</p>');
 
       } else location.reload();
     });

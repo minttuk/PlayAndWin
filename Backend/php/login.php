@@ -13,26 +13,14 @@ if (isset($_POST['Username']))  {
 $message = 'success';
 
 if (isset($_POST['Email'])) {
-      if($_POST["Password"] != $_POST["ConfirmPassword"]) {
-        $message = "Your Passwords Must Match!";
-      } elseif (strlen($_POST["Password"]) <= '8') {
-          $message = "Your Password Must Contain At Least 8 Characters!";
-      }
-      elseif(!preg_match("#[0-9]+#",$_POST["Password"])) {
-          $message = "Your Password Must Contain At Least 1 Number!";
-      }
-      elseif(!preg_match("#[A-Z]+#",$_POST["Password"])) {
-          $message = "Your Password Must Contain At Least 1 Capital Letter!";
-      }
-      elseif(!preg_match("#[a-z]+#",$_POST["Password"])) {
-          $message = "Your Password Must Contain At Least 1 Lowercase Letter!";
-     } else {
+  if (validatePassword($_POST['Password'])) {
       $newuser = findUser($uname);
       if (!$newuser) {
         regUser($uname,$_POST['Email'],$password,$_POST['Firstname'],$_POST['Lastname']);
         $newuser = findUser($uname);
         startSession($newuser->id);
         R::exec('CREATE TABLE collection_'.$newuser->id.' (id INT(6) PRIMARY KEY NOT NULL, amount INT(6), FOREIGN KEY (id) REFERENCES product(id));');
+        $message = 'success';
       //$message = 'Welcome to Play and Win, '.$uname.'!';
       } else $message = 'Username taken, try again!';
     }
@@ -84,4 +72,31 @@ echo $message;
     $user = R::findOne('user',
         ' username = ? ',array($username));
     return $user;
+  }
+
+  function validatePassword($password) {
+    global $message;
+    $message = '';
+    $accepted = true;
+    if($password != $_POST["ConfirmPassword"]) {
+        $message .= "Your passwords must match!</br>";
+        $accepted = false;
+    }
+    if (strlen($password) <= '6') {
+        $message .= "Your password must contain at least 6 characters!</br>";
+        $accepted = false;
+    }
+    if(!preg_match("#[0-9]+#",$password)) {
+        $message .= "Your password must contain at least 1 number!</br>";
+        $accepted = false;
+    }
+    /*if(!preg_match("#[a-z]+#",$password)) {
+        $message .= "Your password must contain at least 1 lowercase letter!</br>";
+        $accepted = false;
+   }
+    if(!preg_match("#[A-Z]+#",$password)) {
+        $message .= "Your password must contain at least 1 capital letter!</br>";
+        $accepted = false;
+    }*/
+    return $accepted;
   }
