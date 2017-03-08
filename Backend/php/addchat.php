@@ -1,9 +1,6 @@
 <?php
-ini_set('display_errors', 1);
-require 'rb.php';
+require 'connection.php';
 session_start();
-
-R::setup( 'mysql:host=localhost;dbname=playandwin', 'root', '' );
 
 if (isset($_SESSION['id'])) {
   $user = R::load('user',$_SESSION['id']);

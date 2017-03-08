@@ -1,5 +1,6 @@
 var signedIn = false;
 isSignedIn();
+updateCoins();
 
 $(document).ready(function() {
   $("#signForm").submit(function(e) {
@@ -7,7 +8,6 @@ $(document).ready(function() {
     $.post( "../Backend/php/login.php", $( "#signForm" ).serialize(), function(data) {
       if(data!='success') {
         $("#errorMsg").html('</br>'+data);
-
       } else location.reload();
     });
   });
@@ -44,7 +44,28 @@ function isSignedIn() {
   });
   if (signedIn) {
     $('#prof').css('display','block');
-    $('.signUp').remove();
+    $('.signUp').html('');
     $('.signIn').html('Log out');
+    $('.signUp').css({"color": "white", "font-size": "20px",'padding-top':'16px', 'width':'95px'});
+  }
+}
+function updateCoins() {
+  if (signedIn){
+    var html = '<i class="glyphicon glyphicon-copyright-mark"></i> ';
+    if (sessionStorage.coins)
+      $('.signUp').html(html+sessionStorage.coins);
+    $.ajax({url: '../Backend/php/getcoins.php', success: function (coins) {
+      var newCoins = coins-sessionStorage.coins;
+      if (coins != sessionStorage.coins) {
+        $('.signUp').fadeOut(function() {
+          $(this).html(html + ' + '+ newCoins).fadeIn(function() {
+            $('.signUp').fadeOut(function() {
+              $(this).html(html + coins).fadeIn('slow');
+            });
+          });
+        });
+        sessionStorage.coins = coins;
+      }
+    }});
   }
 }

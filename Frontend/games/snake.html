@@ -85,19 +85,19 @@
                 else if (dir == "down") posY++;
 
                 if (posX == -1 || posX == w / cellWidth || posY == -1 || posY == h / cellWidth || check_collision(posX, posY, snake_array)) {
-                    var endScore = Math.round(score / 2 * 25);
                     clearInterval(game_loop);
                     startColor();
                     $('#again').html('Again?');
-                    $('#result').html(endScore);
+                    $('#result').html(score);
                     $('#start').css('display', 'block');
                     $('#text').css('display', 'block');
                     $('#canvas').css('display', 'none');
                     $.post("../../Backend/php/hshandler.php", {
                         game: 'snake',
-                        score: endScore
+                        score: score
                     }, function(data) {
                         $('#score').html(data.highscore);
+                        window.parent.updateCoins();
                         if (data.message != '') {
                             alert(data.message);
                         }

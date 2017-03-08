@@ -1,9 +1,6 @@
 <?php
-ini_set('display_errors', 1);
-require 'rb.php';
+require 'connection.php';
 session_start();
-
-R::setup( 'mysql:host=localhost;dbname=playandwin', 'root', '' );
 
 function highscore() {
   if (isset($_SESSION['id'])) {
@@ -11,12 +8,13 @@ function highscore() {
       if (isset($_REQUEST['score'])) {
         $tableName = 'hs_'.$_REQUEST['game'];
         $newScore = $_REQUEST['score'];
-        try {
-          R::exec( 'insert into '.$tableName.' (id) Values ('.$_SESSION['id'].')' );
-        } catch(Exception $e) {}
         $id = $_SESSION['id'];
+        try {
+          R::exec('INSERT INTO :table (id) VALUES (:id)', [':id' => $id, ':table' => $tableName]);
+        } catch(Exception $e) {}
         $score = R::load( $tableName, $id );
         $curScore = $score->highscore;
+        coinAmount($id,$_REQUEST['game'],$newScore);
         if ($newScore > $curScore) {
           $score->highscore=$newScore;
           R::store( $score );
@@ -32,3 +30,11 @@ function highscore() {
 }
 
 highscore();
+
+function coinAmount($id,$game,$score) {
+    $newCoins = array('snake'=>round($score*0.2),'flappy'=>round($score*0.3),'reaction'=>round($score*0.006),'jumper'=>round($score*0.07));
+    $user = R::load( 'user', $id );
+    $coins = $user->coins + $newCoins[$game];
+    $user->coins = $coins;
+    R::store( $user );
+}

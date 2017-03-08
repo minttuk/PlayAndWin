@@ -11,18 +11,19 @@ function hideMenu() {
     $('#text').css('display', 'none');
 }
 
-function showMenu(gameID,multiplier) {
+function showMenu(gameID) {
     $.post("../../Backend/php/hshandler.php", {
         game: gameID,
-        score: score * multiplier
+        score: score
     }, function(data) {
         $('#score').html(data.highscore);
+        window.parent.updateCoins();
         if (data.message != '') {
             alert(data.message);
         }
     }, 'json');
     startColor();
-    $('#result').html(score * multiplier);
+    $('#result').html(score);
     $('#start').css('display', 'block');
     $('#text').css('display', 'block');
 }

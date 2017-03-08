@@ -1,9 +1,6 @@
 <?php
-ini_set('display_errors', 1);
-require 'rb.php';
+require 'connection.php';
 session_start();
-
-R::setup( 'mysql:host=localhost;dbname=playandwin', 'root', '' );
 
 function jsonBuilder($game,$userid) {
   $tableName = 'hs_'.$game;

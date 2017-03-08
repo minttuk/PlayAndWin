@@ -1,3 +1,9 @@
+.glyphicon-copyright-mark {
+	top:4px;
+	font-size: 1.1em;
+	-webkit-font-smoothing: antialiased;
+}
+
 @media (max-width: 900px){
 	.advertisement {
 		display: none;

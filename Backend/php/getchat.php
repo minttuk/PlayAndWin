@@ -1,7 +1,5 @@
 <?php
-ini_set('display_errors', 1);
-require 'rb.php';
-R::setup( 'mysql:host=localhost;dbname=playandwin', 'root', '' );
+require 'connection.php';
 //if (isset($_SESSION['id'])) {
 $results=R::getAll('select * from chatroom');
 $html = '';

@@ -76,11 +76,11 @@
                     score: Math.round(1000 / highScore)
                 }, function(data) {
                     $('#score').html(data.highscore);
+                    window.parent.updateCoins();
                     if (data.message != '') {
                         alert(data.message);
                     }
                 }, 'json');
-
                 startColor();
                 startCircle.display = "block";
                 dialog.display = "block";

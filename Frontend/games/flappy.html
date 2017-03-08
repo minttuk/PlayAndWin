@@ -33,6 +33,7 @@
                 },
 
                 create: function() {
+                    this.doOnce = false;
                     game.scale.pageAlignHorizontally = true;
                     game.scale.pageAlignVertically = true;
                     game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
@@ -71,7 +72,7 @@
 
                 gameOver: function() {
                     game.destroy();
-                    showMenu('flappy',20);
+                    showMenu('flappy');
                 },
 
                 addOnePipe: function(x, y) {
@@ -85,8 +86,9 @@
 
                 addRowOfPipes: function() {
                     var hole = Math.floor(Math.random() * 5) + 1;
+                    if (this.doOnce) score += 1;
+                    else this.doOnce = true;
                     this.labelScore.text = score;
-                    score += 1;
                     for (var i = 0; i < 8; i++)
                         if (i != hole && i != hole + 1)
                             this.addOnePipe(490, i * 60 + 10);
