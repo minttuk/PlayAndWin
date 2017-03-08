@@ -26,7 +26,6 @@ function getSession() {
       async: false,
       success: function (response){
         sessionId = response;
-        console.log('session is ' + response);
         return response;
       },
       error: function(jqXHR, textStatus, errorThrown) {
@@ -87,41 +86,58 @@ function checkEditedProfile(firstname, lastname) {
   return false;
 }
 
-//Work in progress... Not working yet.
 function showFriends(){
-  console.log('mentiin functioon getFriends()')
-  getMutualFriends();
-  if (userId == sessionId) {
-    //getPendingFriends();
-  }
+  getMutualFriends(function(error, response) {
+    if (error) {
+      console.log(error);
+    }
+    showLastUsers(response, 'showfriendsdiv');
+  });
 }
 
-function getMutualFriends() {
+function getMutualFriends(callback) {
   var str = "getMutualFriends&id=";
   $.ajax({
       url: model + str + userId,
       dataType: "json",
       success: function (response){
-        console.log(response);
-        return response;
+        callback(null, response);
       },
       error: function(jqXHR, textStatus, errorThrown) {
         console.log(textStatus, errorThrown);
+        callback(errorThrown);
       }
   });
 }
 
-function getPendingFriends() {
-  var str = "getFriends";
+function getPendingFriends(callback) {
+  var str = "getPendingFriends&id=";
   $.ajax({
       url: model + str + userId,
       dataType: "json",
       success: function (response){
         console.log(response);
-        return response;
+        callback(null, response);
       },
       error: function(jqXHR, textStatus, errorThrown) {
         console.log(textStatus, errorThrown);
+        callback(errorThrown);
+      }
+  });
+}
+
+function getFriendRequests(callback) {
+  var str = "getFriendRequests&id=";
+  $.ajax({
+      url: model + str + userId,
+      dataType: "json",
+      success: function (response){
+        console.log(response);
+        callback(null, response);
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        console.log(textStatus, errorThrown);
+        callback(errorThrown);
       }
   });
 }
@@ -129,14 +145,11 @@ function getPendingFriends() {
 function getUserInfo() {
     if (parseURL('user')) {
       userId = parseURL('user');
-      console.log('parse ' + userId);
     }
     else if (sessionId != -1) {
       userId = sessionId;
-      console.log('else if ' + userId);
     }
     else {
-      console.log('else');
       window.location = "index.html";
     }
     var str = "getUserInfo&id=" + userId;
@@ -202,9 +215,9 @@ function updateProfile(response) {
   }
   //addfriendbutton and sendmessagebutton only visible in other users profiles
   if (userId != sessionId) {
-    $('#sendmessagebutton').fadeOut(0, function() {
+    /*$('#sendmessagebutton').fadeOut(0, function() {
       $(this).css('display', 'inline-block').fadeIn(500);
-    });
+    });*/
     $('#addfriendbutton').fadeOut(0, function() {
       $(this).css('display', 'inline-block').fadeIn(500);
     });
@@ -224,18 +237,33 @@ function updateProfile(response) {
 }
 
 $('#friendrequeststab').click(function() {
+  getFriendRequests(function(error, response) {
+    if (error) {
+      console.log(error);
+    }
+    console.log("friends " + response);
+    showLastUsers(response, 'showfriendsdiv');
+  });
   $('#friendrequeststab').attr('class', 'active');
   $('#mutualfriendstab').removeClass('active');
   $('#pendingfriendstab').removeClass('active');
 })
 
 $('#pendingfriendstab').click(function() {
+  getPendingFriends(function(error, response) {
+    if (error) {
+      console.log(error);
+    }
+    console.log("friends " + response);
+    showLastUsers(response, 'showfriendsdiv');
+  });
   $('#pendingfriendstab').attr('class', 'active');
   $('#mutualfriendstab').removeClass('active');
   $('#friendrequeststab').removeClass('active');
 })
 
 $('#mutualfriendstab').click(function() {
+  showFriends();
   $('#mutualfriendstab').attr('class', 'active');
   $('#pendingfriendstab').removeClass('active');
   $('#friendrequeststab').removeClass('active');
@@ -275,8 +303,8 @@ function getNewUsers() {
   });
 }
 
-//the order shown so far is in id order, gotta fix it at some point...
 function showLastUsers(response, who) {
+  $('#' + who + '').empty();
   for (var i in response) {
     var div = $('<div></div>');
     div.addClass('col-md-3 img-w3-agile');

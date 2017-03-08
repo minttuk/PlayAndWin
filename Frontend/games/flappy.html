@@ -33,6 +33,8 @@
                 },
 
                 create: function() {
+                    game.scale.pageAlignHorizontally = true;
+                    game.scale.pageAlignVertically = true;
                     game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
                     game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
                     game.scale.refresh();
@@ -51,7 +53,8 @@
                         fill: "#aaaaaa"
                     });
 
-                    game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+                    this.spaceKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+                    this.spaceKey.onDown.add(this.jump, this);
                     game.input.addPointer();
                     game.input.onDown.add(this.jump, this);
                 },

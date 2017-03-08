@@ -9,5 +9,6 @@ final class userTest extends TestCase {
     public function testcheckEmpty() {
         $this->assertEquals(null, checkEmpty(''));
         $this->assertEquals('moi', checkEmpty('moi'));
+        $this->assertEquals(null, checkEmpty('   '));
     }
 }
