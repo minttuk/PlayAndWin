@@ -26,7 +26,6 @@ function getSession() {
       async: false,
       success: function (response){
         sessionId = response;
-        console.log('session is ' + response);
         return response;
       },
       error: function(jqXHR, textStatus, errorThrown) {
@@ -146,14 +145,11 @@ function getFriendRequests(callback) {
 function getUserInfo() {
     if (parseURL('user')) {
       userId = parseURL('user');
-      console.log('parse ' + userId);
     }
     else if (sessionId != -1) {
       userId = sessionId;
-      console.log('else if ' + userId);
     }
     else {
-      console.log('else');
       window.location = "index.html";
     }
     var str = "getUserInfo&id=" + userId;
@@ -219,9 +215,9 @@ function updateProfile(response) {
   }
   //addfriendbutton and sendmessagebutton only visible in other users profiles
   if (userId != sessionId) {
-    $('#sendmessagebutton').fadeOut(0, function() {
+    /*$('#sendmessagebutton').fadeOut(0, function() {
       $(this).css('display', 'inline-block').fadeIn(500);
-    });
+    });*/
     $('#addfriendbutton').fadeOut(0, function() {
       $(this).css('display', 'inline-block').fadeIn(500);
     });
@@ -297,7 +293,6 @@ function getNewUsers() {
       type: "get",
       dataType: "json",
       success: function (response){
-        console.log("new users " + response);
         //passes also div name to function because the same function is used to show new users
         var who = 'newusers';
         showLastUsers(response, who);

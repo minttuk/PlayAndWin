@@ -47,6 +47,7 @@ function setUserInfo() {
 
 //TEST OK. If string is empty, it will be changed into NULL.
 function checkEmpty($stringToCheck) {
+  $stringToCheck = str_replace(' ', '', $stringToCheck);
   if ($stringToCheck == '') {
     return null;
   }
@@ -100,17 +101,22 @@ function getFriendsInfo($friends) {
 }
 
 function getFriendsCount($id) {
-  $friends = R::getAll( 'SELECT COUNT(*) AS friendcount FROM friendship WHERE user1_id = :id AND approved = 1', [':id' => $id]);
+  $friends = R::getAll('SELECT COUNT(*) AS friendcount FROM friendship WHERE user1_id = :id AND approved = 1', [':id' => $id]);
   return $friends[0]['friendcount'];
 }
-
+ /*
 //Work in progress... Not working yet
 function addFriend() {
   R::setup( 'mysql:host=localhost;dbname=playandwin', 'root', '' );
   $value = json_decode(file_get_contents('php://input'), true);
   $friendId = $value['friendId'];
+  R::exec('INSERT INTO friendship (:sessionid, :friendid, 0)', [':sessionid' => $_SESSION['id'], ':friendif' => $friendId]);
+  $mutual = R::exec('SELECT * FROM friendship WHERE user1_id = :friendid AND user2_id = :sessionid', [':friendid' => $friendid, ':sessionid' => $_SESSION['id']] );
+  if ($mutual) {
+    echo json_encode('message' => 'moi');
+  }
 }
-
+*/
 // returns at most 8 users that have the most recent date in last_online
 function getLastLoggedIn() {
   R::setup( 'mysql:host=localhost;dbname=playandwin', 'root', '' );
