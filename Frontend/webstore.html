@@ -83,23 +83,22 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
   $.get('../Backend/php/products.php', function(products) {
     for (var i = 0; i < products.length; i++) {
-
-    $('.infos').append('<div class="pop-up"><div id="small-dialog'+i+'" class="mfp-hide book-form"><div class="pop-up-content-agileits-w3layouts"><div class="col-md-6 w3ls-left">'
-                   +'<img src="'+products[i].image_url+'" alt=" " class="img-responsive zoom-img" /></div>'
-                   +'<div class="col-md-6 w3ls-right">'
-                   +'<h4>'+products[i].name+'</h4>'
-                   +'<p>'+products[i].description+'</p>'
-                   +'<div class="span span1">'
-                   +'<p class="left">NAME</p>'+'<p class="right">'+products[i].name+'</p>'
-                   +'<div class="clearfix"></div></div>'
-                   +'<div class="span span2">'+'<p class="left">COST</p><p class="right">'+products[i].price+'</p>'
-                   +'<div class="clearfix"></div></div>'
-                   +'<div class="span span3"><button type="button" class="buy-button" onclick="buy('+products[i].id+')">BUY</button>'
-                   +'<p class="buyMessage"></p>'
-                    +'<div class="clearfix"></div></div></div><div class="clearfix"></div></div></div></div>');
-    $('.gallery-grids').append('<div class="gallery-grid">'
-      +'<a class="book popup-with-zoom-anim button-isi zoomIn animated" data-wow-delay=".5s" href="#small-dialog'+i+'">'
-      +'<img src="'+products[i].image_url+'" alt=" " style="max-height:340px;max-width:340px;" class="img-responsive zoom-img" /></a></div>');
+	    $('.infos').append('<div class="pop-up"><div id="small-dialog'+i+'" class="mfp-hide book-form"><div class="pop-up-content-agileits-w3layouts"><div class="col-md-6 w3ls-left">'
+	                   +'<img src="'+products[i].image_url+'" alt=" " class="img-responsive zoom-img" /></div>'
+	                   +'<div class="col-md-6 w3ls-right">'
+	                   +'<h4>'+products[i].name+'</h4>'
+	                   +'<p>'+products[i].description+'</p>'
+	                   +'<div class="span span1">'
+	                   +'<p class="left">NAME</p>'+'<p class="right">'+products[i].name+'</p>'
+	                   +'<div class="clearfix"></div></div>'
+	                   +'<div class="span span2">'+'<p class="left">COST</p><p class="right">'+products[i].price+'</p>'
+	                   +'<div class="clearfix"></div></div>'
+	                   +'<div class="span span3"><button type="button" class="buy-button" onclick="buy('+products[i].id+')">BUY</button>'
+	                   +'<p class="buyMessage"></p>'
+	                    +'<div class="clearfix"></div></div></div><div class="clearfix"></div></div></div></div>');
+	    $('.gallery-grids').append('<div class="gallery-grid">'
+	      +'<a class="book popup-with-zoom-anim button-isi zoomIn animated" data-wow-delay=".5s" href="#small-dialog'+i+'">'
+	      +'<img src="'+products[i].image_url+'" alt=" " style="max-height:340px;max-width:340px;" class="img-responsive zoom-img" /></a></div>');
   };
   $('.gallery-grids').append('<div class="clearfix"></div>');
   }, 'json').then(function() {
@@ -112,7 +111,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
       preloader: false,
       midClick: true,
       removalDelay: 300,
-      mainClass: 'my-mfp-zoom-in'
+      mainClass: 'my-mfp-zoom-in',
+			callbacks: {
+            close: function () {
+                $('.buyMessage').html('');
+            }
+        }
   });
   })});
 
