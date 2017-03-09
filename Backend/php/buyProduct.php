@@ -10,7 +10,6 @@
 
 function buyProduct(){
 
-    R::setup( 'mysql:host=localhost;dbname=playandwin', 'root', '' );
     $value = json_decode(file_get_contents('php://input'), true);
     $product_id = $value['product_id'];
 

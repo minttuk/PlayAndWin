@@ -3,7 +3,6 @@
 function getUserInfo() {
   $id = $_REQUEST['id'];
   $user = R::load('user', $id);
-
   if ($user->id != 0) {
     $friends = getFriendsCount($id);
     $response = array(
@@ -42,7 +41,7 @@ function setUserInfo() {
   echo $user;
 }
 
-//TEST OK. If string is empty, it will be changed into NULL.
+//TEST OK. If string is empty, it will be changed into NULL before inserts to database.
 function checkEmpty($stringToCheck) {
   $stringToCheck = str_replace(' ', '', $stringToCheck);
   if ($stringToCheck == '') {
@@ -61,6 +60,7 @@ function getMutualFriends() {
   echo json_encode($response);
 }
 
+// Gets all users that the this user has sent a friend request to (in database user1_id = this user and approved = 0)
 function getPendingFriends() {
   $id = $_REQUEST['id'];
   $pendingfriends = R::getAll( 'SELECT user2_id FROM friendship WHERE user1_id = :id AND approved = 0', [':id' => $id]);
@@ -68,6 +68,7 @@ function getPendingFriends() {
   echo json_encode($response);
 }
 
+// Gets all users that have sent a friend request to this user (in database user2_id = this user and approved = 0)
 function getFriendRequests() {
   $id = $_REQUEST['id'];
   $friendrequests = R::getAll( 'SELECT user1_id FROM friendship WHERE user2_id = :id AND approved = 0', [':id' => $id]);
@@ -75,6 +76,7 @@ function getFriendRequests() {
   echo json_encode($response);
 }
 
+// retrieves the id, username and profilepicture of friends (mutual, pending and requests)
 function getFriendsInfo($friends) {
   $response = array();
   foreach ($friends as $friend) {
@@ -94,16 +96,17 @@ function getFriendsInfo($friends) {
   return $response;
 }
 
+// counts how many friends a user has
 function getFriendsCount($id) {
   $friends = R::getAll('SELECT COUNT(*) AS friendcount FROM friendship WHERE user1_id = :id AND approved = 1', [':id' => $id]);
   return $friends[0]['friendcount'];
 }
 
+// sends a friend request to a user or makes the friendship mutual if both have added/ accepted each other
 function addFriend() {
   $friendId = $_REQUEST['id'];
   $approved = 0;
   $mutualAdd =  R::getAll('SELECT * FROM friendship WHERE user1_id = :friendid AND user2_id = :sessionid', [':friendid' => $friendId, ':sessionid' => $_SESSION['id']]);
-  //echo json_encode($mutualAdd);
   if ($mutualAdd != null) {
     $approved = 1;
     R::exec('UPDATE friendship SET approved = :approved WHERE user1_id = :friendid AND user2_id = :sessionid', [':sessionid' => $_SESSION['id'], ':friendid' => $friendId, ':approved' => $approved]);
@@ -113,6 +116,7 @@ function addFriend() {
   echo json_encode($response);
 }
 
+// deletes friendship or requests
 function deleteFriend() {
   $friendId = $_REQUEST['id'];
   R::exec('DELETE FROM friendship WHERE (user1_id = :sessionid AND user2_id = :friendid) OR (user2_id = :sessionid AND user1_id = :friendid)', [':friendid' => $friendId, ':sessionid' => $_SESSION['id']]);
@@ -120,6 +124,7 @@ function deleteFriend() {
   echo json_encode($response);
 }
 
+//retrieves the friendship between session id and profiles user id. if returns 2 rows, its a mutual friendship, if returns only one row its a request
 function getFriendship() {
   $friendId = $_REQUEST['id'];
   $result = R::getAll('SELECT * FROM friendship WHERE (user1_id = :sessionid AND user2_id = :friendid) OR (user2_id = :sessionid AND user1_id = :friendid)', [':friendid' => $friendId, ':sessionid' => $_SESSION['id']]);
