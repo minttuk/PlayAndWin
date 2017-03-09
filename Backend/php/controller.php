@@ -34,11 +34,13 @@ else {
     $q = $_REQUEST["q"];
 
     if ($q == "getUserInfo"){
-        getUserInfo();
+      $id = $_REQUEST['id'];
+      getUserInfo($id);
     }
 
     if ($q == "setUserInfo"){
-        setUserInfo();
+      $value = json_decode(file_get_contents('php://input'), true);
+      setUserInfo($value);
     }
 
     if ($q == "addProduct"){

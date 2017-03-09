@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="Test" tests="4" assertions="6" failures="0" errors="0" time="0.002141">
-    <testsuite name="EmailTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/EmailTest.php" tests="3" assertions="3" failures="0" errors="0" time="0.001747">
-      <testcase name="testCanBeCreatedFromValidEmailAddress" class="EmailTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/EmailTest.php" line="13" assertions="1" time="0.000838"/>
-      <testcase name="testCannotBeCreatedFromInvalidEmailAddress" class="EmailTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/EmailTest.php" line="21" assertions="1" time="0.000452"/>
-      <testcase name="testCanBeUsedAsString" class="EmailTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/EmailTest.php" line="28" assertions="1" time="0.000457"/>
-    </testsuite>
-    <testsuite name="userTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/userTest.php" tests="1" assertions="3" failures="0" errors="0" time="0.000394">
-      <testcase name="testcheckEmpty" class="userTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/userTest.php" line="9" assertions="3" time="0.000394"/>
+  <testsuite name="Test" tests="3" assertions="3" failures="0" errors="1" time="0.050333">
+    <testsuite name="userTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/userTest.php" tests="3" assertions="3" failures="0" errors="1" time="0.050333">
+      <testcase name="testcheckEmpty" class="userTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/userTest.php" line="11" assertions="3" time="0.017080"/>
+      <testcase name="testgetNewUsers" class="userTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/userTest.php" line="17" assertions="0" time="0.008009"/>
+      <testcase name="testgetUserInfo" class="userTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/userTest.php" line="21" assertions="0" time="0.025244">
+        <error type="PHPUnit_Framework_Error_Warning">userTest::testgetUserInfo
+Cannot modify header information - headers already sent by (output started at /Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/userTest.php:5)
+
+/Users/sainipatala/Documents/PHP/PlayAndWin/Backend/php/user.php:19
+/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/userTest.php:22
+</error>
+      </testcase>
     </testsuite>
   </testsuite>
 </testsuites>

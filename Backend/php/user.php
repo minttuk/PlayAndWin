@@ -1,7 +1,6 @@
 <?php
 
-function getUserInfo() {
-  $id = $_REQUEST['id'];
+function getUserInfo($id) {
   $user = R::load('user', $id);
   if ($user->id != 0) {
     $friends = getFriendsCount($id);
@@ -29,8 +28,7 @@ function getUserInfo() {
   }
 }
 
-function setUserInfo() {
-  $value = json_decode(file_get_contents('php://input'), true);
+function setUserInfo($value) {
   $id = $value['id'];
   $user = R::load( 'user', $id);
   $user->firstname = $value['firstname'];
