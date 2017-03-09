@@ -32,7 +32,7 @@ function buyProduct(){
 
             makeShopOrder($user_id);
             makeOrderRow($product_id);
-            addToCollection($product_id, $coins_left);
+            addToCollection($product_id, $coins_left,$_SESSION['id'] );
         }
     }
     else {
@@ -50,9 +50,9 @@ function makeOrderRow($product_id){
     R::exec( 'INSERT INTO order_row (order_id, product_id, amount) VALUES (LAST_INSERT_ID(), :product_id, 1)', [':product_id' => $product_id]);
 
 }
-function addToCollection($product_id, $coins_left){
-    $collection = 'collection_'.$_SESSION['id'];
-    $product = R::load( 'collection_'.$_SESSION['id'], $product_id );
+function addToCollection($product_id, $coins_left, $session_id){
+    $collection = 'collection_'.$session_id;
+    $product = R::load( 'collection_'.$session_id, $product_id );
     $id = $product->id;
     if ($id == 0){
         R::exec( 'INSERT INTO '.$collection.'(id, amount) VALUES (:product_id, 1)', [':product_id' => $product_id]);
