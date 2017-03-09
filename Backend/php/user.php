@@ -19,12 +19,12 @@ function getUserInfo($id) {
     //header('Content-Type: application/json');
   }
   if ($user->id != 0) {
-    return json_encode($response);
+    return $response;
 
   }
   else {
     //http_response_code(403);
-    return json_encode(array('error'=>'No user found'));
+    return array('error'=>'No user found');
   }
 }
 

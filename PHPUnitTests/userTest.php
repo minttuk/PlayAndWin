@@ -18,15 +18,18 @@ final class userTest extends TestCase {
 
     }
     */
-/*
+
   public function testgetUserInfo() {
-    $response = getUserInfo('0');
-    $this->assertJsonStringEqualsJsonString(
-    $response[0],
-    json_encode(['error' => 'No user found'])
-    );
+    $info = getUserInfo('0');
+    $this->assertArrayHasKey('error', $info);
+    $this->assertArrayNotHasKey('username', $info);
+    $info = getUserInfo('1');
+    $this->assertArrayHasKey('username', $info);
+    $info = getUserInfo('100');
+    $this->assertArrayHasKey('error', $info);
+    $this->assertArrayNotHasKey('username', $info);
   }
-*/
+
   public function testgetFriendsCount() {
     deleteFriend('1', '2');
     $this->assertEquals("0", getFriendsCount('1'));

@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="Test" tests="4" assertions="13" failures="0" errors="0" time="0.077929">
-    <testsuite name="userTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/userTest.php" tests="4" assertions="13" failures="0" errors="0" time="0.077929">
-      <testcase name="testcheckEmpty" class="userTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/userTest.php" line="11" assertions="3" time="0.011838"/>
-      <testcase name="testgetFriendsCount" class="userTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/userTest.php" line="30" assertions="4" time="0.035964"/>
-      <testcase name="testaddFriend" class="userTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/userTest.php" line="41" assertions="3" time="0.017174"/>
-      <testcase name="testdeleteFriend" class="userTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/userTest.php" line="48" assertions="3" time="0.012953"/>
+  <testsuite name="Test" tests="5" assertions="18" failures="0" errors="0" time="0.112807">
+    <testsuite name="userTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/userTest.php" tests="5" assertions="18" failures="0" errors="0" time="0.112807">
+      <testcase name="testcheckEmpty" class="userTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/userTest.php" line="11" assertions="3" time="0.012156"/>
+      <testcase name="testgetUserInfo" class="userTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/userTest.php" line="22" assertions="5" time="0.028343"/>
+      <testcase name="testgetFriendsCount" class="userTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/userTest.php" line="33" assertions="4" time="0.042275"/>
+      <testcase name="testaddFriend" class="userTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/userTest.php" line="44" assertions="3" time="0.018049"/>
+      <testcase name="testdeleteFriend" class="userTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/userTest.php" line="51" assertions="3" time="0.011984"/>
     </testsuite>
   </testsuite>
 </testsuites>

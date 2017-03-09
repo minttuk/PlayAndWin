@@ -35,7 +35,7 @@ else {
 
     if ($q == "getUserInfo"){
       $id = $_REQUEST['id'];
-      echo getUserInfo($id);
+      echo json_encode(getUserInfo($id));
     }
 
     if ($q == "setUserInfo"){
