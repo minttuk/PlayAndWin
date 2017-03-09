@@ -1,5 +1,5 @@
 var userId;
-var model = "../Backend/php/model.php?q=";
+var controller = "../Backend/php/controller.php?q=";
 var sessionId;
 
 function getScoreTable() {
@@ -40,7 +40,7 @@ $( "#addfriendbutton" ).click(function() {
   var str = "addFriend&id=";
   console.log(userId);
   $.ajax({
-      url: model + str + userId,
+      url: controller + str + userId,
       //type: "post",
       dataType: "json",
       //data: JSON.stringify({"friendid": userId}),
@@ -59,7 +59,7 @@ $("#deletefriendbutton").click(function() {
   console.log("deletefriendbutton clicked");
   var str = "deleteFriend&id=";
   $.ajax({
-      url: model + str + userId,
+      url: controller + str + userId,
       //type: "post",
       dataType: "json",
       //data: JSON.stringify({"friendid": userId}),
@@ -84,7 +84,7 @@ $( "#saveprofilebutton" ).click(function() {
   var inputOk = checkEditedProfile($newfirstname, $newlastname);
   if (inputOk) {
     $.ajax({
-        url: model + str,
+        url: controller + str,
         type: "post",
         dataType: "json",
         data: JSON.stringify({"id": userId, "firstname": $newfirstname, "lastname": $newlastname, "description": $newdescription, "location": $newlocation}),
@@ -121,7 +121,7 @@ function showFriends(){
 function getMutualFriends(callback) {
   var str = "getMutualFriends&id=";
   $.ajax({
-      url: model + str + userId,
+      url: controller + str + userId,
       dataType: "json",
       success: function (response){
         callback(null, response);
@@ -136,7 +136,7 @@ function getMutualFriends(callback) {
 function getPendingFriends(callback) {
   var str = "getPendingFriends&id=";
   $.ajax({
-      url: model + str + userId,
+      url: controller + str + userId,
       dataType: "json",
       success: function (response){
         console.log(response);
@@ -152,7 +152,7 @@ function getPendingFriends(callback) {
 function getFriendRequests(callback) {
   var str = "getFriendRequests&id=";
   $.ajax({
-      url: model + str + userId,
+      url: controller + str + userId,
       dataType: "json",
       success: function (response){
         console.log(response);
@@ -203,7 +203,7 @@ function showFriendActionButton() {
 function getFriendship(callback) {
   var str = "getFriendship&id=";
   $.ajax({
-      url: model + str + userId,
+      url: controller + str + userId,
       dataType: "json",
       success: function (response){
         callback(null, response);
@@ -227,7 +227,7 @@ function getUserInfo() {
     }
     var str = "getUserInfo&id=" + userId;
     $.ajax({
-        url: model + str,
+        url: controller + str,
         dataType: "json",
         success: function (response){
           updateProfile(response);
@@ -342,7 +342,7 @@ $('#mutualfriendstab').click(function() {
 function getLastLoggedIn() {
   var str = 'getLastLoggedIn';
   $.ajax({
-      url: model + str,
+      url: controller + str,
       type: "get",
       dataType: "json",
       success: function (response){
@@ -359,7 +359,7 @@ function getLastLoggedIn() {
 function getNewUsers() {
   var str = 'getNewUsers';
   $.ajax({
-      url: model + str,
+      url: controller + str,
       type: "get",
       dataType: "json",
       success: function (response){
