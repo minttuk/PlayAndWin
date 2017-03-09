@@ -5,5 +5,15 @@ $database = 'playandwin';
 $username = 'root';
 $password = '';
 
-R::setup( 'mysql:host=localhost;dbname='.$database, $username, $password );
+$errorMsg = null;
+
+try {
+  R::setup( 'mysql:host=localhost;dbname='.$database, $username, $password );
+} catch (SQLException $e) {
+  try {
+    R::setup( 'mysql:host=10.114.32.140;dbname='.$database, $username, $password );
+  } catch (SQLException $e1) {
+        e1.printStackTrace();
+    }
+  }
 ?>
