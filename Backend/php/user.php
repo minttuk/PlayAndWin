@@ -16,15 +16,15 @@ function getUserInfo($id) {
       'last_online' => $user->last_online,
       'friends' => $friends,
     );
-    header('Content-Type: application/json');
-    echo json_encode($response);
-  }/*
+    //header('Content-Type: application/json');
+  }
   if ($user->id != 0) {
-    echo $user;
-  }*/
+    return json_encode($response);
+
+  }
   else {
-    http_response_code(403);
-    echo json_encode(array('error'=>'No user found'));
+    //http_response_code(403);
+    return json_encode(array('error'=>'No user found'));
   }
 }
 
@@ -117,7 +117,7 @@ function addFriend($myId, $friendId) {
 function deleteFriend($myId, $friendId) {
   R::exec('DELETE FROM friendship WHERE (user1_id = :sessionid AND user2_id = :friendid) OR (user2_id = :sessionid AND user1_id = :friendid)', [':friendid' => $friendId, ':sessionid' => $myId]);
   $response = array('message' => 'Friend deleted succesfully!');
-  echo json_encode($response);
+  return json_encode($response);
 }
 
 //retrieves the friendship between session id and profiles user id. if returns 2 rows, its a mutual friendship, if returns only one row its a request

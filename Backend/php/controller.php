@@ -35,7 +35,7 @@ else {
 
     if ($q == "getUserInfo"){
       $id = $_REQUEST['id'];
-      getUserInfo($id);
+      echo getUserInfo($id);
     }
 
     if ($q == "setUserInfo"){
@@ -71,7 +71,7 @@ else {
     if ($q == "deleteFriend"){
       $myId = $_SESSION['id'];
       $friendId = $_REQUEST['id'];
-      deleteFriend($myId, $friendId);
+      echo deleteFriend($myId, $friendId);
     }
 
     if ($q == "getLastLoggedIn"){

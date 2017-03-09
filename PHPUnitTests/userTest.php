@@ -19,10 +19,13 @@ final class userTest extends TestCase {
     }
     */
 /*
-    public function testgetUserInfo() {
-      $response = getUserInfo('1');
-      $this->assertEquals("No user found", $response['message']);
-    }
+  public function testgetUserInfo() {
+    $response = getUserInfo('0');
+    $this->assertJsonStringEqualsJsonString(
+    $response[0],
+    json_encode(['error' => 'No user found'])
+    );
+  }
 */
   public function testgetFriendsCount() {
     deleteFriend('1', '2');
