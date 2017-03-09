@@ -1,6 +1,5 @@
 <?php
 require 'connection.php';
-
 session_start();
 
 if (isset($_POST['Username']))  {
@@ -44,6 +43,7 @@ echo $message;
   }
 
   function regUser ($username, $email, $password, $firstname, $lastname) {
+    $gamelist = array('snake','flappy','reaction','jumper');
     $user = R::dispense( 'user' );
     $user->username = $username;
     $user->email = $email;
@@ -53,6 +53,9 @@ echo $message;
     $newuser = R::store( $user );
     R::exec( 'update user set reg_date=NOW() where username = :username', [':username' => $username]);
     R::exec( 'update user set last_online=NOW() where username = :username', [':username' => $username]);
+    foreach ($gamelist as $game) {
+      R::exec('INSERT INTO hs_'.$game.' (id,highscore) VALUES (:id,0)', [':id' => $newuser]);
+    }
   }
 
 //This method is used to update last_online in user table

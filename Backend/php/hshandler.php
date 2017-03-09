@@ -9,9 +9,6 @@ function highscore() {
         $tableName = 'hs_'.$_REQUEST['game'];
         $newScore = $_REQUEST['score'];
         $id = $_SESSION['id'];
-        try {
-          R::exec('INSERT INTO :table (id) VALUES (:id)', [':id' => $id, ':table' => $tableName]);
-        } catch(Exception $e) {}
         $score = R::load( $tableName, $id );
         $curScore = $score->highscore;
         coinAmount($id,$_REQUEST['game'],$newScore);
