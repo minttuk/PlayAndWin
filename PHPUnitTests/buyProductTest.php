@@ -31,7 +31,7 @@ final class buyProductTest extends TestCase{
     //function addToCollection($product_id, $coins_left, $session_id) ->(1,1,3)
     //To be finished later. This test expects that there is a user 3 and a collection_3 table.
 
-    /*public function testaddToCollection(){
+    public function testaddToCollection(){
         $amount = R::getCell( 'SELECT amount FROM collection_3 WHERE id = 1');
         $this->expectOutputString('{"message":"You have bought this product! You have 1 coins left."}', addToCollection('1', '1', '3') );
         $newAmount = R::getCell( 'SELECT amount FROM collection_3 WHERE id = 1');
@@ -39,7 +39,7 @@ final class buyProductTest extends TestCase{
         R::exec( 'UPDATE collection_3 SET amount = '.$amount.' WHERE id = 1');
 
 
-    }*/
+    }
 
 
 }
