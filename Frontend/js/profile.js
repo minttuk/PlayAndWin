@@ -151,7 +151,6 @@ function getPendingFriends(callback) {
 
 function getFriendRequests(callback) {
   var str = "getFriendRequests&id=";
-  console.log(userId);
   $.ajax({
       url: model + str + userId,
       dataType: "json",
