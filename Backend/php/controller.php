@@ -63,11 +63,15 @@ else {
     }
 
     if ($q == "addFriend"){
-        addFriend();
+      $myId = $_SESSION['id'];
+      $friendId = $_REQUEST['id'];
+      echo addFriend($myId, $friendId);
     }
 
     if ($q == "deleteFriend"){
-        deleteFriend();
+      $myId = $_SESSION['id'];
+      $friendId = $_REQUEST['id'];
+      deleteFriend($myId, $friendId);
     }
 
     if ($q == "getLastLoggedIn"){

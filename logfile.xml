@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="Test" tests="2" assertions="4" failures="0" errors="0" time="0.021063">
-    <testsuite name="userTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/userTest.php" tests="2" assertions="4" failures="0" errors="0" time="0.021063">
-      <testcase name="testcheckEmpty" class="userTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/userTest.php" line="11" assertions="3" time="0.010381"/>
-      <testcase name="testgetFriendsCount" class="userTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/userTest.php" line="26" assertions="1" time="0.010682"/>
+  <testsuite name="Test" tests="4" assertions="10" failures="0" errors="1" time="0.086737">
+    <testsuite name="userTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/userTest.php" tests="4" assertions="10" failures="0" errors="1" time="0.086737">
+      <testcase name="testcheckEmpty" class="userTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/userTest.php" line="11" assertions="3" time="0.014006"/>
+      <testcase name="testgetFriendsCount" class="userTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/userTest.php" line="27" assertions="4" time="0.042521">
+        <system-out>{"message":"Friend deleted succesfully!"}{"message":"Friend deleted succesfully!"}</system-out>
+      </testcase>
+      <testcase name="testaddFriend" class="userTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/userTest.php" line="38" assertions="3" time="0.017967"/>
+      <testcase name="testdeleteFriend" class="userTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/userTest.php" line="45" assertions="0" time="0.012243">
+        <error type="PHPUnit_Framework_Exception">userTest::testdeleteFriend
+PHPUnit_Framework_Exception: Argument #1 (No Value) of PHPUnit_Framework_Assert::assertJson() must be a string
+
+/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/userTest.php:49
+</error>
+        <system-out>{"message":"Friend deleted succesfully!"}</system-out>
+      </testcase>
     </testsuite>
   </testsuite>
 </testsuites>

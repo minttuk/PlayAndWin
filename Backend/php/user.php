@@ -101,23 +101,21 @@ function getFriendsCount($id) {
 }
 
 // sends a friend request to a user or makes the friendship mutual if both have added/ accepted each other
-function addFriend() {
-  $friendId = $_REQUEST['id'];
+function addFriend($myId, $friendId) {
   $approved = 0;
-  $mutualAdd =  R::getAll('SELECT * FROM friendship WHERE user1_id = :friendid AND user2_id = :sessionid', [':friendid' => $friendId, ':sessionid' => $_SESSION['id']]);
+  $mutualAdd =  R::getAll('SELECT * FROM friendship WHERE user1_id = :friendid AND user2_id = :sessionid', [':friendid' => $friendId, ':sessionid' => $myId]);
   if ($mutualAdd != null) {
     $approved = 1;
-    R::exec('UPDATE friendship SET approved = :approved WHERE user1_id = :friendid AND user2_id = :sessionid', [':sessionid' => $_SESSION['id'], ':friendid' => $friendId, ':approved' => $approved]);
+    R::exec('UPDATE friendship SET approved = :approved WHERE user1_id = :friendid AND user2_id = :sessionid', [':sessionid' => $myId, ':friendid' => $friendId, ':approved' => $approved]);
   }
-  R::exec('INSERT INTO friendship (user1_id, user2_id, approved) VALUES (:sessionid, :friendid, :approved)', [':sessionid' => $_SESSION['id'], ':friendid' => $friendId, ':approved' => $approved]);
+  R::exec('INSERT INTO friendship (user1_id, user2_id, approved) VALUES (:sessionid, :friendid, :approved)', [':sessionid' => $myId, ':friendid' => $friendId, ':approved' => $approved]);
   $response = array('message' => 'Friend added succesfully!');
-  echo json_encode($response);
+  return json_encode($response);
 }
 
 // deletes friendship or requests
-function deleteFriend() {
-  $friendId = $_REQUEST['id'];
-  R::exec('DELETE FROM friendship WHERE (user1_id = :sessionid AND user2_id = :friendid) OR (user2_id = :sessionid AND user1_id = :friendid)', [':friendid' => $friendId, ':sessionid' => $_SESSION['id']]);
+function deleteFriend($myId, $friendId) {
+  R::exec('DELETE FROM friendship WHERE (user1_id = :sessionid AND user2_id = :friendid) OR (user2_id = :sessionid AND user1_id = :friendid)', [':friendid' => $friendId, ':sessionid' => $myId]);
   $response = array('message' => 'Friend deleted succesfully!');
   echo json_encode($response);
 }
