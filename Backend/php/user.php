@@ -1,7 +1,7 @@
 <?php
 
 function getUserInfo() {
-  R::setup( 'mysql:host=localhost;dbname=playandwin', 'root', '' );
+
   $id = $_REQUEST['id'];
   $user = R::load('user', $id);
 
@@ -32,7 +32,7 @@ function getUserInfo() {
 }
 
 function setUserInfo() {
-  R::setup( 'mysql:host=localhost;dbname=playandwin', 'root', '' );
+
 
   $value = json_decode(file_get_contents('php://input'), true);
   $id = $value['id'];
@@ -58,7 +58,6 @@ function checkEmpty($stringToCheck) {
 
 // getFriends() gets all the friendship rows that have the userid and are approved
 function getMutualFriends() {
-  R::setup( 'mysql:host=localhost;dbname=playandwin', 'root', '' );
   $id = $_REQUEST['id'];
   $friends = R::getAll('SELECT user2_id FROM friendship WHERE user1_id = :id AND approved = 1', [':id' => $id]);
   $response = getFriendsInfo($friends);
@@ -66,7 +65,7 @@ function getMutualFriends() {
 }
 
 function getPendingFriends() {
-  R::setup( 'mysql:host=localhost;dbname=playandwin', 'root', '' );
+
   $id = $_REQUEST['id'];
   $pendingfriends = R::getAll( 'SELECT user2_id FROM friendship WHERE user1_id = :id AND approved = 0', [':id' => $id]);
   $response = getFriendsInfo($pendingfriends);
@@ -74,7 +73,7 @@ function getPendingFriends() {
 }
 
 function getFriendRequests() {
-  R::setup( 'mysql:host=localhost;dbname=playandwin', 'root', '' );
+
   $id = $_REQUEST['id'];
   $friendrequests = R::getAll( 'SELECT user1_id FROM friendship WHERE user2_id = :id AND approved = 0', [':id' => $id]);
   $response = getFriendsInfo($friendrequests);
@@ -84,7 +83,7 @@ function getFriendRequests() {
 function getFriendsInfo($friends) {
   $response = array();
   foreach ($friends as $friend) {
-    if ($friend['user2_id']) {
+    if (array_key_exists('user2_id',$friend)) {
       $userid = $friend['user2_id'];
     }
     else {
@@ -106,7 +105,7 @@ function getFriendsCount($id) {
 }
 
 function addFriend() {
-  R::setup( 'mysql:host=localhost;dbname=playandwin', 'root', '' );
+
   $friendId = $_REQUEST['id'];
   $approved = 0;
   $mutualAdd =  R::getAll('SELECT * FROM friendship WHERE user1_id = :friendid AND user2_id = :sessionid', [':friendid' => $friendId, ':sessionid' => $_SESSION['id']]);
@@ -121,7 +120,7 @@ function addFriend() {
 }
 
 function deleteFriend() {
-  R::setup( 'mysql:host=localhost;dbname=playandwin', 'root', '' );
+
   $friendId = $_REQUEST['id'];
   R::exec('DELETE FROM friendship WHERE (user1_id = :sessionid AND user2_id = :friendid) OR (user2_id = :sessionid AND user1_id = :friendid)', [':friendid' => $friendId, ':sessionid' => $_SESSION['id']]);
   $response = array('message' => 'Friend deleted succesfully!');
@@ -129,7 +128,7 @@ function deleteFriend() {
 }
 
 function getFriendship() {
-  R::setup( 'mysql:host=localhost;dbname=playandwin', 'root', '' );
+
   $friendId = $_REQUEST['id'];
   $result = R::getAll('SELECT * FROM friendship WHERE (user1_id = :sessionid AND user2_id = :friendid) OR (user2_id = :sessionid AND user1_id = :friendid)', [':friendid' => $friendId, ':sessionid' => $_SESSION['id']]);
   echo json_encode($result);
@@ -137,7 +136,7 @@ function getFriendship() {
 
 // returns at most 8 users that have the most recent date in last_online
 function getLastLoggedIn() {
-  R::setup( 'mysql:host=localhost;dbname=playandwin', 'root', '' );
+
   $users = R::findAll('user', 'ORDER BY last_online DESC LIMIT 8');
   $response = array();
   foreach ($users as $id => $user) {
@@ -153,7 +152,7 @@ function getLastLoggedIn() {
 
 // returns at most 8 users that have the most recent date in reg_date
 function getNewUsers() {
-  R::setup( 'mysql:host=localhost;dbname=playandwin', 'root', '' );
+
   $users = R::findAll('user', 'ORDER BY reg_date DESC LIMIT 8');
   $response = array();
   foreach ($users as $id => $user) {

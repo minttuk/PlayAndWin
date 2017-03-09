@@ -4,7 +4,7 @@ session_start();
 include 'user.php';
 include 'addProduct.php';
 include 'buyProduct.php';
-require 'rb.php';
+require 'connection.php';
 
 
 $resource = getResource();
