@@ -3,7 +3,7 @@
 
 use phpunit\Framework\TestCase;
 echo "xxxxx" . getcwd();
-include './Backend/php/connection.php';
+//include './Backend/php/connection.php';
 //require './Backend/php/rb.php';
 require './Backend/php/user.php';
 
