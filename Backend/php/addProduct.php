@@ -8,8 +8,6 @@
 
 function addProduct(){
 
-    R::setup( 'mysql:host=localhost;dbname=playandwin', 'root', '' );
-
     $value = json_decode(file_get_contents('php://input'), true);
     $name = $value['name'];
     $price = $value['price'];
@@ -28,7 +26,6 @@ function addProduct(){
 }
 
 function getAdmin(){
-    R::setup( 'mysql:host=localhost;dbname=playandwin', 'root', '' );
     if (isset($_SESSION['id'])!=null){
         $user = R::load('user',$_SESSION['id']);
         $admin = $user->admin;
@@ -36,7 +33,5 @@ function getAdmin(){
     else{
         $admin = null;
     }
-    //$user = R::load('user',$_SESSION['id']);
-    //$admin = $user->admin;
     echo json_encode(array('admin'=>$admin));
 }
