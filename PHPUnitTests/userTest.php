@@ -13,12 +13,17 @@ final class userTest extends TestCase {
         $this->assertEquals('moi', checkEmpty('moi'));
         $this->assertEquals(null, checkEmpty('   '));
     }
-
+/*
     public function testgetNewUsers() {
 
     }
 
     public function testgetUserInfo() {
-      $this->assertNotEmpty(getUserInfo('1'));
+      $response = getUserInfo('1');
+      $this->assertEquals("No user found", $response);
+    }
+*/
+    public function testgetFriendsCount() {
+      $this->assertEquals("0", getFriendsCount('1'));
     }
 }

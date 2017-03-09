@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1489060935">
-  <project timestamp="1489060935">
+<coverage generated="1489065625">
+  <project timestamp="1489065625">
     <file name="/Users/sainipatala/Documents/PHP/PlayAndWin/Backend/php/addProduct.php">
       <line num="11" type="stmt" count="0"/>
       <line num="12" type="stmt" count="0"/>
@@ -450,21 +450,21 @@
       <metrics loc="58" ncloc="36" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="43" coveredstatements="0" elements="43" coveredelements="0"/>
     </file>
     <file name="/Users/sainipatala/Documents/PHP/PlayAndWin/Backend/php/user.php">
-      <line num="4" type="stmt" count="1"/>
-      <line num="5" type="stmt" count="1"/>
-      <line num="6" type="stmt" count="1"/>
-      <line num="8" type="stmt" count="1"/>
-      <line num="9" type="stmt" count="1"/>
-      <line num="10" type="stmt" count="1"/>
-      <line num="11" type="stmt" count="1"/>
-      <line num="12" type="stmt" count="1"/>
-      <line num="13" type="stmt" count="1"/>
-      <line num="14" type="stmt" count="1"/>
-      <line num="15" type="stmt" count="1"/>
-      <line num="16" type="stmt" count="1"/>
-      <line num="17" type="stmt" count="1"/>
-      <line num="18" type="stmt" count="1"/>
-      <line num="19" type="stmt" count="1"/>
+      <line num="4" type="stmt" count="0"/>
+      <line num="5" type="stmt" count="0"/>
+      <line num="6" type="stmt" count="0"/>
+      <line num="8" type="stmt" count="0"/>
+      <line num="9" type="stmt" count="0"/>
+      <line num="10" type="stmt" count="0"/>
+      <line num="11" type="stmt" count="0"/>
+      <line num="12" type="stmt" count="0"/>
+      <line num="13" type="stmt" count="0"/>
+      <line num="14" type="stmt" count="0"/>
+      <line num="15" type="stmt" count="0"/>
+      <line num="16" type="stmt" count="0"/>
+      <line num="17" type="stmt" count="0"/>
+      <line num="18" type="stmt" count="0"/>
+      <line num="19" type="stmt" count="0"/>
       <line num="20" type="stmt" count="0"/>
       <line num="21" type="stmt" count="0"/>
       <line num="26" type="stmt" count="0"/>
@@ -555,8 +555,8 @@
       <line num="158" type="stmt" count="0"/>
       <line num="159" type="stmt" count="0"/>
       <line num="160" type="stmt" count="0"/>
-      <metrics loc="162" ncloc="136" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="105" coveredstatements="21" elements="105" coveredelements="21"/>
+      <metrics loc="162" ncloc="136" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="105" coveredstatements="6" elements="105" coveredelements="6"/>
     </file>
-    <metrics files="15" loc="774" ncloc="614" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="510" coveredstatements="21" elements="510" coveredelements="21"/>
+    <metrics files="15" loc="774" ncloc="614" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="510" coveredstatements="6" elements="510" coveredelements="6"/>
   </project>
 </coverage>

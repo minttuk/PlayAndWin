@@ -1,17 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="Test" tests="3" assertions="3" failures="0" errors="1" time="0.050333">
-    <testsuite name="userTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/userTest.php" tests="3" assertions="3" failures="0" errors="1" time="0.050333">
-      <testcase name="testcheckEmpty" class="userTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/userTest.php" line="11" assertions="3" time="0.017080"/>
-      <testcase name="testgetNewUsers" class="userTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/userTest.php" line="17" assertions="0" time="0.008009"/>
-      <testcase name="testgetUserInfo" class="userTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/userTest.php" line="21" assertions="0" time="0.025244">
-        <error type="PHPUnit_Framework_Error_Warning">userTest::testgetUserInfo
-Cannot modify header information - headers already sent by (output started at /Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/userTest.php:5)
-
-/Users/sainipatala/Documents/PHP/PlayAndWin/Backend/php/user.php:19
-/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/userTest.php:22
-</error>
-      </testcase>
+  <testsuite name="Test" tests="2" assertions="4" failures="0" errors="0" time="0.021063">
+    <testsuite name="userTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/userTest.php" tests="2" assertions="4" failures="0" errors="0" time="0.021063">
+      <testcase name="testcheckEmpty" class="userTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/userTest.php" line="11" assertions="3" time="0.010381"/>
+      <testcase name="testgetFriendsCount" class="userTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/userTest.php" line="26" assertions="1" time="0.010682"/>
     </testsuite>
   </testsuite>
 </testsuites>
