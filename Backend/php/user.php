@@ -1,7 +1,6 @@
 <?php
 
 function getUserInfo() {
-
   $id = $_REQUEST['id'];
   $user = R::load('user', $id);
 
@@ -32,8 +31,6 @@ function getUserInfo() {
 }
 
 function setUserInfo() {
-
-
   $value = json_decode(file_get_contents('php://input'), true);
   $id = $value['id'];
   $user = R::load( 'user', $id);
@@ -65,7 +62,6 @@ function getMutualFriends() {
 }
 
 function getPendingFriends() {
-
   $id = $_REQUEST['id'];
   $pendingfriends = R::getAll( 'SELECT user2_id FROM friendship WHERE user1_id = :id AND approved = 0', [':id' => $id]);
   $response = getFriendsInfo($pendingfriends);
@@ -73,7 +69,6 @@ function getPendingFriends() {
 }
 
 function getFriendRequests() {
-
   $id = $_REQUEST['id'];
   $friendrequests = R::getAll( 'SELECT user1_id FROM friendship WHERE user2_id = :id AND approved = 0', [':id' => $id]);
   $response = getFriendsInfo($friendrequests);
@@ -105,7 +100,6 @@ function getFriendsCount($id) {
 }
 
 function addFriend() {
-
   $friendId = $_REQUEST['id'];
   $approved = 0;
   $mutualAdd =  R::getAll('SELECT * FROM friendship WHERE user1_id = :friendid AND user2_id = :sessionid', [':friendid' => $friendId, ':sessionid' => $_SESSION['id']]);
@@ -120,7 +114,6 @@ function addFriend() {
 }
 
 function deleteFriend() {
-
   $friendId = $_REQUEST['id'];
   R::exec('DELETE FROM friendship WHERE (user1_id = :sessionid AND user2_id = :friendid) OR (user2_id = :sessionid AND user1_id = :friendid)', [':friendid' => $friendId, ':sessionid' => $_SESSION['id']]);
   $response = array('message' => 'Friend deleted succesfully!');
@@ -128,7 +121,6 @@ function deleteFriend() {
 }
 
 function getFriendship() {
-
   $friendId = $_REQUEST['id'];
   $result = R::getAll('SELECT * FROM friendship WHERE (user1_id = :sessionid AND user2_id = :friendid) OR (user2_id = :sessionid AND user1_id = :friendid)', [':friendid' => $friendId, ':sessionid' => $_SESSION['id']]);
   echo json_encode($result);
@@ -136,7 +128,6 @@ function getFriendship() {
 
 // returns at most 8 users that have the most recent date in last_online
 function getLastLoggedIn() {
-
   $users = R::findAll('user', 'ORDER BY last_online DESC LIMIT 8');
   $response = array();
   foreach ($users as $id => $user) {
@@ -152,7 +143,6 @@ function getLastLoggedIn() {
 
 // returns at most 8 users that have the most recent date in reg_date
 function getNewUsers() {
-
   $users = R::findAll('user', 'ORDER BY reg_date DESC LIMIT 8');
   $response = array();
   foreach ($users as $id => $user) {

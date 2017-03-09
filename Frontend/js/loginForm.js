@@ -34,7 +34,7 @@ function signInForm() {
   } else {
     $("#signForm").html('<input type="text" class="text" name="Username" placeholder="Username" required="">'
                       +'<input type="password" class="text" name="Password" placeholder="Password" required="">'
-                      +'<input type="submit" class="more_btn" name="submit" value="Sign in">');
+                      +'<input type="submit" class="more_btn" name="submit" value="Sign in"><p id="errorMsg"></p>');
   }
 }
 

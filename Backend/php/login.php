@@ -1,9 +1,7 @@
 <?php
-require 'rb.php';
+require 'connection.php';
 
 session_start();
-
-R::setup( 'mysql:host=localhost;dbname=playandwin', 'root', '' );
 
 if (isset($_POST['Username']))  {
   $uname = $_POST['Username'];
@@ -31,7 +29,7 @@ if (isset($_POST['Email'])) {
     //$message = 'Logged in!';
     startSession($player->id);
     updateLastOnline();
-  } else  $message = 'Nope, wrong password!';
+  } else  $message = 'Nope, wrong username or password!';
 } else {
   $message = isset($_SESSION['id']) ? $_SESSION['id'] : -1;
 }
