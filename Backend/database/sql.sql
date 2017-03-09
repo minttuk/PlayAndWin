@@ -102,4 +102,4 @@ INSERT INTO user(username, firstname, lastname, email, password, coins, admin, r
 VALUES('admin', 'admin', 'admin', 'admin@playandwin.fi', 'ec15d79e36e14dd258cfff3d48b73d35', '50000', '1', '2017-03-06 10:05:09', '2017-03-06 10:05:09');
 
 INSERT INTO friendship (user1_id, user2_id, approved)
-VALUES (1, 2, 1);
+VALUES (1, 2, 0);
