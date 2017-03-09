@@ -35,7 +35,7 @@ function buy(product_id){
         }
     };
 
-    ajaxRequest.open("POST", "../Backend/php/model.php?q=buyProduct", true);
+    ajaxRequest.open("POST", "../Backend/php/controller.php?q=buyProduct", true);
     ajaxRequest.send(dataString);
 
 
