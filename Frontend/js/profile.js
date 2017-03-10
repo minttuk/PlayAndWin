@@ -6,7 +6,7 @@ function getScoreTable() {
   var idParam = '';
   if (parseURL('user'))
     idParam = 'id='+parseURL('user')+'&';
-  $.ajax({url: '../Backend/php/highscore.php?'+idParam+'table',
+  $.ajax({url: '../Backend/php/controller.php?q=getHighscores&'+idParam+'table',
     datatype:'html',success: function(result){$("#highscores").html(result);
   }});
 }

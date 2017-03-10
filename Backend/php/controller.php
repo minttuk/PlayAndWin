@@ -1,11 +1,12 @@
 <?php
 header("Access-Control-Allow-Origin: *");
 session_start();
+require 'connection.php';
 include 'user.php';
 include 'addProduct.php';
 include 'buyProduct.php';
-require 'connection.php';
-
+include 'chathandler.php';
+include 'hshandler.php';
 
 $resource = getResource();
 $request_method = getMethod();
@@ -33,6 +34,22 @@ else {
 
     $q = $_REQUEST["q"];
 
+    if ($q == 'getHighscores') {
+      echo getHighscores();
+    }
+
+    if ($q == 'setHighscore') {
+      echo setHighscore();
+    }
+
+    if ($q == 'getChat') {
+      echo getChat();
+    }
+
+    if ($q == 'addChat') {
+      addChat();
+    }
+
     if ($q == "getUserInfo"){
       $id = $_REQUEST['id'];
       echo json_encode(getUserInfo($id));
@@ -46,6 +63,7 @@ else {
     if ($q == "addProduct"){
         addProduct();
     }
+
     if ($q == "buyProduct"){
         buyProduct();
     }
