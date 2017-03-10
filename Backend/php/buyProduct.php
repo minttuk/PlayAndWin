@@ -1,22 +1,22 @@
 <?php
 
+
 /**
- * Created by PhpStorm.
- * User: minttu
- * Date: 22-Feb-17
- * Time: 21:01
+ * Buying a product from the webstore.
+ *
+ * Gets the product id through the body of an ajax call. If the user is signed in, it checks if the user
+ * has enough coins to buy the product. If the user has enough coins, it calls functions: makeShopOrder(),
+ * makeOrderRow(), and addToCollection().
+ *
  */
-
-
 function buyProduct(){
 
     $value = json_decode(file_get_contents('php://input'), true);
     $product_id = $value['product_id'];
-
+    //checks if the user is signed in or not.
     if (isset($_SESSION['id'])) {
         $user = R::load('user',$_SESSION['id']);
         $user_id = $user->id;
-
         $user_coins = R::getCell( 'SELECT coins FROM user WHERE id = :user_id', [':user_id' => $user_id]);
         $product_price = R::getCell( 'SELECT price FROM product WHERE id = :product_id', [':product_id' => $product_id]);
 
@@ -40,16 +40,34 @@ function buyProduct(){
     }
 }
 
+/**
+ * Inserts a line into shoporder table in database with user id given by parameter.
+ *
+ * @param int $user_id is the id number of the user signed in.
+ */
 function makeShopOrder($user_id){
     $shoporder = R::dispense( 'shoporder' );
     $shoporder->user_id = $user_id;
     R::store( $shoporder );
 }
 
+/**
+ * Inserts a line into order_row table in database.
+ *
+ * @param int $product_id is the id number of the product bought.
+ */
 function makeOrderRow($product_id){
     R::exec( 'INSERT INTO order_row (order_id, product_id, amount) VALUES (LAST_INSERT_ID(), :product_id, 1)', [':product_id' => $product_id]);
 
 }
+
+/**
+ * Adds a line to the user's collection table in the database.
+ *
+ * @param int $product_id is the id number of the product bought.
+ * @param int $coins_left is the amount of coins the user has left after buying the product.
+ * @param int $session_id is the id number of the user who has bought the product.
+ */
 function addToCollection($product_id, $coins_left, $session_id){
     $collection = 'collection_'.$session_id;
     $product = R::load( 'collection_'.$session_id, $product_id );

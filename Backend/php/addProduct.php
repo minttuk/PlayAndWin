@@ -1,11 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: minttu
- * Date: 19-Feb-17
- * Time: 10:14
- */
 
+/**
+ * Adds a product to the webstore.
+ *
+ * The product information is passed through the body of an ajax call. The new product is added to the
+ * database table of products with the information given.
+ */
 function addProduct(){
 
     $value = json_decode(file_get_contents('php://input'), true);
@@ -25,6 +25,9 @@ function addProduct(){
 
 }
 
+/**
+ * Checks the admin status of the user signed in. Returns a boolean value of the admin status.
+ */
 function getAdmin(){
     if (isset($_SESSION['id'])!=null){
         $user = R::load('user',$_SESSION['id']);

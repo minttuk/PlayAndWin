@@ -5,6 +5,12 @@
 var submitForm = document.getElementById("submitForm");
 var addProductModal = document.getElementById("addProductModal");
 
+
+/**
+ * An ajax call to check if the ADD PRODUCT button is displayed on the webpage or not.
+ *
+ * @returns {boolean}
+ */
 window.onload = function displayAddProductButton() {
 
     var ajaxRequest;
@@ -49,6 +55,12 @@ window.onload = function displayAddProductButton() {
     ajaxRequest.send(null);
     }
 
+/**
+ * An ajax call to add a product to the webstore. The product information is send in the body of the call.
+ * If success, the product adding modal is closed and the webstore webpage refreshed.
+ *
+ * @returns {boolean}
+ */
 submitForm.onclick = function(){
 
 //function addProduct(){
@@ -96,8 +108,12 @@ submitForm.onclick = function(){
         ajaxRequest.send(dataString);
     }
 }
-/* checkDescription() = To check that a description is given. */
 
+/**
+ * To check if the description is not empty and is between 0-500 characters long.
+ * @param String description
+ * @returns {boolean}
+ */
 function checkDescription(description) {
     if (description.length > 0 && description.length < 500 && description.trim().length !== 0) {
         return true;
@@ -108,8 +124,11 @@ function checkDescription(description) {
     }
 }
 
-/* checkName() = to check that a title is given */
-
+/**
+ * Checks if the name is given and is between 0-255 characters long.
+ * @param String name
+ * @returns {boolean}
+ */
 function checkName(name) {
     if (name.length > 0 && name.length < 255) {
         return true;
@@ -120,8 +139,11 @@ function checkName(name) {
     }
 }
 
-/* checkCost() = to check that a cost to the product is given */
-
+/**
+ * Checks if a price is given and is between 0-25 numbers long.
+ * @param int price
+ * @returns {boolean}
+ */
 function checkCost(price) {
     if (price.length > 0 && price.length < 25) {
         return true;
