@@ -54,7 +54,7 @@ function updateCoins() {
     var html = '<i class="glyphicon glyphicon-copyright-mark"></i> ';
     if (sessionStorage.coins)
       $('.signUp').html(html+sessionStorage.coins);
-    $.ajax({url: '../Backend/php/getcoins.php', success: function (coins) {
+    $.ajax({url: '../Backend/php/controller.php?q=getCoins', success: function (coins) {
       var newCoins = coins-sessionStorage.coins;
       if (coins != sessionStorage.coins) {
         $('.signUp').fadeOut(function() {
