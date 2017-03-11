@@ -1,5 +1,11 @@
 <?php
 $colorshift = true;
+
+/**
+ * Get the 30 latest chatroom entries
+ *
+ * Return the results in either JSON or HTML format, depending on POST parameters
+ */
 function getChat(){
   $results=R::getAll('select * from chatroom');
   $html = '';
@@ -19,6 +25,12 @@ function getChat(){
   }
 }
 
+/**
+ * Add a new chat entry to the database.
+ *
+ * Stores a chat entry into the database based on the users Session ID and
+ * a message in recieved as a POST parameter.
+ */
 function addChat() {
   if (isset($_SESSION['id'])) {
     $user = R::load('user',$_SESSION['id']);
@@ -34,6 +46,11 @@ function addChat() {
   }
 }
 
+/**
+ * Alternates between generating two possible CSS background colors.
+ *
+ * Returns a CSS formated background color based on shifting the value of a boolean.
+ */
 function cardColor() {
   global $colorshift;
   if ($colorshift) {
