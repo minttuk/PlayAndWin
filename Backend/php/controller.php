@@ -35,11 +35,20 @@ else {
     $q = $_REQUEST["q"];
 
     if ($q == 'getHighscores') {
-      echo getHighscores();
+      if (isset($_SESSION['id']) || isset($_REQUEST['id'])) {
+        if (isset($_REQUEST['id'])) $userID = $_REQUEST['id'];
+        else $userID = $_SESSION['id'];
+        echo getHighscores($userID);
+      }
     }
 
     if ($q == 'setHighscore') {
       echo setHighscore();
+    }
+
+    if ($q == 'getCoins') {
+      if (isset($_SESSION['id']))
+        echo getCoins($_SESSION['id']);
     }
 
     if ($q == 'getChat') {

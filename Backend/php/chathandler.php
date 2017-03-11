@@ -1,9 +1,8 @@
 <?php
-
+$colorshift = true;
 function getChat(){
   $results=R::getAll('select * from chatroom');
   $html = '';
-  $colorshift = true;
   if (isset($_REQUEST['html'])) {
     for ($i = max(0,sizeof($results) - 30); $i < sizeof($results); $i++) {
         $html .=
