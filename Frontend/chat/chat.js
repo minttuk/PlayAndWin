@@ -36,7 +36,7 @@ function update() {
             prevResult = result[result.length - 1].id;
             $(".msg-wrap").append('' +
                 '<div class="media msg" style='+cardColor()+'>' +
-                '<div class="media-body">' +
+                '<div>' +
                 '<small class="pull-right time"><i class="fa fa-clock-o"></i>' + ' ' + result[result.length - 1].ts + '</small>' +
                 '<h4 class="media-heading">' + result[result.length - 1].username + '</h4>' +
                 '<p class="col-lg-10">' + result[result.length - 1].msg + '</p>' +
