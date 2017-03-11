@@ -92,7 +92,7 @@
                     $('#start').css('display', 'block');
                     $('#text').css('display', 'block');
                     $('#canvas').css('display', 'none');
-                    $.post("../../Backend/php/controller.php?q=setHighscore", {
+                    $.post("../../Backend/php/hshandler.php", {
                         game: 'snake',
                         score: score
                     }, function(data) {
