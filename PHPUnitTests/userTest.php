@@ -1,5 +1,5 @@
 <?php
-
+/*
 
 use phpunit\Framework\TestCase;
 echo "xxxxx" . getcwd();
@@ -18,7 +18,7 @@ final class userTest extends TestCase {
 
     }
     */
-
+/*
   public function testgetUserInfo() {
     $info = getUserInfo('0');
     $this->assertArrayHasKey('error', $info);
@@ -54,4 +54,4 @@ final class userTest extends TestCase {
     json_encode(['message' => 'Friend deleted succesfully!'])
     );
   }
-}
+}*/
