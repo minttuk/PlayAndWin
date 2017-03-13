@@ -1,15 +1,15 @@
 <phpunit>
     <testsuites>
         <testsuite name="Test">
-            <directory>./PHPUnitTests</directory>
+            <directory>./</directory>
         </testsuite>
     </testsuites>
 
     <filter>
       <whitelist>
-          <directory suffix=".php">./Backend/php/</directory>
+          <directory suffix=".php">../Backend/php/</directory>
           <exclude>
-            <file>./Backend/php/rb.php</file>
+            <file>../Backend/php/rb.php</file>
           </exclude>
       </whitelist>
   </filter>
