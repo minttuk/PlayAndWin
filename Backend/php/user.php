@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Returns user info that excludes login information by user ID (id, username, profilepicture, lastname, description, location, reg_date, last_online, friends)
+ * Returns users id, username, profile picture, firstname, lastname, description, location, registration date, last time online time and a list of friends ids
  *
- * @return json formatted string
+ * @return json PHP array
  */
 
 function getUserInfo($id) {
@@ -22,7 +22,6 @@ function getUserInfo($id) {
       'last_online' => $user->last_online,
       'friends' => $friends,
     );
-    //header('Content-Type: application/json');
   }
   if ($user->id != 0) {
     return $response;
@@ -37,18 +36,16 @@ function getUserInfo($id) {
 /**
  * Updates user firstname, lastname, description and location
  *
- * @return php object
  */
 
-function setUserInfo($value) {
-  $id = $value['id'];
+function setUserInfo($id, $firstname, $lastname, $description, $location) {
   $user = R::load( 'user', $id);
-  $user->firstname = $value['firstname'];
-  $user->lastname = $value['lastname'];
-  $user->description = checkEmpty($value['description']);
-  $user->location = checkEmpty($value['location']);
+  $user->firstname = $firstname;
+  $user->lastname = $lastname;
+  $user->description = checkEmpty($description);
+  $user->location = checkEmpty($location);
   R::store( $user );
-  echo $user;
+  return $user;
 }
 
 /**
@@ -144,21 +141,20 @@ function addFriend($myId, $friendId) {
   }
   R::exec('INSERT INTO friendship (user1_id, user2_id, approved) VALUES (:sessionid, :friendid, :approved)', [':sessionid' => $myId, ':friendid' => $friendId, ':approved' => $approved]);
   $response = array('message' => 'Friend added succesfully!');
-  return json_encode($response);
+  return $response;
 }
 
 // deletes friendship or requests
 function deleteFriend($myId, $friendId) {
   R::exec('DELETE FROM friendship WHERE (user1_id = :sessionid AND user2_id = :friendid) OR (user2_id = :sessionid AND user1_id = :friendid)', [':friendid' => $friendId, ':sessionid' => $myId]);
   $response = array('message' => 'Friend deleted succesfully!');
-  return json_encode($response);
+  return $response;
 }
 
 //retrieves the friendship between session id and profiles user id. if returns 2 rows, its a mutual friendship, if returns only one row its a request
-function getFriendship() {
-  $friendId = $_REQUEST['id'];
-  $result = R::getAll('SELECT * FROM friendship WHERE (user1_id = :sessionid AND user2_id = :friendid) OR (user2_id = :sessionid AND user1_id = :friendid)', [':friendid' => $friendId, ':sessionid' => $_SESSION['id']]);
-  echo json_encode($result);
+function getFriendship($myId, $friendId) {
+  $result = R::getAll('SELECT * FROM friendship WHERE (user1_id = :sessionid AND user2_id = :friendid) OR (user2_id = :sessionid AND user1_id = :friendid)', [':friendid' => $friendId, ':sessionid' => $myId]);
+  return $result;
 }
 
 // returns at most 8 users that have the most recent date in last_online

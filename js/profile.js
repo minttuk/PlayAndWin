@@ -89,7 +89,7 @@ $( "#saveprofilebutton" ).click(function() {
         dataType: "json",
         data: JSON.stringify({"id": userId, "firstname": $newfirstname, "lastname": $newlastname, "description": $newdescription, "location": $newlocation}),
         success: function (response){
-          console.log('success');
+          //console.log('success');
           getUserInfo();
         },
         error: function(jqXHR, textStatus, errorThrown) {

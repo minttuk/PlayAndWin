@@ -66,7 +66,7 @@ else {
 
     if ($q == "setUserInfo"){
       $value = json_decode(file_get_contents('php://input'), true);
-      setUserInfo($value);
+      echo json_encode(setUserInfo($value['id'], $value['firstname'], $value['lastname'], $value['description'], $value['location']));
     }
 
     if ($q == "addProduct"){
@@ -90,23 +90,20 @@ else {
     }
 
     if ($q == "addFriend"){
-      $myId = $_SESSION['id'];
-      $friendId = $_REQUEST['id'];
-      echo addFriend($myId, $friendId);
+      echo json_encode(addFriend($_SESSION['id'], $_REQUEST['id']));
     }
 
     if ($q == "deleteFriend"){
-      $myId = $_SESSION['id'];
-      $friendId = $_REQUEST['id'];
-      echo deleteFriend($myId, $friendId);
+      echo json_encode(deleteFriend($_SESSION['id'], $_REQUEST['id']));
     }
 
     if ($q == "getLastLoggedIn"){
-        getLastLoggedIn();
+      $friendId = $_REQUEST['id'];
+      getLastLoggedIn();
     }
 
     if ($q == "getFriendship"){
-        getFriendship();
+        echo json_encode(getFriendship($_SESSION['id'], $_REQUEST['id']));
     }
 
     if ($q == "getNewUsers"){
