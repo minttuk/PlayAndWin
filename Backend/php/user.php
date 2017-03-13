@@ -72,9 +72,9 @@ function checkEmpty($stringToCheck) {
 }
 
 /**
- * Gets the friends of a user by the user id. Passes all friends ids to the function getFriendsInfo that returns their ids, usernames and profilepictures. Returns a PHP array that contains the friends information
+ * Gets the friends of a user by the user id. Returns a PHP array that contains the friends information
  *
- * @param $id is the users id whose friends are getting retrieved
+ * @param $id is the users id whose friends are being retrieved
  *
  * @return PHP array
  */
@@ -86,29 +86,31 @@ function getMutualFriends($id) {
 }
 
 /**
- * Gets the peding friends of a user by the user id. Passes peding friends ids to function getFriendsInfo
+ * Gets the peding friends of a user by the user id. Returns a PHP array that contains the pending friends information
  *
- * @return json formatted string
+ * @param $id is the users id whose peding friend requests are being retrieved
+ *
+ * @return PHP array
  */
 
-function getPendingFriends() {
-  $id = $_REQUEST['id'];
+function getPendingFriends($id) {
   $pendingfriends = R::getAll( 'SELECT user2_id FROM friendship WHERE user1_id = :id AND approved = 0', [':id' => $id]);
   $response = getFriendsInfo($pendingfriends);
-  echo json_encode($response);
+  return $response;
 }
 
 /**
- * Gets the peding friends of a user by the user id. Passes peding friends ids to function getFriendsInfo
+ * Gets the peding friends of a user by the user id. Returns a PHP array that contains the friend requests information
  *
- * @return json formatted string
+ * @param $id is the users id whose friend requests are being retrieved
+ *
+ * @return PHP array
  */
 
-function getFriendRequests() {
-  $id = $_REQUEST['id'];
+function getFriendRequests($id) {
   $friendrequests = R::getAll( 'SELECT user1_id FROM friendship WHERE user2_id = :id AND approved = 0', [':id' => $id]);
   $response = getFriendsInfo($friendrequests);
-  echo json_encode($response);
+  return $response;
 }
 
 // retrieves the id, username and profilepicture of friends (mutual, pending and requests)

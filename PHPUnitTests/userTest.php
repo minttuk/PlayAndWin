@@ -82,4 +82,30 @@ final class userTest extends TestCase {
     $this->assertEquals('admin', getMutualFriends('1')[0]['username']);
     deleteFriend('1', '2');
   }
+
+  public function testgetFriendRequests() {
+    deleteFriend('1', '2');
+    $this->assertEquals('0', count(getFriendRequests('1')));
+    addFriend('2', '1');
+    $this->assertEquals('1', count(getFriendRequests('1')));
+    $this->assertEquals('admin', getFriendRequests('1')[0]['username']);
+    addFriend('1', '2');
+    $this->assertEquals('0', count(getFriendRequests('1')));
+    deleteFriend('1', '2');
+  }
+
+  public function testgetPendingFriends() {
+    deleteFriend('1', '2');
+    $this->assertEquals('0', count(getPendingFriends('1')));
+    addFriend('2', '1');
+    $this->assertEquals('0', count(getPendingFriends('1')));
+    deleteFriend('1', '2');
+    addFriend('1', '2');
+    $this->assertEquals('1', count(getPendingFriends('1')));
+    $this->assertEquals('admin', getPendingFriends('1')[0]['username']);
+    addFriend('2', '1');
+    $this->assertEquals('0', count(getPendingFriends('1')));
+    deleteFriend('1', '2');
+  }
+
 }

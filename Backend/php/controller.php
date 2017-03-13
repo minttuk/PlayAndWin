@@ -82,11 +82,11 @@ else {
     }
 
     if ($q == "getFriendRequests") {
-        getFriendRequests();
+      echo json_encode(getFriendRequests($id = $_REQUEST['id']));
     }
 
     if ($q == "getPendingFriends"){
-        getPendingFriends();
+      echo json_encode(getPendingFriends($id = $_REQUEST['id']));
     }
 
     if ($q == "addFriend"){
