@@ -1,2 +1,6 @@
 .DS_Store
-rbtest.php
+PHPUnitTests/coverage
+PHPUnitTests/logfile.xml
+PHPUnitTests/coverage.html
+PHPUnitTests/report.xml
+PHPUnitTests/testdox.xml
