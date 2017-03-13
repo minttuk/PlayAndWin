@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Returns user info that excludes login information by user ID (id, username, profilepicture, lastname, description, location, reg_date, last_online, friends)
+ *
+ * @return json formatted string
+ */
+
 function getUserInfo($id) {
   $user = R::load('user', $id);
   if ($user->id != 0) {
@@ -28,6 +34,12 @@ function getUserInfo($id) {
   }
 }
 
+/**
+ * Updates user firstname, lastname, description and location
+ *
+ * @return php object
+ */
+
 function setUserInfo($value) {
   $id = $value['id'];
   $user = R::load( 'user', $id);
@@ -39,7 +51,14 @@ function setUserInfo($value) {
   echo $user;
 }
 
-//TEST OK. If string is empty, it will be changed into NULL before inserts to database.
+/**
+ * Converts empty strings into null
+ *
+ * @param String $stringToCheck
+ *
+ * @return String or null
+ */
+
 function checkEmpty($stringToCheck) {
   $stringToCheck = str_replace(' ', '', $stringToCheck);
   if ($stringToCheck == '') {
@@ -50,7 +69,12 @@ function checkEmpty($stringToCheck) {
   }
 }
 
-// getFriends() gets all the friendship rows that have the userid and are approved
+/**
+ * Gets the friends of a user by the user id. Passes friends ids to function getFriendsInfo
+ *
+ * @return json formatted string
+ */
+
 function getMutualFriends() {
   $id = $_REQUEST['id'];
   $friends = R::getAll('SELECT user2_id FROM friendship WHERE user1_id = :id AND approved = 1', [':id' => $id]);
@@ -58,7 +82,12 @@ function getMutualFriends() {
   echo json_encode($response);
 }
 
-// Gets all users that the this user has sent a friend request to (in database user1_id = this user and approved = 0)
+/**
+ * Gets the peding friends of a user by the user id. Passes peding friends ids to function getFriendsInfo
+ *
+ * @return json formatted string
+ */
+
 function getPendingFriends() {
   $id = $_REQUEST['id'];
   $pendingfriends = R::getAll( 'SELECT user2_id FROM friendship WHERE user1_id = :id AND approved = 0', [':id' => $id]);
@@ -66,7 +95,12 @@ function getPendingFriends() {
   echo json_encode($response);
 }
 
-// Gets all users that have sent a friend request to this user (in database user2_id = this user and approved = 0)
+/**
+ * Gets the peding friends of a user by the user id. Passes peding friends ids to function getFriendsInfo
+ *
+ * @return json formatted string
+ */
+
 function getFriendRequests() {
   $id = $_REQUEST['id'];
   $friendrequests = R::getAll( 'SELECT user1_id FROM friendship WHERE user2_id = :id AND approved = 0', [':id' => $id]);
