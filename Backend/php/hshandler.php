@@ -1,10 +1,10 @@
 <?php
 
 /**
- * Sets a new highscore for a user if the new score is greater than the stored value.
- *
- * The game and score are recieved as POST parameters and the user ID is retrieved from a session variable,
- * a JSON formatted string is returned with a message and the new highscore.
+ * Sets a new highscore for a user if the new score is greater than the stored value and
+ * returns JSON formatted string with a message and the new highscore.
+ * The game and score are recieved as POST parameters and the user ID is retrieved from a session variable.
+ * @return JSON formatted string.
  */
 function setHighscore() {
   if (isset($_SESSION['id'])) {
@@ -19,7 +19,7 @@ function setHighscore() {
         if ($newScore > $curScore) {
           $score->highscore=$newScore;
           R::store( $score );
-          return json_encode(array('highscore'=>$newScore,'message'=>'New High Score!'));
+          return json_encode(array('highscore'=>$newScore,'message'=>''));
         }
         return json_encode(array('highscore'=>$curScore,'message'=>''));
       }
@@ -29,9 +29,10 @@ function setHighscore() {
 }
 
 /**
- * Returns the amount of coins associated with a given user ID.
+ * Gets the amount of coins associated with a given user ID from the database.
  *
  * @param int $id is the ID number of the user.
+ * @return int
  */
 function getCoins($id) {
     $user = R::load( 'user', $id);
@@ -58,6 +59,7 @@ function coinAmount($id,$game,$score) {
  * Gets the highscores associated with a user in either JSON or HTML format based on a POST parameter.
  *
  * @param int $user is the ID number of the user.
+ * @return string
  */
 function getHighscores($user) {
   $gamelist = array('snake'=>'Disco Snake','flappy'=>'Flutter Bird','reaction'=>'Speed Click','jumper'=>'Jumper Man');
@@ -78,10 +80,11 @@ function getHighscores($user) {
 }
 
 /**
- * Returns an array of the highscores achieved by the user.
+ * Builds an array of highscores achieved by the user.
  *
  * @param int $userid is the ID number of the user.
  * @param string $game a the name of a game.
+ * @return array
  */
 function jsonBuilder($game,$userid) {
   $tableName = 'hs_'.$game;
