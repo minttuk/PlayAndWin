@@ -71,7 +71,7 @@
                 }
                 document.getElementById("again").innerHTML = "Again?";
                 document.getElementById("result").innerHTML = Math.round(1000 / reactionTotal);
-                $.post("../../Backend/php/controller.php?q=setHighscore", {
+                $.post("../Backend/php/controller.php?q=setHighscore", {
                     game: 'reaction',
                     score: Math.round(1000 / highScore)
                 }, function(data) {

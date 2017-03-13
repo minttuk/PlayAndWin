@@ -1,12 +1,12 @@
 var userId;
-var controller = "../Backend/php/controller.php?q=";
+var controller = "./Backend/php/controller.php?q=";
 var sessionId;
 
 function getScoreTable() {
   var idParam = '';
   if (parseURL('user'))
     idParam = 'id='+parseURL('user')+'&';
-  $.ajax({url: '../Backend/php/controller.php?q=getHighscores&'+idParam+'table',
+  $.ajax({url: './Backend/php/controller.php?q=getHighscores&'+idParam+'table',
     datatype:'html',success: function(result){$("#highscores").html(result);
   }});
 }
@@ -20,7 +20,7 @@ function parseURL(param){
 
 function getSession() {
   $.ajax({
-      url: "../Backend/php/login.php",
+      url: "./Backend/php/login.php",
       type: "get",
       dataType: "json",
       async: false,
