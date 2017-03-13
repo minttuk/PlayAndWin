@@ -5,7 +5,7 @@ use phpunit\Framework\TestCase;
 echo "xxxxx" . getcwd();
 //include './Backend/php/connection.php';
 //require './Backend/php/rb.php';
-require __DIR__.'\..\Backend\php\chathandler.php';
+require_once './Backend/php/chathandler.php';
 
 final class chatTest extends TestCase {
   public function testcardColor() {

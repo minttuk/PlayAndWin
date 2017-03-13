@@ -1,14 +1,13 @@
 <?php
 
-
 use phpunit\Framework\TestCase;
 echo "xxxxx" . getcwd();
 //include './Backend/php/connection.php';
 //require './Backend/php/rb.php';
-require __DIR__.'\..\Backend\php\hshandler.php';
-require __DIR__.'\..\Backend\php\connection.php';
+require_once './Backend/php/chathandler.php';
+require_once './Backend/php/connection.php';
 
-final class chatTest extends TestCase {
+final class highscoreTest extends TestCase {
   public function testSetHS() {
       $this->assertEquals(json_encode(array('highscore'=>'','message'=>'Highscore not saved! (No user signed in.)')), setHighscore());
   }
