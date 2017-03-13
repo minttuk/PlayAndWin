@@ -5,8 +5,8 @@ use phpunit\Framework\TestCase;
 echo "xxxxx" . getcwd();
 //include './Backend/php/connection.php';
 //require './Backend/php/rb.php';
-require_once './Backend/php/hshandler.php';
-require_once './Backend/php/connection.php';
+require_once '../Backend/php/hshandler.php';
+require_once '../Backend/php/connection.php';
 
 final class highscoreTest extends TestCase {
   public function testSetHS() {
