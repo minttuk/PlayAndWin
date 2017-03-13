@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1489393527">
-  <project timestamp="1489393527">
+<coverage generated="1489396721">
+  <project timestamp="1489396721">
     <file name="/Users/sainipatala/Documents/PHP/PlayAndWin/Backend/php/addProduct.php">
       <line num="11" type="stmt" count="0"/>
       <line num="12" type="stmt" count="0"/>
@@ -266,12 +266,12 @@
       <line num="87" type="stmt" count="2"/>
       <line num="88" type="stmt" count="2"/>
       <line num="89" type="stmt" count="2"/>
-      <line num="90" type="stmt" count="2"/>
-      <line num="91" type="stmt" count="2"/>
-      <line num="92" type="stmt" count="1"/>
+      <line num="90" type="stmt" count="0"/>
+      <line num="91" type="stmt" count="0"/>
+      <line num="92" type="stmt" count="2"/>
       <line num="94" type="stmt" count="2"/>
       <line num="95" type="stmt" count="2"/>
-      <metrics loc="125" ncloc="68" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="46" coveredstatements="18" elements="46" coveredelements="18"/>
+      <metrics loc="125" ncloc="68" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="46" coveredstatements="16" elements="46" coveredelements="16"/>
     </file>
     <file name="/Users/sainipatala/Documents/PHP/PlayAndWin/Backend/php/login.php">
       <line num="2" type="stmt" count="0"/>
@@ -512,6 +512,6 @@
       <line num="158" type="stmt" count="0"/>
       <metrics loc="160" ncloc="134" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="99" coveredstatements="36" elements="99" coveredelements="36"/>
     </file>
-    <metrics files="11" loc="832" ncloc="611" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="477" coveredstatements="72" elements="477" coveredelements="72"/>
+    <metrics files="11" loc="832" ncloc="611" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="477" coveredstatements="70" elements="477" coveredelements="70"/>
   </project>
 </coverage>
