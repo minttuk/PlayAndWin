@@ -5,7 +5,7 @@
  * Date: 09-Mar-17
  * Time: 16:33
  */
- /*
+
 use phpunit\Framework\TestCase;
 echo "xxxxx" . getcwd();
 include './Backend/php/connection.php';
@@ -44,4 +44,3 @@ final class buyProductTest extends TestCase{
 
 
 }
-*/
