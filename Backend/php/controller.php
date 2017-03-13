@@ -99,15 +99,15 @@ else {
 
     if ($q == "getLastLoggedIn"){
       $friendId = $_REQUEST['id'];
-      getLastLoggedIn();
+      echo json_encode(getLastLoggedIn());
     }
 
     if ($q == "getFriendship"){
-        echo json_encode(getFriendship($_SESSION['id'], $_REQUEST['id']));
+      echo json_encode(getFriendship($_SESSION['id'], $_REQUEST['id']));
     }
 
     if ($q == "getNewUsers"){
-      getNewUsers();
+      echo json_encode(getNewUsers());
     }
     if ($q == "getAdmin"){
       getAdmin();

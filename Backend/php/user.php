@@ -176,8 +176,8 @@ function getLastLoggedIn() {
       'profilepicture' => $user->profilepicture,
     );
   }
-  header('Content-Type: application/json');
-  echo json_encode($response);
+  //header('Content-Type: application/json');
+  return $response;
 }
 
 // returns at most 8 users that have the most recent date in reg_date
@@ -191,8 +191,8 @@ function getNewUsers() {
       'profilepicture' => $user->profilepicture,
     );
   }
-  header('Content-Type: application/json');
-  echo json_encode($response);
+  //header('Content-Type: application/json');
+  return $response;
 }
 
 ?>

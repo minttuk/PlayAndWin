@@ -108,4 +108,12 @@ final class userTest extends TestCase {
     deleteFriend('1', '2');
   }
 
+  public function testgetLastLoggedIn() {
+    $this->assertTrue('1' < count(getLastLoggedIn()));
+  }
+
+  public function testgetNewUsers() {
+    $this->assertTrue('1' < count(getNewUsers()));
+  }
+
 }
