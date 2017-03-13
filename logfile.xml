@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="Test" tests="12" assertions="27" failures="2" errors="0" time="0.323703">
+    <testsuite name="buyProductTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/buyProductTest.php" tests="2" assertions="4" failures="0" errors="0" time="0.064935">
+      <testcase name="testmakeShopOrder" class="buyProductTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/buyProductTest.php" line="17" assertions="2" time="0.042549"/>
+      <testcase name="testaddToCollection" class="buyProductTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/buyProductTest.php" line="34" assertions="2" time="0.022386"/>
+    </testsuite>
+    <testsuite name="chatTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/chatTest.php" tests="1" assertions="1" failures="0" errors="0" time="0.009220">
+      <testcase name="testcardColor" class="chatTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/chatTest.php" line="11" assertions="1" time="0.009220"/>
+    </testsuite>
+    <testsuite name="highscoreTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/highscoreTest.php" tests="4" assertions="4" failures="2" errors="0" time="0.104165">
+      <testcase name="testSetHS" class="highscoreTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/highscoreTest.php" line="11" assertions="1" time="0.011853"/>
+      <testcase name="testGetHS" class="highscoreTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/highscoreTest.php" line="14" assertions="1" time="0.055571">
+        <failure type="PHPUnit_Framework_ExpectationFailedException">highscoreTest::testGetHS
+Failed asserting that two strings are equal.
+--- Expected
++++ Actual
+@@ @@
+-'[{"snake":"1"},{"flappy":"1"},{"reaction":"1"},{"jumper":"1"}]'
++'[{"snake":0},{"flappy":0},{"reaction":0},{"jumper":"150"}]'
+
+/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/highscoreTest.php:15
+</failure>
+      </testcase>
+      <testcase name="testJsonBuilder" class="highscoreTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/highscoreTest.php" line="17" assertions="1" time="0.016597">
+        <failure type="PHPUnit_Framework_ExpectationFailedException">highscoreTest::testJsonBuilder
+Failed asserting that two arrays are equal.
+--- Expected
++++ Actual
+@@ @@
+ Array (
+-    'snake' =&gt; '1'
++    'snake' =&gt; 0
+ )
+
+/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/highscoreTest.php:18
+</failure>
+      </testcase>
+      <testcase name="testGetCoins" class="highscoreTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/highscoreTest.php" line="20" assertions="1" time="0.020144"/>
+    </testsuite>
+    <testsuite name="userTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/userTest.php" tests="5" assertions="18" failures="0" errors="0" time="0.145383">
+      <testcase name="testcheckEmpty" class="userTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/userTest.php" line="11" assertions="3" time="0.022688"/>
+      <testcase name="testgetUserInfo" class="userTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/userTest.php" line="22" assertions="5" time="0.031954"/>
+      <testcase name="testgetFriendsCount" class="userTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/userTest.php" line="33" assertions="4" time="0.044422"/>
+      <testcase name="testaddFriend" class="userTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/userTest.php" line="44" assertions="3" time="0.023792"/>
+      <testcase name="testdeleteFriend" class="userTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/userTest.php" line="51" assertions="3" time="0.022527"/>
+    </testsuite>
+  </testsuite>
+</testsuites>

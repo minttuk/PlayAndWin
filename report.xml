@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1489081252">
-  <project timestamp="1489081252">
+<coverage generated="1489393527">
+  <project timestamp="1489393527">
     <file name="/Users/sainipatala/Documents/PHP/PlayAndWin/Backend/php/addProduct.php">
       <line num="11" type="stmt" count="0"/>
       <line num="12" type="stmt" count="0"/>
@@ -14,40 +14,23 @@
       <line num="22" type="stmt" count="0"/>
       <line num="24" type="stmt" count="0"/>
       <line num="26" type="stmt" count="0"/>
-      <line num="29" type="stmt" count="0"/>
-      <line num="30" type="stmt" count="0"/>
-      <line num="31" type="stmt" count="0"/>
       <line num="32" type="stmt" count="0"/>
       <line num="33" type="stmt" count="0"/>
       <line num="34" type="stmt" count="0"/>
       <line num="35" type="stmt" count="0"/>
       <line num="36" type="stmt" count="0"/>
       <line num="37" type="stmt" count="0"/>
-      <metrics loc="37" ncloc="31" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="21" coveredstatements="0" elements="21" coveredelements="0"/>
-    </file>
-    <file name="/Users/sainipatala/Documents/PHP/PlayAndWin/Backend/php/addchat.php">
-      <line num="2" type="stmt" count="0"/>
-      <line num="3" type="stmt" count="0"/>
-      <line num="5" type="stmt" count="0"/>
-      <line num="6" type="stmt" count="0"/>
-      <line num="7" type="stmt" count="0"/>
-      <line num="8" type="stmt" count="0"/>
-      <line num="9" type="stmt" count="0"/>
-      <line num="10" type="stmt" count="0"/>
-      <line num="11" type="stmt" count="0"/>
-      <line num="12" type="stmt" count="0"/>
-      <line num="13" type="stmt" count="0"/>
-      <line num="14" type="stmt" count="0"/>
-      <line num="15" type="stmt" count="0"/>
-      <line num="16" type="stmt" count="0"/>
-      <metrics loc="16" ncloc="16" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="14" coveredstatements="0" elements="14" coveredelements="0"/>
+      <line num="38" type="stmt" count="0"/>
+      <line num="39" type="stmt" count="0"/>
+      <line num="40" type="stmt" count="0"/>
+      <metrics loc="40" ncloc="31" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="21" coveredstatements="0" elements="21" coveredelements="0"/>
     </file>
     <file name="/Users/sainipatala/Documents/PHP/PlayAndWin/Backend/php/buyProduct.php">
-      <line num="13" type="stmt" count="0"/>
       <line num="14" type="stmt" count="0"/>
-      <line num="16" type="stmt" count="0"/>
+      <line num="15" type="stmt" count="0"/>
       <line num="17" type="stmt" count="0"/>
       <line num="18" type="stmt" count="0"/>
+      <line num="19" type="stmt" count="0"/>
       <line num="20" type="stmt" count="0"/>
       <line num="21" type="stmt" count="0"/>
       <line num="24" type="stmt" count="0"/>
@@ -61,39 +44,58 @@
       <line num="37" type="stmt" count="0"/>
       <line num="39" type="stmt" count="0"/>
       <line num="41" type="stmt" count="0"/>
-      <line num="44" type="stmt" count="1"/>
-      <line num="45" type="stmt" count="1"/>
-      <line num="46" type="stmt" count="1"/>
-      <line num="47" type="stmt" count="1"/>
+      <line num="49" type="stmt" count="1"/>
       <line num="50" type="stmt" count="1"/>
+      <line num="51" type="stmt" count="1"/>
       <line num="52" type="stmt" count="1"/>
-      <line num="54" type="stmt" count="1"/>
-      <line num="55" type="stmt" count="1"/>
-      <line num="56" type="stmt" count="1"/>
-      <line num="57" type="stmt" count="1"/>
-      <line num="58" type="stmt" count="0"/>
-      <line num="59" type="stmt" count="0"/>
-      <line num="61" type="stmt" count="1"/>
+      <line num="60" type="stmt" count="1"/>
       <line num="62" type="stmt" count="1"/>
-      <line num="63" type="stmt" count="1"/>
-      <line num="65" type="stmt" count="1"/>
-      <line num="66" type="stmt" count="1"/>
-      <metrics loc="65" ncloc="53" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="34" coveredstatements="14" elements="34" coveredelements="14"/>
+      <line num="72" type="stmt" count="1"/>
+      <line num="73" type="stmt" count="1"/>
+      <line num="74" type="stmt" count="1"/>
+      <line num="75" type="stmt" count="1"/>
+      <line num="76" type="stmt" count="0"/>
+      <line num="77" type="stmt" count="0"/>
+      <line num="79" type="stmt" count="1"/>
+      <line num="80" type="stmt" count="1"/>
+      <line num="81" type="stmt" count="1"/>
+      <line num="83" type="stmt" count="1"/>
+      <line num="84" type="stmt" count="1"/>
+      <metrics loc="83" ncloc="50" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="34" coveredstatements="14" elements="34" coveredelements="14"/>
     </file>
-    <file name="/Users/sainipatala/Documents/PHP/PlayAndWin/Backend/php/connect.php">
-      <line num="3" type="stmt" count="0"/>
-      <line num="4" type="stmt" count="0"/>
-      <line num="5" type="stmt" count="0"/>
-      <line num="6" type="stmt" count="0"/>
+    <file name="/Users/sainipatala/Documents/PHP/PlayAndWin/Backend/php/chathandler.php">
       <line num="10" type="stmt" count="0"/>
+      <line num="11" type="stmt" count="0"/>
       <line num="12" type="stmt" count="0"/>
       <line num="13" type="stmt" count="0"/>
-      <line num="14" type="stmt" count="0"/>
       <line num="15" type="stmt" count="0"/>
       <line num="16" type="stmt" count="0"/>
       <line num="17" type="stmt" count="0"/>
+      <line num="18" type="stmt" count="0"/>
       <line num="19" type="stmt" count="0"/>
-      <metrics loc="22" ncloc="16" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="12" coveredstatements="0" elements="12" coveredelements="0"/>
+      <line num="20" type="stmt" count="0"/>
+      <line num="21" type="stmt" count="0"/>
+      <line num="22" type="stmt" count="0"/>
+      <line num="24" type="stmt" count="0"/>
+      <line num="35" type="stmt" count="0"/>
+      <line num="36" type="stmt" count="0"/>
+      <line num="37" type="stmt" count="0"/>
+      <line num="38" type="stmt" count="0"/>
+      <line num="39" type="stmt" count="0"/>
+      <line num="41" type="stmt" count="0"/>
+      <line num="42" type="stmt" count="0"/>
+      <line num="43" type="stmt" count="0"/>
+      <line num="44" type="stmt" count="0"/>
+      <line num="45" type="stmt" count="0"/>
+      <line num="46" type="stmt" count="0"/>
+      <line num="47" type="stmt" count="0"/>
+      <line num="55" type="stmt" count="1"/>
+      <line num="56" type="stmt" count="1"/>
+      <line num="57" type="stmt" count="1"/>
+      <line num="58" type="stmt" count="1"/>
+      <line num="60" type="stmt" count="0"/>
+      <line num="61" type="stmt" count="0"/>
+      <metrics loc="63" ncloc="47" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="31" coveredstatements="4" elements="31" coveredelements="4"/>
     </file>
     <file name="/Users/sainipatala/Documents/PHP/PlayAndWin/Backend/php/connection.php">
       <line num="2" type="stmt" count="0"/>
@@ -119,171 +121,111 @@
       <line num="5" type="stmt" count="0"/>
       <line num="6" type="stmt" count="0"/>
       <line num="7" type="stmt" count="0"/>
-      <line num="10" type="stmt" count="0"/>
+      <line num="8" type="stmt" count="0"/>
+      <line num="9" type="stmt" count="0"/>
       <line num="11" type="stmt" count="0"/>
       <line num="12" type="stmt" count="0"/>
-      <line num="17" type="stmt" count="0"/>
-      <line num="29" type="stmt" count="0"/>
+      <line num="13" type="stmt" count="0"/>
+      <line num="18" type="stmt" count="0"/>
       <line num="30" type="stmt" count="0"/>
-      <line num="34" type="stmt" count="0"/>
-      <line num="36" type="stmt" count="0"/>
+      <line num="31" type="stmt" count="0"/>
+      <line num="35" type="stmt" count="0"/>
       <line num="37" type="stmt" count="0"/>
       <line num="38" type="stmt" count="0"/>
       <line num="39" type="stmt" count="0"/>
+      <line num="40" type="stmt" count="0"/>
       <line num="41" type="stmt" count="0"/>
       <line num="42" type="stmt" count="0"/>
       <line num="43" type="stmt" count="0"/>
-      <line num="44" type="stmt" count="0"/>
+      <line num="45" type="stmt" count="0"/>
       <line num="46" type="stmt" count="0"/>
       <line num="47" type="stmt" count="0"/>
-      <line num="48" type="stmt" count="0"/>
       <line num="49" type="stmt" count="0"/>
       <line num="50" type="stmt" count="0"/>
       <line num="51" type="stmt" count="0"/>
-      <line num="53" type="stmt" count="0"/>
+      <line num="52" type="stmt" count="0"/>
       <line num="54" type="stmt" count="0"/>
       <line num="55" type="stmt" count="0"/>
-      <line num="57" type="stmt" count="0"/>
+      <line num="56" type="stmt" count="0"/>
       <line num="58" type="stmt" count="0"/>
       <line num="59" type="stmt" count="0"/>
-      <line num="61" type="stmt" count="0"/>
+      <line num="60" type="stmt" count="0"/>
       <line num="62" type="stmt" count="0"/>
       <line num="63" type="stmt" count="0"/>
+      <line num="64" type="stmt" count="0"/>
       <line num="65" type="stmt" count="0"/>
-      <line num="66" type="stmt" count="0"/>
       <line num="67" type="stmt" count="0"/>
       <line num="68" type="stmt" count="0"/>
       <line num="69" type="stmt" count="0"/>
-      <line num="71" type="stmt" count="0"/>
+      <line num="70" type="stmt" count="0"/>
       <line num="72" type="stmt" count="0"/>
       <line num="73" type="stmt" count="0"/>
       <line num="74" type="stmt" count="0"/>
-      <line num="75" type="stmt" count="0"/>
+      <line num="76" type="stmt" count="0"/>
       <line num="77" type="stmt" count="0"/>
       <line num="78" type="stmt" count="0"/>
-      <line num="79" type="stmt" count="0"/>
+      <line num="80" type="stmt" count="0"/>
       <line num="81" type="stmt" count="0"/>
       <line num="82" type="stmt" count="0"/>
-      <line num="83" type="stmt" count="0"/>
+      <line num="84" type="stmt" count="0"/>
       <line num="85" type="stmt" count="0"/>
       <line num="86" type="stmt" count="0"/>
-      <line num="87" type="stmt" count="0"/>
       <line num="88" type="stmt" count="0"/>
       <line num="89" type="stmt" count="0"/>
       <line num="90" type="stmt" count="0"/>
-      <line num="91" type="stmt" count="0"/>
+      <line num="92" type="stmt" count="0"/>
+      <line num="93" type="stmt" count="0"/>
+      <line num="94" type="stmt" count="0"/>
+      <line num="95" type="stmt" count="0"/>
+      <line num="96" type="stmt" count="0"/>
       <line num="98" type="stmt" count="0"/>
       <line num="99" type="stmt" count="0"/>
       <line num="100" type="stmt" count="0"/>
       <line num="101" type="stmt" count="0"/>
       <line num="102" type="stmt" count="0"/>
-      <line num="103" type="stmt" count="0"/>
       <line num="104" type="stmt" count="0"/>
       <line num="105" type="stmt" count="0"/>
       <line num="106" type="stmt" count="0"/>
-      <line num="111" type="stmt" count="0"/>
+      <line num="108" type="stmt" count="0"/>
+      <line num="109" type="stmt" count="0"/>
+      <line num="110" type="stmt" count="0"/>
       <line num="112" type="stmt" count="0"/>
       <line num="113" type="stmt" count="0"/>
       <line num="114" type="stmt" count="0"/>
+      <line num="115" type="stmt" count="0"/>
       <line num="116" type="stmt" count="0"/>
       <line num="117" type="stmt" count="0"/>
       <line num="118" type="stmt" count="0"/>
-      <line num="119" type="stmt" count="0"/>
-      <line num="120" type="stmt" count="0"/>
-      <line num="121" type="stmt" count="0"/>
-      <line num="122" type="stmt" count="0"/>
-      <line num="123" type="stmt" count="0"/>
-      <line num="124" type="stmt" count="0"/>
       <line num="125" type="stmt" count="0"/>
+      <line num="126" type="stmt" count="0"/>
+      <line num="127" type="stmt" count="0"/>
+      <line num="128" type="stmt" count="0"/>
+      <line num="129" type="stmt" count="0"/>
       <line num="130" type="stmt" count="0"/>
       <line num="131" type="stmt" count="0"/>
       <line num="132" type="stmt" count="0"/>
-      <metrics loc="133" ncloc="100" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="85" coveredstatements="0" elements="85" coveredelements="0"/>
-    </file>
-    <file name="/Users/sainipatala/Documents/PHP/PlayAndWin/Backend/php/getchat.php">
-      <line num="2" type="stmt" count="0"/>
-      <line num="4" type="stmt" count="0"/>
-      <line num="5" type="stmt" count="0"/>
-      <line num="6" type="stmt" count="0"/>
-      <line num="7" type="stmt" count="0"/>
-      <line num="8" type="stmt" count="0"/>
-      <line num="9" type="stmt" count="0"/>
-      <line num="10" type="stmt" count="0"/>
-      <line num="11" type="stmt" count="0"/>
-      <line num="12" type="stmt" count="0"/>
-      <line num="13" type="stmt" count="0"/>
-      <line num="14" type="stmt" count="0"/>
-      <line num="15" type="stmt" count="0"/>
-      <line num="16" type="stmt" count="0"/>
-      <line num="17" type="stmt" count="0"/>
-      <line num="18" type="stmt" count="0"/>
-      <line num="19" type="stmt" count="0"/>
-      <line num="20" type="stmt" count="0"/>
-      <line num="23" type="stmt" count="0"/>
-      <line num="24" type="stmt" count="0"/>
-      <line num="25" type="stmt" count="0"/>
-      <line num="26" type="stmt" count="0"/>
-      <line num="27" type="stmt" count="0"/>
-      <line num="28" type="stmt" count="0"/>
-      <line num="29" type="stmt" count="0"/>
-      <line num="30" type="stmt" count="0"/>
-      <line num="31" type="stmt" count="0"/>
-      <metrics loc="31" ncloc="27" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="27" coveredstatements="0" elements="27" coveredelements="0"/>
-    </file>
-    <file name="/Users/sainipatala/Documents/PHP/PlayAndWin/Backend/php/getcoins.php">
-      <line num="2" type="stmt" count="0"/>
-      <line num="3" type="stmt" count="0"/>
-      <line num="4" type="stmt" count="0"/>
-      <line num="5" type="stmt" count="0"/>
-      <line num="6" type="stmt" count="0"/>
-      <line num="7" type="stmt" count="0"/>
-      <metrics loc="7" ncloc="7" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="0" elements="6" coveredelements="0"/>
-    </file>
-    <file name="/Users/sainipatala/Documents/PHP/PlayAndWin/Backend/php/highscore.php">
-      <line num="2" type="stmt" count="0"/>
-      <line num="3" type="stmt" count="0"/>
-      <line num="6" type="stmt" count="0"/>
-      <line num="7" type="stmt" count="0"/>
-      <line num="8" type="stmt" count="0"/>
-      <line num="9" type="stmt" count="0"/>
-      <line num="10" type="stmt" count="0"/>
-      <line num="11" type="stmt" count="0"/>
-      <line num="12" type="stmt" count="0"/>
-      <line num="13" type="stmt" count="0"/>
-      <line num="14" type="stmt" count="0"/>
-      <line num="15" type="stmt" count="0"/>
-      <line num="17" type="stmt" count="0"/>
-      <line num="18" type="stmt" count="0"/>
-      <line num="19" type="stmt" count="0"/>
-      <line num="20" type="stmt" count="0"/>
-      <line num="21" type="stmt" count="0"/>
-      <line num="22" type="stmt" count="0"/>
-      <line num="23" type="stmt" count="0"/>
-      <line num="24" type="stmt" count="0"/>
-      <line num="25" type="stmt" count="0"/>
-      <line num="26" type="stmt" count="0"/>
-      <line num="27" type="stmt" count="0"/>
-      <line num="28" type="stmt" count="0"/>
-      <line num="29" type="stmt" count="0"/>
-      <line num="30" type="stmt" count="0"/>
-      <line num="31" type="stmt" count="0"/>
-      <line num="32" type="stmt" count="0"/>
-      <line num="33" type="stmt" count="0"/>
-      <line num="34" type="stmt" count="0"/>
-      <line num="35" type="stmt" count="0"/>
-      <line num="36" type="stmt" count="0"/>
-      <line num="37" type="stmt" count="0"/>
-      <line num="39" type="stmt" count="0"/>
-      <metrics loc="67" ncloc="41" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="34" coveredstatements="0" elements="34" coveredelements="0"/>
+      <line num="133" type="stmt" count="0"/>
+      <line num="138" type="stmt" count="0"/>
+      <line num="139" type="stmt" count="0"/>
+      <line num="140" type="stmt" count="0"/>
+      <line num="141" type="stmt" count="0"/>
+      <line num="143" type="stmt" count="0"/>
+      <line num="144" type="stmt" count="0"/>
+      <line num="145" type="stmt" count="0"/>
+      <line num="146" type="stmt" count="0"/>
+      <line num="147" type="stmt" count="0"/>
+      <line num="148" type="stmt" count="0"/>
+      <line num="149" type="stmt" count="0"/>
+      <line num="150" type="stmt" count="0"/>
+      <line num="151" type="stmt" count="0"/>
+      <line num="152" type="stmt" count="0"/>
+      <line num="157" type="stmt" count="0"/>
+      <line num="158" type="stmt" count="0"/>
+      <line num="159" type="stmt" count="0"/>
+      <metrics loc="160" ncloc="127" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="107" coveredstatements="0" elements="107" coveredelements="0"/>
     </file>
     <file name="/Users/sainipatala/Documents/PHP/PlayAndWin/Backend/php/hshandler.php">
-      <line num="2" type="stmt" count="0"/>
-      <line num="3" type="stmt" count="0"/>
-      <line num="6" type="stmt" count="0"/>
-      <line num="7" type="stmt" count="0"/>
-      <line num="8" type="stmt" count="0"/>
-      <line num="9" type="stmt" count="0"/>
-      <line num="10" type="stmt" count="0"/>
+      <line num="10" type="stmt" count="1"/>
       <line num="11" type="stmt" count="0"/>
       <line num="12" type="stmt" count="0"/>
       <line num="13" type="stmt" count="0"/>
@@ -296,19 +238,40 @@
       <line num="20" type="stmt" count="0"/>
       <line num="21" type="stmt" count="0"/>
       <line num="22" type="stmt" count="0"/>
-      <line num="23" type="stmt" count="0"/>
       <line num="24" type="stmt" count="0"/>
-      <line num="25" type="stmt" count="0"/>
       <line num="26" type="stmt" count="0"/>
       <line num="27" type="stmt" count="0"/>
-      <line num="29" type="stmt" count="0"/>
-      <line num="32" type="stmt" count="0"/>
-      <line num="33" type="stmt" count="0"/>
-      <line num="34" type="stmt" count="0"/>
-      <line num="35" type="stmt" count="0"/>
-      <line num="36" type="stmt" count="0"/>
-      <line num="37" type="stmt" count="0"/>
-      <metrics loc="37" ncloc="37" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="31" coveredstatements="0" elements="31" coveredelements="0"/>
+      <line num="28" type="stmt" count="1"/>
+      <line num="37" type="stmt" count="1"/>
+      <line num="38" type="stmt" count="1"/>
+      <line num="50" type="stmt" count="0"/>
+      <line num="51" type="stmt" count="0"/>
+      <line num="52" type="stmt" count="0"/>
+      <line num="53" type="stmt" count="0"/>
+      <line num="54" type="stmt" count="0"/>
+      <line num="55" type="stmt" count="0"/>
+      <line num="63" type="stmt" count="1"/>
+      <line num="64" type="stmt" count="1"/>
+      <line num="65" type="stmt" count="1"/>
+      <line num="66" type="stmt" count="1"/>
+      <line num="67" type="stmt" count="1"/>
+      <line num="68" type="stmt" count="0"/>
+      <line num="69" type="stmt" count="0"/>
+      <line num="70" type="stmt" count="0"/>
+      <line num="71" type="stmt" count="0"/>
+      <line num="72" type="stmt" count="0"/>
+      <line num="73" type="stmt" count="0"/>
+      <line num="74" type="stmt" count="0"/>
+      <line num="76" type="stmt" count="1"/>
+      <line num="87" type="stmt" count="2"/>
+      <line num="88" type="stmt" count="2"/>
+      <line num="89" type="stmt" count="2"/>
+      <line num="90" type="stmt" count="2"/>
+      <line num="91" type="stmt" count="2"/>
+      <line num="92" type="stmt" count="1"/>
+      <line num="94" type="stmt" count="2"/>
+      <line num="95" type="stmt" count="2"/>
+      <metrics loc="125" ncloc="68" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="46" coveredstatements="18" elements="46" coveredelements="18"/>
     </file>
     <file name="/Users/sainipatala/Documents/PHP/PlayAndWin/Backend/php/login.php">
       <line num="2" type="stmt" count="0"/>
@@ -549,6 +512,6 @@
       <line num="158" type="stmt" count="0"/>
       <metrics loc="160" ncloc="134" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="99" coveredstatements="36" elements="99" coveredelements="36"/>
     </file>
-    <metrics files="15" loc="776" ncloc="616" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="502" coveredstatements="50" elements="502" coveredelements="50"/>
+    <metrics files="11" loc="832" ncloc="611" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="477" coveredstatements="72" elements="477" coveredelements="72"/>
   </project>
 </coverage>
