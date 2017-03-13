@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
+<<<<<<< HEAD
   <testsuite name="Test" tests="12" assertions="27" failures="2" errors="0" time="0.323703">
     <testsuite name="buyProductTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/buyProductTest.php" tests="2" assertions="4" failures="0" errors="0" time="0.064935">
       <testcase name="testmakeShopOrder" class="buyProductTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/buyProductTest.php" line="17" assertions="2" time="0.042549"/>
@@ -44,6 +45,158 @@ Failed asserting that two arrays are equal.
       <testcase name="testgetFriendsCount" class="userTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/userTest.php" line="33" assertions="4" time="0.044422"/>
       <testcase name="testaddFriend" class="userTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/userTest.php" line="44" assertions="3" time="0.023792"/>
       <testcase name="testdeleteFriend" class="userTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/userTest.php" line="51" assertions="3" time="0.022527"/>
+=======
+  <testsuite name="Test" tests="12" assertions="5" failures="0" errors="9" time="0.011759">
+    <testsuite name="buyProductTest" file="/Users/ali/PlayAndWin/PHPUnitTests/buyProductTest.php" tests="2" assertions="0" failures="0" errors="2" time="0.001752">
+      <testcase name="testmakeShopOrder" class="buyProductTest" file="/Users/ali/PlayAndWin/PHPUnitTests/buyProductTest.php" line="17" assertions="0" time="0.001109">
+        <error type="PDOException">buyProductTest::testmakeShopOrder
+PDOException: Could not connect to database (playandwin).
+
+/Users/ali/PlayAndWin/Backend/php/rb.php:858
+/Users/ali/PlayAndWin/Backend/php/rb.php:684
+/Users/ali/PlayAndWin/Backend/php/rb.php:882
+/Users/ali/PlayAndWin/Backend/php/rb.php:903
+/Users/ali/PlayAndWin/Backend/php/rb.php:3480
+/Users/ali/PlayAndWin/Backend/php/rb.php:5669
+/Users/ali/PlayAndWin/Backend/php/rb.php:5009
+/Users/ali/PlayAndWin/Backend/php/rb.php:7398
+/Users/ali/PlayAndWin/Backend/php/rb.php:7496
+/Users/ali/PlayAndWin/Backend/php/rb.php:7626
+/Users/ali/PlayAndWin/Backend/php/rb.php:7225
+/Users/ali/PlayAndWin/Backend/php/rb.php:8302
+/Users/ali/PlayAndWin/Backend/php/rb.php:10619
+/Users/ali/PlayAndWin/Backend/php/buyProduct.php:51
+/Users/ali/PlayAndWin/PHPUnitTests/buyProductTest.php:18
+</error>
+      </testcase>
+      <testcase name="testaddToCollection" class="buyProductTest" file="/Users/ali/PlayAndWin/PHPUnitTests/buyProductTest.php" line="34" assertions="0" time="0.000643">
+        <error type="PDOException">buyProductTest::testaddToCollection
+PDOException: Could not connect to database (playandwin).
+
+/Users/ali/PlayAndWin/Backend/php/rb.php:858
+/Users/ali/PlayAndWin/Backend/php/rb.php:684
+/Users/ali/PlayAndWin/Backend/php/rb.php:882
+/Users/ali/PlayAndWin/Backend/php/rb.php:919
+/Users/ali/PlayAndWin/Backend/php/rb.php:3539
+/Users/ali/PlayAndWin/Backend/php/rb.php:10293
+/Users/ali/PlayAndWin/Backend/php/rb.php:10974
+/Users/ali/PlayAndWin/PHPUnitTests/buyProductTest.php:35
+</error>
+      </testcase>
+    </testsuite>
+    <testsuite name="chatTest" file="/Users/ali/PlayAndWin/PHPUnitTests/chatTest.php" tests="1" assertions="1" failures="0" errors="0" time="0.000329">
+      <testcase name="testcardColor" class="chatTest" file="/Users/ali/PlayAndWin/PHPUnitTests/chatTest.php" line="11" assertions="1" time="0.000329"/>
+    </testsuite>
+    <testsuite name="highscoreTest" file="/Users/ali/PlayAndWin/PHPUnitTests/highscoreTest.php" tests="4" assertions="1" failures="0" errors="3" time="0.004080">
+      <testcase name="testSetHS" class="highscoreTest" file="/Users/ali/PlayAndWin/PHPUnitTests/highscoreTest.php" line="11" assertions="1" time="0.000342"/>
+      <testcase name="testGetHS" class="highscoreTest" file="/Users/ali/PlayAndWin/PHPUnitTests/highscoreTest.php" line="14" assertions="0" time="0.001208">
+        <error type="PDOException">highscoreTest::testGetHS
+PDOException: Could not connect to database (playandwin).
+
+/Users/ali/PlayAndWin/Backend/php/rb.php:858
+/Users/ali/PlayAndWin/Backend/php/rb.php:684
+/Users/ali/PlayAndWin/Backend/php/rb.php:882
+/Users/ali/PlayAndWin/Backend/php/rb.php:3458
+/Users/ali/PlayAndWin/Backend/php/rb.php:5169
+/Users/ali/PlayAndWin/Backend/php/rb.php:7721
+/Users/ali/PlayAndWin/Backend/php/rb.php:8333
+/Users/ali/PlayAndWin/Backend/php/rb.php:10680
+/Users/ali/PlayAndWin/Backend/php/hshandler.php:88
+/Users/ali/PlayAndWin/Backend/php/hshandler.php:65
+/Users/ali/PlayAndWin/PHPUnitTests/highscoreTest.php:15
+</error>
+      </testcase>
+      <testcase name="testJsonBuilder" class="highscoreTest" file="/Users/ali/PlayAndWin/PHPUnitTests/highscoreTest.php" line="17" assertions="0" time="0.001298">
+        <error type="PDOException">highscoreTest::testJsonBuilder
+PDOException: Could not connect to database (playandwin).
+
+/Users/ali/PlayAndWin/Backend/php/rb.php:858
+/Users/ali/PlayAndWin/Backend/php/rb.php:684
+/Users/ali/PlayAndWin/Backend/php/rb.php:882
+/Users/ali/PlayAndWin/Backend/php/rb.php:3458
+/Users/ali/PlayAndWin/Backend/php/rb.php:5169
+/Users/ali/PlayAndWin/Backend/php/rb.php:7721
+/Users/ali/PlayAndWin/Backend/php/rb.php:8333
+/Users/ali/PlayAndWin/Backend/php/rb.php:10680
+/Users/ali/PlayAndWin/Backend/php/hshandler.php:88
+/Users/ali/PlayAndWin/PHPUnitTests/highscoreTest.php:18
+</error>
+      </testcase>
+      <testcase name="testGetCoins" class="highscoreTest" file="/Users/ali/PlayAndWin/PHPUnitTests/highscoreTest.php" line="20" assertions="0" time="0.001232">
+        <error type="PDOException">highscoreTest::testGetCoins
+PDOException: Could not connect to database (playandwin).
+
+/Users/ali/PlayAndWin/Backend/php/rb.php:858
+/Users/ali/PlayAndWin/Backend/php/rb.php:684
+/Users/ali/PlayAndWin/Backend/php/rb.php:958
+/Users/ali/PlayAndWin/Backend/php/rb.php:3447
+/Users/ali/PlayAndWin/Backend/php/rb.php:10293
+/Users/ali/PlayAndWin/Backend/php/rb.php:10946
+/Users/ali/PlayAndWin/PHPUnitTests/highscoreTest.php:21
+</error>
+      </testcase>
+    </testsuite>
+    <testsuite name="userTest" file="/Users/ali/PlayAndWin/PHPUnitTests/userTest.php" tests="5" assertions="3" failures="0" errors="4" time="0.005598">
+      <testcase name="testcheckEmpty" class="userTest" file="/Users/ali/PlayAndWin/PHPUnitTests/userTest.php" line="11" assertions="3" time="0.000860"/>
+      <testcase name="testgetUserInfo" class="userTest" file="/Users/ali/PlayAndWin/PHPUnitTests/userTest.php" line="22" assertions="0" time="0.001224">
+        <error type="PDOException">userTest::testgetUserInfo
+PDOException: Could not connect to database (playandwin).
+
+/Users/ali/PlayAndWin/Backend/php/rb.php:858
+/Users/ali/PlayAndWin/Backend/php/rb.php:684
+/Users/ali/PlayAndWin/Backend/php/rb.php:882
+/Users/ali/PlayAndWin/Backend/php/rb.php:3458
+/Users/ali/PlayAndWin/Backend/php/rb.php:5169
+/Users/ali/PlayAndWin/Backend/php/rb.php:7721
+/Users/ali/PlayAndWin/Backend/php/rb.php:8333
+/Users/ali/PlayAndWin/Backend/php/rb.php:10680
+/Users/ali/PlayAndWin/Backend/php/user.php:4
+/Users/ali/PlayAndWin/PHPUnitTests/userTest.php:23
+</error>
+      </testcase>
+      <testcase name="testgetFriendsCount" class="userTest" file="/Users/ali/PlayAndWin/PHPUnitTests/userTest.php" line="33" assertions="0" time="0.002244">
+        <error type="PDOException">userTest::testgetFriendsCount
+PDOException: Could not connect to database (playandwin).
+
+/Users/ali/PlayAndWin/Backend/php/rb.php:858
+/Users/ali/PlayAndWin/Backend/php/rb.php:684
+/Users/ali/PlayAndWin/Backend/php/rb.php:958
+/Users/ali/PlayAndWin/Backend/php/rb.php:3447
+/Users/ali/PlayAndWin/Backend/php/rb.php:10293
+/Users/ali/PlayAndWin/Backend/php/rb.php:10946
+/Users/ali/PlayAndWin/Backend/php/user.php:118
+/Users/ali/PlayAndWin/PHPUnitTests/userTest.php:34
+</error>
+      </testcase>
+      <testcase name="testaddFriend" class="userTest" file="/Users/ali/PlayAndWin/PHPUnitTests/userTest.php" line="44" assertions="0" time="0.000670">
+        <error type="PDOException">userTest::testaddFriend
+PDOException: Could not connect to database (playandwin).
+
+/Users/ali/PlayAndWin/Backend/php/rb.php:858
+/Users/ali/PlayAndWin/Backend/php/rb.php:684
+/Users/ali/PlayAndWin/Backend/php/rb.php:882
+/Users/ali/PlayAndWin/Backend/php/rb.php:3458
+/Users/ali/PlayAndWin/Backend/php/rb.php:10293
+/Users/ali/PlayAndWin/Backend/php/rb.php:10960
+/Users/ali/PlayAndWin/Backend/php/user.php:106
+/Users/ali/PlayAndWin/PHPUnitTests/userTest.php:46
+</error>
+      </testcase>
+      <testcase name="testdeleteFriend" class="userTest" file="/Users/ali/PlayAndWin/PHPUnitTests/userTest.php" line="51" assertions="0" time="0.000600">
+        <error type="PDOException">userTest::testdeleteFriend
+PDOException: Could not connect to database (playandwin).
+
+/Users/ali/PlayAndWin/Backend/php/rb.php:858
+/Users/ali/PlayAndWin/Backend/php/rb.php:684
+/Users/ali/PlayAndWin/Backend/php/rb.php:958
+/Users/ali/PlayAndWin/Backend/php/rb.php:3447
+/Users/ali/PlayAndWin/Backend/php/rb.php:10293
+/Users/ali/PlayAndWin/Backend/php/rb.php:10946
+/Users/ali/PlayAndWin/Backend/php/user.php:118
+/Users/ali/PlayAndWin/PHPUnitTests/userTest.php:53
+</error>
+      </testcase>
+>>>>>>> b6a9e68946a4fb76e465801badf4b4a4c6205483
     </testsuite>
   </testsuite>
 </testsuites>

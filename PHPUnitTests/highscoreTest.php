@@ -1,5 +1,6 @@
-<?php
 
+<?php
+/*
 use phpunit\Framework\TestCase;
 echo "xxxxx" . getcwd();
 //include './Backend/php/connection.php';
@@ -22,3 +23,4 @@ final class highscoreTest extends TestCase {
       $this->assertEquals(5000, getCoins(1));
   }
 }
+*/

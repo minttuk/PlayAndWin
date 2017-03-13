@@ -1,6 +1,6 @@
 <?php
 
-
+/*
 use phpunit\Framework\TestCase;
 echo "xxxxx" . getcwd();
 //include './Backend/php/connection.php';
@@ -12,3 +12,4 @@ final class chatTest extends TestCase {
       $this->assertEquals('background-color:#d2e2fa;', cardColor());
   }
 }
+*/
