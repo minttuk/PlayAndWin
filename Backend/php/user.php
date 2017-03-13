@@ -3,6 +3,8 @@
 /**
  * Returns users id, username, profile picture, firstname, lastname, description, location, registration date, last time online time and a list of friends ids
  *
+ * @param $id is the user id whose information is retrieved
+ *
  * @return json PHP array
  */
 
@@ -34,8 +36,11 @@ function getUserInfo($id) {
 }
 
 /**
- * Updates user firstname, lastname, description and location
+ * Updates user firstname, lastname, description and location. Returns updated user
  *
+ * @param $id is the user id that will be updated. $firstname, $lastname, $description and $location are the values to update the user table with
+ *
+ * @return PHP array
  */
 
 function setUserInfo($id, $firstname, $lastname, $description, $location) {
@@ -51,7 +56,7 @@ function setUserInfo($id, $firstname, $lastname, $description, $location) {
 /**
  * Converts empty strings into null
  *
- * @param String $stringToCheck
+ * @param String $stringToCheck, string that will be converted into null if it contains only whitespace or no characters
  *
  * @return String or null
  */
@@ -67,16 +72,17 @@ function checkEmpty($stringToCheck) {
 }
 
 /**
- * Gets the friends of a user by the user id. Passes friends ids to function getFriendsInfo
+ * Gets the friends of a user by the user id. Passes all friends ids to the function getFriendsInfo that returns their ids, usernames and profilepictures. Returns a PHP array that contains the friends information
  *
- * @return json formatted string
+ * @param $id is the users id whose friends are getting retrieved
+ *
+ * @return PHP array
  */
 
-function getMutualFriends() {
-  $id = $_REQUEST['id'];
+function getMutualFriends($id) {
   $friends = R::getAll('SELECT user2_id FROM friendship WHERE user1_id = :id AND approved = 1', [':id' => $id]);
   $response = getFriendsInfo($friends);
-  echo json_encode($response);
+  return $response;
 }
 
 /**

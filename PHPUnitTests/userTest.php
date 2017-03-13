@@ -71,4 +71,15 @@ final class userTest extends TestCase {
     $this->assertEquals('2', $rows);
     deleteFriend('1', '2');
   }
+
+  public function testgetMutualFriends() {
+    deleteFriend('1', '2');
+    $this->assertEquals('0', count(getMutualFriends('1')));
+    addFriend('1', '2');
+    $this->assertEquals('0', count(getMutualFriends('1')));
+    addFriend('2', '1');
+    $this->assertEquals('1', count(getMutualFriends('1')));
+    $this->assertEquals('admin', getMutualFriends('1')[0]['username']);
+    deleteFriend('1', '2');
+  }
 }

@@ -78,7 +78,7 @@ else {
     }
 
     if ($q == "getMutualFriends"){
-        getMutualFriends();
+        echo json_encode(getMutualFriends($id = $_REQUEST['id']));
     }
 
     if ($q == "getFriendRequests") {
