@@ -8,17 +8,12 @@ echo "xxxxx" . getcwd();
 require '../Backend/php/user.php';
 
 final class userTest extends TestCase {
+
   public function testcheckEmpty() {
-      $this->assertEquals(null, checkEmpty(''));
-      $this->assertEquals('moi', checkEmpty('moi'));
-      $this->assertEquals(null, checkEmpty('   '));
+    $this->assertEquals(null, checkEmpty(''));
+    $this->assertEquals('moi', checkEmpty('moi'));
+    $this->assertEquals(null, checkEmpty('   '));
   }
-
-  /*
-  public function testgetNewUsers() {
-
-  }
-  */
 
   public function testgetUserInfo() {
     $info = getUserInfo('0');
@@ -29,6 +24,14 @@ final class userTest extends TestCase {
     $info = getUserInfo('100');
     $this->assertArrayHasKey('error', $info);
     $this->assertArrayNotHasKey('username', $info);
+  }
+
+  public function testsetUserInfo() {
+    setUserInfo('2', 'assert', 'equal', '  ', 'Hong Kong');
+    $user = getUserInfo('2');
+    $this->assertEquals('assert', $user['firstname']);
+    $this->assertEquals(null, $user['description']);
+    setUserInfo('2', 'admin', 'admin', '', '');
   }
 
   public function testgetFriendsCount() {
@@ -43,16 +46,29 @@ final class userTest extends TestCase {
   }
 
   public function testaddFriend() {
-    $this->assertJsonStringEqualsJsonString(
-    addFriend('1,', '2'),
-    json_encode(['message' => 'Friend added succesfully!'])
+    $this->assertEquals(
+    addFriend('1', '2'), ['message' => 'Friend added succesfully!']
     );
   }
 
   public function testdeleteFriend() {
-    $this->assertJsonStringEqualsJsonString(
-    deleteFriend('1,', '2'),
-    json_encode(['message' => 'Friend deleted succesfully!'])
+    $this->assertEquals(
+    deleteFriend('1', '2'), ['message' => 'Friend deleted succesfully!']
     );
+  }
+
+  public function testgetFriendship() {
+    $friendship = getFriendship('1', '2');
+    $rows = count($friendship);
+    $this->assertEquals('0', $rows);
+    addFriend('1', '2');
+    $friendship = getFriendship('1', '2');
+    $rows = count($friendship);
+    $this->assertEquals('1', $rows);
+    addFriend('2', '1');
+    $friendship = getFriendship('1', '2');
+    $rows = count($friendship);
+    $this->assertEquals('2', $rows);
+    deleteFriend('1', '2');
   }
 }
