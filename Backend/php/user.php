@@ -5,7 +5,7 @@
  *
  * @param $id is the user id whose information is retrieved
  *
- * @return json PHP array
+ * @return PHP array
  */
 
 function getUserInfo($id) {
@@ -113,7 +113,14 @@ function getFriendRequests($id) {
   return $response;
 }
 
-// retrieves the id, username and profilepicture of friends (mutual, pending and requests)
+/**
+ * Returns the id, username and profilepicture of some an array of users
+ *
+ * @param $friends is an array of users
+ *
+ * @return PHP array
+ */
+
 function getFriendsInfo($friends) {
   $response = array();
   foreach ($friends as $friend) {
@@ -133,13 +140,27 @@ function getFriendsInfo($friends) {
   return $response;
 }
 
-// counts how many friends a user has
+/**
+ * Returns the number of mutual friend rows
+ *
+ * @param $id is the users id whose friend cout is being retrieved
+ *
+ * @return PHP array
+ */
+
 function getFriendsCount($id) {
   $friends = R::getAll('SELECT COUNT(*) AS friendcount FROM friendship WHERE user1_id = :id AND approved = 1', [':id' => $id]);
   return $friends[0]['friendcount'];
 }
 
-// sends a friend request to a user or makes the friendship mutual if both have added/ accepted each other
+/**
+ * Adds a friend request or approves a friendship. If no previous rows exist for the users passed as parameters, a new row is added. If a request exists already from the other user its updated as approved and another row is added with ids other way
+ *
+ * @param $myId is the session user id and $friendId is the friend id
+ *
+ * @return PHP array
+ */
+
 function addFriend($myId, $friendId) {
   $approved = 0;
   $mutualAdd =  R::getAll('SELECT * FROM friendship WHERE user1_id = :friendid AND user2_id = :sessionid', [':friendid' => $friendId, ':sessionid' => $myId]);
@@ -152,20 +173,37 @@ function addFriend($myId, $friendId) {
   return $response;
 }
 
-// deletes friendship or requests
+/**
+ * Deletes all friendship rows with the two parameter ids
+ *
+ * @param $myId is the session user id and $friendId is the friends id
+ *
+ * @return PHP array
+ */
+
 function deleteFriend($myId, $friendId) {
   R::exec('DELETE FROM friendship WHERE (user1_id = :sessionid AND user2_id = :friendid) OR (user2_id = :sessionid AND user1_id = :friendid)', [':friendid' => $friendId, ':sessionid' => $myId]);
   $response = array('message' => 'Friend deleted succesfully!');
   return $response;
 }
 
-//retrieves the friendship between session id and profiles user id. if returns 2 rows, its a mutual friendship, if returns only one row its a request
+/**
+ * Returns the friendship of the session user and another user. Two rows of result means mutual friendship. 1 row means either user has sent a friend request. 0 rows means no friend requests sent.
+ *
+ * @return PHP array
+ */
+
 function getFriendship($myId, $friendId) {
   $result = R::getAll('SELECT * FROM friendship WHERE (user1_id = :sessionid AND user2_id = :friendid) OR (user2_id = :sessionid AND user1_id = :friendid)', [':friendid' => $friendId, ':sessionid' => $myId]);
   return $result;
 }
 
-// returns at most 8 users that have the most recent date in last_online
+/**
+ * Gets the most resent logged in useres by last login time, returns max 8 users
+ *
+ * @return PHP array
+ */
+
 function getLastLoggedIn() {
   $users = R::findAll('user', 'ORDER BY last_online DESC LIMIT 8');
   $response = array();
@@ -176,12 +214,16 @@ function getLastLoggedIn() {
       'profilepicture' => $user->profilepicture,
     );
   }
-  //header('Content-Type: application/json');
   return $response;
 }
 
-// returns at most 8 users that have the most recent date in reg_date
-function getNewUsers() {
+/**
+ * Gets the most resent new users by registration time, returns max 8 users
+ *
+ * @return PHP array
+ */
+
+ function getNewUsers() {
   $users = R::findAll('user', 'ORDER BY reg_date DESC LIMIT 8');
   $response = array();
   foreach ($users as $id => $user) {
@@ -191,7 +233,6 @@ function getNewUsers() {
       'profilepicture' => $user->profilepicture,
     );
   }
-  //header('Content-Type: application/json');
   return $response;
 }
 

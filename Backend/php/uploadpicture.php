@@ -3,7 +3,7 @@ require 'rb.php';
 session_start();
 
 if ($_SESSION['id']) {
-  $target_dir = "../../Frontend/images/user/";
+  $target_dir = "../../images/user/";
   $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
   $extension = end(explode(".", $_FILES["fileToUpload"]["name"]));
   $uploadOk = 1;
@@ -41,14 +41,9 @@ if ($_SESSION['id']) {
           R::setup( 'mysql:host=localhost;dbname=playandwin', 'root', '' );
           $user = R::load('user', $_SESSION['id']);
           $newfilename = $_SESSION['id'] . "." .  $extension;
-          //$newfilename = '5.jpg';
           $user->profilepicture = $newfilename;
           R::store($user);
-          //$update = "UPDATE user SET profilepicture = '" . mysqli_real_escape_string($link,$_SESSION['id']) . "." .  $extension . "' WHERE id='" . $_SESSION['id'] . "' LIMIT 1";
-          //mysqli_query($link,$update);
-          //header('Location: profile.php?id=' . $row['id']);
-          //echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
-          header('Location: /PlayAndWin/Frontend/profile.html?user=' . $_SESSION['id']);
+          header('Location: /PlayAndWin/profile.html');
       }
       else {
           echo "Sorry, there was an error uploading your file.";
