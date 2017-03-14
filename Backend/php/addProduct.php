@@ -3,16 +3,16 @@
 /**
  * Adds a product to the webstore.
  *
- * The product information is passed through the body of an ajax call. The new product is added to the
+ * The product information is passed through the parameters. The new product is added to the
  * database table of products with the information given.
+ *
+ * @param String $name
+ * @param int $price
+ * @param String $description
+ * @param String $image_url
+ *
  */
 function addProduct($name, $price, $description, $image_url){
-
-    //$value = json_decode(file_get_contents('php://input'), true);
-    //$name = $value['name'];
-    //$price = $value['price'];
-    //$description = $value['description'];
-    //$image_url = $value['image_url'];
 
     $product = R::dispense( 'product' );
 
@@ -27,6 +27,8 @@ function addProduct($name, $price, $description, $image_url){
 
 /**
  * Checks the admin status of the user signed in. Returns a boolean value of the admin status.
+ *
+ * @param int $id is the id number of the user
  */
 function getAdmin($id){
     if ($id != -1){
