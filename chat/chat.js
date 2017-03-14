@@ -15,7 +15,7 @@ $(document).ready(function() {
         $('#chatbox').scrollTop($('#chatbox')[0].scrollHeight);
         $('#chatbox').perfectScrollbar('update');
     }});
-    $.getJSON("../../Backend/php/controller.php?q=getChat", function(result) {
+    $.getJSON("../Backend/php/controller.php?q=getChat", function(result) {
         prevResult = result[result.length - 1].id;
     });
 });
