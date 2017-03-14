@@ -11,6 +11,7 @@ R::setup( 'mysql:host=localhost;dbname='.$database, $username, $password );
 
 $isConnected = R::testConnection();
 if (!$isConnected) {
+  R::nuke();
   R::setup( 'mysql:host=10.114.32.140;dbname='.$database, 'jenkins', 'jenkins' );
 }
 
