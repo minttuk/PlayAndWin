@@ -10,6 +10,7 @@ use phpunit\Framework\TestCase;
 echo "xxxxx" . getcwd();
 include '../Backend/php/connection.php';
 require '../Backend/php/addProduct.php';
+connect();
 
 final class addProductTest extends TestCase{
 
