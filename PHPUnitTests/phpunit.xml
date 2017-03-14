@@ -10,6 +10,8 @@
           <directory suffix=".php">../Backend/php/</directory>
           <exclude>
             <file>../Backend/php/rb.php</file>
+            <file>../Backend/php/controller.php</file>
+            <file>../Backend/php/test.php</file>
           </exclude>
       </whitelist>
   </filter>
