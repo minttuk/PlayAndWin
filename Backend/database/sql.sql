@@ -96,10 +96,10 @@ INSERT INTO product (name, price, description, image_url) VALUES
 INSERT INTO playandwin.chatroom (username, msg) VALUES ('guest', 'hello');
 
 INSERT INTO user(username, firstname, lastname, email, password, coins, admin, reg_date, last_online)
-VALUES('testi1', 'testi1', 'testi1', 'testi1@testi1.fi', '6dcf1cff0946426cc3bba390ad0f50d5', '4000', '0', '2017-03-06 10:04:34', '2017-03-06 10:04:34');
+VALUES('Bobby', 'testi1', 'testi1', 'testi1@testi1.fi', '6dcf1cff0946426cc3bba390ad0f50d5', '4000', '0', '2017-03-06 10:04:34', '2017-03-06 10:04:34');
 
 INSERT INTO user(username, firstname, lastname, email, password, coins, admin, reg_date, last_online)
-VALUES('admin', 'admin', 'admin', 'admin@playandwin.fi', 'ec15d79e36e14dd258cfff3d48b73d35', '50000', '1', '2017-03-06 10:05:09', '2017-03-06 10:05:09');
+VALUES('Boss', 'admin', 'admin', 'admin@playandwin.fi', 'ec15d79e36e14dd258cfff3d48b73d35', '50000', '1', '2017-03-06 10:05:09', '2017-03-06 10:05:09');
 
 INSERT INTO friendship (user1_id, user2_id, approved)
 VALUES (1, 2, 0);

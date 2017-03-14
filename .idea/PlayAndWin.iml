@@ -18,11 +18,11 @@
       <library name="PHARS">
         <CLASSES>
           <root url="phar://$MODULE_DIR$/PHPUnitTests/phpunit-5.7.14.phar/" />
-          <root url="phar://$MODULE_DIR$/phpunit.phar/" />
+          <root url="phar://$MODULE_DIR$/PHPUnitTests/phpunit.phar/" />
         </CLASSES>
         <SOURCES>
           <root url="phar://$MODULE_DIR$/PHPUnitTests/phpunit-5.7.14.phar/" />
-          <root url="phar://$MODULE_DIR$/phpunit.phar/" />
+          <root url="phar://$MODULE_DIR$/PHPUnitTests/phpunit.phar/" />
         </SOURCES>
       </library>
     </orderEntry>
