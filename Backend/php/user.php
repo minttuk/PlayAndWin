@@ -163,14 +163,23 @@ function getFriendsCount($id) {
  */
 
 function addFriend($myId, $friendId) {
-  $approved = 0;
-  $mutualAdd =  R::getAll('SELECT * FROM friendship WHERE user1_id = :friendid AND user2_id = :sessionid', [':friendid' => $friendId, ':sessionid' => $myId]);
-  if ($mutualAdd != null) {
-    $approved = 1;
-    R::exec('UPDATE friendship SET approved = :approved WHERE user1_id = :friendid AND user2_id = :sessionid', [':sessionid' => $myId, ':friendid' => $friendId, ':approved' => $approved]);
+  $response = array('message' => 'No session id');
+  if ($myId != -1 && $myId != null) {
+    $approved = 0;
+    $mutualAdd =  R::getAll('SELECT * FROM friendship WHERE user1_id = :friendid AND user2_id = :sessionid', [':friendid' => $friendId, ':sessionid' => $myId]);
+    if ($mutualAdd != null) {
+      $approved = 1;
+      R::exec('UPDATE friendship SET approved = :approved WHERE user1_id = :friendid AND user2_id = :sessionid', [':sessionid' => $myId, ':friendid' => $friendId, ':approved' => $approved]);
+    }
+    $alreadyExists =  R::getAll('SELECT * FROM friendship WHERE user1_id = :sessionid AND user2_id = :friendid', [':friendid' => $friendId, ':sessionid' => $myId]);
+    if (!$alreadyExists) {
+      R::exec('INSERT INTO friendship (user1_id, user2_id, approved) VALUES (:sessionid, :friendid, :approved)', [':sessionid' => $myId, ':friendid' => $friendId, ':approved' => $approved]);
+      $response = array('message' => 'Friend added succesfully!');
+    }
+    else {
+      $response = array('message' => 'Friend has already been added');
+    }
   }
-  R::exec('INSERT INTO friendship (user1_id, user2_id, approved) VALUES (:sessionid, :friendid, :approved)', [':sessionid' => $myId, ':friendid' => $friendId, ':approved' => $approved]);
-  $response = array('message' => 'Friend added succesfully!');
   return $response;
 }
 
@@ -183,8 +192,11 @@ function addFriend($myId, $friendId) {
  */
 
 function deleteFriend($myId, $friendId) {
-  R::exec('DELETE FROM friendship WHERE (user1_id = :sessionid AND user2_id = :friendid) OR (user2_id = :sessionid AND user1_id = :friendid)', [':friendid' => $friendId, ':sessionid' => $myId]);
-  $response = array('message' => 'Friend deleted succesfully!');
+  $response = array('message' => 'No session id');
+  if ($myId != -1 && $myId != null) {
+    R::exec('DELETE FROM friendship WHERE (user1_id = :sessionid AND user2_id = :friendid) OR (user2_id = :sessionid AND user1_id = :friendid)', [':friendid' => $friendId, ':sessionid' => $myId]);
+    $response = array('message' => 'Friend deleted succesfully!');
+  }
   return $response;
 }
 

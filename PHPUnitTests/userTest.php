@@ -46,15 +46,14 @@ final class userTest extends TestCase {
   }
 
   public function testaddFriend() {
-    $this->assertEquals(
-    addFriend('1', '2'), ['message' => 'Friend added succesfully!']
-    );
+    $this->assertEquals(addFriend('-1', '2'), ['message' => 'No session id']);
+    $this->assertEquals(addFriend('1', '2'), ['message' => 'Friend added succesfully!']);
+    $this->assertEquals(addFriend('1', '2'), ['message' => 'Friend has already been added']);
   }
 
   public function testdeleteFriend() {
-    $this->assertEquals(
-    deleteFriend('1', '2'), ['message' => 'Friend deleted succesfully!']
-    );
+    $this->assertEquals(deleteFriend('-1', '2'), ['message' => 'No session id']);
+    $this->assertEquals(deleteFriend('1', '2'), ['message' => 'Friend deleted succesfully!']);
   }
 
   public function testgetFriendship() {
