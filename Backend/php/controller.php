@@ -8,6 +8,8 @@ include 'buyProduct.php';
 include 'chathandler.php';
 include 'hshandler.php';
 
+connect();
+
 $resource = getResource();
 $request_method = getMethod();
 $parameters = getParameters();
