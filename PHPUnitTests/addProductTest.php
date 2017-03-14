@@ -11,7 +11,7 @@ echo "xxxxx" . getcwd();
 include '../Backend/php/connection.php';
 require '../Backend/php/addProduct.php';
 
-final class buyProductTest extends TestCase{
+final class addProductTest extends TestCase{
 
     public function testgetAdmin(){
         $this->assertEquals(0, getAdmin(1));

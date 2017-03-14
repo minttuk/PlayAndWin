@@ -29,8 +29,8 @@ function addProduct(){
  * Checks the admin status of the user signed in. Returns a boolean value of the admin status.
  */
 function getAdmin($id){
-    if ($id!=null){
-        $user = R::load('user',$_SESSION['id']);
+    if ($id != -1){
+        $user = R::load('user', $id);
         $admin = $user->admin;
     }
     else{

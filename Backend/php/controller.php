@@ -110,7 +110,7 @@ else {
       echo json_encode(getNewUsers());
     }
     if ($q == "getAdmin"){
-      getAdmin(isset($_SESSION['id']));
+        getAdmin($_SESSION['id']);
     }
 }
 
