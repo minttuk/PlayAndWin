@@ -19,7 +19,7 @@ final class addProductTest extends TestCase{
     }
 
     public function testaddProduct(){
-        addProduct(testname, testprice, testdescription, testurl);
+        addProduct('testname', 'testprice', 'testdescription', 'testurl');
         $id = R::getCell( 'SELECT MAX(ID) FROM product');
         $name = R::getCell( 'SELECT name FROM product WHERE id = '.$id);
         $this->assertEquals('testname', $name);
