@@ -14,9 +14,8 @@ require '../Backend/php/addProduct.php';
 final class addProductTest extends TestCase{
 
     public function testgetAdmin(){
-        $this->assertEquals(0, getAdmin(1));
-        $this->assertEquals(1, getAdmin(2));
-
+        $this->expectOutputString('{"admin":"0"}', getAdmin(1));
+        $this->expectOutputString('{"admin":"1"}', getAdmin(2));
     }
 
 }
