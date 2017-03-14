@@ -7,15 +7,15 @@ $password = '';
 
 $errorMsg = null;
 
-try {
-    R::setup( 'mysql:host=localhost;dbname='.$database, $username, $password );
-}
-catch ( RedBeanPHP\RedException $e ) {
-    R::nuke();
-    R::setup( 'mysql:host=10.114.32.140;dbname='.$database, 'jenkins', 'jenkins' );
-}
 
+R::setup( 'mysql:host=localhost;dbname='.$database, $username, $password );
 
+$isConnected = R::testConnection();
+
+if (!$isConnected) {
+  R::addDatabase('jenkinsDB','mysql:host=10.114.32.140;dbname='.$database, 'jenkins', 'jenkins' );
+  R::selectDatabase('jenkinsDB');
+}
 
 
 
