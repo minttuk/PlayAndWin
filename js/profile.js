@@ -252,12 +252,14 @@ function updateProfile(response) {
     $(this).text('Last seen: ' + response.last_online).fadeIn(500);
   });
   //description
-  if (response.description != null) {
-    $('#userdescription').fadeOut(0, function() {
-        $(this).text(response.description).fadeIn(500);
-    });
-    $('input[name="newdescription"]').val(response.description);
-  }
+  $('#userdescription').fadeOut(0, function() {
+    if (response.description == null) {
+      $(this).text('').fadeIn(500);
+    }
+    else {
+      $(this).text(response.description).fadeIn(500);
+    }
+  });
   //location
   $('#userlocation').fadeOut(0, function() {
       if (response.location == null) {

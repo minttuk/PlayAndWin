@@ -66,7 +66,7 @@ else {
 
     if ($q == "setUserInfo"){
       $value = json_decode(file_get_contents('php://input'), true);
-      echo json_encode(setUserInfo($value['id'], $value['firstname'], $value['lastname'], $value['description'], $value['location']));
+      echo json_encode(setUserInfo($_SESSION['id'], $value['firstname'], $value['lastname'], $value['description'], $value['location']));
     }
 
     if ($q == "addProduct"){

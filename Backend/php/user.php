@@ -62,7 +62,8 @@ function setUserInfo($id, $firstname, $lastname, $description, $location) {
  */
 
 function checkEmpty($stringToCheck) {
-  $stringToCheck = str_replace(' ', '', $stringToCheck);
+  //$stringToCheck = str_replace(' ', '', $stringToCheck);
+  $stringToCheck = trim($stringToCheck);
   if ($stringToCheck == '') {
     return null;
   }
