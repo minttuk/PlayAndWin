@@ -5,7 +5,7 @@ $('#chatbox').perfectScrollbar();
 
 $(document).ready(function() {
     setInterval(update, 1000);
-    $.ajax({url: "../../Backend/php/controller.php?q=getChat&html",
+    $.ajax({url: "../Backend/php/controller.php?q=getChat&html",
     datatype: 'html',
     success: function(result){
         $(".msg-wrap").html(result);
@@ -21,7 +21,7 @@ $(document).ready(function() {
 });
 
 function sendMsg() {
-    $.post("../../Backend/php/controller.php?q=addChat", {
+    $.post("../Backend/php/controller.php?q=addChat", {
         message: $('#msgbox').val(),
     }, function(data) {
         $('#msgbox').val('');
@@ -30,7 +30,7 @@ function sendMsg() {
 }
 
 function update() {
-    $.getJSON("../../Backend/php/controller.php?q=getChat", function(result) {
+    $.getJSON("../Backend/php/controller.php?q=getChat", function(result) {
         if (result[result.length - 1].id != prevResult) {
             doOnce = true;
             prevResult = result[result.length - 1].id;
