@@ -8,7 +8,6 @@
 
 use phpunit\Framework\TestCase;
 echo "xxxxx" . getcwd();
-include '../Backend/php/connection.php';
 require '../Backend/php/buyProduct.php';
 
 final class buyProductTest extends TestCase{
