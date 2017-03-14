@@ -6,13 +6,13 @@
  * The product information is passed through the body of an ajax call. The new product is added to the
  * database table of products with the information given.
  */
-function addProduct(){
+function addProduct($name, $price, $description, $image_url){
 
-    $value = json_decode(file_get_contents('php://input'), true);
-    $name = $value['name'];
-    $price = $value['price'];
-    $description = $value['description'];
-    $image_url = $value['image_url'];
+    //$value = json_decode(file_get_contents('php://input'), true);
+    //$name = $value['name'];
+    //$price = $value['price'];
+    //$description = $value['description'];
+    //$image_url = $value['image_url'];
 
     $product = R::dispense( 'product' );
 
