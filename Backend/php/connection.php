@@ -8,9 +8,10 @@ $password = '';
 $errorMsg = null;
 
 R::setup( 'mysql:host=localhost;dbname='.$database, $username, $password );
-R::getDatabaseAdapter()->getDatabase()->close();
 $isConnected = R::testConnection();
+echo $isConnected + ' connection status\n';
 if (!$isConnected) {
+  R::close();
   R::setup( 'mysql:host=10.114.32.140;dbname='.$database, 'jenkins', 'jenkins' );
 }
 
