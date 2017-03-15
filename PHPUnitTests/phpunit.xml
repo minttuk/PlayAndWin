@@ -12,6 +12,7 @@
             <file>../Backend/php/rb.php</file>
             <file>../Backend/php/controller.php</file>
             <file>../Backend/php/test.php</file>
+            <file>../Backend/php/uploadpicture.php</file>
           </exclude>
       </whitelist>
   </filter>

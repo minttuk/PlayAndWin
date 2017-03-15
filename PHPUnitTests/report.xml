@@ -1,29 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1489491419">
-  <project timestamp="1489491419">
+<coverage generated="1489567208">
+  <project timestamp="1489567208">
     <file name="/Users/sainipatala/Documents/PHP/PlayAndWin/Backend/php/addProduct.php">
-      <line num="11" type="stmt" count="0"/>
-      <line num="12" type="stmt" count="0"/>
-      <line num="13" type="stmt" count="0"/>
-      <line num="14" type="stmt" count="0"/>
-      <line num="15" type="stmt" count="0"/>
-      <line num="17" type="stmt" count="0"/>
-      <line num="19" type="stmt" count="0"/>
-      <line num="20" type="stmt" count="0"/>
-      <line num="21" type="stmt" count="0"/>
-      <line num="22" type="stmt" count="0"/>
-      <line num="24" type="stmt" count="0"/>
-      <line num="26" type="stmt" count="0"/>
-      <line num="32" type="stmt" count="0"/>
-      <line num="33" type="stmt" count="0"/>
-      <line num="34" type="stmt" count="0"/>
-      <line num="35" type="stmt" count="0"/>
-      <line num="36" type="stmt" count="0"/>
-      <line num="37" type="stmt" count="0"/>
-      <line num="38" type="stmt" count="0"/>
+      <line num="17" type="stmt" count="1"/>
+      <line num="19" type="stmt" count="1"/>
+      <line num="20" type="stmt" count="1"/>
+      <line num="21" type="stmt" count="1"/>
+      <line num="22" type="stmt" count="1"/>
+      <line num="24" type="stmt" count="1"/>
+      <line num="26" type="stmt" count="1"/>
+      <line num="34" type="stmt" count="1"/>
+      <line num="35" type="stmt" count="1"/>
+      <line num="36" type="stmt" count="1"/>
+      <line num="37" type="stmt" count="1"/>
       <line num="39" type="stmt" count="0"/>
-      <line num="40" type="stmt" count="0"/>
-      <metrics loc="40" ncloc="31" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="21" coveredstatements="0" elements="21" coveredelements="0"/>
+      <line num="41" type="stmt" count="1"/>
+      <line num="42" type="stmt" count="1"/>
+      <metrics loc="42" ncloc="25" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="14" coveredstatements="13" elements="14" coveredelements="13"/>
     </file>
     <file name="/Users/sainipatala/Documents/PHP/PlayAndWin/Backend/php/buyProduct.php">
       <line num="14" type="stmt" count="0"/>
@@ -98,16 +91,16 @@
       <metrics loc="64" ncloc="47" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="31" coveredstatements="4" elements="31" coveredelements="4"/>
     </file>
     <file name="/Users/sainipatala/Documents/PHP/PlayAndWin/Backend/php/connection.php">
-      <line num="2" type="stmt" count="0"/>
-      <line num="4" type="stmt" count="0"/>
-      <line num="5" type="stmt" count="0"/>
-      <line num="6" type="stmt" count="0"/>
-      <line num="8" type="stmt" count="0"/>
-      <line num="11" type="stmt" count="0"/>
-      <line num="12" type="stmt" count="0"/>
+      <line num="5" type="stmt" count="1"/>
+      <line num="6" type="stmt" count="1"/>
+      <line num="7" type="stmt" count="1"/>
+      <line num="9" type="stmt" count="1"/>
+      <line num="12" type="stmt" count="1"/>
       <line num="13" type="stmt" count="0"/>
       <line num="14" type="stmt" count="0"/>
-      <metrics loc="16" ncloc="14" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="0" elements="9" coveredelements="0"/>
+      <line num="15" type="stmt" count="0"/>
+      <line num="17" type="stmt" count="1"/>
+      <metrics loc="19" ncloc="17" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="9" coveredstatements="6" elements="9" coveredelements="6"/>
     </file>
     <file name="/Users/sainipatala/Documents/PHP/PlayAndWin/Backend/php/hshandler.php">
       <line num="10" type="stmt" count="1"/>
@@ -386,6 +379,6 @@
       <line num="249" type="stmt" count="1"/>
       <metrics loc="252" ncloc="163" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="95" coveredstatements="95" elements="95" coveredelements="95"/>
     </file>
-    <metrics files="9" loc="755" ncloc="508" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="357" coveredstatements="129" elements="357" coveredelements="129"/>
+    <metrics files="9" loc="760" ncloc="505" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="350" coveredstatements="148" elements="350" coveredelements="148"/>
   </project>
 </coverage>
