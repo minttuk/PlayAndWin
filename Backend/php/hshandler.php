@@ -32,7 +32,7 @@ function setHighscore() {
  * Gets the amount of coins associated with a given user ID from the database.
  *
  * @param int $id is the ID number of the user.
- * @return int
+ * @return int Number of coins
  */
 function getCoins($id) {
     $user = R::load( 'user', $id);
@@ -59,7 +59,7 @@ function coinAmount($id,$game,$score) {
  * Gets the highscores associated with a user in either JSON or HTML format based on a POST parameter.
  *
  * @param int $user is the ID number of the user.
- * @return string
+ * @return string JSON or HTML
  */
 function getHighscores($user) {
   $gamelist = array('snake'=>'Disco Snake','flappy'=>'Flutter Bird','reaction'=>'Speed Click','jumper'=>'Jumper Man');
@@ -84,7 +84,7 @@ function getHighscores($user) {
  *
  * @param int $userid is the ID number of the user.
  * @param string $game a the name of a game.
- * @return array
+ * @return array User Highscores
  */
 function jsonBuilder($game,$userid) {
   $tableName = 'hs_'.$game;

@@ -11,7 +11,7 @@ $message = 'success';
  *@param string $firstname is the user's first name.
  *@param string $lastname is the user's last name.
  *
- *@return string
+ *@return string Message of success or errors
  */
 function loginUser($uname, $password, $confirmPass, $email, $firstname, $lastname) {
   global $message;
@@ -47,7 +47,7 @@ function loginUser($uname, $password, $confirmPass, $email, $firstname, $lastnam
 /**
  *Destroys the session, effectively logging out the user.
  *
- *return string
+ *@return string Message of success
  */
 function logOut() {
   session_destroy();
@@ -105,7 +105,7 @@ function logOut() {
  *
  *@param int $id is the user's id.
  *
- *@return object
+ *@return database object
  */
   function getUser ($id) {
     $user = R::load( 'user', $id );
@@ -117,7 +117,7 @@ function logOut() {
  *
  *@param string $username is the user's username.
  *
- *@return object
+ *@return database object
  */
   function findUser($username) {
     $user = R::findOne('user',
@@ -131,7 +131,7 @@ function logOut() {
  *@param string $password is the user's password.
  *@param string $confirmPass is the user's confirm password.
  *
- *@return boolean
+ *@return boolean Password is valid of not
  */
   function validatePassword($password, $confirmPass) {
     global $message;
@@ -167,7 +167,7 @@ function logOut() {
    *@param int $id The user id of the user authorizing the delete.
    *@param int $id The user id of the user to be deleted.
    *
-   *@return string
+   *@return string Message of success or failure.
    */
   function deleteUser($id,$deleteID) {
     $gamelist = array('snake','flappy','reaction','jumper');

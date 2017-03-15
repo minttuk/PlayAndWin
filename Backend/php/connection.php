@@ -1,6 +1,12 @@
 <?php
 require 'rb.php';
 
+/**
+ *Sets up the database connection
+ *If default connection fails, fallback to Jenkins Server connection
+ *
+ *@return boolean Connection successful or not
+ */
 function connect() {
   $database = 'playandwin';
   $username = 'root';

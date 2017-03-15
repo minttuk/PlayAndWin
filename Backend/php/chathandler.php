@@ -5,7 +5,7 @@ $colorshift = true;
  * Get the 30 latest chatroom entries.
  * Returns results in either JSON or HTML format, depending on POST parameters.
  *
- * @return string
+ * @return string JSON or HTML
  */
 function getChat(){
   $results=R::getAll('select * from chatroom');
@@ -50,7 +50,7 @@ function addChat() {
 /**
  * Alternates between generating two possible CSS background colors based on a boolean value.
  *
- * @return string
+ * @return string CSS formatted background-color
  */
 function cardColor() {
   global $colorshift;
