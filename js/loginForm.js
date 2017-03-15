@@ -5,11 +5,10 @@ updateCoins();
 $(document).ready(function() {
   $("#signForm").submit(function(e) {
     e.preventDefault();
-    $.ajax({ url: "./Backend/php/controller.php?q=login", method: "post", data: $( "#signForm" ).serialize(), success: function(data) {
-        if(data!='success') {
-          $("#errorMsg").html('</br>'+data);
-        } else location.reload();
-      }
+    $.post( "./Backend/php/controller.php?q=login", $( "#signForm" ).serialize(), function(data) {
+      if(data!='success') {
+        $("#errorMsg").html('</br>'+data);
+      } else location.reload();
     });
   });
 });

@@ -88,12 +88,12 @@ else {
       $email = null;
       $firstname = null;
       $lastname = null;
-      if (isset($_POST['Username'])) $username = $_POST['Username'];
-      if (isset($_POST['Password'])) $password = $_POST['Password'];
-      if (isset($_POST['ConfirmPassword'])) $confirmPass = $_POST['ConfirmPassword'];
-      if (isset($_POST['Email'])) $email = $_POST['Email'];
-      if (isset($_POST['Firstname'])) $firstname = $_POST['Firstname'];
-      if (isset($_POST['Lastname'])) $lastname = $_POST['Lastname'];
+      if (isset($_REQUEST['Username'])) $username = $_REQUEST['Username'];
+      if (isset($_REQUEST['Password'])) $password = $_REQUEST['Password'];
+      if (isset($_REQUEST['ConfirmPassword'])) $confirmPass = $_REQUEST['ConfirmPassword'];
+      if (isset($_REQUEST['Email'])) $email = $_REQUEST['Email'];
+      if (isset($_REQUEST['Firstname'])) $firstname = $_REQUEST['Firstname'];
+      if (isset($_REQUEST['Lastname'])) $lastname = $_REQUEST['Lastname'];
       echo loginUser($username, $password, $confirmPass, $email, $firstname, $lastname);
     }
 
@@ -122,7 +122,6 @@ else {
     }
 
     if ($q == "getLastLoggedIn"){
-      $friendId = $_REQUEST['id'];
       echo json_encode(getLastLoggedIn());
     }
 
@@ -135,6 +134,16 @@ else {
     }
     if ($q == "getAdmin"){
         getAdmin($_SESSION['id']);
+    }
+
+    if ($q == "deleteUser"){
+      if (isset($_SESSION['id']) && isset($_REQUEST['deleteID'])){
+        $id = $_SESSION['id'];
+        $deleteID = $_REQUEST['deleteID'];
+        echo deleteUser($_SESSION['id'],$_REQUEST['deleteID']);
+      } else {
+      echo 'Missing Information.';
+      }
     }
 }
 

@@ -1,7 +1,8 @@
 <?php
-
+$message = 'success';
 /**
- *Registers the user or sign's one in, depending on which paramaters are set. If no parameters are set then returns the $_SESSION['id'] value if set, otherwise return -1.
+ *Registers the user or sign's one in, depending on which paramaters are set.
+ *If no parameters are set then returns the $_SESSION['id'] value if set, otherwise return -1.
  *
  *@param string $username is the user's username.
  *@param string $email is the user's email address.
@@ -13,14 +14,14 @@
  *@return string
  */
 function loginUser($uname, $password, $confirmPass, $email, $firstname, $lastname) {
-  if (isset($uname))  {
+  global $message;
+  if ($uname)  {
+    $plainPass = $password;
     $password = md5(md5($uname.$password));
   }
 
-  $message = 'success';
-
-  if (isset($email)) {
-    if (validatePassword($password, $confirmPass)) {
+  if ($email) {
+    if (validatePassword($plainPass, $confirmPass)) {
         $newuser = findUser($uname);
         if (!$newuser) {
           regUser($uname,$email,$password,$firstname,$lastname);
@@ -29,10 +30,10 @@ function loginUser($uname, $password, $confirmPass, $email, $firstname, $lastnam
           R::exec('CREATE TABLE collection_'.$newuser->id.' (id INT(6) PRIMARY KEY NOT NULL, amount INT(6), FOREIGN KEY (id) REFERENCES product(id));');
         } else $message = 'Username taken, try again!';
     }
-  } else if (isset($uname)) {
+  } else if ($uname) {
     $player = findUser($uname);
 
-    if(isset($player) ? ($player->password==$password) : false) {
+    if($player ? ($player->password==$password) : false) {
       //$message = 'Logged in!';
       startSession($player->id);
       updateLastOnline();
@@ -40,7 +41,7 @@ function loginUser($uname, $password, $confirmPass, $email, $firstname, $lastnam
   } else {
     $message = isset($_SESSION['id']) ? $_SESSION['id'] : -1;
   }
-  echo $message;
+  return $message;
 }
 
 /**
@@ -130,7 +131,7 @@ function logOut() {
  *@param string $password is the user's password.
  *@param string $confirmPass is the user's confirm password.
  *
- *@return string
+ *@return boolean
  */
   function validatePassword($password, $confirmPass) {
     global $message;
@@ -140,7 +141,7 @@ function logOut() {
         $message .= "Your passwords must match!</br>";
         $accepted = false;
     }
-    if (strlen($password) <= '6') {
+    if (strlen($password) <= 5) {
         $message .= "Your password must contain at least 6 characters!</br>";
         $accepted = false;
     }
@@ -156,5 +157,29 @@ function logOut() {
         $message .= "Your password must contain at least 1 capital letter!</br>";
         $accepted = false;
     }*/
+    if ($message == '') $message = 'success';
     return $accepted;
+  }
+
+  /**
+   *This function is used to delete a user from the database
+   *
+   *@param int $id The user id of the user authorizing the delete.
+   *@param int $id The user id of the user to be deleted.
+   *
+   *@return string
+   */
+  function deleteUser($id,$deleteID) {
+    $gamelist = array('snake','flappy','reaction','jumper');
+    $user = R::load( 'user',$id);
+    if ($user->admin == 1 || $id == $deleteID) {
+      foreach ($gamelist as $game) {
+        R::exec('DELETE FROM hs_'.$game.' WHERE id=:id', [':id' => $deleteID]);
+      }
+      R::exec('DROP TABLE collection_'.$deleteID);
+      R::exec('DELETE FROM user WHERE id=:id', [':id' => $deleteID]);
+      if ($id == $deleteID) logout();
+      return 'User '.$deleteID.' deleted.';
+    }
+    return 'Missing privileges.';
   }
