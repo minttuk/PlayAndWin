@@ -5,10 +5,11 @@ updateCoins();
 $(document).ready(function() {
   $("#signForm").submit(function(e) {
     e.preventDefault();
-    $.post( "./Backend/php/login.php", $( "#signForm" ).serialize(), function(data) {
-      if(data!='success') {
-        $("#errorMsg").html('</br>'+data);
-      } else location.reload();
+    $.ajax({ url: "./Backend/php/controller.php?q=login", method: "post", data: $( "#signForm" ).serialize(), success: function(data) {
+        if(data!='success') {
+          $("#errorMsg").html('</br>'+data);
+        } else location.reload();
+      }
     });
   });
 });
@@ -28,7 +29,7 @@ function signUpForm() {
 function signInForm() {
   if(signedIn) {
     $('.signIn').removeAttr('data-toggle');
-    $.get('./Backend/php/login.php?logout', function(result){
+    $.get('./Backend/php/controller.php?q=logout', function(result){
       location.reload();
     });
   } else {
@@ -39,7 +40,7 @@ function signInForm() {
 }
 
 function isSignedIn() {
-  $.ajax({url: './Backend/php/login.php', async: false,
+  $.ajax({url: './Backend/php/controller.php?q=login', async: false,
     success: function (id) { if (id != -1) signedIn = true;}
   });
   if (signedIn) {

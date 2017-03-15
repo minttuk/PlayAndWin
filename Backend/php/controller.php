@@ -7,6 +7,7 @@ include 'addProduct.php';
 include 'buyProduct.php';
 include 'chathandler.php';
 include 'hshandler.php';
+include 'login.php';
 
 connect();
 
@@ -78,6 +79,26 @@ else {
 
     if ($q == "buyProduct"){
         buyProduct();
+    }
+
+    if ($q == "login") {
+      $username = null;
+      $password = null;
+      $confirmPass = null;
+      $email = null;
+      $firstname = null;
+      $lastname = null;
+      if (isset($_POST['Username'])) $username = $_POST['Username'];
+      if (isset($_POST['Password'])) $password = $_POST['Password'];
+      if (isset($_POST['ConfirmPassword'])) $confirmPass = $_POST['ConfirmPassword'];
+      if (isset($_POST['Email'])) $email = $_POST['Email'];
+      if (isset($_POST['Firstname'])) $firstname = $_POST['Firstname'];
+      if (isset($_POST['Lastname'])) $lastname = $_POST['Lastname'];
+      echo loginUser($username, $password, $confirmPass, $email, $firstname, $lastname);
+    }
+
+    if ($q == "logout") {
+      echo logOut();
     }
 
     if ($q == "getMutualFriends"){

@@ -1,47 +1,80 @@
 <?php
-require 'connection.php';
-session_start();
 
-if (isset($_POST['Username']))  {
-  $uname = $_POST['Username'];
-  $password = md5(md5($uname.$_POST['Password']));
-}
+/**
+ *Registers the user or sign's one in, depending on which paramaters are set. If no parameters are set then returns the $_SESSION['id'] value if set, otherwise return -1.
+ *
+ *@param string $username is the user's username.
+ *@param string $email is the user's email address.
+ *@param string $password is the user's password.
+ *@param string $confirmPass the user's confirm password.
+ *@param string $firstname is the user's first name.
+ *@param string $lastname is the user's last name.
+ *
+ *@return string
+ */
+function loginUser($uname, $password, $confirmPass, $email, $firstname, $lastname) {
+  if (isset($uname))  {
+    $password = md5(md5($uname.$password));
+  }
 
-$message = 'success';
+  $message = 'success';
 
-if (isset($_POST['Email'])) {
-  if (validatePassword($_POST['Password'])) {
-      $newuser = findUser($uname);
-      if (!$newuser) {
-        regUser($uname,$_POST['Email'],$password,$_POST['Firstname'],$_POST['Lastname']);
+  if (isset($email)) {
+    if (validatePassword($password, $confirmPass)) {
         $newuser = findUser($uname);
-        startSession($newuser->id);
-        R::exec('CREATE TABLE collection_'.$newuser->id.' (id INT(6) PRIMARY KEY NOT NULL, amount INT(6), FOREIGN KEY (id) REFERENCES product(id));');
-        $message = 'success';
-      //$message = 'Welcome to Play and Win, '.$uname.'!';
-      } else $message = 'Username taken, try again!';
+        if (!$newuser) {
+          regUser($uname,$email,$password,$firstname,$lastname);
+          $newuser = findUser($uname);
+          startSession($newuser->id);
+          R::exec('CREATE TABLE collection_'.$newuser->id.' (id INT(6) PRIMARY KEY NOT NULL, amount INT(6), FOREIGN KEY (id) REFERENCES product(id));');
+        } else $message = 'Username taken, try again!';
     }
-} else if (isset($_POST['Username'])) {
-  $player = findUser($uname);
+  } else if (isset($uname)) {
+    $player = findUser($uname);
 
-  if(isset($player) ? ($player->password==$password) : false) {
-    //$message = 'Logged in!';
-    startSession($player->id);
-    updateLastOnline();
-  } else  $message = 'Nope, wrong username or password!';
-} else {
-  $message = isset($_SESSION['id']) ? $_SESSION['id'] : -1;
+    if(isset($player) ? ($player->password==$password) : false) {
+      //$message = 'Logged in!';
+      startSession($player->id);
+      updateLastOnline();
+    } else  $message = 'Nope, wrong username or password!';
+  } else {
+    $message = isset($_SESSION['id']) ? $_SESSION['id'] : -1;
+  }
+  echo $message;
 }
-if(isset($_REQUEST['logout'])) {
+
+/**
+ *Destroys the session, effectively logging out the user.
+ *
+ *return string
+ */
+function logOut() {
   session_destroy();
-  $message  = 'You have been logged out.';
+  return 'You have been logged out.';
 }
-echo $message;
+
+
 //---------------funktiot:
+
+/**
+ *Setting the $_SESSION variable to store the user's session on the server side.
+ *
+ *@param int $id is the user's id.
+ */
   function startSession($id) {
     $_SESSION['id'] = $id;
   }
 
+/**
+ *Registers the user by sending a query to the database to form a row in the user table for the user.
+ *Also adds user rows to all the different hs_ tables.
+ *
+ *@param int $username is the user's username.
+ *@param string $email is the user's email address.
+ *@param string $password is the user's password.
+ *@param string $firstname is the user's first name.
+ *@param string $lastname is the user's last name.
+ */
   function regUser ($username, $email, $password, $firstname, $lastname) {
     $gamelist = array('snake','flappy','reaction','jumper');
     $user = R::dispense( 'user' );
@@ -58,28 +91,52 @@ echo $message;
     }
   }
 
-//This method is used to update last_online in user table
+/**
+ *This method is used to update last_online in user table
+ *
+ */
   function updateLastOnline() {
     R::exec( 'update user set last_online=NOW() where id = :id', [':id' => $_SESSION['id']]);
   }
 
-//This method is used to get user data by id
+/**
+ *This method is used to get user data by id
+ *
+ *@param int $id is the user's id.
+ *
+ *@return object
+ */
   function getUser ($id) {
     $user = R::load( 'user', $id );
     return $user;
   }
 
+/**
+ *Queries the database by username and returns the user's information.
+ *
+ *@param string $username is the user's username.
+ *
+ *@return object
+ */
   function findUser($username) {
     $user = R::findOne('user',
         ' username = ? ',array($username));
     return $user;
   }
 
-  function validatePassword($password) {
+/**
+ *Validates the password submitted by the user by checking that the password meets the password criteria and that the ConfirmPassword input field matches the Password field.
+ *
+ *@param string $password is the user's password.
+ *@param string $confirmPass is the user's confirm password.
+ *
+ *@return string
+ */
+  function validatePassword($password, $confirmPass) {
     global $message;
     $message = '';
     $accepted = true;
-    if($password != $_POST["ConfirmPassword"]) {
+    if($password != $confirmPass) {
         $message .= "Your passwords must match!</br>";
         $accepted = false;
     }

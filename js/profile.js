@@ -20,7 +20,7 @@ function parseURL(param){
 
 function getSession() {
   $.ajax({
-      url: "./Backend/php/login.php",
+      url: "./Backend/php/controller.php?q=login",
       type: "get",
       dataType: "json",
       async: false,
