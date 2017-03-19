@@ -1,12 +1,12 @@
 var userId;
-var controller = "./Backend/php/controller.php?q=";
+var controller = "/Backend/php/controller.php?q=";
 var sessionId;
 
 function getScoreTable() {
   var idParam = '';
-  if (parseURL('user'))
-    idParam = 'id='+parseURL('user')+'&';
-  $.ajax({url: './Backend/php/controller.php?q=getHighscores&'+idParam+'table',
+  if (getLastDir())
+    idParam = 'id='+getLastDir()+'&';
+  $.ajax({url: '/Backend/php/controller.php?q=getHighscores&'+idParam+'table',
     datatype:'html',success: function(result){$("#highscores").html(result);
   }});
 }
@@ -18,14 +18,23 @@ function parseURL(param){
   return results[1] || 0;
 }
 
+function getLastDir() {
+  var last = window.location.href.split('/');
+  var last = last.pop();
+  if (last == 'profile' || last == '')
+    return null;
+  return last.replace('#','');
+}
+
 function getSession() {
   $.ajax({
-      url: "./Backend/php/controller.php?q=login",
+      url: "/Backend/php/controller.php?q=login",
       type: "get",
       dataType: "json",
       async: false,
       success: function (response){
         sessionId = response;
+        if (response != -1) sessionId = response.name;
         return response;
       },
       error: function(jqXHR, textStatus, errorThrown) {
@@ -216,14 +225,14 @@ function getFriendship(callback) {
 }
 
 function getUserInfo() {
-    if (parseURL('user')) {
-      userId = parseURL('user');
+    if (getLastDir()) {
+      userId = getLastDir();
     }
     else if (sessionId != -1) {
       userId = sessionId;
     }
     else {
-      window.location = "index.html";
+      window.location = "/";
     }
     var str = "getUserInfo&id=" + userId;
     $.ajax({
@@ -274,7 +283,7 @@ function updateProfile(response) {
   });
   if (response.profilepicture != 'default.png') {
     $('.profilepicture').fadeOut(0, function() {
-      $(this).attr("src", "images/user/" + response.profilepicture).fadeIn(500);
+      $(this).attr("src", "../images/user/" + response.profilepicture).fadeIn(500);
     });
   }
   //editprofilebutton, only visible in your own profile
@@ -381,10 +390,10 @@ function showLastUsers(response, who) {
     var div = $('<div></div>');
     div.addClass('col-md-3 img-w3-agile');
     var a = $('<a></a>');
-    a.attr("href", "profile.html?user=" + response[i].id);
+    a.attr("href", response[i].username);
     //a.attr("target", "_blank");
     var img = $('<img></img>');
-    img.attr("src", "images/user/" + response[i].profilepicture);
+    img.attr("src", "../images/user/" + response[i].profilepicture);
     img.attr("alt", " ");
     a.append(img);
     var name = $('<p></p>');
@@ -394,7 +403,7 @@ function showLastUsers(response, who) {
   }
 }
 
-getScoreTable()
+getScoreTable();
 getSession();
 getUserInfo();
 getLastLoggedIn();

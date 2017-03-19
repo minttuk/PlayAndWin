@@ -9,9 +9,9 @@
  */
 
 function getUserInfo($id) {
-  $user = R::load('user', $id);
+  $user = R::load('user',getUserID($id));
   if ($user->id != 0) {
-    $friends = getFriendsCount($id);
+    $friends = getFriendsCount($user->id);
     $response = array(
       'id' => $user->id,
       'username' => $user->username,
@@ -80,8 +80,18 @@ function checkEmpty($stringToCheck) {
  * @return PHP array
  */
 
+function getUserID($id) {
+  $user = R::findOne( 'user', ' username = ? ', [$id]);
+  return $user->id;
+}
+
+function getUserName($id) {
+  $user = R::findOne( 'user', ' id = ? ', [$id]);
+  return $user->username;
+}
+
 function getMutualFriends($id) {
-  $friends = R::getAll('SELECT user2_id FROM friendship WHERE user1_id = :id AND approved = 1', [':id' => $id]);
+  $friends = R::getAll('SELECT user2_id FROM friendship WHERE user1_id = :id AND approved = 1', [':id' => getUserID($id)]);
   $response = getFriendsInfo($friends);
   return $response;
 }
@@ -95,7 +105,7 @@ function getMutualFriends($id) {
  */
 
 function getPendingFriends($id) {
-  $pendingfriends = R::getAll( 'SELECT user2_id FROM friendship WHERE user1_id = :id AND approved = 0', [':id' => $id]);
+  $pendingfriends = R::getAll( 'SELECT user2_id FROM friendship WHERE user1_id = :id AND approved = 0', [':id' => getUserID($id)]);
   $response = getFriendsInfo($pendingfriends);
   return $response;
 }
@@ -109,7 +119,7 @@ function getPendingFriends($id) {
  */
 
 function getFriendRequests($id) {
-  $friendrequests = R::getAll( 'SELECT user1_id FROM friendship WHERE user2_id = :id AND approved = 0', [':id' => $id]);
+  $friendrequests = R::getAll( 'SELECT user1_id FROM friendship WHERE user2_id = :id AND approved = 0', [':id' => getUserID($id)]);
   $response = getFriendsInfo($friendrequests);
   return $response;
 }
@@ -163,6 +173,7 @@ function getFriendsCount($id) {
  */
 
 function addFriend($myId, $friendId) {
+  $friendId = getUserID($friendId);
   $response = array('message' => 'No session id');
   if ($myId != -1 && $myId != null) {
     $approved = 0;
@@ -192,6 +203,7 @@ function addFriend($myId, $friendId) {
  */
 
 function deleteFriend($myId, $friendId) {
+  $friendId = getUserID($friendId);
   $response = array('message' => 'No session id');
   if ($myId != -1 && $myId != null) {
     R::exec('DELETE FROM friendship WHERE (user1_id = :sessionid AND user2_id = :friendid) OR (user2_id = :sessionid AND user1_id = :friendid)', [':friendid' => $friendId, ':sessionid' => $myId]);
@@ -207,7 +219,12 @@ function deleteFriend($myId, $friendId) {
  */
 
 function getFriendship($myId, $friendId) {
+  $friendId = getUserID($friendId);
   $result = R::getAll('SELECT * FROM friendship WHERE (user1_id = :sessionid AND user2_id = :friendid) OR (user2_id = :sessionid AND user1_id = :friendid)', [':friendid' => $friendId, ':sessionid' => $myId]);
+  if ($result) {
+    $result[0]['user1_id'] = getUserName($result[0]['user1_id']);
+    $result[0]['user2_id'] = getUserName($result[0]['user2_id']);
+  }
   return $result;
 }
 

@@ -39,7 +39,7 @@ else {
 
     if ($q == 'getHighscores') {
       if (isset($_SESSION['id']) || isset($_REQUEST['id'])) {
-        if (isset($_REQUEST['id'])) $userID = $_REQUEST['id'];
+        if (isset($_REQUEST['id'])) $userID = getUserID($_REQUEST['id']);
         else $userID = $_SESSION['id'];
         echo getHighscores($userID);
       }
@@ -102,15 +102,15 @@ else {
     }
 
     if ($q == "getMutualFriends"){
-        echo json_encode(getMutualFriends($id = $_REQUEST['id']));
+        echo json_encode(getMutualFriends($_REQUEST['id']));
     }
 
     if ($q == "getFriendRequests") {
-      echo json_encode(getFriendRequests($id = $_REQUEST['id']));
+      echo json_encode(getFriendRequests($_REQUEST['id']));
     }
 
     if ($q == "getPendingFriends"){
-      echo json_encode(getPendingFriends($id = $_REQUEST['id']));
+      echo json_encode(getPendingFriends($_REQUEST['id']));
     }
 
     if ($q == "addFriend"){

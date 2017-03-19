@@ -39,7 +39,7 @@ function loginUser($uname, $password, $confirmPass, $email, $firstname, $lastnam
       updateLastOnline();
     } else  $message = 'Nope, wrong username or password!';
   } else {
-    $message = isset($_SESSION['id']) ? $_SESSION['id'] : -1;
+    $message = isset($_SESSION['id']) ? json_encode(array('id'=>$_SESSION['id'],'name'=>R::getCell('SELECT username FROM user WHERE id='.$_SESSION['id']))) : -1;
   }
   return $message;
 }

@@ -19,7 +19,6 @@ function connect() {
     R::addDatabase('jenkinsDB','mysql:host=10.114.32.140;dbname='.$database, 'jenkins', 'jenkins' );
     R::selectDatabase('jenkinsDB');
   }
-
   return R::testConnection();
 }
 ?>

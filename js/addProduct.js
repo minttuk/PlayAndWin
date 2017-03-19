@@ -51,7 +51,7 @@ window.onload = function displayAddProductButton() {
         ;
     }
 
-    ajaxRequest.open("GET", "./Backend/php/controller.php?q=getAdmin", true);
+    ajaxRequest.open("GET", "/Backend/php/controller.php?q=getAdmin", true);
     ajaxRequest.send(null);
     }
 
@@ -104,7 +104,7 @@ submitForm.onclick = function(){
             }
         };
 
-        ajaxRequest.open("POST", "./Backend/php/controller.php?q=addProduct", true);
+        ajaxRequest.open("POST", "/Backend/php/controller.php?q=addProduct", true);
         ajaxRequest.send(dataString);
     }
 }
