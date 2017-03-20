@@ -70,6 +70,7 @@ function makeOrderRow($product_id){
  */
 function addToCollection($product_id, $coins_left, $session_id){
     $row = R::getCell( 'SELECT products FROM collection WHERE id = :id', [':id' => $session_id]);
+    //$row will be in form {"product_id":amount, "product_id:amount...}
     $dataObject = json_decode($row, true);
 
     if ($dataObject == null){
