@@ -84,6 +84,12 @@ CREATE TABLE chatroom (
   ts TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE TABLE collection (
+  id INT(6) PRIMARY KEY NOT NULL,
+  products JSON DEFAULT NULL,
+  FOREIGN KEY (id) REFERENCES user(id)
+);
+
 INSERT INTO product (name, price, description, image_url) VALUES
 ("Tesla car", 9000000, "Super cool luxury car", "https://tctechcrunch2011.files.wordpress.com/2015/08/tesla_model_s.jpg?w=738"),
 ("Aliexpress giftcard", 5000, "20 dollar giftcard to Aliexpress!", "https://alixblog.com/wp-content/uploads/2015/02/Aliexpress-China.png"),

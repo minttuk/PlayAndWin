@@ -27,7 +27,7 @@ function loginUser($uname, $password, $confirmPass, $email, $firstname, $lastnam
           regUser($uname,$email,$password,$firstname,$lastname);
           $newuser = findUser($uname);
           startSession($newuser->id);
-          R::exec('CREATE TABLE collection_'.$newuser->id.' (id INT(6) PRIMARY KEY NOT NULL, amount INT(6), FOREIGN KEY (id) REFERENCES product(id));');
+          //R::exec('CREATE TABLE collection_'.$newuser->id.' (id INT(6) PRIMARY KEY NOT NULL, amount INT(6), FOREIGN KEY (id) REFERENCES product(id));');
         } else $message = 'Username taken, try again!';
     }
   } else if ($uname) {
@@ -90,6 +90,7 @@ function logOut() {
     foreach ($gamelist as $game) {
       R::exec('INSERT INTO hs_'.$game.' (id,highscore) VALUES (:id,0)', [':id' => $newuser]);
     }
+    R::exec('INSERT INTO collection (id) VALUES (:id)', [':id' => $newuser]);
   }
 
 /**

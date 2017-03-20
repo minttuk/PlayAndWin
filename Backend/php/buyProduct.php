@@ -69,8 +69,38 @@ function makeOrderRow($product_id){
  * @param int $session_id is the id number of the user who has bought the product.
  */
 function addToCollection($product_id, $coins_left, $session_id){
-    $collection = 'collection_'.$session_id;
+    $row = R::load('collection', $session_id);
+    $dataObject = json_decode($row, true);
+
+    if (array_key_exists($product_id, $dataObject)){
+        $amount = $dataObject[$product_id];
+        $newAmount = $amount+1;
+        $dataObject[$product_id] = $newAmount;
+    }
+    else{
+        $arr = '{'.$product_id.': 1}';
+        array_push($dataObject, $arr);
+    }
+    $newRow = json_encode($dataObject);
+    R::exec( 'UPDATE collection SET products = :newRow WHERE id = :id', [':newRow' => $newRow, ':id' => $session_id]);
+
+
+
+    /*$search = findContentByIndex($dataObject, $product_id, 0, count($dataObject));
+    if ($search == -1){ //no match found
+        $arr = '{'.$product_id.': 1}';
+        array_push($row, $arr);
+    }
+    else{
+        $amount = $dataObject[$product_id];
+        $newAmount = $amount+1;
+        $dataObject[$product_id] = $newAmount;
+
+    }*/
+
+    /*$collection = 'collection_'.$session_id;
     $product = R::load( 'collection_'.$session_id, $product_id );
+
     $id = $product->id;
     if ($id == 0){
         R::exec( 'INSERT INTO '.$collection.'(id, amount) VALUES (:product_id, 1)', [':product_id' => $product_id]);
@@ -79,6 +109,6 @@ function addToCollection($product_id, $coins_left, $session_id){
         $amount = R::getCell( 'SELECT amount FROM '.$collection.' WHERE id = '.$product_id.'');
         $newAmount = $amount+1;
         R::exec( 'UPDATE '.$collection.' SET amount = '.$newAmount.' WHERE id = '.$product_id.'');
-    }
+    }*/
     echo json_encode(array('message'=>'You have bought this product! You have '.$coins_left.' coins left.' ));
 }
