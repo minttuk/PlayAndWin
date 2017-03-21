@@ -38,6 +38,7 @@ function buy(product_id){
             console.log(text);
             var object = JSON.parse(text);
             $('.buyMessage').html(object['message']);
+            updateCoins();
             //window.location = 'webstore.html';
         }
     };
