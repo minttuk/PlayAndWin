@@ -70,6 +70,9 @@ function makeOrderRow($product_id){
  */
 function addToCollection($product_id, $coins_left, $session_id){
     $row = R::getCell( 'SELECT products FROM collection WHERE id = :id', [':id' => $session_id]);
+    //$row = R::Load('collection',$session_id);
+    //$dataObject = json_decode($row->products, true);
+
     //$row will be in form {"product_id":amount, "product_id:amount...}
     $dataObject = json_decode($row, true);
 
@@ -83,9 +86,12 @@ function addToCollection($product_id, $coins_left, $session_id){
         $dataObject[$product_id] = $newAmount;
     }
     else{
+        //$dataObject[$product_id] = 1;
         array_push($dataObject, 1);
     }
     $newRow = json_encode($dataObject);
+    //$row->products = $newRow;
+    //R::Store($row);
     R::exec( 'UPDATE collection SET products = :newRow WHERE id = :id', [':newRow' => $newRow, ':id' => $session_id]);
 
     echo json_encode(array('message'=>'You have bought this product! You have '.$coins_left.' coins left.' ));
