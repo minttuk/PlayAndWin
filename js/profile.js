@@ -180,20 +180,21 @@ function showFriendActionButton() {
       console.log(error);
     }
     else {
-      console.log(response);
+      //console.log(response);
       if (response.length == 0) {
         $('#addfriendbutton').fadeOut(0, function() {
+          $('#addfriendbuttontext').text('Add Friend');
           $(this).css('display', 'inline-block').fadeIn(500);
         });
       }
       else if (response.length == 1) {
-        if (response[0]['user1_id'] == userId) {
+        if (response[0]['user_id'] == userId) {
           $('#addfriendbuttontext').text('Accept Request');
           $('#addfriendbutton').fadeOut(0, function() {
             $(this).css('display', 'inline-block').fadeIn(500);
           });
         }
-        else if (response[0]['user2_id'] == userId) {
+        else if (response[0]['friend_id'] == userId) {
           $('#deletefriendbuttontext').text('Cancel Request');
           $('#deletefriendbutton').fadeOut(0, function() {
             $(this).css('display', 'inline-block').fadeIn(500);

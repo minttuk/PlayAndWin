@@ -20,12 +20,11 @@ CREATE TABLE user (
 
 
 CREATE TABLE friendship (
-  id INT(6) PRIMARY KEY AUTO_INCREMENT NOT NULL,
-  user1_id INT(6) NOT NULL,
-  user2_id INT(6) NOT NULL,
-  approved BOOLEAN DEFAULT 0,
-  FOREIGN KEY (user1_id) REFERENCES user(id),
-  FOREIGN KEY (user2_id) REFERENCES user(id)
+  user_id INT(6) NOT NULL,
+  friend_id INT(6) NOT NULL,
+  PRIMARY KEY (user_id, friend_id),
+  FOREIGN KEY (user_id) REFERENCES user(id),
+  FOREIGN KEY (friend_id) REFERENCES user(id)
 );
 
 CREATE TABLE product (
@@ -107,5 +106,7 @@ VALUES('Bobby', 'testi1', 'testi1', 'testi1@testi1.fi', '6dcf1cff0946426cc3bba39
 INSERT INTO user(username, firstname, lastname, email, password, coins, admin, reg_date, last_online)
 VALUES('Boss', 'admin', 'admin', 'admin@playandwin.fi', 'ec15d79e36e14dd258cfff3d48b73d35', '50000', '1', '2017-03-06 10:05:09', '2017-03-06 10:05:09');
 
-INSERT INTO friendship (user1_id, user2_id, approved)
-VALUES (1, 2, 0);
+INSERT INTO friendship (user_id, friend_id)
+VALUES (1, 2);
+INSERT INTO friendship (user_id, friend_id)
+VALUES (2, 1);
