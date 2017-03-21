@@ -70,28 +70,28 @@ function makeOrderRow($product_id){
  */
 function addToCollection($product_id, $coins_left, $session_id){
     //$row = R::getCell( 'SELECT products FROM collection WHERE id = :id', [':id' => $session_id]);
-    $row = R::load('collection',$session_id);
+    $collection = R::load('collection',$session_id);
 
     //$row will be in form {"product_id":amount, "product_id:amount...}
-    $dataObject = json_decode($row->products, true);
+    $products = json_decode($collection->products, true);
     //$dataObject = json_decode($row, true);
 
-    if ($dataObject == null){
-        $arr = array("$product_id"=>"1");
-        $dataObject = $arr;
+    if ($products == null){
+        //$arr = array("$product_id"=>"1");
+        $products = array($product_id=>1);
     }
-    else if (array_key_exists($product_id, $dataObject)){
-        $amount = $dataObject[$product_id];
-        $newAmount = $amount+1;
-        $dataObject[$product_id] = $newAmount;
+    else if (array_key_exists($product_id, $products)){
+        //$amount = $dataObject[$product_id];
+        //$newAmount = $amount+1;
+        $products[$product_id]++;
     }
     else{
-        $dataObject[$product_id] = 1;
+        $products[$product_id] = 1;
         //array_push($dataObject, 1);
     }
-    $newRow = json_encode($dataObject);
-    $row->products = $newRow;
-    R::store($row);
+    //$newRow = json_encode($dataObject);
+    $collection->products = json_encode($products);
+    R::store($collection);
     //R::exec( 'UPDATE collection SET products = :newRow WHERE id = :id', [':newRow' => $newRow, ':id' => $session_id]);
 
     echo json_encode(array('message'=>'You have bought this product! You have '.$coins_left.' coins left.' ));
