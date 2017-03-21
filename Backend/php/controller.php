@@ -7,6 +7,7 @@ include 'addProduct.php';
 include 'buyProduct.php';
 include 'chathandler.php';
 include 'hshandler.php';
+include 'search.php';
 include 'login.php';
 
 connect();
@@ -43,6 +44,13 @@ else {
         else $userID = $_SESSION['id'];
         echo getHighscores($userID);
       }
+    }
+
+    if ($q == 'searchUsers') {
+      if (isset($_REQUEST['query'])) {
+        echo searchUsers($_REQUEST['query']);
+      }
+
     }
 
     if ($q == 'setHighscore') {
