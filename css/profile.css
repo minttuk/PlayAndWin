@@ -21,7 +21,7 @@ h6 {
   display: none;
 }
 
-#addfriendbutton {
+#addfriendbutton{
   display: none;
 }
 
@@ -45,8 +45,20 @@ h6 {
   display: none;
 }
 
-#showfriendsdiv {
+.showfriendsdiv {
   margin-top: 10px;
+}
+
+.glyphicon-remove {
+  font-size: 20px;
+  padding: 0 15px 0 0;
+  color: #e0394e;
+}
+
+.glyphicon-ok {
+  font-size: 20px;
+  padding: 0 15px 0 0;
+  color: #49c180;
 }
 
 .errormessage {

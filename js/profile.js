@@ -44,12 +44,12 @@ function getSession() {
   });
 }
 
-$( "#addfriendbutton" ).click(function() {
+$( ".addfriendbutton" ).click(function() {
   console.log("addfriendbutton clicked");
   var str = "addFriend&id=";
   console.log(userId);
   $.ajax({
-      url: controller + str + userId,
+      url: controller + str + $(this).attr('data-id'),
       //type: "post",
       dataType: "json",
       //data: JSON.stringify({"friendid": userId}),
@@ -64,11 +64,11 @@ $( "#addfriendbutton" ).click(function() {
   });
 })
 
-$("#deletefriendbutton").click(function() {
+$(".deletefriendbutton").click(function() {
   console.log("deletefriendbutton clicked");
   var str = "deleteFriend&id=";
   $.ajax({
-      url: controller + str + userId,
+      url: controller + str + $(this).attr('data-id'),
       //type: "post",
       dataType: "json",
       //data: JSON.stringify({"friendid": userId}),
@@ -123,7 +123,7 @@ function showFriends(){
     if (error) {
       console.log(error);
     }
-    showLastUsers(response, 'showfriendsdiv');
+    showOtherUsers(response, 'showmutualfriendsdiv');
   });
 }
 
@@ -182,7 +182,7 @@ function showFriendActionButton() {
     else {
       //console.log(response);
       if (response.length == 0) {
-        $('#addfriendbutton').fadeOut(0, function() {
+        $('.addfriendbutton').fadeOut(0, function() {
           $('#addfriendbuttontext').text('Add Friend');
           $(this).css('display', 'inline-block').fadeIn(500);
         });
@@ -190,19 +190,19 @@ function showFriendActionButton() {
       else if (response.length == 1) {
         if (response[0]['user_id'] == userId) {
           $('#addfriendbuttontext').text('Accept Request');
-          $('#addfriendbutton').fadeOut(0, function() {
+          $('.addfriendbutton').fadeOut(0, function() {
             $(this).css('display', 'inline-block').fadeIn(500);
           });
         }
         else if (response[0]['friend_id'] == userId) {
           $('#deletefriendbuttontext').text('Cancel Request');
-          $('#deletefriendbutton').fadeOut(0, function() {
+          $('.deletefriendbutton').fadeOut(0, function() {
             $(this).css('display', 'inline-block').fadeIn(500);
           });
         }
       }
       else if (response.length >= 2) {
-        $('#deletefriendbutton').fadeOut(0, function() {
+        $('.deletefriendbutton').fadeOut(0, function() {
           $(this).css('display', 'inline-block').fadeIn(500);
         });
       }
@@ -299,9 +299,13 @@ function updateProfile(response) {
     $('#pendingfriendstab').css("display", "inline-block");
   }
   //addfriendbutton and sendmessagebutton only visible in other users profiles
+  console.log(userId + " " + sessionId);
   if (userId != sessionId) {
-    $('#addfriendbutton').css('display', 'none');
-    $('#deletefriendbutton').css('display', 'none');
+    console.log(userId + " " + sessionId);
+    $('.addfriendbutton').css('display', 'none');
+    $('.addfriendbutton').attr('data-id', userId);
+    $('.deletefriendbutton').css('display', 'none');
+    $('.deletefriendbutton').attr('data-id', userId);
     showFriendActionButton();
   }
   //firstname
@@ -324,11 +328,14 @@ $('#friendrequeststab').click(function() {
       console.log(error);
     }
     console.log("friends " + response);
-    showLastUsers(response, 'showfriendsdiv');
+    showOtherUsers(response, 'showfriendrequestsdiv');
   });
   $('#friendrequeststab').attr('class', 'active');
+  $('#showfriendrequestsdiv').css('display', 'inline-block');
   $('#mutualfriendstab').removeClass('active');
+  $('#showmutualfriendsdiv').css('display', 'none');
   $('#pendingfriendstab').removeClass('active');
+  $('#showpendingfriendsdiv').css('display', 'none');
 })
 
 $('#pendingfriendstab').click(function() {
@@ -337,18 +344,24 @@ $('#pendingfriendstab').click(function() {
       console.log(error);
     }
     console.log("friends " + response);
-    showLastUsers(response, 'showfriendsdiv');
+    showOtherUsers(response, 'showpendingfriendsdiv');
   });
   $('#pendingfriendstab').attr('class', 'active');
+  $('#showpendingfriendsdiv').css('display', 'inline-block');
   $('#mutualfriendstab').removeClass('active');
+  $('#showmutualfriendsdiv').css('display', 'none');
   $('#friendrequeststab').removeClass('active');
+  $('#showfriendrequestsdiv').css('display', 'none');
 })
 
 $('#mutualfriendstab').click(function() {
   showFriends();
   $('#mutualfriendstab').attr('class', 'active');
+  $('#showmutualfriendsdiv').css('display', 'inline-block');
   $('#pendingfriendstab').removeClass('active');
+  $('#showpendingfriendsdiv').css('display', 'none');
   $('#friendrequeststab').removeClass('active');
+  $('#showfriendrequestsdiv').css('display', 'none');
 })
 
 function getLastLoggedIn() {
@@ -360,7 +373,7 @@ function getLastLoggedIn() {
       success: function (response){
         //passes also div name to function because the same function is used to show new users
         var who = 'lastloggedin';
-        showLastUsers(response, who);
+        showOtherUsers(response, who);
       },
       error: function(jqXHR, textStatus, errorThrown) {
         console.log(textStatus, errorThrown);
@@ -377,7 +390,7 @@ function getNewUsers() {
       success: function (response){
         //passes also div name to function because the same function is used to show new users
         var who = 'newusers';
-        showLastUsers(response, who);
+        showOtherUsers(response, who);
       },
       error: function(jqXHR, textStatus, errorThrown) {
         console.log(textStatus, errorThrown);
@@ -385,7 +398,8 @@ function getNewUsers() {
   });
 }
 
-function showLastUsers(response, who) {
+//who = element id where people are shown
+function showOtherUsers(response, who) {
   $('#' + who + '').empty();
   for (var i in response) {
     var div = $('<div></div>');
@@ -400,6 +414,16 @@ function showLastUsers(response, who) {
     var name = $('<p></p>');
     name.append(response[i].username);
     div.append(a, name);
+    if (who == "showfriendrequestsdiv") {
+      var buttonAdd = $('<a data-id=""><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></a>');
+      buttonAdd.attr("data-id", response[i].username);
+      div.append(buttonAdd);
+    }
+    if (who == "showmutualfriendsdiv" || who == "showfriendrequestsdiv" || who == "showpendingfriendsdiv") {
+      var buttonDelete = $('<a data-id=""><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>');
+      buttonDelete.attr("data-id", response[i].username);
+      div.append(buttonDelete);
+    }
     $('#' + who + '').append(div);
   }
 }
