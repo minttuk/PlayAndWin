@@ -2,15 +2,15 @@
 header("Access-Control-Allow-Origin: *");
 session_start();
 require 'connection.php';
-include 'user.php';
-include 'addProduct.php';
-include 'buyProduct.php';
-include 'chathandler.php';
-include 'hshandler.php';
-include 'search.php';
-include 'login.php';
+require 'user.php';
+require 'product.php';
+require 'chat.php';
+require 'highscore.php';
+require 'search.php';
+require 'login.php';
 
 connect();
+include 'api.php';
 
 $resource = getResource();
 $request_method = getMethod();
@@ -35,7 +35,7 @@ if ($resource[0]=="playandwin") {
 else {
 
     //Methods without rest
-
+    if(isset($_REQUEST["q"])) {
     $q = $_REQUEST["q"];
 
     if ($q == 'getHighscores') {
@@ -87,6 +87,10 @@ else {
 
     if ($q == "buyProduct"){
         buyProduct();
+    }
+
+    if ($q == "getProducts"){
+      echo getProducts();
     }
 
     if ($q == "login") {
@@ -153,6 +157,7 @@ else {
       echo 'Missing Information.';
       }
     }
+  }
 }
 
 // Tästä alkaa varsinaiset metodit.

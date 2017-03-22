@@ -100,7 +100,7 @@ submitForm.onclick = function(){
                 console.log(text);
                 //$('#addProductModal').hide();
                 addProductModal.style.display = "none";
-                window.location = 'webstore.html';
+                window.location = '/shop';
             }
         };
 
