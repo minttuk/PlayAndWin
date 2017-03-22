@@ -109,7 +109,7 @@
 				<div id='content'>
 					<h2>You have somehow sumbled across a link that doesn't work!</h2>
 					<br />
-					<h3>Don't worry you will be redirected to the homepage in <span id='seconds'>5 seconds</span>.</h3>
+					<h3>Don't worry you will be redirected to the homepage in <span id='seconds'>10 seconds</span>.</h3>
 					<br />
 					<img src='../images/sad.png' id='sad'/>
 				</div>
@@ -131,12 +131,11 @@
 
 	<!-- //footer -->
 	<script src="../js/loginForm.js"></script>
-	<script src="../js/gamelist.js"></script>
 	<script>
-	var sec=5;
+	var sec=10;
 		setTimeout(function() {
 			window.location.href = '/';
-		},5000);
+		},10000);
 		setInterval(function() {
 			sec--;
 			if(sec > 1)
