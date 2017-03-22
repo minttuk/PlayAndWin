@@ -44,45 +44,6 @@ function getSession() {
   });
 }
 
-$( ".addfriendbutton" ).click(function() {
-  console.log("addfriendbutton clicked");
-  var str = "addFriend&id=";
-  console.log(userId);
-  $.ajax({
-      url: controller + str + $(this).attr('data-id'),
-      //type: "post",
-      dataType: "json",
-      //data: JSON.stringify({"friendid": userId}),
-      success: function (response){
-        console.log(response);
-        showFriends();
-        getUserInfo();
-      },
-      error: function(jqXHR, textStatus, errorThrown) {
-        console.log(textStatus, errorThrown);
-      }
-  });
-})
-
-$(".deletefriendbutton").click(function() {
-  console.log("deletefriendbutton clicked");
-  var str = "deleteFriend&id=";
-  $.ajax({
-      url: controller + str + $(this).attr('data-id'),
-      //type: "post",
-      dataType: "json",
-      //data: JSON.stringify({"friendid": userId}),
-      success: function (response){
-        console.log(response);
-        showFriends();
-        getUserInfo();
-      },
-      error: function(jqXHR, textStatus, errorThrown) {
-        console.log(textStatus, errorThrown);
-      }
-  });
-})
-
 $( "#saveprofilebutton" ).click(function() {
   console.log("saveprofilebutton clicked");
   var str = "setUserInfo";
@@ -125,6 +86,20 @@ function showFriends(){
     }
     showOtherUsers(response, 'showmutualfriendsdiv');
   });
+  if (sessionId == userId) {
+    getPendingFriends(function(error, response) {
+      if (error) {
+        console.log(error);
+      }
+      showOtherUsers(response, 'showpendingfriendsdiv');
+    });
+    getFriendRequests(function(error, response) {
+      if (error) {
+        console.log(error);
+      }
+      showOtherUsers(response, 'showfriendrequestsdiv');
+    });
+  }
 }
 
 function getMutualFriends(callback) {
@@ -323,13 +298,14 @@ function updateProfile(response) {
 }
 
 $('#friendrequeststab').click(function() {
-  getFriendRequests(function(error, response) {
+  showFriends();
+  /*getFriendRequests(function(error, response) {
     if (error) {
       console.log(error);
     }
     console.log("friends " + response);
     showOtherUsers(response, 'showfriendrequestsdiv');
-  });
+  });*/
   $('#friendrequeststab').attr('class', 'active');
   $('#showfriendrequestsdiv').css('display', 'inline-block');
   $('#mutualfriendstab').removeClass('active');
@@ -339,13 +315,14 @@ $('#friendrequeststab').click(function() {
 })
 
 $('#pendingfriendstab').click(function() {
-  getPendingFriends(function(error, response) {
+  showFriends();
+  /*getPendingFriends(function(error, response) {
     if (error) {
       console.log(error);
     }
     console.log("friends " + response);
     showOtherUsers(response, 'showpendingfriendsdiv');
-  });
+  });*/
   $('#pendingfriendstab').attr('class', 'active');
   $('#showpendingfriendsdiv').css('display', 'inline-block');
   $('#mutualfriendstab').removeClass('active');
@@ -415,18 +392,64 @@ function showOtherUsers(response, who) {
     name.append(response[i].username);
     div.append(a, name);
     if (who == "showfriendrequestsdiv") {
-      var buttonAdd = $('<a data-id=""><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></a>');
+      var buttonAdd = $('<a class="addfriendbutton"><i class="glyphicon glyphicon-ok"></i></a>');
       buttonAdd.attr("data-id", response[i].username);
       div.append(buttonAdd);
     }
     if (who == "showmutualfriendsdiv" || who == "showfriendrequestsdiv" || who == "showpendingfriendsdiv") {
-      var buttonDelete = $('<a data-id=""><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>');
+      //var buttonDelete = $('<a class="deletefriendbutton"><i class="glyphicon glyphicon-remove" aria-hidden="true"></i></a>');
+      var buttonDelete = $('<a class="deletefriendbutton"><i class="glyphicon glyphicon-remove"></i></a>');
       buttonDelete.attr("data-id", response[i].username);
       div.append(buttonDelete);
     }
     $('#' + who + '').append(div);
   }
+  initHandlers();
 }
+
+// click event handlers are called after DOM elements creation too
+function initHandlers() {
+
+  $( ".addfriendbutton" ).click(function() {
+    console.log("addfriendbutton clicked");
+    var str = "addFriend&id=";
+    console.log(userId);
+    $.ajax({
+        url: controller + str + $(this).attr('data-id'),
+        //type: "post",
+        dataType: "json",
+        //data: JSON.stringify({"friendid": userId}),
+        success: function (response){
+          console.log(response);
+          showFriends();
+          getUserInfo();
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+          console.log(textStatus, errorThrown);
+        }
+    });
+  })
+
+  $(".deletefriendbutton").click(function() {
+    console.log("deletefriendbutton clicked");
+    var str = "deleteFriend&id=";
+    $.ajax({
+        url: controller + str + $(this).attr('data-id'),
+        //type: "post",
+        dataType: "json",
+        //data: JSON.stringify({"friendid": userId}),
+        success: function (response){
+          console.log(response);
+          showFriends();
+          getUserInfo();
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+          console.log(textStatus, errorThrown);
+        }
+    });
+  })
+}
+
 
 getScoreTable();
 getSession();
@@ -434,3 +457,4 @@ getUserInfo();
 getLastLoggedIn();
 getNewUsers();
 showFriends();
+initHandlers();

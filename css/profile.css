@@ -45,6 +45,14 @@ h6 {
   display: none;
 }
 
+#showfriendrequestsdiv {
+  display: none;
+}
+
+#showpendingfriendsdiv {
+  display: none;
+}
+
 .showfriendsdiv {
   margin-top: 10px;
 }
