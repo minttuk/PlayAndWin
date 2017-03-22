@@ -22,7 +22,7 @@ function getChat(){
     }
     return $html;
   } else {
-    return json_encode($results);
+    return json_encode($results,JSON_PRETTY_PRINT);
   }
 }
 

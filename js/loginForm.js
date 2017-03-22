@@ -56,9 +56,11 @@ function updateCoins() {
       $('.signUp').html(html+sessionStorage.coins);
     $.ajax({url: '/Backend/php/controller.php?q=getCoins', success: function (coins) {
       var newCoins = coins-sessionStorage.coins;
+      var newCoinString = newCoins;
+      if (newCoins > 0) newCoinString = '+'+newCoinString;
       if (coins != sessionStorage.coins) {
         $('.signUp').fadeOut(function() {
-          $(this).html(html + '&nbsp;+'+ newCoins).fadeIn(function() {
+          $(this).html(html + '&nbsp;'+ newCoinString).fadeIn(function() {
             $(this).fadeOut(function() {
               $(this).html(html + coins).fadeIn('slow');
             });

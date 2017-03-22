@@ -1,0 +1,44 @@
+.row {
+  font-family: 'Josefin Sans', sans-serif;
+}
+.col-md-12 {
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+}
+
+.copyright {
+  bottom: 25px;
+  left: 0;
+  position: absolute;
+  right: 0;
+}
+
+.subtable {
+  margin-left: 10px;
+  display: none;
+}
+
+#info{
+  font-size:1.3em;
+  text-align: left;
+}
+
+#apiRow {
+  margin-left:-10px;
+}
+
+#apiTitle{
+  font-size: 4em;
+}
+
+th:hover {
+  color:#4d5ebf;
+  cursor: pointer;
+}
+
+table {
+  font-family: 'Open Sans', sans-serif;
+  line-height: 3vh;
+  color:#180565;
+  font-size:1.3em;
+}

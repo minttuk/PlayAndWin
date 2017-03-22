@@ -5,5 +5,5 @@ function searchUsers($query) {
   foreach ($results as $result) {
     $matches[] = array('name'=>$result['username'],'image'=>$result['profilepicture']);
   }
-  return json_encode($matches);
+  return json_encode($matches,JSON_PRETTY_PRINT);
 }
