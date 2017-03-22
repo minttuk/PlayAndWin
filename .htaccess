@@ -5,3 +5,5 @@
    RewriteRule ^profile/([^/]+)$ /profile/ [L,QSA]
    RewriteRule ^user/([^/]+)$ /profile/ [L,QSA]
 </IfModule>
+
+ErrorDocument 404 /notfound/
