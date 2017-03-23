@@ -4,3 +4,4 @@ PHPUnitTests/logfile.xml
 PHPUnitTests/coverage.html
 PHPUnitTests/report.xml
 PHPUnitTests/testdox.xml
+.idea
