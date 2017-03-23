@@ -86,7 +86,7 @@ else {
     }
 
     if ($q == "buyProduct"){
-        buyProduct();
+      buyProduct();
     }
 
     if ($q == "getProducts"){
@@ -145,7 +145,7 @@ else {
       echo json_encode(getNewUsers());
     }
     if ($q == "getAdmin"){
-        getAdmin($_SESSION['id']);
+      echo getAdmin($_SESSION['id']);
     }
 
     if ($q == "deleteUser"){

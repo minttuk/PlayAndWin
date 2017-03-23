@@ -358,4 +358,20 @@ function getLastLoggedIn() {
   return $response;
 }
 
+/**
+ * Checks the admin status of the user signed in. Returns a boolean value of the admin status.
+ *
+ * @param int $id is the id number of the user
+ */
+function getAdmin($id){
+    if ($id != -1){
+        $user = R::load('user', $id);
+        $admin = $user->admin;
+    }
+    else{
+        $admin = null;
+    }
+    return json_encode(array('admin'=>$admin));
+}
+
 ?>

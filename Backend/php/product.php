@@ -102,18 +102,3 @@ function addProduct($name, $price, $description, $image_url){
     $product->image_url = $image_url;
     R::store( $product );
 }
-/**
- * Checks the admin status of the user signed in. Returns a boolean value of the admin status.
- *
- * @param int $id is the id number of the user
- */
-function getAdmin($id){
-    if ($id != -1){
-        $user = R::load('user', $id);
-        $admin = $user->admin;
-    }
-    else{
-        $admin = null;
-    }
-    echo json_encode(array('admin'=>$admin));
-}
