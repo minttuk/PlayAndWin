@@ -1,5 +1,8 @@
 <?php
 
+function getProducts(){
+  return json_encode(R::getAll( 'SELECT * FROM product' ),JSON_PRETTY_PRINT);
+}
 
 /**
  * Buying a product from the webstore.
@@ -10,32 +13,19 @@
  *
  */
 
- function getProducts(){
-   return json_encode(R::getAll( 'SELECT * FROM product' ),JSON_PRETTY_PRINT);
- }
-
-function buyProduct(){
-
-    $value = json_decode(file_get_contents('php://input'), true);
-    $product_id = $value['product_id'];
-    //checks if the user is signed in or not.
-    if (isset($_SESSION['id'])) {
-        $user = R::load('user',$_SESSION['id']);
-        $product_price = R::getCell( 'SELECT price FROM product WHERE id = :product_id', [':product_id' => $product_id]);
-        // Does the user have enough coins to buy this product?
-        if ($user->coins<$product_price){
-            echo json_encode(array('message'=>'You cannot buy this yet. You need more coins.'));
-        } else {
-            //If the user can buy the product subtract price from user's coins
-            $user->coins = $user->coins-$product_price;
-            makeShopOrder($user->id);
-            makeOrderRow($product_id);
-            addToCollection($product_id, $user->coins,$_SESSION['id'] );
-            R::store($user);
-        }
-    }
-    else {
-        echo json_encode(array('message'=>'You need to sign in first!'));
+function buyProduct($id,$product_id){
+    $user = R::load('user',$id);
+    $product_price = R::getCell( 'SELECT price FROM product WHERE id = :product_id', [':product_id' => $product_id]);
+    // Does the user have enough coins to buy this product?
+    if ($user->coins<$product_price){
+        return 'You cannot buy this yet. You need more coins.';
+    } else {
+        //If the user can buy the product subtract price from user's coins
+        $user->coins = $user->coins-$product_price;
+        makeShopOrder($user->id);
+        makeOrderRow($product_id);
+        R::store($user);
+        return addToCollection($product_id, $user->coins,$id);
     }
 }
 
@@ -79,7 +69,7 @@ function addToCollection($product_id, $coins, $session_id){
     }
     $collection->products = json_encode($products);
     R::store($collection);
-    echo json_encode(array('message'=>'You have bought this product! You have '.$coins.' coins left.' ));
+    return 'You have bought this product! You have '.$coins.' coins left.';
 }
 
 /**

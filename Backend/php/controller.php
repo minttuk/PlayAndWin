@@ -81,12 +81,16 @@ else {
     }
 
     if ($q == "addProduct"){
-        $value = json_decode(file_get_contents('php://input'), true);
-        addProduct($value['name'], $value['price'], $value['description'], $value['image_url']);
+      $value = json_decode(file_get_contents('php://input'), true);
+      addProduct($value['name'], $value['price'], $value['description'], $value['image_url']);
     }
 
     if ($q == "buyProduct"){
-      buyProduct();
+      if (isset($_SESSION['id'])) {
+        echo buyProduct($_SESSION['id'],$_REQUEST['product']);
+      } else {
+        echo 'You need to sign in first!';
+      }
     }
 
     if ($q == "getProducts"){

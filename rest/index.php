@@ -16,7 +16,7 @@ Flight::route('/', function(){
     include '../api/index.html';
 });
 
-// ----------------------------   SESSION "REST" API   ---------------------------- //
+// --------------------------   SESSION "RESTless" API   -------------------------- //
 
 //User
 Flight::route('PUT /user', function(){
@@ -61,7 +61,9 @@ Flight::route('POST /product', function(){
   );
 });
 Flight::route('/product/buy', function(){
-    buyProduct();
+    if (isSession() && Flight::request()->query->product != null) {
+      echo buyProduct($_SESSION['id'],Flight::request()->query->product);
+    }
 });
 
 // Highscore
