@@ -1,12 +1,8 @@
 var userId;
-var controller = "/Backend/php/controller.php?q=";
 var sessionId;
 
 function getScoreTable() {
-  var idParam = '';
-  if (getLastDir())
-    idParam = 'id='+getLastDir()+'&';
-  $.ajax({url: '/Backend/php/controller.php?q=getHighscores&'+idParam+'table',
+  $.ajax({url: '/rest/score/'+getLastDir()+'?table',
     datatype:'html',success: function(result){$("#highscores").html(result);
   }});
 }
@@ -22,13 +18,13 @@ function getLastDir() {
   var last = window.location.href.split('/');
   var last = last.pop();
   if (last == 'profile' || last == '')
-    return null;
+    return '';
   return last.replace('#','');
 }
 
 function getSession() {
   $.ajax({
-      url: "/Backend/php/controller.php?q=login",
+      url: "/rest/user",
       type: "get",
       dataType: "json",
       async: false,
@@ -55,7 +51,8 @@ $( "#saveprofilebutton" ).click(function() {
   if (inputOk) {
     $.ajax({
         url: controller + str,
-        type: "post",
+        type: "PUT",
+        contentType: "application/json",
         dataType: "json",
         data: JSON.stringify({"id": userId, "firstname": $newfirstname, "lastname": $newlastname, "description": $newdescription, "location": $newlocation}),
         success: function (response){
@@ -103,9 +100,8 @@ function showFriends(){
 }
 
 function getMutualFriends(callback) {
-  var str = "getMutualFriends&id=";
   $.ajax({
-      url: controller + str + userId,
+      url:'/rest/friends/'+userId,
       dataType: "json",
       success: function (response){
         callback(null, response);
@@ -118,9 +114,8 @@ function getMutualFriends(callback) {
 }
 
 function getPendingFriends(callback) {
-  var str = "getPendingFriends&id=";
   $.ajax({
-      url: controller + str + userId,
+      url:'/rest/friends/pending/'+userId,
       dataType: "json",
       success: function (response){
         console.log(response);
@@ -134,9 +129,8 @@ function getPendingFriends(callback) {
 }
 
 function getFriendRequests(callback) {
-  var str = "getFriendRequests&id=";
   $.ajax({
-      url: controller + str + userId,
+      url:'/rest/friends/requests/'+userId,
       dataType: "json",
       success: function (response){
         console.log(response);
@@ -186,9 +180,8 @@ function showFriendActionButton() {
 }
 
 function getFriendship(callback) {
-  var str = "getFriendship&id=";
   $.ajax({
-      url: controller + str + userId,
+      url: '/rest/friends?id='+userId,
       dataType: "json",
       success: function (response){
         callback(null, response);
@@ -201,7 +194,7 @@ function getFriendship(callback) {
 }
 
 function getUserInfo() {
-    if (getLastDir()) {
+    if (getLastDir()!='') {
       userId = getLastDir();
     }
     else if (sessionId != -1) {
@@ -210,9 +203,8 @@ function getUserInfo() {
     else {
       window.location = "/";
     }
-    var str = "getUserInfo&id=" + userId;
     $.ajax({
-        url: controller + str,
+        url: '/rest/user/'+userId,
         dataType: "json",
         success: function (response){
           updateProfile(response);
@@ -342,9 +334,8 @@ $('#mutualfriendstab').click(function() {
 })
 
 function getLastLoggedIn() {
-  var str = 'getLastLoggedIn';
   $.ajax({
-      url: controller + str,
+      url:'/rest/users/last',
       type: "get",
       dataType: "json",
       success: function (response){
@@ -359,9 +350,8 @@ function getLastLoggedIn() {
 }
 
 function getNewUsers() {
-  var str = 'getNewUsers';
   $.ajax({
-      url: controller + str,
+      url:'/rest/users/new',
       type: "get",
       dataType: "json",
       success: function (response){
@@ -415,8 +405,8 @@ function initHandlers() {
     var str = "addFriend&id=";
     console.log(userId);
     $.ajax({
-        url: controller + str + $(this).attr('data-id'),
-        //type: "post",
+        url:'/rest/friends?id='+$(this).attr('data-id'),
+        type: "POST",
         dataType: "json",
         //data: JSON.stringify({"friendid": userId}),
         success: function (response){
@@ -434,8 +424,8 @@ function initHandlers() {
     console.log("deletefriendbutton clicked");
     var str = "deleteFriend&id=";
     $.ajax({
-        url: controller + str + $(this).attr('data-id'),
-        //type: "post",
+        url:'/rest/friends?id='+$(this).attr('data-id'),
+        type: "DELETE",
         dataType: "json",
         //data: JSON.stringify({"friendid": userId}),
         success: function (response){

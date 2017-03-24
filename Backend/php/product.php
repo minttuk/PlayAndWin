@@ -85,10 +85,10 @@ function addToCollection($product_id, $coins, $session_id){
  *
  */
 function addProduct($name, $price, $description, $image_url){
-    $product = R::dispense( 'product' );
+    $product = R::dispense('product');
     $product->name = $name;
     $product->price = $price;
     $product->description = $description;
     $product->image_url = $image_url;
-    R::store( $product );
+    R::store($product);
 }

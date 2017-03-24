@@ -5,7 +5,7 @@ updateCoins();
 $(document).ready(function() {
   $("#signForm").submit(function(e) {
     e.preventDefault();
-    $.post( "/Backend/php/controller.php?q=login", $( "#signForm" ).serialize(), function(data) {
+    $.post( "/rest/user", $( "#signForm" ).serialize(), function(data) {
       if(data!='success') {
         $("#errorMsg").html('</br>'+data);
       } else location.reload();
@@ -28,7 +28,7 @@ function signUpForm() {
 function signInForm() {
   if(signedIn) {
     $('.signIn').removeAttr('data-toggle');
-    $.get('/Backend/php/controller.php?q=logout', function(result){
+    $.get('/rest/user/logout', function(result){
       location.reload();
     });
   } else {
@@ -39,7 +39,7 @@ function signInForm() {
 }
 
 function isSignedIn() {
-  $.ajax({url: '/Backend/php/controller.php?q=login', async: false,
+  $.ajax({url: '/rest/user', async: false,
     success: function (id) { if (id != -1) signedIn = true;}
   });
   if (signedIn) {
@@ -54,7 +54,7 @@ function updateCoins() {
     var html = '<i class="glyphicon glyphicon-copyright-mark"></i> ';
     if (sessionStorage.coins)
       $('.signUp').html(html+sessionStorage.coins);
-    $.ajax({url: '/Backend/php/controller.php?q=getCoins', success: function (coins) {
+    $.ajax({url: '/rest/coins', success: function (coins) {
       var newCoins = coins-sessionStorage.coins;
       var newCoinString = newCoins;
       if (newCoins > 0) newCoinString = '+'+newCoinString;

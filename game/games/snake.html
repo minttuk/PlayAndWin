@@ -43,7 +43,7 @@
             $('#start').css('display', 'none');
             $('#text').css('display', 'none');
             $('#canvas').css('display', 'block');
-
+            begin();
             dir = "right";
             create_snake();
             create_food();
@@ -92,7 +92,7 @@
                     $('#start').css('display', 'block');
                     $('#text').css('display', 'block');
                     $('#canvas').css('display', 'none');
-                    $.post("/Backend/php/controller.php?q=setHighscore", {
+                    $.post("/rest/score", {
                         game: 'snake',
                         score: score
                     }, function(data) {
@@ -111,6 +111,7 @@
                         y: posY
                     };
                     score++;
+                    update();
                     create_food();
                 } else {
                     var tail = snake_array.pop();

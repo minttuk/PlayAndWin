@@ -26,6 +26,7 @@
         $('#start').click(function() {
             score = 0;
             hideMenu();
+            begin();
             var hasLanded = false;
             var Jumper = function() {};
             Jumper.Play = function() {};
@@ -70,6 +71,7 @@
                         if (hasLanded) {
                             score++;
                             hasLanded = false;
+                            update();
                         }
                     });
                     this.heroMove();

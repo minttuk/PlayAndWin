@@ -2,7 +2,7 @@ var names = new Bloodhound({
   datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
   queryTokenizer: Bloodhound.tokenizers.whitespace,
   remote: {
-    url: '/Backend/php/controller.php?q=searchUsers&query=%QUERY',
+    url: '/rest/search/%QUERY',
     wildcard: '%QUERY'
   }
 });

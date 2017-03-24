@@ -374,4 +374,15 @@ function getAdmin($id){
     return json_encode(array('admin'=>$admin));
 }
 
+/**
+ * Gets the amount of coins associated with a given user ID from the database.
+ *
+ * @param int $id is the ID number of the user.
+ * @return int Number of coins
+ */
+function getCoins($id) {
+    $user = R::load( 'user', $id);
+    return $user->coins;
+}
+
 ?>

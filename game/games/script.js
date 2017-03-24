@@ -12,7 +12,7 @@ function hideMenu() {
 }
 
 function showMenu(gameID) {
-    $.post("/Backend/php/controller.php?q=setHighscore", {
+    $.post("/rest/score", {
         game: gameID,
         score: score
     }, function(data) {
@@ -26,4 +26,12 @@ function showMenu(gameID) {
     $('#result').html(score);
     $('#start').css('display', 'block');
     $('#text').css('display', 'block');
+}
+
+function update() {
+  $.post( "scorer.php", {update:1} );
+}
+
+function begin() {
+  $.post( "scorer.php", {begin:1} );
 }

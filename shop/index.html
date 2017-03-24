@@ -7,7 +7,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Play and Win</title>
+<title>Play Talk .Win</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="Games Zone Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
@@ -48,7 +48,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a href="/"><h1>Play and win <img src="../images/c1.png" alt=" " /></h1></a>
+					<a href="/"><h1>Play Talk .Win <img src="../images/c1.png" alt=" " /></h1></a>
 				</div>
 
 				<div id="navbar" class="navbar-collapse collapse">
@@ -88,7 +88,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
  <script>
   $(document).ready(function() {
 
-  $.get('/Backend/php/controller.php?q=getProducts', function(products) {
+  $.get('/rest/products', function(products) {
     for (var i = 0; i < products.length; i++) {
 	    $('.infos').append('<div class="pop-up"><div id="small-dialog'+i+'" class="mfp-hide book-form"><div class="pop-up-content-agileits-w3layouts"><div class="col-md-6 w3ls-left">'
 	                   +'<img src="'+products[i].image_url+'" alt=" " class="img-responsive zoom-img" /></div>'
@@ -128,7 +128,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
   })});
 
 </script>
-<script src="../js/buy.js"></script>
 
 <!-- Add Product Modal -->
 <div id="addProductModal" class="modal">
@@ -166,10 +165,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 </div>
 
 <button type="button" class="button" id="addProductButton" data-toggle="modal" data-target="#addProductModal" >ADD PRODUCTS</button>
-<script src="../js/loginForm.js"></script>
-<script src="../js/addProduct.js"></script>
-<script src="../js/jquery.magnific-popup.js" type="text/javascript"></script>
-<script type="text/javascript" src="../js/modernizr.custom.53451.js"></script>
+<script src="/js/navbar.js"></script>
+<script src="/js/webstore.js"></script>
+<script src="/js/jquery.magnific-popup.js" type="text/javascript"></script>
+<script src="/js/modernizr.custom.53451.js" type="text/javascript"></script>
 <div class="infos"/>
 
 <!-- Malli siitä miten oli ennen
@@ -327,14 +326,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div class="clearfix"></div>
 		</div>
 		<div class="col-md-4 footer-right-w3">
-			<a href="/"><h4>Play And Win <img src="../images/f1.png" alt=" " /> </h4></a>
+			<a href="/"><h4>Play Talk .Win <img src="../images/f1.png" alt=" " /> </h4></a>
 			<p>The shop is where you can spend the coins you have earned on this site on a selection of awesome prizes.</p>
 			<p class="agileinfo">Some prizes are only available for a limited amount of time, but more offers are added frequently so check back soon.</p>
 		</div>
 	</div>
 	<div class="clearfix"></div>
 	<div class="copyright">
-		<p>&copy; 2017 Play And Win. All Rights Reserved | Design by <a href="http://w3layouts.com/" target="_blank"> W3layouts </a></p>
+		<p>&copy; 2017 Play Talk .Win. All Rights Reserved | Design by <a href="http://w3layouts.com/" target="_blank"> W3layouts </a></p>
 	</div>
 </div>
 

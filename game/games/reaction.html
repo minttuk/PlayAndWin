@@ -26,12 +26,9 @@
     </div>
 
     <script>
-        var clickedTime;
-        var createdTime;
-        var reactionTime;
+        var timer;
         var clickCount;
         var reactionTotal;
-        var highScore = 99999;
         var boxStyle = document.getElementById("box").style;
         var startCircle = document.getElementById("start").style;
         var dialog = document.getElementById("text").style;
@@ -39,7 +36,7 @@
         function makeBox() {
 
             var boxShape = Math.random() * 60 + 5 + "px";
-            var time = (Math.random() * 1000);
+            var time = (Math.random() * 700);
             var boxVertical = Math.random() * window.innerHeight - 100;
             var boxHorizontal = Math.random() * window.innerWidth - 100;
 
@@ -50,52 +47,53 @@
                 boxHorizontal = Math.random() * window.innerWidth - 100;
             }
             setTimeout(function() {
+                var timelimit;
                 boxStyle.borderRadius = boxShape;
                 boxStyle.display = "block";
                 boxStyle.background = '#' + Math.round(0xffffff * Math.random()).toString(16);
                 boxStyle.left = boxHorizontal + "px";
                 boxStyle.top = boxVertical + "px";
-                createdTime = Date.now();
+                if (clickCount < 10) timelimit = 2000/parseFloat('1.'+clickCount);
+                else if (clickCount > 20) timelimit = 2100/parseFloat('3.'+clickCount);
+                else timelimit = 1800/parseFloat('2.'+clickCount);
+                timer = setTimeout(gameOver,timelimit);
+                console.log(timelimit);
             }, time);
         }
 
         document.getElementById("box").onclick = function() {
-            clickedTime = Date.now();
-            reactionTime = (clickedTime - createdTime) / 700;
-            console.log(reactionTime + "s");
+            clearTimeout(timer);
             clickCount++;
+            update();
             this.style.display = "none";
-            if (clickCount == 5) {
-                while (reactionTotal < highScore) {
-                    highScore = reactionTotal
-                }
-                document.getElementById("again").innerHTML = "Again?";
-                document.getElementById("result").innerHTML = Math.round(1000 / reactionTotal);
-                $.post("/Backend/php/controller.php?q=setHighscore", {
-                    game: 'reaction',
-                    score: Math.round(1000 / highScore)
-                }, function(data) {
-                    $('#score').html(data.highscore);
-                    window.parent.updateCoins();
-                    if (data.message != '') {
-                        alert(data.message);
-                    }
-                }, 'json');
-                startColor();
-                startCircle.display = "block";
-                dialog.display = "block";
-            } else {
-                makeBox();;
-                reactionTotal = reactionTotal + reactionTime;
-            }
+            makeBox();
         }
 
         document.getElementById("start").onclick = function() {
             clickCount = 0;
-            reactionTotal = 0;
             startCircle.display = "none";
             dialog.display = "none";
+            begin();
             makeBox();
+        }
+
+        function gameOver() {
+          document.getElementById("box").style.display = "none";
+          document.getElementById("again").innerHTML = "Again?";
+          document.getElementById("result").innerHTML = clickCount;
+          $.post("/rest/score", {
+              game: 'reaction',
+              score: clickCount
+          }, function(data) {
+              $('#score').html(data.highscore);
+              window.parent.updateCoins();
+              if (data.message != '') {
+                  alert(data.message);
+              }
+          }, 'json');
+          startColor();
+          startCircle.display = "block";
+          dialog.display = "block";
         }
     </script>
 

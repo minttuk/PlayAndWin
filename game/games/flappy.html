@@ -26,6 +26,7 @@
         $('#start').click(function() {
             score = 0
             hideMenu();
+            begin();
             var mainState = {
                 preload: function() {
                     game.load.image('pipe', 'res/pipe.png');
@@ -86,7 +87,10 @@
 
                 addRowOfPipes: function() {
                     var hole = Math.floor(Math.random() * 5) + 1;
-                    if (this.doOnce) score += 1;
+                    if (this.doOnce) {
+                      score += 1;
+                      update();
+                    }
                     else this.doOnce = true;
                     this.labelScore.text = score;
                     for (var i = 0; i < 8; i++)

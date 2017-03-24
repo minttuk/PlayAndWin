@@ -51,7 +51,7 @@ window.onload = function displayAddProductButton() {
         ;
     }
 
-    ajaxRequest.open("GET", "/Backend/php/controller.php?q=getAdmin", true);
+    ajaxRequest.open("GET", "/rest/user/admin", true);
     ajaxRequest.send(null);
     }
 
@@ -104,7 +104,8 @@ submitForm.onclick = function(){
             }
         };
 
-        ajaxRequest.open("POST", "/Backend/php/controller.php?q=addProduct", true);
+        ajaxRequest.open("POST", "/rest/product", true);
+        ajaxRequest.setRequestHeader("Content-Type","application/json");
         ajaxRequest.send(dataString);
     }
 }
@@ -152,4 +153,21 @@ function checkCost(price) {
         $('.errormsg').html("Please give the product's cost!");
         return false;
     }
+}
+
+/**
+ * An ajax call send when the user clicks "BUY" on the webstore's product pop-up window. Response text of the call
+ * returns a JSON array containing a message for the user to be displayed on the pop-up window.
+ *
+ * @param int product_id
+ * @returns {boolean}
+ */
+function buy(product_id){
+
+    $.ajax({url: '/rest/product/buy?product='+product_id,
+      success: function (message) {
+        $('.buyMessage').html(message);
+        updateCoins();
+      }
+    });
 }

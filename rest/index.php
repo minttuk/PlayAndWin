@@ -67,7 +67,7 @@ Flight::route('/product/buy', function(){
 });
 
 // Highscore
-Flight::route('PUT /score', function(){
+Flight::route('POST /score', function(){
     echo setHighscore();
 });
 Flight::route('/score', function(){
@@ -85,19 +85,22 @@ Flight::route('/coins', function(){
 // User
 Flight::route('POST /user', function(){
     echo loginUser(
-      Flight::request()->query->Username,
-      Flight::request()->query->Password,
-      Flight::request()->query->ConfirmPassword,
-      Flight::request()->query->Email,
-      Flight::request()->query->Firstname,
-      Flight::request()->query->Lastname
+      Flight::request()->data->Username,
+      Flight::request()->data->Password,
+      Flight::request()->data->ConfirmPassword,
+      Flight::request()->data->Email,
+      Flight::request()->data->Firstname,
+      Flight::request()->data->Lastname
     );
+});
+Flight::route('/user/logout', function(){
+    echo logOut();
 });
 Flight::route('/user/@id', function($id){
     Flight::json(getUserInfo($id));
 });
-Flight::route('/user/logout', function($id){
-    echo logOut();
+Flight::route('/user', function(){
+    echo loginUser(null,null,null,null,null,null);
 });
 
 // Users
@@ -114,7 +117,7 @@ Flight::route('/products', function(){
 });
 
 // Chat
-Flight::route('PUT /chat', function(){
+Flight::route('POST /chat', function(){
     echo addChat();
 });
 Flight::route('/chat', function(){

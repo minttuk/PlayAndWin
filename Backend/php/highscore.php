@@ -7,36 +7,25 @@
  * @return JSON formatted string.
  */
 function setHighscore() {
-  if (isset($_SESSION['id'])) {
-    if (isset($_REQUEST['game'])) {
-      if (isset($_REQUEST['score'])) {
-        $tableName = 'hs_'.$_REQUEST['game'];
-        $newScore = $_REQUEST['score'];
-        $id = $_SESSION['id'];
-        $score = R::load( $tableName, $id );
-        $curScore = $score->highscore;
-        coinAmount($id,$_REQUEST['game'],$newScore);
-        if ($newScore > $curScore) {
-          $score->highscore=$newScore;
-          R::store( $score );
-          return json_encode(array('highscore'=>$newScore,'message'=>''));
-        }
-        return json_encode(array('highscore'=>$curScore,'message'=>''));
+  if (isset($_SESSION['id']) && isset($_REQUEST['game']) && isset($_REQUEST['score'])) {
+    if ($_REQUEST['score'] == $_SESSION['score']) {
+      $_SESSION['score'] = 0;
+      $tableName = 'hs_'.$_REQUEST['game'];
+      $newScore = $_REQUEST['score'];
+      $id = $_SESSION['id'];
+      $score = R::load( $tableName, $id );
+      $curScore = $score->highscore;
+      coinAmount($id,$_REQUEST['game'],$newScore);
+      if ($newScore > $curScore) {
+        $score->highscore=$newScore;
+        R::store( $score );
+        return json_encode(array('highscore'=>$newScore,'message'=>''));
       }
+      return json_encode(array('highscore'=>$curScore,'message'=>''));
     }
+      return json_encode(array('highscore'=>'','message'=>'Possible cheating detected!'));
   }
   return json_encode(array('highscore'=>'','message'=>'Highscore not saved! (No user signed in.)'));
-}
-
-/**
- * Gets the amount of coins associated with a given user ID from the database.
- *
- * @param int $id is the ID number of the user.
- * @return int Number of coins
- */
-function getCoins($id) {
-    $user = R::load( 'user', $id);
-    return $user->coins;
 }
 
 /**
@@ -48,7 +37,7 @@ function getCoins($id) {
  */
 
 function coinAmount($id,$game,$score) {
-    $newCoins = array('snake'=>round($score*0.2),'flappy'=>round($score*0.3),'reaction'=>round($score*0.006),'jumper'=>round($score*0.07));
+    $newCoins = array('snake'=>round($score*0.2),'flappy'=>round($score*0.3),'reaction'=>round($score*0.09),'jumper'=>round($score*0.07));
     $user = R::load( 'user', $id );
     $coins = $user->coins + $newCoins[$game];
     $user->coins = $coins;
