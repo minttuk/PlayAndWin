@@ -1,3 +1,4 @@
+var search = true;
 var names = new Bloodhound({
   datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
   queryTokenizer: Bloodhound.tokenizers.whitespace,
@@ -12,8 +13,7 @@ $('#remote .typeahead').typeahead(null, {
   displayKey: 'name',
   source: names,
   templates: {
-    empty: ['<h4><b>No users found!</b></h4>'
-    ],
+    empty: ['<h5><b>No users found!</b></h5>'],
     suggestion: function(data){
           return '<a class="resultlink" href="/profile/'+data.name
           +'"><div class="result"><img class="searchimage" src="/images/user/'
@@ -21,3 +21,24 @@ $('#remote .typeahead').typeahead(null, {
     }
   }
 });
+
+$('#search').click(function(){
+  if (search) {
+    mobileView();
+    $('#remote').toggle(500);
+    $('#searchbar').focus();
+  }
+  search = false;
+});
+$('#searchbar').focusout(function(){
+  $('#remote .typeahead').typeahead('val', '');
+  $('#remote').toggle(500, function(){
+    mobileView();
+  });
+  setTimeout(function(){search = true;},500);
+});
+
+function mobileView(){
+  if($( window ).width() < 500)
+    $('#search').toggle();
+}

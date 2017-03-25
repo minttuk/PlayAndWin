@@ -1,5 +1,5 @@
 .modal-dialog {
-    width: 455px;
+    width: 275px;
 }
 
 .tt-input, .tt-hint {
@@ -22,7 +22,7 @@
 }
 
 .tt-menu {
-    width: 422px;
+    width: 242px;
     margin-top: 12px;
     padding: 8px 0;
     background-color: #fff;
@@ -61,7 +61,7 @@ color:#999 !important;
 
 .typeahead {
   font-family: 'Josefin Sans', sans-serif;
-  width: 420px;
+  width: 240px;
 }
 
 .searchimage {

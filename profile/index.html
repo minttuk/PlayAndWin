@@ -11,7 +11,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <link href="../css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
 <link href="../css/style.css" rel="stylesheet" type="text/css" media="all" />
 <link href="../css/profile.css" rel="stylesheet" type="text/css" media="all" />
-  <link href="../css/search.css" rel="stylesheet" type="text/css" media="all" />
+<link href="../css/search.css" rel="stylesheet" type="text/css" media="all" />
 <!--// css -->
 <!-- font -->
 <link href='http://fonts.googleapis.com/css?family=Josefin+Sans:400,100,100italic,300,300italic,400italic,600,600italic,700,700italic' rel='stylesheet' type='text/css'>
@@ -125,18 +125,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					</div>
 				</div>
 			</div>
-			<!-- Search modal -->
-			<div id="searchModal" class="modal fade" role="dialog">
-			  <div class="modal-dialog">
-			    <div class="modal-content">
-			      <div class="modal-body">
-			        <div id="remote">
-			          <input class="typeahead form-control" type="text" placeholder="Search for others users">
-			        </div>
-			      </div>
-			    </div>
-			  </div>
-			</div>
 		</div>
   </div>
 <div class="events-section2-agileinfo">
@@ -146,8 +134,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<img class="profilepicture" src="../images/default.png" alt=" " />
 		</div>
 		<div class="col-md-8 blog-text-w3ls">
-			<h4 data-toggle="modal" data-target="#searchModal" style="float:right; font-size:1.7em" id="search">
-				<span class="glyphicon glyphicon-search" style='font-size:0.8em'></span> Search
+      <div id="remote" style="float:right; display:none; padding-left: 10px;">
+        <input id='searchbar' class="typeahead form-control" type="text" placeholder="">
+      </div>
+			<h4 style="float:right; font-size:1.7em; position: relative;" id="search">
+				<span class="glyphicon glyphicon-search" style='font-size:0.8em'></span> Find User
 			</h4>
 			<h4 id="username">&nbsp;</h4>
 			<h6 id="membersince">&nbsp;</h6>

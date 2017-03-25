@@ -42,7 +42,6 @@ function getSession() {
 
 $( "#saveprofilebutton" ).click(function() {
   console.log("saveprofilebutton clicked");
-  var str = "setUserInfo";
   var $newfirstname = $('input[name="newfirstname"]').val();
   var $newlastname = $('input[name="newlastname"]').val();
   var $newdescription = $('input[name="newdescription"]').val();
@@ -50,7 +49,7 @@ $( "#saveprofilebutton" ).click(function() {
   var inputOk = checkEditedProfile($newfirstname, $newlastname);
   if (inputOk) {
     $.ajax({
-        url: controller + str,
+        url: '/rest/user',
         type: "PUT",
         contentType: "application/json",
         dataType: "json",
@@ -211,7 +210,6 @@ function getUserInfo() {
         },
         error: function(jqXHR, textStatus, errorThrown) {
           console.log(textStatus, errorThrown);
-          //window.location = "index.html";
         }
     });
 }
