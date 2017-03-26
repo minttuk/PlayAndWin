@@ -1,12 +1,5 @@
 <?php
-require 'flight/Flight.php';
-require '../Backend/php/connection.php';
-require '../Backend/php/user.php';
-require '../Backend/php/product.php';
-require '../Backend/php/chat.php';
-require '../Backend/php/highscore.php';
-require '../Backend/php/search.php';
-require '../Backend/php/login.php';
+require 'dependencies/require_all.php';
 session_start();
 
 connect();
@@ -16,13 +9,18 @@ Flight::route('/', function(){
     include '../api/index.html';
 });
 
+Flight::route('/test', function(){
+    //$token = generateToken();
+    print_r(validateToken());
+});
+
 // --------------------------   SESSION "RESTless" API   -------------------------- //
 
 //User
 Flight::route('PUT /user', function(){
-    if(isSession()) {
+    if(isToken()) {
       echo setUserInfo(
-        $_SESSION['id'],
+        validateToken(),
         Flight::request()->data->firstname,
         Flight::request()->data->lastname,
         Flight::request()->data->description,
@@ -31,24 +29,24 @@ Flight::route('PUT /user', function(){
     }
 });
 Flight::route('DELETE /user', function(){
-    if (isSession()) echo deleteUser($_SESSION['id'],$_SESSION['id']);
+    if (isToken()) echo deleteUser(validateToken(),validateToken());
 });
 Flight::route('DELETE /user/@id', function($id){
-    if (isSession()) echo deleteUser($_SESSION['id'],$id);
+    if (isToken()) echo deleteUser(validateToken(),$id);
 });
 Flight::route('/user/admin', function(){
-    if (isset($_SESSION['id'])) echo getAdmin($_SESSION['id']);
+    if (isToken()) echo getAdmin(validateToken());
 });
 
 // Friends
 Flight::route('POST /friends', function(){
-    if (isFriendParams())Flight::json(addFriend($_SESSION['id'], Flight::request()->query->id));
+    if (isFriendParams())Flight::json(addFriend(validateToken(), Flight::request()->query->id));
 });
 Flight::route('DELETE /friends', function(){
-    if (isFriendParams()) Flight::json(deleteFriend($_SESSION['id'], Flight::request()->query->id));
+    if (isFriendParams()) Flight::json(deleteFriend(validateToken(), Flight::request()->query->id));
 });
 Flight::route('GET /friends', function(){
-    if (isFriendParams()) Flight::json(getFriendship($_SESSION['id'], Flight::request()->query->id));
+    if (isFriendParams()) Flight::json(getFriendship(validateToken(), Flight::request()->query->id));
 });
 
 //Product
@@ -61,8 +59,8 @@ Flight::route('POST /product', function(){
   );
 });
 Flight::route('/product/buy', function(){
-    if (isSession() && Flight::request()->query->product != null) {
-      echo buyProduct($_SESSION['id'],Flight::request()->query->product);
+    if (isToken() && Flight::request()->query->product != null) {
+      echo buyProduct(validateToken(),Flight::request()->query->product);
     }
 });
 
@@ -71,12 +69,12 @@ Flight::route('POST /score', function(){
     echo setHighscore();
 });
 Flight::route('/score', function(){
-    if (isSession()) echo getHighscores($_SESSION['id']);
+    if (isToken()) echo getHighscores(validateToken());
 });
 
 // Coins
 Flight::route('/coins', function(){
-    if (isSession()) echo getCoins($_SESSION['id']);
+    if (isToken()) echo getCoins(validateToken());
 });
 
 
@@ -156,7 +154,7 @@ Flight::map('notFound', function(){
 Flight::start();
 
 // Helper functions
-function isFriendParams() {
+function isFriendParam() {
     if (isset($_SESSION['id']) && Flight::request()->query->id != null) return true;
     else echo 'Incomplete request'; return false;
 }
@@ -164,4 +162,14 @@ function isFriendParams() {
 function isSession() {
     if (isset($_SESSION['id'])) return true;
     else echo 'No user is signed in.'; return false;
+}
+
+function isFriendParams() {
+    if (isset($_SERVER['HTTP_ACCESS_TOKEN']) && Flight::request()->query->id != null) return true;
+    else echo 'Incomplete request'; return false;
+}
+
+function isToken() {
+    if (isset($_SERVER['HTTP_ACCESS_TOKEN'])) return true;
+    else echo 'No access token provided.'; return false;
 }

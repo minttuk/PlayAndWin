@@ -2,7 +2,7 @@ var userId;
 var sessionId;
 
 function getScoreTable() {
-  $.ajax({url: '/rest/score/'+getLastDir()+'?table',
+  $.ajax({url: '/rest/score/'+getLastDir()+'?table', headers:{'access_token':$.cookie('access_token')},
     datatype:'html',success: function(result){$("#highscores").html(result);
   }});
 }
@@ -28,6 +28,7 @@ function getSession() {
       type: "get",
       dataType: "json",
       async: false,
+      headers:{'access_token':$.cookie('access_token')},
       success: function (response){
         sessionId = response;
         if (response != -1) sessionId = response.name;
@@ -182,6 +183,7 @@ function getFriendship(callback) {
   $.ajax({
       url: '/rest/friends?id='+userId,
       dataType: "json",
+      headers:{'access_token':$.cookie('access_token')},
       success: function (response){
         callback(null, response);
       },
@@ -205,6 +207,7 @@ function getUserInfo() {
     $.ajax({
         url: '/rest/user/'+userId,
         dataType: "json",
+        headers:{'access_token':$.cookie('access_token')},
         success: function (response){
           updateProfile(response);
         },
@@ -406,6 +409,7 @@ function initHandlers() {
         url:'/rest/friends?id='+$(this).attr('data-id'),
         type: "POST",
         dataType: "json",
+        headers:{'access_token':$.cookie('access_token')},
         //data: JSON.stringify({"friendid": userId}),
         success: function (response){
           console.log(response);
@@ -420,11 +424,11 @@ function initHandlers() {
 
   $(".deletefriendbutton").click(function() {
     console.log("deletefriendbutton clicked");
-    var str = "deleteFriend&id=";
     $.ajax({
         url:'/rest/friends?id='+$(this).attr('data-id'),
         type: "DELETE",
         dataType: "json",
+        headers:{'access_token':$.cookie('access_token')},
         //data: JSON.stringify({"friendid": userId}),
         success: function (response){
           console.log(response);

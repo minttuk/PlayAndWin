@@ -5,11 +5,14 @@ updateCoins();
 $(document).ready(function() {
   $("#signForm").submit(function(e) {
     e.preventDefault();
-    $.post( "/rest/user", $( "#signForm" ).serialize(), function(data) {
-      if(data!='success') {
-        $("#errorMsg").html('</br>'+data);
-      } else location.reload();
-    });
+    $.post( "/rest/user", $( "#signForm" ).serialize(), function(result) {
+      if(result.token) {
+        $.cookie("access_token",result.token,{expires:14});
+        location.reload();
+      } else {
+        $("#errorMsg").html('</br>'+result.data);
+      }
+    },'json');
   });
 });
 function signUpForm() {
@@ -29,6 +32,7 @@ function signInForm() {
   if(signedIn) {
     $('.signIn').removeAttr('data-toggle');
     $.get('/rest/user/logout', function(result){
+      $.removeCookie('access_token', { path: '/' });
       location.reload();
     });
   } else {
@@ -39,9 +43,17 @@ function signInForm() {
 }
 
 function isSignedIn() {
-  $.ajax({url: '/rest/user', async: false,
-    success: function (id) { if (id != -1) signedIn = true;}
-  });
+
+  if($.cookie('access_token')){
+    $.ajax({url: '/rest/user', async: false, headers:{'access_token':$.cookie('access_token')},
+      success: function (id) { if (id != -1) signedIn = true;}
+    });
+  } else {
+    $.ajax({url: '/rest/user', async: false,
+      success: function (id) { if (id != -1) signedIn = true;}
+    });
+  }
+
   if (signedIn) {
     $('#prof').css('display','block');
     $('.signUp').html('');
@@ -54,7 +66,7 @@ function updateCoins() {
     var html = '<i class="glyphicon glyphicon-copyright-mark"></i> ';
     if (sessionStorage.coins)
       $('.signUp').html(html+sessionStorage.coins);
-    $.ajax({url: '/rest/coins', success: function (coins) {
+    $.ajax({url: '/rest/coins',headers:{'access_token':$.cookie('access_token')},success:function (coins) {
       var newCoins = coins-sessionStorage.coins;
       var newCoinString = newCoins;
       if (newCoins > 0) newCoinString = '+'+newCoinString;
