@@ -8,7 +8,7 @@
 
 use phpunit\Framework\TestCase;
 echo "xxxxx" . getcwd();
-require '../Backend/php/addProduct.php';
+require '../Backend/php/product.php';
 
 final class addProductTest extends TestCase{
 
