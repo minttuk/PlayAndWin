@@ -88,6 +88,9 @@ CREATE TABLE collection (
   products JSON DEFAULT NULL,
   FOREIGN KEY (id) REFERENCES user(id)
 );
+INSERT INTO collection (id, products) VALUES
+  (1, '{"3": 2, "4": 1}'),
+  (2, '{"1": 2, "3": 4}');
 
 INSERT INTO product (name, price, description, image_url) VALUES
 ("Tesla car", 9000000, "Super cool luxury car", "https://tctechcrunch2011.files.wordpress.com/2015/08/tesla_model_s.jpg?w=738"),
