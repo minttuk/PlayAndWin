@@ -10,16 +10,10 @@ Flight::route('/', function(){
 });
 
 Flight::route('/test', function(){
-    //print_r();
-    //$moi = getallheaders();
-    //echo getallheaders()['access_token'];
-    //print_r(getallheaders());
-    // $_SERVER['HTTP_ACCESS_TOKEN'];
-    //$token = generateToken();
     print_r(validateToken());
 });
 
-// --------------------------   SESSION "RESTless" API   -------------------------- //
+// --------------------------   PRIVATE REST API   -------------------------- //
 
 //User
 Flight::route('PUT /user', function(){
@@ -83,7 +77,7 @@ Flight::route('/coins', function(){
 });
 
 
-// --------------------------------   RESTful API   -------------------------------- //
+// --------------------------------   PUBLIC REST API   -------------------------------- //
 
 // User
 Flight::route('POST /user', function(){
