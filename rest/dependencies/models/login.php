@@ -38,7 +38,7 @@ function loginUser($uname, $password, $confirmPass, $email, $firstname, $lastnam
       return json_encode(array('token'=>generateToken($player->id,$uname)));
     } else  $message['data'] = 'Nope, wrong username or password!';
   } else {
-    $message = isset($_SERVER['HTTP_ACCESS_TOKEN']) ? array('id'=>validateToken(),'name'=>R::getCell('SELECT username FROM user WHERE id='.validateToken())) : -1;
+    $message = isset(getallheaders()['access_token']) ? array('id'=>validateToken(),'name'=>R::getCell('SELECT username FROM user WHERE id='.validateToken())) : -1;
   }
   return json_encode($message);
 }

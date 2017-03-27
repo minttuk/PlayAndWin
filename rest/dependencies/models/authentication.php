@@ -19,7 +19,7 @@ function generateToken($id,$name){
 }
 
 function validateToken(){
-  $jwt = $_SERVER['HTTP_ACCESS_TOKEN'];
+  $jwt = getallheaders()['access_token'];
   global $key;
   $decoded = JWT::decode($jwt, $key, array('HS256'));
   $decoded_array = (array) $decoded;

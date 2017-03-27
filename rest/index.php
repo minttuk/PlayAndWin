@@ -10,6 +10,11 @@ Flight::route('/', function(){
 });
 
 Flight::route('/test', function(){
+    //print_r();
+    //$moi = getallheaders();
+    //echo getallheaders()['access_token'];
+    //print_r(getallheaders());
+    // $_SERVER['HTTP_ACCESS_TOKEN'];
     //$token = generateToken();
     print_r(validateToken());
 });
@@ -165,11 +170,11 @@ function isSession() {
 }
 
 function isFriendParams() {
-    if (isset($_SERVER['HTTP_ACCESS_TOKEN']) && Flight::request()->query->id != null) return true;
+    if (isset(getallheaders()['access_token']) && Flight::request()->query->id != null) return true;
     else echo 'Incomplete request'; return false;
 }
 
 function isToken() {
-    if (isset($_SERVER['HTTP_ACCESS_TOKEN'])) return true;
+    if (isset(getallheaders()['access_token'])) return true;
     else echo 'No access token provided.'; return false;
 }
