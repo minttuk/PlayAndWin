@@ -387,7 +387,7 @@ function showOtherUsers(response, who) {
       buttonAdd.attr("data-id", response[i].username);
       div.append(buttonAdd);
     }
-    if (who == "showmutualfriendsdiv" || who == "showfriendrequestsdiv" || who == "showpendingfriendsdiv") {
+    if (who == "showfriendrequestsdiv" || who == "showpendingfriendsdiv") {
       //var buttonDelete = $('<a class="deletefriendbutton"><i class="glyphicon glyphicon-remove" aria-hidden="true"></i></a>');
       var buttonDelete = $('<a class="deletefriendbutton"><i class="glyphicon glyphicon-remove"></i></a>');
       buttonDelete.attr("data-id", response[i].username);
