@@ -162,6 +162,10 @@ function showFriendActionButton() {
           $('.addfriendbutton').fadeOut(0, function() {
             $(this).css('display', 'inline-block').fadeIn(500);
           });
+          $('#deletefriendbuttontext').text('Reject Request');
+          $('.deletefriendbutton').fadeOut(0, function() {
+              $(this).css('display', 'inline-block').fadeIn(500);
+          });
         }
         else if (response[0]['friend_id'] == userId) {
           $('#deletefriendbuttontext').text('Cancel Request');
