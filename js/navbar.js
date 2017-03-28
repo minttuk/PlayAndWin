@@ -7,7 +7,7 @@ $(document).ready(function() {
     e.preventDefault();
     $.post( "/rest/user", $( "#signForm" ).serialize(), function(result) {
       if(result.token) {
-        $.cookie("access_token",result.token,{expires:14});
+        $.cookie("access_token",result.token,{expires:14, path:'/'});
         location.reload();
       } else {
         $("#errorMsg").html('</br>'+result.data);
