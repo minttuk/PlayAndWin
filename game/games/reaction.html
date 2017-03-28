@@ -28,7 +28,7 @@
 
     <script>
         var timer;
-        var clickCount;
+        var score;
         var reactionTotal;
         var boxStyle = document.getElementById("box").style;
         var startCircle = document.getElementById("start").style;
@@ -54,9 +54,9 @@
                 boxStyle.background = '#' + Math.round(0xffffff * Math.random()).toString(16);
                 boxStyle.left = boxHorizontal + "px";
                 boxStyle.top = boxVertical + "px";
-                if (clickCount < 10) timelimit = 2000/parseFloat('1.'+clickCount);
-                else if (clickCount > 20) timelimit = 2100/parseFloat('3.'+clickCount);
-                else timelimit = 1800/parseFloat('2.'+clickCount);
+                if (score < 10) timelimit = 2000/parseFloat('1.'+score);
+                else if (score > 20) timelimit = 2100/parseFloat('3.'+score);
+                else timelimit = 1800/parseFloat('2.'+score);
                 timer = setTimeout(gameOver,timelimit);
                 console.log(timelimit);
             }, time);
@@ -64,14 +64,14 @@
 
         document.getElementById("box").onclick = function() {
             clearTimeout(timer);
-            clickCount++;
+            score++;
             update();
             this.style.display = "none";
             makeBox();
         }
 
         document.getElementById("start").onclick = function() {
-            clickCount = 0;
+            score = 0;
             startCircle.display = "none";
             dialog.display = "none";
             begin();
