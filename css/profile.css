@@ -67,6 +67,10 @@ h6 {
   display: none;
 }
 
+#mycollectionbutton {
+  display: none;
+}
+
 .showfriendsdiv {
   margin-top: 10px;
 }

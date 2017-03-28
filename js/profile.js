@@ -267,6 +267,9 @@ function updateProfile(response) {
     $('#editpicturebutton').fadeOut(0, function() {
       $(this).css('display', 'inline-block').fadeIn(500);
     });
+    $('#mycollectionbutton').fadeOut(0, function() {
+      $(this).css('display', 'inline-block').fadeIn(500);
+    });
     $('#friendrequeststab').css("display", "inline-block");
     $('#pendingfriendstab').css("display", "inline-block");
   }
