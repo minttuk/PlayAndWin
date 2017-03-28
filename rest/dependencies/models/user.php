@@ -392,7 +392,8 @@ function getCoins($id) {
  * @return List of products
  */
 function getCollection($id) {
-
+  $products = R::load('collection', getUserID($id));
+  return $products;
 }
 
 ?>

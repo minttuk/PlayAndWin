@@ -104,7 +104,17 @@ $('#mycollectionbutton').click(function (){
 });
 
 function getCollection() {
-  console.log("moi");
+  console.log(userId);
+  $.ajax({
+      url:'/rest/collection/'+userId,
+      dataType: "json",
+      success: function (response){
+        console.log(response);
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        console.log(textStatus, errorThrown);
+      }
+  });
 }
 
 function getMutualFriends(callback) {
