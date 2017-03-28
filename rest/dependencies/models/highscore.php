@@ -6,26 +6,25 @@
  * The game and score are recieved as POST parameters and the user ID is retrieved from a session variable.
  * @return JSON formatted string.
  */
-function setHighscore() {
-  if (isset($_SESSION['id']) && isset($_REQUEST['game']) && isset($_REQUEST['score'])) {
-    if ($_REQUEST['score'] == $_SESSION['score']) {
+function setHighscore($id) {
+  if ($id && isset($_REQUEST['game']) && isset($_REQUEST['score'])) {
+    if (isset($_SESSION['score']) && $_REQUEST['score'] == $_SESSION['score']) {
       $_SESSION['score'] = 0;
       $tableName = 'hs_'.$_REQUEST['game'];
       $newScore = $_REQUEST['score'];
-      $id = $_SESSION['id'];
       $score = R::load( $tableName, $id );
       $curScore = $score->highscore;
       coinAmount($id,$_REQUEST['game'],$newScore);
       if ($newScore > $curScore) {
         $score->highscore=$newScore;
         R::store( $score );
-        return json_encode(array('highscore'=>$newScore,'message'=>''));
+        return array('highscore'=>$newScore,'message'=>'');
       }
-      return json_encode(array('highscore'=>$curScore,'message'=>''));
+      return array('highscore'=>$curScore,'message'=>'');
     }
-      return json_encode(array('highscore'=>'','message'=>'Possible cheating detected!'));
+    return array('highscore'=>'','message'=>'Possible cheating detected!');
   }
-  return json_encode(array('highscore'=>'','message'=>'Highscore not saved! (No user signed in.)'));
+  return array('highscore'=>'','message'=>'Highscore not saved! (No user signed in.)');
 }
 
 /**

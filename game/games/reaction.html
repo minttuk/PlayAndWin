@@ -8,6 +8,7 @@
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
     <script src="script.js"></script>
     <link href='styles.css' rel='stylesheet' type='text/css'>
 </head>
@@ -80,20 +81,7 @@
         function gameOver() {
           document.getElementById("box").style.display = "none";
           document.getElementById("again").innerHTML = "Again?";
-          document.getElementById("result").innerHTML = clickCount;
-          $.post("/rest/score", {
-              game: 'reaction',
-              score: clickCount
-          }, function(data) {
-              $('#score').html(data.highscore);
-              window.parent.updateCoins();
-              if (data.message != '') {
-                  alert(data.message);
-              }
-          }, 'json');
-          startColor();
-          startCircle.display = "block";
-          dialog.display = "block";
+          showMenu('reaction');
         }
     </script>
 

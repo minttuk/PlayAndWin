@@ -12,48 +12,18 @@ var addProductModal = document.getElementById("addProductModal");
  * @returns {boolean}
  */
 window.onload = function displayAddProductButton() {
-
-    var ajaxRequest;
-    var button = document.getElementById('addProductButton');
-
-    try{
-        // Opera 8.0+, Firefox, Safari
-        ajaxRequest = new XMLHttpRequest();
-    } catch (e){
-        // Internet Explorer Browsers
-        try{
-            ajaxRequest = new ActiveXObject("Msxml2.XMLHTTP");
-        } catch (e) {
-            try{
-                ajaxRequest = new ActiveXObject("Microsoft.XMLHTTP");
-            } catch (e){
-                // Something went wrong
-                alert("Your browser broke!");
-                return false;
-            }
-        }
-    }
-
-    ajaxRequest.onreadystatechange = function() {
-        if (ajaxRequest.readyState == 4 && ajaxRequest.status == 200) {
-            var text = ajaxRequest.responseText;
-            console.log(text);
-            var object = JSON.parse(text);
-            console.log("admin arvo on " + object['admin']);
-
-            if (object['admin'] == 1) {
-                button.style.display = "block";
-            }
-            else {
-                button.style.display = "none";
-            }
-        }
-        ;
-    }
-
-    ajaxRequest.open("GET", "/rest/user/admin", true);
-    ajaxRequest.send(null);
-    }
+    $.ajax({
+      url: "/rest/user/admin",
+      type: "GET",
+      dataType: 'json',
+      headers:{'access_token':$.cookie('access_token')},
+      success: function(data) {
+        console.log(data);
+        console.log("admin arvo on " + data.admin);
+        if (data.admin == 1) $('#addProductButton').css('display','block');
+        else $('#addProductButton').css('display','none');
+    }});
+}
 
 /**
  * An ajax call to add a product to the webstore. The product information is send in the body of the call.
@@ -165,6 +135,7 @@ function checkCost(price) {
 function buy(product_id){
 
     $.ajax({url: '/rest/product/buy?product='+product_id,
+      headers:{'access_token':$.cookie('access_token')},
       success: function (message) {
         $('.buyMessage').html(message);
         updateCoins();

@@ -58,14 +58,14 @@ Flight::route('POST /product', function(){
   );
 });
 Flight::route('/product/buy', function(){
-    if (isToken() && Flight::request()->query->product != null) {
+    if (isset(getallheaders()['access_token']) && Flight::request()->query->product != null) {
       echo buyProduct(validateToken(),Flight::request()->query->product);
     }
 });
 
 // Highscore
 Flight::route('POST /score', function(){
-    echo setHighscore();
+    if (isToken()) Flight::json(setHighscore(validateToken()));
 });
 Flight::route('/score', function(){
     if (isToken()) echo getHighscores(validateToken());
@@ -115,7 +115,8 @@ Flight::route('/products', function(){
 
 // Chat
 Flight::route('POST /chat', function(){
-    echo addChat();
+    if(isToken()) echo addChat(validateToken());
+    else echo addChat(null);
 });
 Flight::route('/chat', function(){
     echo getChat();

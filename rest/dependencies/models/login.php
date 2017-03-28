@@ -34,7 +34,7 @@ function loginUser($uname, $password, $confirmPass, $email, $firstname, $lastnam
 
     if($player ? ($player->password==$password) : false) {
       startSession($player->id);
-      updateLastOnline();
+      updateLastOnline($player->id);
       return json_encode(array('token'=>generateToken($player->id,$uname)));
     } else  $message['data'] = 'Nope, wrong username or password!';
   } else {
@@ -96,8 +96,8 @@ function logOut() {
  *This method is used to update last_online in user table
  *
  */
-  function updateLastOnline() {
-    R::exec( 'update user set last_online=NOW() where id = :id', [':id' => $_SESSION['id']]);
+  function updateLastOnline($id) {
+    R::exec( 'update user set last_online=NOW() where id = :id', [':id' => $id]);
   }
 
 /**

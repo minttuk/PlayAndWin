@@ -32,9 +32,9 @@ function getChat(){
  * Stores a chat entry into the database based on the users Session ID and
  * a message in recieved as a POST parameter.
  */
-function addChat() {
-  if (isset($_SESSION['id'])) {
-    $user = R::load('user',$_SESSION['id']);
+function addChat($id) {
+  if ($id) {
+    $user = R::load('user',$id);
     $username = $user->username;
   } else {
     $username = 'guest';

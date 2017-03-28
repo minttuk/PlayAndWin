@@ -54,10 +54,10 @@ function makeOrderRow($product_id){
  *
  * @param int $product_id is the id number of the product bought.
  * @param int $coins_left is the amount of coins the user has left after buying the product.
- * @param int $session_id is the id number of the user who has bought the product.
+ * @param int $id is the id number of the user who has bought the product.
  */
-function addToCollection($product_id, $coins, $session_id){
-    $collection = R::load('collection',$session_id);
+function addToCollection($product_id, $coins, $id){
+    $collection = R::load('collection',$id);
     $products = json_decode($collection->products, true);
 
     if ($products == null){

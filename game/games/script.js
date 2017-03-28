@@ -12,16 +12,21 @@ function hideMenu() {
 }
 
 function showMenu(gameID) {
-    $.post("/rest/score", {
-        game: gameID,
-        score: score
-    }, function(data) {
+
+    $.ajax({
+      url: "/rest/score",
+      type: "POST",
+      dataType: "JSON",
+      data: {game: gameID, score: score},
+      headers:{'access_token':$.cookie('access_token')},
+      success: function(data) {
         $('#score').html(data.highscore);
         window.parent.updateCoins();
         if (data.message != '') {
             alert(data.message);
         }
-    }, 'json');
+    }});
+
     startColor();
     $('#result').html(score);
     $('#start').css('display', 'block');

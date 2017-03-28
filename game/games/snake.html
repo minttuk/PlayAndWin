@@ -8,6 +8,7 @@
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
     <script src="script.js"></script>
     <link href='styles.css' rel='stylesheet' type='text/css'>
 </head>
@@ -86,23 +87,9 @@
 
                 if (posX == -1 || posX == w / cellWidth || posY == -1 || posY == h / cellWidth || check_collision(posX, posY, snake_array)) {
                     clearInterval(game_loop);
-                    startColor();
                     $('#again').html('Again?');
-                    $('#result').html(score);
-                    $('#start').css('display', 'block');
-                    $('#text').css('display', 'block');
                     $('#canvas').css('display', 'none');
-                    $.post("/rest/score", {
-                        game: 'snake',
-                        score: score
-                    }, function(data) {
-                        $('#score').html(data.highscore);
-                        window.parent.updateCoins();
-                        if (data.message != '') {
-                            alert(data.message);
-                        }
-                    }, 'json');
-                    return;
+                    showMenu('snake');
                 }
 
                 if (posX == food.x && posY == food.y) {
