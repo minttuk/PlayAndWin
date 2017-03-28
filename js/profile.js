@@ -2,12 +2,13 @@ var userId;
 var sessionId;
 
 function getScoreTable() {
-  $.ajax({url: '/rest/score/'+getLastDir()+'?table', headers:{'access_token':$.cookie('access_token')},
+  $.ajax({url: '/rest/score/'+getLastDir()+'?table',
     datatype:'html',success: function(result){$("#highscores").html(result);
   }});
 }
 
 function parseURL(param){
+
   var results = new RegExp('[\?&]' + param + '=([^&#]*)').exec(window.location.href);
   if (results==null)
     return null;
@@ -28,7 +29,6 @@ function getSession() {
       type: "get",
       dataType: "json",
       async: false,
-      headers:{'access_token':$.cookie('access_token')},
       success: function (response){
         sessionId = response;
         if (response != -1) sessionId = response.name;
@@ -63,11 +63,10 @@ $( "#saveprofilebutton" ).click(function() {
           console.log(textStatus, errorThrown);
         }
     });
-  }
-  else {
+  } else {
     $('.errormessage').text("Please fill in your first and last name.");
   }
-})
+});
 
 function checkEditedProfile(firstname, lastname) {
   if (firstname.length > 0 && lastname.length > 0) {
@@ -205,7 +204,6 @@ function getFriendship(callback) {
   $.ajax({
       url: '/rest/friends?id='+userId,
       dataType: "json",
-      headers:{'access_token':$.cookie('access_token')},
       success: function (response){
         callback(null, response);
       },
@@ -229,7 +227,6 @@ function getUserInfo() {
     $.ajax({
         url: '/rest/user/'+userId,
         dataType: "json",
-        headers:{'access_token':$.cookie('access_token')},
         success: function (response){
           updateProfile(response);
         },
@@ -434,7 +431,6 @@ function initHandlers() {
         url:'/rest/friends?id='+$(this).attr('data-id'),
         type: "POST",
         dataType: "json",
-        headers:{'access_token':$.cookie('access_token')},
         //data: JSON.stringify({"friendid": userId}),
         success: function (response){
           console.log(response);
@@ -453,7 +449,6 @@ function initHandlers() {
         url:'/rest/friends?id='+$(this).attr('data-id'),
         type: "DELETE",
         dataType: "json",
-        headers:{'access_token':$.cookie('access_token')},
         //data: JSON.stringify({"friendid": userId}),
         success: function (response){
           console.log(response);
@@ -466,6 +461,23 @@ function initHandlers() {
     });
   })
 }
+
+$('#userlocation').click(function(){
+  if (navigator.geolocation) {
+     navigator.geolocation.getCurrentPosition(location);
+     function location(pos){
+       $.getJSON("https://maps.googleapis.com/maps/api/geocode/json?latlng="
+         +pos.coords.latitude+","
+         +pos.coords.longitude+"&key=AIzaSyDvCgxjSDBrtcbsLc2nUAco0ObaYGeO3f4",
+         function(data){
+           location = data.results[1].address_components;
+           $('#userlocation').html( location[0].long_name);
+       });
+     }
+  } else {
+    console.log("Your browser doesn't support geolocation");
+  }
+})
 
 
 getScoreTable();

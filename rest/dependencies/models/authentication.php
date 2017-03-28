@@ -6,7 +6,7 @@ function generateToken($id,$name){
   $token = array(
     "iss" => "http://playtalk.win",
     "iat" => time(),
-    "exp" => time()+604800,
+    "exp" => time()+60*60*24*14,
     'data' => [
       'userId'   => $id,
       'userName' => $name,
@@ -19,7 +19,8 @@ function generateToken($id,$name){
 }
 
 function validateToken(){
-  $jwt = getallheaders()['access_token'];
+  if (isset($_COOKIE['access_token'])) $jwt = $_COOKIE['access_token'];
+  else if (isset(getallheaders()['access_token'])) $jwt = getallheaders()['access_token'];
   global $key;
   $decoded = JWT::decode($jwt, $key, array('HS256'));
   $decoded_array = (array) $decoded;

@@ -10,7 +10,7 @@ Flight::route('/', function(){
 });
 
 Flight::route('/test', function(){
-    print_r(validateToken());
+    print_r(isToken());
 });
 
 // --------------------------   PRIVATE REST API   -------------------------- //
@@ -58,7 +58,7 @@ Flight::route('POST /product', function(){
   );
 });
 Flight::route('/product/buy', function(){
-    if (isset(getallheaders()['access_token']) && Flight::request()->query->product != null) {
+    if (isToken() && Flight::request()->query->product != null) {
       echo buyProduct(validateToken(),Flight::request()->query->product);
     }
 });
@@ -159,22 +159,12 @@ Flight::map('notFound', function(){
 Flight::start();
 
 // Helper functions
-function isFriendParam() {
-    if (isset($_SESSION['id']) && Flight::request()->query->id != null) return true;
-    else echo 'Incomplete request'; return false;
-}
-
-function isSession() {
-    if (isset($_SESSION['id'])) return true;
-    else echo 'No user is signed in.'; return false;
-}
-
 function isFriendParams() {
     if (isset(getallheaders()['access_token']) && Flight::request()->query->id != null) return true;
     else echo 'Incomplete request'; return false;
 }
 
 function isToken() {
-    if (isset(getallheaders()['access_token'])) return true;
-    else echo 'No access token provided.'; return false;
+    if (isset(getallheaders()['access_token'])||isset($_COOKIE['access_token'])) return true;
+    else echo 'Not logged in or no access token provided.'; return false;
 }

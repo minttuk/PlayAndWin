@@ -58,7 +58,7 @@ function getHighscores($user) {
     $html = '';
     foreach ($json as $game) {
       $gameID = array_keys($game)[0];
-      $html .= '<tr><th><a href="/game.html#'.$gameID.'">'.
+      $html .= '<tr><th><a href="/game#'.$gameID.'">'.
       $gamelist[$gameID].'</a></th><td>'.$game[$gameID].'</td></tr>';
     }
     return ($html);

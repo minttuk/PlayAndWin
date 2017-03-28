@@ -18,7 +18,6 @@ function showMenu(gameID) {
       type: "POST",
       dataType: "JSON",
       data: {game: gameID, score: score},
-      headers:{'access_token':$.cookie('access_token')},
       success: function(data) {
         $('#score').html(data.highscore);
         window.parent.updateCoins();

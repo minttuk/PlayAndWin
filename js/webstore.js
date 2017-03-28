@@ -16,7 +16,6 @@ window.onload = function displayAddProductButton() {
       url: "/rest/user/admin",
       type: "GET",
       dataType: 'json',
-      headers:{'access_token':$.cookie('access_token')},
       success: function(data) {
         console.log(data);
         console.log("admin arvo on " + data.admin);
@@ -134,11 +133,9 @@ function checkCost(price) {
  */
 function buy(product_id){
 
-    $.ajax({url: '/rest/product/buy?product='+product_id,
-      headers:{'access_token':$.cookie('access_token')},
+    $.ajax({url:'/rest/product/buy?product='+product_id,
       success: function (message) {
         $('.buyMessage').html(message);
         updateCoins();
-      }
-    });
+    }});
 }
