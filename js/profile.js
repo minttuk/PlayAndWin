@@ -99,6 +99,14 @@ function showFriends(){
   }
 }
 
+$('#mycollectionbutton').click(function (){
+  getCollection();
+});
+
+function getCollection() {
+  console.log("moi");
+}
+
 function getMutualFriends(callback) {
   $.ajax({
       url:'/rest/friends/'+userId,

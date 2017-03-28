@@ -385,4 +385,14 @@ function getCoins($id) {
     return $user->coins;
 }
 
+/**
+ * Returns the bought items of a usere
+ *
+ * @param int $id is the ID number of the user.
+ * @return List of products
+ */
+function getCollection($id) {
+
+}
+
 ?>

@@ -143,6 +143,11 @@ Flight::route('/friends/pending/@id', function($id){
     Flight::json(getPendingFriends($id));
 });
 
+// Collection
+Flight::route('/collection/@id', function($id){
+  Flight::json(getCollection($id));
+});
+
 // ---------------------------------   END of API  --------------------------------- //
 
 // 404 Error Redirect
