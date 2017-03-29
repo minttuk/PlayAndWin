@@ -288,6 +288,10 @@ function updateProfile(response) {
   if (response.lastname != null) {
     $('input[name="newlastname"]').val(response.lastname);
   }
+  //description
+  if (response.description != null) {
+    $('input[name="newdescription"]').val(response.description);
+  }
   //location
   if (response.location != null) {
     $('input[name="newlocation"]').val(response.location);
@@ -380,7 +384,7 @@ function getCollection() {
       dataType: "json",
       success: function (response){
         console.log(response);
-        $('#mycollection').empty();    
+        $('#mycollection').empty();
         for (var i in response) {
           var productrow = $('<div class="collectionrow"></div>');
           //var col1 = $('<div class="col-m-6 img-w3-agile"></div>');
