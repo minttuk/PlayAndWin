@@ -16,14 +16,14 @@ final class userTest extends TestCase {
   }
 
   public function testgetUserInfo() {
-    $info = json_decode(json_encode(getUserInfo('0')), true);
-    $this->assertArrayHasKey('error', $info);
-    $this->assertArrayNotHasKey('username', $info);
+    $info = json_encode(getUserInfo('0'));
+    $this->assertEquals(json_encode(array('error'=>'No user found')), $info);
+    /*$this->assertArrayNotHasKey('username', $info);
     $info = getUserInfo('1');
     $this->assertArrayHasKey('username', $info);
     $info = getUserInfo('100');
     $this->assertArrayHasKey('error', $info);
-    $this->assertArrayNotHasKey('username', $info);
+    $this->assertArrayNotHasKey('username', $info);*/
   }
 
   public function testsetUserInfo() {
