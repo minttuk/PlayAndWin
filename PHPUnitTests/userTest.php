@@ -22,7 +22,7 @@ final class userTest extends TestCase {
 
   public function testgetUserInfo() {
     $info = getUserInfo(0);
-    $this->assertArrayHasKey('error', json_decode($info, true);
+    $this->assertArrayHasKey('error', json_decode($info, true));
     $this->assertArrayNotHasKey('username', $info);
     $info = getUserInfo(1);
     $this->assertArrayHasKey('username', $info);
