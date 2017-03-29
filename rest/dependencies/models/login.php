@@ -26,6 +26,7 @@ function loginUser($uname, $password, $confirmPass, $email, $firstname, $lastnam
         if (!$newuser) {
           regUser($uname,$email,$password,$firstname,$lastname);
           startSession($newuser->id);
+          setcookie("access_token",generateToken($player->id,$uname), time()+60*60*24*14, '/');
           return json_encode(array('token'=>generateToken($newuser->id,$uname)));
         } else $message['data'] = 'Username taken, try again!';
     }
@@ -35,10 +36,11 @@ function loginUser($uname, $password, $confirmPass, $email, $firstname, $lastnam
     if($player ? ($player->password==$password) : false) {
       startSession($player->id);
       updateLastOnline($player->id);
+      setcookie("access_token",generateToken($player->id,$uname), time()+60*60*24*14, '/');
       return json_encode(array('token'=>generateToken($player->id,$uname)));
     } else  $message['data'] = 'Nope, wrong username or password!';
   } else {
-    $message = isset(getallheaders()['access_token']) ? array('id'=>validateToken(),'name'=>R::getCell('SELECT username FROM user WHERE id='.validateToken())) : -1;
+    $message = isset(getallheaders()['access_token'])||isset($_COOKIE['access_token']) ? array('id'=>validateToken(),'name'=>R::getCell('SELECT username FROM user WHERE id='.validateToken())) : -1;
   }
   return json_encode($message);
 }
@@ -50,6 +52,7 @@ function loginUser($uname, $password, $confirmPass, $email, $firstname, $lastnam
  */
 function logOut() {
   session_destroy();
+  setcookie("access_token","", time() - 3600,"/");
   return 'You have been logged out.';
 }
 

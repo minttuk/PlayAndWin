@@ -21,23 +21,12 @@ $(document).ready(function() {
 });
 
 function sendMsg() {
-    if($.cookie('access_token')) {
-      $.ajax({url: "/rest/chat",
-      type: 'POST',
-      data : {message: $('#msgbox').val()},
-      headers:{'access_token':$.cookie('access_token')},
-      success: function(data){
+    $.post("/rest/chat", {
+        message: $('#msgbox').val(),
+    }, function(data) {
         $('#msgbox').val('');
         update();
-      }});
-    } else {
-      $.post("/rest/chat", {
-          message: $('#msgbox').val(),
-      }, function(data) {
-          $('#msgbox').val('');
-          update();
-      });
-    }
+    });
 }
 
 function update() {
