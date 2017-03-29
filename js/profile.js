@@ -99,24 +99,6 @@ function showFriends(){
   }
 }
 
-$('#mycollectionbutton').click(function (){
-  getCollection();
-});
-
-function getCollection() {
-  console.log(userId);
-  $.ajax({
-      url:'/rest/collection/'+userId,
-      dataType: "json",
-      success: function (response){
-        console.log(response);
-      },
-      error: function(jqXHR, textStatus, errorThrown) {
-        console.log(textStatus, errorThrown);
-      }
-  });
-}
-
 function getMutualFriends(callback) {
   $.ajax({
       url:'/rest/friends/'+userId,
@@ -384,6 +366,42 @@ function getNewUsers() {
         //passes also div name to function because the same function is used to show new users
         var who = 'newusers';
         showOtherUsers(response, who);
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        console.log(textStatus, errorThrown);
+      }
+  });
+}
+
+$('#mycollectionbutton').click(function (){
+  getCollection();
+});
+
+function getCollection() {
+  $.ajax({
+      url:'/rest/collection/'+userId,
+      dataType: "json",
+      success: function (response){
+        console.log(response);
+        $('#mycollection').empty();    
+        for (var i in response) {
+          var productrow = $('<div class="collectionrow"></div>');
+          //var col1 = $('<div class="col-m-6 img-w3-agile"></div>');
+          var header = $('<h3></h3>');
+          header.text(response[i].name);
+          var price = $('<h4></h4>');
+          price.text("Price: " + response[i].price);
+          var amount = $('<h4></h4>');
+          amount.text("Amount: " + response[i].amount);
+          productrow.append(header, price, amount);
+          var img = $('<img></img>');
+          img.attr("src", response[i].picture);
+          img.attr("alt", "image of " + response[i].name);
+          productrow.append(img);
+          //var col2 = $('<div class="col-m-6"></div>');
+          //row.append(col1, col2);
+          $('#mycollection').append(productrow);
+        }
       },
       error: function(jqXHR, textStatus, errorThrown) {
         console.log(textStatus, errorThrown);

@@ -145,7 +145,7 @@ Flight::route('/friends/pending/@id', function($id){
 
 // Collection
 Flight::route('/collection/@id', function($id){
-  Flight::json(getCollection($id));
+    Flight::json(getCollection($id));
 });
 
 // ---------------------------------   END of API  --------------------------------- //

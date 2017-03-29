@@ -69,6 +69,15 @@ h6 {
 
 #mycollectionbutton {
   display: none;
+  text-align: left;
+}
+
+#mycollection img {
+  padding: 10px;
+}
+
+.collectionrow {
+  padding: 20px 0 10px 0;
 }
 
 .showfriendsdiv {

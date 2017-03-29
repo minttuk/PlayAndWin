@@ -393,7 +393,18 @@ function getCoins($id) {
  */
 function getCollection($id) {
   $products = R::load('collection', getUserID($id));
-  return $products;
+  $products = json_decode($products['products']);
+  $response = array();
+  foreach ($products as $id => $amount) {
+    $product = R::load('product', $id);
+    $response[] = array(
+      'name' => $product->name,
+      'amount' => $amount,
+      'picture' => $product->image_url,
+      'price' => $product->price
+     );
+  }
+  return $response;
 }
 
 ?>
