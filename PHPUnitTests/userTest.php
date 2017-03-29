@@ -15,14 +15,20 @@ final class userTest extends TestCase {
     $this->assertEquals(null, checkEmpty('   '));
   }
 
+  public function testgetAdmin(){
+        $this->expectOutputString('{"admin":"0"}', getAdmin(1));
+        //$this->expectOutputString('{"admin":"1"}', getAdmin(2));
+  }
+
   public function testgetUserInfo() {
-    $this->assertEquals(json_encode(array('error'=>'No user found')), json_encode(getUserInfo('0')));
-    /*$this->assertArrayNotHasKey('username', $info);
-    $info = getUserInfo('1');
-    $this->assertArrayHasKey('username', $info);
-    $info = getUserInfo('100');
+    $info = getUserInfo(0);
     $this->assertArrayHasKey('error', $info);
-    $this->assertArrayNotHasKey('username', $info);*/
+    $this->assertArrayNotHasKey('username', $info);
+    $info = getUserInfo(1);
+    $this->assertArrayHasKey('username', $info);
+    $info = getUserInfo(100);
+    $this->assertArrayHasKey('error', $info);
+    $this->assertArrayNotHasKey('username', $info);
   }
 
   public function testsetUserInfo() {

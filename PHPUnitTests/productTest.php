@@ -12,11 +12,6 @@ require_once '../rest/dependencies/require_all.php';
 
 final class addProductTest extends TestCase{
 
-    public function testgetAdmin(){
-        $this->expectOutputString('{"admin":"0"}', getAdmin(1));
-        //$this->expectOutputString('{"admin":"1"}', getAdmin(2));
-    }
-
     public function testaddProduct(){
         addProduct('testname', '1000', 'testdescription', 'testurl');
         $id = R::getCell( 'SELECT MAX(ID) FROM product');
