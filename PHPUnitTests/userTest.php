@@ -21,7 +21,7 @@ final class userTest extends TestCase {
   }
 
   public function testgetUserInfo() {
-    $info = getUserInfo('');
+    $info = getUserInfo(-1);
     $this->assertEquals(array('error'=>'No user found'), $info);
     /*$this->assertArrayHasKey('error', json_decode($info, true));
     $this->assertArrayNotHasKey('username', $info);
