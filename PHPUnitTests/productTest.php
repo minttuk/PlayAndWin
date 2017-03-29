@@ -8,7 +8,7 @@
 
 use phpunit\Framework\TestCase;
 echo "xxxxx" . getcwd();
-require '../rest/dependencies/require_all.php';
+require_once '../rest/dependencies/require_all.php';
 
 final class addProductTest extends TestCase{
 
