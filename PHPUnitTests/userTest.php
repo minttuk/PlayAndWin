@@ -5,7 +5,7 @@ use phpunit\Framework\TestCase;
 echo "xxxxx" . getcwd();
 //include './Backend/php/connection.php';
 //require './Backend/php/rb.php';
-require '../Backend/php/user.php';
+require '../rest/dependencies/models/user.php';
 
 final class userTest extends TestCase {
 
