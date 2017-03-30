@@ -9,6 +9,6 @@ require_once '../rest/dependencies/require_all.php';
 
 final class searchTest extends TestCase {
   public function testsearchUsers() {
-      $this->assertEquals('Bobby',searchUsers('bob')['name']);
+      $this->assertEquals('Bobby',searchUsers('bob')[0]['name']);
   }
 }
