@@ -33,10 +33,7 @@ final class userTest extends TestCase {
   }
 
   public function testsetUserInfo() {
-    setUserInfo(2, 'assert', 'equal', '  ', 'Hong Kong');
-    $user = getUserInfo('assert');
-    $this->assertEquals('assert', $user['firstname']);
-    $this->assertEquals(null, $user['description']);
+    $this->assertEquals('assert', setUserInfo(2, 'assert', 'equal', '  ', 'Hong Kong')['firstname']);
     setUserInfo(2, 'admin', 'admin', '', '');
   }
 
