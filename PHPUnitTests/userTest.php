@@ -65,15 +65,15 @@ final class userTest extends TestCase {
   }
 
   public function testgetFriendship() {
-    $friendship = getFriendship('Bobby', 'Boss');
+    $friendship = getFriendship(1, 'Boss');
     $rows = count($friendship);
     $this->assertEquals(0, $rows);
     addFriend(1, 'Boss');
-    $friendship = getFriendship('Bobby', 'Boss');
+    $friendship = getFriendship(1, 'Boss');
     $rows = count($friendship);
     $this->assertEquals(1, $rows);
-    addFriend(1, 'Bobby');
-    $friendship = getFriendship('Bobby', 'Boss');
+    addFriend(2, 'Bobby');
+    $friendship = getFriendship(1, 'Boss');
     $rows = count($friendship);
     $this->assertEquals(2, $rows);
     deleteFriend(1, 'Boss');
