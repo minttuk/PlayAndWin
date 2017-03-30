@@ -2047,7 +2047,22 @@ color:rgb(2, 24, 136) !important;
 		padding: 0 10px;
 	}
 }
+@media screen and (min-width: 1400px){
+	#lang{
+		position:absolute;
+		right:0;
+	}
+}
+
 @media screen and (max-width: 1200px){
+
+	.dropdown-menu {
+		background-color: transparent !important;
+	}
+
+	.dropdown-menu > li > a {
+	color: white !important;
+	}
 
 	.navbar-header h1 {
 		text-align: left;
@@ -2778,4 +2793,27 @@ color:rgb(2, 24, 136) !important;
 	.w3l_categories h3, .w3l_archives h3, .w3agile_flickr_posts h3, .agileits_reply h3, .wthree_blog_left_grid h3, .newsletter h4 {
 		font-size: 1.2em!important;
 	}
+}
+
+.dropdown-menu {
+	border-radius:5px !important;
+	background-color: rgba(255, 255, 255, 0.6);
+	border:none;
+	min-width:60px !important;
+}
+
+.dropdown-toggle {
+	font-weight: bold !important;
+	color: white !important;
+	background-color: transparent !important;
+}
+
+.dropdown-menu > li > a {
+color: rgb(49, 57, 68);
+font-weight: bold !important;
+}
+
+.dropdown-menu > li > a:hover {
+color: #e91e63 !important;
+font-weight: bold !important;
 }

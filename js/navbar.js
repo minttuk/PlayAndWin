@@ -47,7 +47,8 @@ function isSignedIn() {
   if (signedIn) {
     $('#prof').css('display','block');
     $('.signUp').html('');
-    $('.signIn').html('Log out');
+    //$('.signIn').html('Log out');
+    $('.signIn').text($.i18n.prop('navbar_logout'),localStorage.getItem("lang"));
     $('.signUp').css({"color": "white", "font-size": "20px",'padding-top':'16px', 'width':'95px'});
   }
 }
