@@ -371,7 +371,7 @@ function getAdmin($id){
     else{
         $admin = null;
     }
-    return json_encode(array('admin'=>$admin));
+    return array('admin'=>$admin);
 }
 
 /**

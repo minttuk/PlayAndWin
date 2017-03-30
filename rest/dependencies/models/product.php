@@ -1,7 +1,7 @@
 <?php
 
 function getProducts(){
-  return json_encode(R::getAll( 'SELECT * FROM product' ),JSON_PRETTY_PRINT);
+  return R::getAll( 'SELECT * FROM product' );
 }
 
 /**

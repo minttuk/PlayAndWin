@@ -52,7 +52,7 @@ function coinAmount($id,$game,$score) {
 function getHighscores($user) {
   $gamelist = array('snake'=>'Disco Snake','flappy'=>'Flutter Bird','reaction'=>'Speed Click','jumper'=>'Jumper Man');
   foreach ($gamelist as $game => $name) {
-  $json[] = jsonBuilder($game,$user);
+  $json[] = arrayBuilder($game,$user);
   }
   if (isset($_REQUEST['table'])) {
     $html = '';
@@ -63,7 +63,7 @@ function getHighscores($user) {
     }
     return ($html);
   } else {
-    return json_encode($json);
+    return $json;
   }
 }
 
@@ -74,7 +74,7 @@ function getHighscores($user) {
  * @param string $game a the name of a game.
  * @return array User Highscores
  */
-function jsonBuilder($game,$userid) {
+function arrayBuilder($game,$userid) {
   $tableName = 'hs_'.$game;
   $score = R::load( $tableName, $userid );
   if ($score->highscore == '') {

@@ -34,7 +34,7 @@ Flight::route('DELETE /user/@id', function($id){
     if (isToken()) echo deleteUser(validateToken(),$id);
 });
 Flight::route('/user/admin', function(){
-    if (isToken()) echo getAdmin(validateToken());
+    if (isToken()) Flight::json(getAdmin(validateToken()));
 });
 
 // Friends
@@ -68,7 +68,7 @@ Flight::route('POST /score', function(){
     if (isToken()) Flight::json(setHighscore(validateToken()));
 });
 Flight::route('/score', function(){
-    if (isToken()) echo getHighscores(validateToken());
+    if (isToken()) Flight::json(getHighscores(validateToken()));
 });
 
 // Coins
@@ -110,7 +110,7 @@ Flight::route('/users/last', function(){
 
 //Products
 Flight::route('/products', function(){
-    echo getProducts();
+    Flight::json(getProducts());
 });
 
 // Chat
@@ -129,7 +129,7 @@ Flight::route('/score/@id', function($id){
 
 // Search
 Flight::route('/search/@query', function($query){
-    echo searchUsers($query);
+    Flight::json(searchUsers($query));
 });
 
 // Friends

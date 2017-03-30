@@ -8,7 +8,7 @@ echo "xxxxx" . getcwd();
 require_once '../rest/dependencies/require_all.php';
 
 final class searchTest extends TestCase {
-  public function searchUsersTest() {
-      $this->assertEquals('Bobby',json_decode(searchUsers('bob'))['name']);
+  public function testsearchUsers() {
+      $this->assertEquals('Bobby',searchUsers('bob')['name']);
   }
 }

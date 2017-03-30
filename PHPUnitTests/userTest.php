@@ -18,8 +18,8 @@ final class userTest extends TestCase {
   }
 
   public function testgetAdmin(){
-        $this->expectOutputString('', getAdmin(-1));
-        //$this->expectOutputString('{"admin":"1"}', getAdmin(2));
+        $this->expectOutputString(null, getAdmin(-1));
+        $this->expectOutputString(1, getAdmin(2)['admin']);
   }
 
   public function testgetUserInfo() {
