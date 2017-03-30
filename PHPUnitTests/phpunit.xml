@@ -7,12 +7,12 @@
 
     <filter>
       <whitelist>
-          <directory suffix=".php">../Backend/php/</directory>
+          <directory suffix=".php">../rest/dependencies/models/</directory>
           <exclude>
-            <file>../Backend/php/rb.php</file>
-            <file>../Backend/php/controller.php</file>
-            <file>../Backend/php/test.php</file>
-            <file>../Backend/php/uploadpicture.php</file>
+            <file>../rest/dependencies/models/uploadpicture.php</file>
+            <file>../rest/dependencies/models/location.php</file>
+            <file>../rest/dependencies/models/api.php</file>
+            <file>../rest/dependencies/models/authentication.php</file>
           </exclude>
       </whitelist>
   </filter>
