@@ -54,6 +54,22 @@ function setUserInfo($id, $firstname, $lastname, $description, $location) {
 }
 
 /**
+ * Updates user's location.
+ *
+ * @param $id is the user id that will be updated. $firstname, $lastname, $description and $location are the values to update the user table with
+ * @param $location is the location which will be stored in the database
+ *
+ * @return string location
+ */
+
+function setUserLocation($id,$location){
+  $user = R::load('user', $id);
+  $user->location = $location;
+  R::store($user);
+  return $location;
+}
+
+/**
  * Converts empty strings into null
  *
  * @param String $stringToCheck, string that will be converted into null if it contains only whitespace or no characters

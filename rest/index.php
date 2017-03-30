@@ -16,6 +16,9 @@ Flight::route('/test', function(){
 // --------------------------   PRIVATE REST API   -------------------------- //
 
 //User
+Flight::route('PUT /user/location/@location', function($location){
+    if(isToken()) echo setUserLocation(validateToken(),$location);
+});
 Flight::route('PUT /user', function(){
     if(isToken()) {
       echo setUserInfo(
