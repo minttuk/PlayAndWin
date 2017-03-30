@@ -36,7 +36,7 @@ final class userTest extends TestCase {
 
   public function testsetUserInfo() {
     setUserInfo(2, 'assert', 'equal', '  ', 'Hong Kong');
-    $user = getUserInfo('assert');
+    $user = getUserInfo('Boss');
     $this->assertEquals('assert', $user['firstname']);
     $this->assertEquals(null, $user['description']);
     setUserInfo(2, 'admin', 'admin', '', '');
@@ -92,12 +92,12 @@ final class userTest extends TestCase {
 
   public function testgetFriendRequests() {
     deleteFriend(1, 'Boss');
-    $this->assertEquals(0, count(getFriendRequests(1)));
+    $this->assertEquals(0, count(getFriendRequests('Bobby')));
     addFriend(2, 'Bobby');
-    $this->assertEquals(1, count(getFriendRequests(1)));
-    $this->assertEquals('Boss', getFriendRequests(1)[0]['username']);
+    $this->assertEquals(1, count(getFriendRequests('Bobby')));
+    $this->assertEquals('Boss', getFriendRequests('Bobby')[0]['username']);
     addFriend(1, 'Boss');
-    $this->assertEquals(0, count(getFriendRequests(1)));
+    $this->assertEquals(0, count(getFriendRequests('Bobby')));
     deleteFriend(1, 'Boss');
   }
 
