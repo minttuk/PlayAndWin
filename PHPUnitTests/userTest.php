@@ -43,13 +43,13 @@ final class userTest extends TestCase {
   }
 
   public function testgetFriendsCount() {
-    deleteFriend('Bobby', 'Boss');
+    deleteFriend(1, 'Boss');
     $this->assertEquals(0, getFriendsCount(1));
     addFriend(1, 'Boss');
     $this->assertEquals(0, getFriendsCount(1));
     addFriend(2, 'Bobby');
     $this->assertEquals(1, getFriendsCount(1));
-    deleteFriend('Bobby', 'Boss');
+    deleteFriend(1, 'Boss');
     $this->assertEquals(0, getFriendsCount(1));
   }
 
@@ -76,51 +76,49 @@ final class userTest extends TestCase {
     $friendship = getFriendship('Bobby', 'Boss');
     $rows = count($friendship);
     $this->assertEquals(2, $rows);
-    deleteFriend('Bobby', 'Boss');
+    deleteFriend(1, 'Boss');
   }
 
   public function testgetMutualFriends() {
-    deleteFriend('Bobby', 'Boss');
-    $this->assertEquals(0, count(getMutualFriends(1)));
+    deleteFriend(1, 'Boss');
+    $this->assertEquals(0, count(getMutualFriends('Bobby')));
     addFriend(1, 'Boss');
-    $this->assertEquals(0, count(getMutualFriends(1)));
+    $this->assertEquals(0, count(getMutualFriends('Bobby')));
     addFriend(2, 'Bobby');
-    $this->assertEquals(1, count(getMutualFriends(1)));
-    $this->assertEquals('Boss', getMutualFriends(1)[0]['username']);
-    deleteFriend('Bobby', 'Boss');
+    $this->assertEquals(1, count(getMutualFriends('Bobby')));
+    $this->assertEquals('Boss', getMutualFriends('Bobby')[0]['username']);
+    deleteFriend(1, 'Boss');
   }
 
   public function testgetFriendRequests() {
-    deleteFriend('Bobby', 'Boss');
+    deleteFriend(1, 'Boss');
     $this->assertEquals(0, count(getFriendRequests(1)));
     addFriend(2, 'Bobby');
     $this->assertEquals(1, count(getFriendRequests(1)));
     $this->assertEquals('Boss', getFriendRequests(1)[0]['username']);
     addFriend(1, 'Boss');
     $this->assertEquals(0, count(getFriendRequests(1)));
-    deleteFriend('Bobby', 'Boss');
+    deleteFriend(1, 'Boss');
   }
 
   public function testgetPendingFriends() {
-    deleteFriend('Bobby', 'Boss');
-    $this->assertEquals(0, count(getPendingFriends(1)));
+    deleteFriend(1, 'Boss');
+    $this->assertEquals(0, count(getPendingFriends('Bobby')));
     addFriend(2, 'Bobby');
-    $this->assertEquals(0, count(getPendingFriends(1)));
-    deleteFriend('Bobby', 'Boss');
+    $this->assertEquals(0, count(getPendingFriends('Bobby')));
+    deleteFriend(1, 'Boss');
     addFriend(1, 'Boss');
-    $this->assertEquals(1, count(getPendingFriends(1)));
-    $this->assertEquals('Boss', getPendingFriends(1)[0]['username']);
+    $this->assertEquals(1, count(getPendingFriends('Bobby')));
+    $this->assertEquals('Boss', getPendingFriends('Bobby')[0]['username']);
     addFriend(2, 'Bobby');
-    $this->assertEquals(0, count(getPendingFriends(1)));
-    deleteFriend('Bobby', 'Boss');
+    $this->assertEquals(0, count(getPendingFriends('Bobby')));
+    deleteFriend(1, 'Boss');
   }
 
   public function testgetLastLoggedIn() {
     $this->assertTrue('1' < count(getLastLoggedIn()));
   }
-
   public function testgetNewUsers() {
     $this->assertTrue('1' < count(getNewUsers()));
   }
-
 }
