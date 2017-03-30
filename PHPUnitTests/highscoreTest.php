@@ -13,7 +13,7 @@ final class highscoreTest extends TestCase {
       $this->assertEquals(json_encode(array('highscore'=>'','message'=>'Highscore not saved! (No user signed in.)')), $response);
   }
   public function testGetHS() {
-      $this->assertEquals('[{"snake":"1"},{"flappy":"1"},{"reaction":"1"},{"jumper":"1"}]', getHighscores(1));
+      $this->assertEquals(array('snake'=>1,'flappy'=>1,'reaction'=>1,'jumper'=>1), getHighscores(1));
   }
   public function testarrayBuilder() {
       $this->assertEquals(Array('snake'=>'1'), arrayBuilder('snake',1));
