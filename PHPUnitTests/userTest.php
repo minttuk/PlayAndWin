@@ -38,13 +38,6 @@ final class userTest extends TestCase {
   }
 
   public function testgetFriendsCount() {
-    deleteFriend(1, 2);
-    $this->assertEquals(0, getFriendsCount(1));
-    addFriend(1, 2);
-    $this->assertEquals(0, getFriendsCount(1));
-    addFriend(2, 1);
-    $this->assertEquals(1, getFriendsCount(1));
-    deleteFriend(1, 2);
     $this->assertEquals(0, getFriendsCount(1));
   }
 
