@@ -13,7 +13,7 @@ require_once '../rest/dependencies/require_all.php';
 final class addProductTest extends TestCase{
 
     public function testaddProduct(){
-        addProduct('testname', '1000', 'testdescription', 'testurl');
+        addProduct(2, 'testname', '1000', 'testdescription', 'testurl');
         $id = R::getCell( 'SELECT MAX(ID) FROM product');
 
         $name = R::getCell( 'SELECT name FROM product WHERE id = '.$id);
