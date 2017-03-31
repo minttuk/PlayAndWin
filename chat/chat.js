@@ -16,6 +16,7 @@ $(document).ready(function() {
         $('#chatbox').perfectScrollbar('update');
         $('.user_name').each(function() {
           if($(this).text()=='guest') $(this).text($.i18n.prop('chat_guest'),localStorage.getItem("lang"));
+          emojify.run();
         });
     }});
     $.getJSON("/rest/chat", function(result) {
@@ -49,6 +50,7 @@ function update() {
                 '</div>');
             $('#chatbox').scrollTop($('#chatbox')[0].scrollHeight);
             $('#chatbox').perfectScrollbar('update');
+            emojify.run();
         }
     });
 }
