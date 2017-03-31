@@ -13,7 +13,7 @@ require_once '../rest/dependencies/require_all.php';
 final class addProductTest extends TestCase{
 
     public function testaddProduct(){
-        addProduct('testname', '1000', 'testdescription', 'testurl');
+        addProduct(2, 'testname', '1000', 'testdescription', 'testurl');
         $id = R::getCell( 'SELECT MAX(ID) FROM product');
 
         $name = R::getCell( 'SELECT name FROM product WHERE id = '.$id);
@@ -51,16 +51,18 @@ final class addProductTest extends TestCase{
     //function addToCollection($product_id, $coins_left, $session_id) ->(3,1,1)
     /*public function testaddToCollection(){
         $collection = R::load('collection',1);
-        $products = json_decode($collection->products, true);
+        //$products = json_decode($collection->products, true);
+        $products = $collection->products;
         $amount = $products[3];
         $this->expectOutputString('{"message":"You have bought this product! You have 1 coins left."}', addToCollection('1', '1', '1') );
-        $collection = R::load('collection',1);
-        $products = json_decode($collection->products, true);
-        $newAmount = $products[3];
+        $collection2 = R::load('collection',1);
+        //$products = json_decode($collection->products, true);
+        $products2 = $collection2->products;
+        $newAmount = $products2[3];
         $this->assertEquals($amount+1, $newAmount);
-        $products[3]--;
-        $collection->products = json_encode($products);
-        R::store($collection);
+        $products2[3]--;
+        //$collection2->products = json_encode($products2);
+        R::store($collection2);
 
     }*/
 

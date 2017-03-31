@@ -84,11 +84,15 @@ function addToCollection($product_id, $coins, $id){
  * @param String $image_url
  *
  */
-function addProduct($name, $price, $description, $image_url){
-    $product = R::dispense('product');
-    $product->name = $name;
-    $product->price = $price;
-    $product->description = $description;
-    $product->image_url = $image_url;
-    R::store($product);
+function addProduct($id, $name, $price, $description, $image_url){
+    $data = getAdmin($id);
+    if ($data['admin'] == 1){
+        $product = R::dispense('product');
+        $product->name = $name;
+        $product->price = $price;
+        $product->description = $description;
+        $product->image_url = $image_url;
+        R::store($product);
+    }
+
 }
