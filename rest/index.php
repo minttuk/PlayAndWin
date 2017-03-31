@@ -53,12 +53,16 @@ Flight::route('GET /friends', function(){
 
 //Product
 Flight::route('POST /product', function(){
-  addProduct(
-    Flight::request()->data->name,
-    Flight::request()->data->price,
-    Flight::request()->data->description,
-    Flight::request()->data->image_url
-  );
+    if (isToken()){
+        addProduct(
+            validateToken(),
+            Flight::request()->data->name,
+            Flight::request()->data->price,
+            Flight::request()->data->description,
+            Flight::request()->data->image_url
+        );
+    }
+
 });
 Flight::route('/product/buy', function(){
     if (isToken() && Flight::request()->query->product != null) {
