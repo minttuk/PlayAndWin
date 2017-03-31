@@ -54,6 +54,7 @@ final class addProductTest extends TestCase{
         $products = json_decode($collection->products, true);
         $amount = $products[3];
         $this->expectOutputString('{"message":"You have bought this product! You have 1 coins left."}', addToCollection('1', '1', '1') );
+        R::store($collection);
         $collection2 = R::load('collection',1);
         $products2 = json_decode($collection2->products, true);
         $newAmount = $products2[3];
