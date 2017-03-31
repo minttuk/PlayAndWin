@@ -49,7 +49,7 @@ final class addProductTest extends TestCase{
     }
 
     //function addToCollection($product_id, $coins_left, $session_id) ->(3,1,1)
-    /*public function testaddToCollection(){
+    public function testaddToCollection(){
         $collection = R::load('collection',1);
         $products = json_decode($collection->products, true);
         $amount = $products[3];
@@ -62,6 +62,6 @@ final class addProductTest extends TestCase{
         $collection->products = json_encode($products);
         R::store($collection);
 
-    }*/
+    }
 
 }
