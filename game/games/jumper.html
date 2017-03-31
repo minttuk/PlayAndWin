@@ -6,21 +6,23 @@
     <title>Jumper Man</title>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/phaser/2.6.2/phaser.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
-    <script src="script.js"></script>
+    <script src="/localization/jquery.i18n.properties.min.js"></script>
     <link href='styles.css' rel='stylesheet' type='text/css'>
 </head>
 
 <body id='jumper' onload='startColor()'>
     <div id="text">
-        <p>Your score: <span id="result"></span></br>Your highscore: <span id="score"></span></p>
+        <p><span id='game_yourscore'>Your score</span>: <span id="result"></span></br>
+          <span id='game_yourhighscore'>Your highscore</span>: <span id="score"></span>
+        </p>
     </div>
 
     <div id="start">
-        <h1 id="again">START</h1>
-        <p>Jump on the platforms and get higher up!</p>
+        <h1 id="game_start">START</h1>
+        <p id='jumper_desc'>Jump on the platforms and get higher up!</p>
     </div>
-
+    <script src="/localization/localize.js"></script>
+    <script src="script.js"></script>
     <script>
         var score;
 

@@ -28,6 +28,7 @@ function showMenu(gameID) {
 
     startColor();
     $('#result').html(score);
+    $('#game_start').text($.i18n.prop('game_again'),localStorage.getItem("lang"));
     $('#start').css('display', 'block');
     $('#text').css('display', 'block');
 }

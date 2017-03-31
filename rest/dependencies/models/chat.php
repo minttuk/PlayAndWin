@@ -16,7 +16,7 @@ function getChat(){
             '<div class="media msg" style='.cardColor().'>'.
             '<div class="media-body">'.
             '<small class="pull-right time"><i class="fa fa-clock-o"></i>'.' '.$results[$i]['ts'].'</small>'.
-            '<h4 class="media-heading">'.$results[$i]['username'].'</h4>'.
+            '<h4 class="media-heading user_name">'.$results[$i]['username'].'</h4>'.
             '<p class="col-lg-10">'.$results[$i]['msg'].'</p>'.
             '</div></div>';
     }

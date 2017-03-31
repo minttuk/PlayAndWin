@@ -15,17 +15,17 @@ $(document).ready(function() {
   });
 });
 function signUpForm() {
-  $("#signForm").html('<input type="text" class="text" name="Username" placeholder="Username" required="">'
-				    +'<input type="text" class="text" name="Firstname" placeholder="First Name"'
-              +'pattern="[a-zA-Z]+" required="" title="Please enter a valid name.">'
-            +'<input type="text" class="text" name="Lastname" placeholder="Last Name"'
-            +'pattern="[a-zA-Z]+" required="" title="Please enter a valid name.">'
-            +'<input type="email" class="text" name="Email" placeholder="Email"'
-              +'pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required="" title="Please enter a valid email.">'
-            +'<input type="password" class="text" name="Password" placeholder="Password"'
-            +'pattern="(?=.*\\d).{6,}" required="" title="Password must contain at least one number and at least 6 or more characters.">'
-            +'<input type="password" class="text" name="ConfirmPassword" placeholder="Confirm Password" required="">'
-				    +'<input type="submit" class="more_btn" name="submit" value="Sign up"><p id="errorMsg"></p>');
+  $("#signForm").html('<input type="text" class="text" name="Username" placeholder="'+$.i18n.prop('form_username',localStorage.getItem("lang"))+'" required="">'+
+				    '<input type="text" class="text" name="Firstname"  placeholder="'+ $.i18n.prop('form_firstname',localStorage.getItem("lang"))+
+            '" pattern="[a-zA-Z]+" required="" title="'+$.i18n.prop('form_valid_name',localStorage.getItem("lang"))+'">'+
+            '<input type="text" class="text" name="Lastname"  placeholder="'+ $.i18n.prop('form_lastname',localStorage.getItem("lang"))+
+            '" pattern="[a-zA-Z]+" required="" title="'+$.i18n.prop('form_valid_name',localStorage.getItem("lang"))+'">'+
+            '<input type="email" class="text" name="Email"  placeholder="'+ $.i18n.prop('form_email',localStorage.getItem("lang"))+
+            '" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required="" title="'+$.i18n.prop('form_valid_email',localStorage.getItem("lang"))+'">'+
+            '<input type="password" class="text" name="Password"  placeholder="'+ $.i18n.prop('form_password',localStorage.getItem("lang"))+
+            '" pattern="(?=.*\\d).{6,}" required="" title="'+$.i18n.prop('form_valid_password',localStorage.getItem("lang"))+'">'+
+            '<input type="password" class="text" name="ConfirmPassword" placeholder="'+$.i18n.prop('form_confirm',localStorage.getItem("lang"))+'" required="">'+
+				    '<input type="submit" class="more_btn" name="submit" value="'+$.i18n.prop('navbar_signup',localStorage.getItem("lang"))+'"><p id="errorMsg"></p>');
 }
 function signInForm() {
   if(signedIn) {
@@ -34,9 +34,9 @@ function signInForm() {
       location.reload();
     });
   } else {
-    $("#signForm").html('<input type="text" class="text" name="Username" placeholder="Username" required="">'
-                      +'<input type="password" class="text" name="Password" placeholder="Password" required="">'
-                      +'<input type="submit" class="more_btn" name="submit" value="Sign in"><p id="errorMsg"></p>');
+    $("#signForm").html('<input type="text" class="text" name="Username" placeholder='+$.i18n.prop('form_username',localStorage.getItem("lang"))+' required="">'
+                      +'<input type="password" class="text" name="Password" placeholder='+$.i18n.prop('form_password',localStorage.getItem("lang"))+' required="">'
+                      +'<input type="submit" class="more_btn" name="submit" value="'+$.i18n.prop('navbar_signin',localStorage.getItem("lang"))+'"><p id="errorMsg"></p>');
   }
 }
 
@@ -44,13 +44,17 @@ function isSignedIn() {
   $.ajax({url: '/rest/user', async: false,
     success: function (id) { if (id != -1) signedIn = true;}
   });
+  updateLogoutButton();
   if (signedIn) {
     $('#prof').css('display','block');
     $('.signUp').html('');
     //$('.signIn').html('Log out');
-    $('.signIn').text($.i18n.prop('navbar_logout'),localStorage.getItem("lang"));
     $('.signUp').css({"color": "white", "font-size": "20px",'padding-top':'16px', 'width':'95px'});
   }
+}
+
+function updateLogoutButton(){
+  if (signedIn) $('.signIn').text($.i18n.prop('navbar_logout'),localStorage.getItem("lang"));
 }
 
 function updateCoins() {

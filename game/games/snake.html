@@ -8,26 +8,27 @@
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
-    <script src="script.js"></script>
+    <script src="/localization/jquery.i18n.properties.min.js"></script>
     <link href='styles.css' rel='stylesheet' type='text/css'>
 </head>
 
 <body onLoad="startColor()">
 
     <div id="text">
-        <p>Your score: <span id="result"></span></br>Your highscore: <span id="score"></span></p>
+        <p><span id='game_yourscore'>Your score</span>: <span id="result"></span></br>
+          <span id='game_yourhighscore'>Your highscore</span>: <span id="score"></span>
+        </p>
     </div>
 
     <div id="start">
-        <h1 id="again">START</h1>
-        <p>Use the arrow keys to move the snake and eat blocks!</p>
+        <h1 id="game_start">START</h1>
+        <p id='snake_desc'>Use the arrow keys to move the snake and eat blocks!</p>
     </div>
 
     <canvas id="canvas" width="450" height="450"></canvas>
-
+    <script src="/localization/localize.js"></script>
+    <script src="script.js"></script>
     <script>
-
         var canvas = $("#canvas")[0];
         var ctx = canvas.getContext("2d");
         var w = $("#canvas").width();
@@ -40,7 +41,6 @@
         var game_loop;
 
         $('#start').click(function() {
-
             $('#start').css('display', 'none');
             $('#text').css('display', 'none');
             $('#canvas').css('display', 'block');
@@ -87,7 +87,7 @@
 
                 if (posX == -1 || posX == w / cellWidth || posY == -1 || posY == h / cellWidth || check_collision(posX, posY, snake_array)) {
                     clearInterval(game_loop);
-                    $('#again').html('Again?');
+                    //$('#again').html('Again?');
                     $('#canvas').css('display', 'none');
                     showMenu('snake');
                 }
