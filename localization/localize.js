@@ -81,6 +81,27 @@ function loadLanguage(){
       $("#footerMiddleTitle").text(footerMiddleTitle);
       $("#footerDescription").text(footerDescription);
       $("#footerDescription2").text(footerDescription2);
+      //Profile
+      $("#editprofilebuttontext").text(editprofilebuttontext);
+      $("#editpicturebuttontext").text(editpicturebuttontext);
+      $("#mycollectionbuttontext").text(mycollectionbuttontext);
+      $("#profilehighscoretext").text(profilehighscoretext);
+      $("#lastloggedintext").text(lastloggedintext);
+      $("#newuserstext").text(newuserstext);
+      $("#memebersincetext").text(memebersincetext);
+      $("#lastonlinetext").text(lastonlinetext);
+      //Edit profile modal
+      $("#editprofileheading").text(editprofileheading);
+      $("#editprofilefirstname").text(editprofilefirstname);
+      $("#editprofilelastname").text(editprofilelastname);
+      $("#editprofiledescription").text(editprofiledescription);
+      $("#editprofilelocation").text(editprofilelocation);
+      $("#saveprofilebutton").val(saveprofilebutton);
+      //Edit picture modal
+      $("#editpictureheading").text(editpictureheading);
+      $("#uploadpicturebutton").val(uploadpicturebutton);
+      //search
+      $("#finduser").text(finduser);
 
       if (typeof updateLogoutButton == 'function') updateLogoutButton();
     }
