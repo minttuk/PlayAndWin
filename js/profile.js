@@ -28,15 +28,16 @@ function getSession() {
       url: "/rest/user",
       type: "get",
       dataType: "json",
-      async: false,
       success: function (response){
         sessionId = response;
-        if (response != -1) sessionId = response.name;
-        return response;
+        if (response != -1) {
+          sessionId = response.name;
+          getUserInfo();
+          showFriends();
+        }
       },
       error: function(jqXHR, textStatus, errorThrown) {
         console.log(textStatus, errorThrown);
-        sessionId = null;
       }
   });
 }
@@ -117,7 +118,6 @@ function getPendingFriends(callback) {
       url:'/rest/friends/pending/'+userId,
       dataType: "json",
       success: function (response){
-        console.log(response);
         callback(null, response);
       },
       error: function(jqXHR, textStatus, errorThrown) {
@@ -132,7 +132,6 @@ function getFriendRequests(callback) {
       url:'/rest/friends/requests/'+userId,
       dataType: "json",
       success: function (response){
-        console.log(response);
         callback(null, response);
       },
       error: function(jqXHR, textStatus, errorThrown) {
@@ -200,7 +199,7 @@ function getUserInfo() {
     if (getLastDir()!='') {
       userId = getLastDir();
     }
-    else if (sessionId != -1) {
+    else if (sessionId) {
       userId = sessionId;
     }
     else {
@@ -273,7 +272,6 @@ function updateProfile(response) {
   //addfriendbutton and sendmessagebutton only visible in other users profiles
   console.log(userId + " " + sessionId);
   if (userId != sessionId) {
-    console.log(userId + " " + sessionId);
     $('.addfriendbutton').css('display', 'none');
     $('.addfriendbutton').attr('data-id', userId);
     $('.deletefriendbutton').css('display', 'none');
@@ -531,11 +529,10 @@ $('#userlocation').click(function(){
   }
 });
 
-
 getScoreTable();
 getSession();
-getUserInfo();
+//getUserInfo();
 getLastLoggedIn();
 getNewUsers();
-showFriends();
+//();
 initHandlers();

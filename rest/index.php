@@ -168,7 +168,7 @@ Flight::start();
 
 // Helper functions
 function isFriendParams() {
-    if (isset(getallheaders()['access_token']) && Flight::request()->query->id != null) return true;
+    if ((isset(getallheaders()['access_token']) || isset($_COOKIE['access_token'])) && Flight::request()->query->id != null) return true;
     else echo 'Incomplete request'; return false;
 }
 

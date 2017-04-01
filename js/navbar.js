@@ -1,4 +1,4 @@
-var signedIn = false;
+var signedIn = document.cookie.match(/^(.*;)?\s*access_token\s*=\s*[^;]+(.*)?$/);
 isSignedIn();
 updateCoins();
 
@@ -9,7 +9,9 @@ $(document).ready(function() {
       if(result.token) {
         location.reload();
       } else {
-        $("#errorMsg").html('</br>'+result.data);
+        translate(result.data, function(translation){
+          $("#errorMsg").html('</br>'+translation);
+        });
       }
     },'json');
   });
@@ -41,9 +43,6 @@ function signInForm() {
 }
 
 function isSignedIn() {
-  $.ajax({url: '/rest/user', async: false,
-    success: function (id) { if (id != -1) signedIn = true;}
-  });
   updateLogoutButton();
   if (signedIn) {
     $('#prof').css('display','block');
@@ -54,7 +53,7 @@ function isSignedIn() {
 }
 
 function updateLogoutButton(){
-  if (signedIn) $('.signIn').text($.i18n.prop('navbar_logout'),localStorage.getItem("lang"));
+  if (signedIn) $('.signIn').text($.i18n.prop('navbar_logout',localStorage.getItem("lang")));
 }
 
 function updateCoins() {

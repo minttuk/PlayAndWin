@@ -1,16 +1,16 @@
 loadLanguage();
 function loadLanguage(){
   if (!localStorage.getItem("lang") || localStorage.getItem("lang") == "undefined")
-    localStorage.setItem("lang", 'us');
+    localStorage.setItem("lang", 'en');
 
   switch (localStorage.getItem("lang")) {
     case 'fi':
       $("#curLang").html('<span class="flag-icon flag-icon-fi"></span> FI<span class="caret"></span>');
       break;
-    case 'us':
+    case 'en':
       $("#curLang").html('<span class="flag-icon flag-icon-us"></span> EN<span class="caret"></span>');
       break;
-    case 'jp':
+    case 'ja':
       $("#curLang").html('<span class="flag-icon flag-icon-jp"></span> JP<span class="caret"></span>');
       break;
   }
@@ -19,6 +19,8 @@ function loadLanguage(){
     name: 'PlayTalkWin',
     path: '/localization/',
     mode: 'both',
+    async: true,
+    cache: true,
     language: localStorage.getItem("lang"),
     callback: function() {
       // Frontpage
@@ -68,47 +70,52 @@ function loadLanguage(){
       $("#footer_cc").text(footer_cc);
       $("#footer_design").text(footer_design);
       //Webstore
-      $("#Prizes_heading").text(Prizes_heading);
-      $("#addProductModalHeading").text(addProductModalHeading);
-      $("#addProductModalName").text(addProductModalName);
-      $("#addProductModalCost").text(addProductModalCost);
-      $("#addProductModalImage").text(addProductModalImage);
-      $("#addProductModalDescription").text(addProductModalDescription);
-      $("#submitForm").text(submitForm);
-      $("#addProductButton").text(addProductButton);
-      $("#footerContact").text(footerContact);
-      $("#footerNumber").text(footerNumber);
-      $("#footerMiddleTitle").text(footerMiddleTitle);
-      $("#footerDescription").text(footerDescription);
-      $("#footerDescription2").text(footerDescription2);
+      $("#shop_prizes").text(shop_prizes);
+      $("#shop_giveinfo").text(shop_giveinfo);
+      $("#shop_name").text(shop_name);
+      $("#shop_cost").text(shop_cost);
+      $("#shop_imageurl").text(shop_imageurl);
+      $("#shop_product_desc").text(shop_product_desc);
+      $("#shop_amount").text(shop_amount);
+      $("#submitForm").text(shop_add);
+      $("#addProductButton").text(shop_addproducts);
+      $("#shop_contact").text(shop_contact);
+      $("#shop_phonenum").text(shop_phonenum);
+      $("#shop_location").text(shop_location);
+      $("#shop_livechat").text(shop_livechat);
+      $("#shop_needcoins").text(shop_needcoins);
+      $("#shop_desc1").text(shop_desc1);
+      $("#shop_desc2").text(shop_desc2);
       //Profile
-      $("#editprofilebuttontext").text(editprofilebuttontext);
-      $("#editpicturebuttontext").text(editpicturebuttontext);
-      $("#mycollectionbuttontext").text(mycollectionbuttontext);
-      $("#profilehighscoretext").text(profilehighscoretext);
-      $("#lastloggedintext").text(lastloggedintext);
-      $("#newuserstext").text(newuserstext);
-      $("#memebersincetext").text(memebersincetext);
-      $("#lastonlinetext").text(lastonlinetext);
+      $("#editprofilebuttontext").text(profile_edit);
+      $("#editpicturebuttontext").text(profile_changepic);
+      $("#mycollectionbuttontext").text(profile_collection);
+      $("#profilehighscoretext").text(profile_highscore);
+      $("#lastloggedintext").text(profile_lastlogged);
+      $("#newuserstext").text(profile_newusers);
+      $("#memebersincetext").text(profile_memebersince);
+      $("#lastonlinetext").text(profile_lastlogged);
       //Edit profile modal
-      $("#editprofileheading").text(editprofileheading);
-      $("#editprofilefirstname").text(editprofilefirstname);
-      $("#editprofilelastname").text(editprofilelastname);
-      $("#editprofiledescription").text(editprofiledescription);
-      $("#editprofilelocation").text(editprofilelocation);
-      $("#saveprofilebutton").val(saveprofilebutton);
+      $("#editprofileheading").text(profile_edit);
+      $("#editprofilefirstname").text(form_firstname);
+      $("#editprofilelastname").text(form_lastname);
+      $("#editprofiledescription").text(form_desc);
+      $("#editprofilelocation").text(form_location);
+      $("#saveprofilebutton").val(form_save);
       //Edit picture modal
-      $("#editpictureheading").text(editpictureheading);
-      $("#uploadpicturebutton").val(uploadpicturebutton);
+      $("#editpictureheading").text(profile_changepic);
+      $("#uploadpicturebutton").val(form_upload);
       //My friends modal
-      $("#myfriendsheading").text(myfriendsheading);
-      $("#friendstabtext").text(friendstabtext);
-      $("#friendrequeststabtext").text(friendrequeststabtext);
-      $("#pendingfriendstabtext").text(pendingfriendstabtext);
+      $("#myfriendsheading").text(profile_friends);
+      $("#friendstabtext").text(profile_friends);
+      $("#friendrequeststabtext").text(profile_requests);
+      $("#pendingfriendstabtext").text(profile_pending);
       //search
-      $("#finduser").text(finduser);
+      $("#finduser").text(profile_find);
 
       if (typeof updateLogoutButton == 'function') updateLogoutButton();
+      if (typeof generateProducts == 'function') generateProducts();
+      if (typeof cookieMessage == 'function') cookieMessage();
     }
   });
 }
@@ -118,4 +125,10 @@ function changeLanguage(lang,page){
   loadLanguage(page);
   if(document.getElementById("chatwindow")) document.getElementById('chatwindow').contentWindow.location.reload();
   if(document.getElementById('game')) document.getElementById('game').contentWindow.loadLanguage();
+}
+
+function translate(text,callback){
+  $.get( "https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl="+localStorage.getItem("lang")+"&dt=t&q="+ encodeURI(text), function( data ) {
+    callback(JSON.parse(data.split(',,').join(',"",').split(',,').join(',"",'))[0][0][0]);
+  },'text');
 }
