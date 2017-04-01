@@ -67,7 +67,20 @@ function loadLanguage(){
       //Footer
       $("#footer_cc").text(footer_cc);
       $("#footer_design").text(footer_design);
-
+      //Webstore
+      $("#Prizes_heading").text(Prizes_heading);
+      $("#addProductModalHeading").text(addProductModalHeading);
+      $("#addProductModalName").text(addProductModalName);
+      $("#addProductModalCost").text(addProductModalCost);
+      $("#addProductModalImage").text(addProductModalImage);
+      $("#addProductModalDescription").text(addProductModalDescription);
+      $("#submitForm").text(submitForm);
+      $("#addProductButton").text(addProductButton);
+      $("#footerContact").text(footerContact);
+      $("#footerNumber").text(footerNumber);
+      $("#footerMiddleTitle").text(footerMiddleTitle);
+      $("#footerDescription").text(footerDescription);
+      $("#footerDescription2").text(footerDescription2);
 
       if (typeof updateLogoutButton == 'function') updateLogoutButton();
     }
