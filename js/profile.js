@@ -224,11 +224,11 @@ function updateProfile(response) {
   });
   //registration date
   $('#membersince').fadeOut(0, function() {
-      $(this).text('Member since: ' + response.reg_date.slice(0,10)).fadeIn(500);
+      $(this).text(" " + response.reg_date.slice(0,10)).fadeIn(500);
   });
   //last online time
   $('#lastonline').fadeOut(0, function() {
-    $(this).text('Last seen: ' + response.last_online).fadeIn(500);
+    $(this).text(" " + response.last_online).fadeIn(500);
   });
   //description
   $('#userdescription').fadeOut(0, function() {

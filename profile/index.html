@@ -82,15 +82,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-body">
-						<h2>Edit Profile </h2>
+						<h2 id="editprofileheading">Edit Profile </h2>
 							<form action="#" method="post">
-								First name:
+								<p id="editprofilefirstname">First name:</p>
 								<input type="text" class="text" name="newfirstname" placeholder="" required="" value="">
-								Last name:
+								<p id="editprofilelastname">Last name:</p>
 								<input type="text" class="text" name="newlastname" placeholder="" required="" value="">
-								Description:
+								<p id="editprofiledescription">Description:</p>
 								<input type="text" class="text" name="newdescription" placeholder="" value="">
-								Location:
+								<p id="editprofilelocation">Location:</p>
 								<input type="text" class="text" name="newlocation" placeholder=""  value="">
 								<p class="errormessage">&nbsp;</p>
 								<input id="saveprofilebutton" type="submit" data-toggle="modal" data-target="#editprofilemodal" class="more_btn" value="Save">
@@ -104,11 +104,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-body">
-						<h2> Upload Picture </h2>
+						<h2 id="editpictureheading"> Upload Picture </h2>
 						<form class="" action="./Backend/php/uploadpicture.php" method="post" enctype="multipart/form-data" id="upload_form">
 							<div class="form-group">
 								<input name="fileToUpload" type="file" class="filestyle form-control"  data-iconName="glyphicon glyphicon-inbox">
-								<input type="submit" value="Upload" style='margin-top:20px;' class="btn btn-primary form-control"/>
+								<input id="uploadpicturebutton" type="submit" value="Upload" style='margin-top:20px;' class="btn btn-primary form-control"/>
 							</div>
 						</form>
 					</div>
@@ -120,11 +120,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-body">
-						<h2>My Friends</h2>
+						<h2 id="myfriendsheading">Friends</h2>
 						<ul class="nav nav-tabs">
-						  <li id="mutualfriendstab" role="presentation" class="active"><a href="#">Friends</a></li>
-						  <li id="friendrequeststab" role="presentation"><a href="#">Requests</a></li>
-						  <li id="pendingfriendstab" role="presentation"><a href="#">Pending</a></li>
+						  <li id="mutualfriendstab" role="presentation" class="active"><a href="#"><span id="friendstabtext">Friends</span></a></li>
+						  <li id="friendrequeststab" role="presentation"><a href="#"><span id="friendrequeststabtext">Requests</span></a></li>
+						  <li id="pendingfriendstab" role="presentation"><a href="#"><span id="pendingfriendstabtext">Pending</span></a></li>
 						</ul>
 						<div id="showmutualfriendsdiv" class="showfriendsdiv">
 						</div>
@@ -163,21 +163,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <input id='searchbar' class="typeahead form-control" type="text" placeholder="">
       </div>
 			<h4 style="float:right; font-size:1.7em; position: relative;" id="search">
-				<span class="glyphicon glyphicon-search" style='font-size:0.8em'></span> Find User
+				<span class="glyphicon glyphicon-search" style='font-size:0.8em'></span>  <span id="finduser">Find User</span>
 			</h4>
 			<h4 id="username">&nbsp;</h4>
-			<h6 id="membersince">&nbsp;</h6>
-			<h6 id="lastonline">&nbsp;</h6>
+			<h6><span id="memebersincetext">Member since:</span><span id="membersince">&nbsp;</span></h6>
+			<h6><span id="lastonlinetext">Last online:</span><span id="lastonline">&nbsp;</span></h6>
 			<div class="item_info">
 					<ul>
 						<li id="userfriends" data-toggle="modal" data-target="#friendsmodal"><a href="#"><i class="glyphicon glyphicon-user"></i><span id="userfriendsbutton">&nbsp;</span></a></li>
 						<li id='location'><a href="#"><i class="glyphicon glyphicon-map-marker"></i><span id="userlocation">&nbsp;</span></a></li>
-						<li id="editprofilebutton" data-toggle="modal" data-target="#editprofilemodal"><a href="#"><i class="glyphicon glyphicon-pencil"></i>Edit Profile</a></li>
-						<li id="editpicturebutton" data-toggle="modal" data-target="#editpicturemodal"><a href="#"><i class="glyphicon glyphicon-picture"></i>Change Picture</a></li>
+						<li id="editprofilebutton" data-toggle="modal" data-target="#editprofilemodal"><a href="#"><i class="glyphicon glyphicon-pencil"></i><span id="editprofilebuttontext">Edit Profile</span></a></li>
+						<li id="editpicturebutton" data-toggle="modal" data-target="#editpicturemodal"><a href="#"><i class="glyphicon glyphicon-picture"></i><span id="editpicturebuttontext">Change Picture</span></a></li>
 						<li id="addfriendbutton" class="addfriendbutton"><a href="#"><i class="glyphicon glyphicon-plus"></i><span id="addfriendbuttontext">Add Friend</span></a></li>
 						<li id="deletefriendbutton" class="deletefriendbutton"><a href="#"><i class="glyphicon glyphicon-plus"></i><span id="deletefriendbuttontext">Delete Friend</span></a></li>
 						<li id="sendmessagebutton"><a href="#"><i class="glyphicon glyphicon-envelope"></i>Send Message</a></li>
-						<li id="mycollectionbutton" data-toggle="modal" data-target="#mycollectionmodal"><a href="#"><i class="glyphicon glyphicon-gift"></i>My Collection</a><li>
+						<li id="mycollectionbutton" data-toggle="modal" data-target="#mycollectionmodal"><a href="#"><i class="glyphicon glyphicon-gift"></i><span id="mycollectionbuttontext">My Collection</span></a><li>
 					</ul>
 			 </div>
 			 <div class="row">
@@ -187,7 +187,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<div class="col-md-4">
 					 <div class="personal-score">
 						 <table id='highscores'>
-							 <h3>High Scores</h3>
+							 <h3 id="profilehighscoretext">High Scores</h3>
 						 </table>
 					 </div>
 				 </div>
@@ -203,7 +203,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<div class="container">
 		<div class=row>
 			<div class="col-md-6 footer-middle-w3">
-				<h4>Last logged in</h4>
+				<h4 id="lastloggedintext">Last logged in</h4>
 				<span id="lastloggedin">
 				</span>
 					<!--
@@ -213,7 +213,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div class="clearfix"></div>
 			</div>
 			<div class="col-md-6 footer-middle-w3">
-				<h4>New users</h4>
+				<h4 id="newuserstext">New users</h4>
 				<span id="newusers">
 				</span>
 				<div class="clearfix"></div>
