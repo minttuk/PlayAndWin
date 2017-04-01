@@ -187,7 +187,7 @@ function buy(product_id){
     $.ajax({url:'/rest/product/buy?product='+product_id,
       success: function (message) {
         translate(message,function(translation){
-          $('.buyMessage').html(message);
+          $('.buyMessage').html(translation);
         });
         updateCoins();
     }});
