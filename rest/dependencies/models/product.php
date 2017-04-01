@@ -12,20 +12,24 @@ function getProducts(){
  * makeOrderRow(), and addToCollection().
  *
  */
-
 function buyProduct($id,$product_id){
     $user = R::load('user',$id);
     $product_price = R::getCell( 'SELECT price FROM product WHERE id = :product_id', [':product_id' => $product_id]);
-    // Does the user have enough coins to buy this product?
-    if ($user->coins<$product_price){
-        return 'You cannot buy this yet. You need more coins.';
-    } else {
-        //If the user can buy the product subtract price from user's coins
-        $user->coins = $user->coins-$product_price;
-        makeShopOrder($user->id);
-        makeOrderRow($product_id);
-        R::store($user);
-        return addToCollection($product_id, $user->coins,$id);
+    $product_amount = R::getCell( 'SELECT amount FROM product WHERE id = :product_id', [':product_id' => $product_id]);
+    //if there are products left to buy
+    if($product_amount>0){
+        // Does the user have enough coins to buy this product?
+        if ($user->coins<$product_price){
+            return 'You cannot buy this yet. You need more coins.';
+        } else {
+            //If the user can buy the product subtract price from user's coins
+            $user->coins = $user->coins-$product_price;
+            makeShopOrder($user->id);
+            makeOrderRow($product_id);
+            updateProductAmount($product_id, $product_amount-1);
+            R::store($user);
+            return addToCollection($product_id, $user->coins,$id);
+        }
     }
 }
 
@@ -47,6 +51,16 @@ function makeShopOrder($user_id){
  */
 function makeOrderRow($product_id){
     R::exec( 'INSERT INTO order_row (order_id, product_id, amount) VALUES (LAST_INSERT_ID(), :product_id, 1)', [':product_id' => $product_id]);
+}
+
+/**
+ * Updates product amount in the database
+ *
+ * @param int $product_id is the id number of the product
+ * @param int $newAmount is the amount of the product to be inserted in the database
+ */
+function updateProductAmount($product_id, $newAmount){
+    R::exec('UPDATE product SET amount = :newAmount WHERE id = :product_id', [':newAmount' => $newAmount, ':product_id' => $product_id] );
 }
 
 /**
