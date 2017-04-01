@@ -10,10 +10,10 @@ use phpunit\Framework\TestCase;
 echo "xxxxx" . getcwd();
 require_once '../rest/dependencies/require_all.php';
 
-final class addProductTest extends TestCase{
+final class productTest extends TestCase{
 
     public function testaddProduct(){
-        addProduct(2, 'testname', '1000', 'testdescription', 'testurl');
+        addProduct(2, 'testname', '1000', 'testdescription', 'testurl', '50');
         $id = R::getCell( 'SELECT MAX(ID) FROM product');
 
         $name = R::getCell( 'SELECT name FROM product WHERE id = '.$id);
@@ -46,6 +46,16 @@ final class addProductTest extends TestCase{
 
         R::exec( 'DELETE FROM order_row WHERE order_id = '.$id );
         R::exec( 'DELETE FROM shoporder WHERE id = '.$id );
+    }
+
+
+    public function testupdateProductAmount(){
+        $old_amount = R::exec('SELECT amount FROM product WHERE id = 1');
+        updateProductAmount(1, 20);
+        $new_amount = R::exec('SELECT amount FROM product WHERE id = 1');
+        $this->assertEquals(20, $new_amount);
+        R::exec('UPDATE product SET amount = '.$old_amount.' WHERE id = 1');
+
     }
 
     //function addToCollection($product_id, $coins_left, $session_id) ->(3,1,1)

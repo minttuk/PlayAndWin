@@ -98,7 +98,7 @@ function addToCollection($product_id, $coins, $id){
  * @param String $image_url
  *
  */
-function addProduct($id, $name, $price, $description, $image_url){
+function addProduct($id, $name, $price, $description, $image_url, $amount){
     $data = getAdmin($id);
     if ($data['admin'] == 1){
         $product = R::dispense('product');
@@ -106,6 +106,7 @@ function addProduct($id, $name, $price, $description, $image_url){
         $product->price = $price;
         $product->description = $description;
         $product->image_url = $image_url;
+        $product->amount = $amount;
         R::store($product);
     }
 

@@ -38,11 +38,12 @@ submitForm.onclick = function(){
     var name = document.getElementById('formName').value;
     var price = document.getElementById('formPrice').value;
     var image_url = document.getElementById("formImage_url").value;
+    var amount = document.getElementById("formAmount").value;
     console.log("name " + name);
 
     if (checkName(name) && checkCost(price) && checkDescription(description)){
 
-        var array = {"name": name, "price": price, "description": description, "image_url": image_url};
+        var array = {"name": name, "price": price, "description": description, "image_url": image_url, "amount": amount};
         var dataString = JSON.stringify(array);
 
         try{

@@ -25,7 +25,11 @@
     color: rgb(2, 24, 136);
     border: 2px solid rgb(2, 24, 136);
 }
-.span3 {
+/*.span3 {
+    border-bottom: none;
+    padding: 15px 0px;
+}*/
+.span4 {
     border-bottom: none;
     padding: 15px 0px;
 }

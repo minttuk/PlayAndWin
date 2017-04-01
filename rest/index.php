@@ -59,7 +59,8 @@ Flight::route('POST /product', function(){
             Flight::request()->data->name,
             Flight::request()->data->price,
             Flight::request()->data->description,
-            Flight::request()->data->image_url
+            Flight::request()->data->image_url,
+            Flight::request()->data->amount
         );
     }
 
