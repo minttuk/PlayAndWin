@@ -49,14 +49,14 @@ final class productTest extends TestCase{
     }
 
 
-    public function testupdateProductAmount(){
+    /*public function testupdateProductAmount(){
         $old_amount = R::exec('SELECT amount FROM product WHERE id = 1');
         updateProductAmount(1, 20);
         $new_amount = R::exec('SELECT amount FROM product WHERE id = 1');
         $this->assertEquals(20, $new_amount);
         R::exec('UPDATE product SET amount = '.$old_amount.' WHERE id = 1');
 
-    }
+    }*/
 
     //function addToCollection($product_id, $coins_left, $session_id) ->(3,1,1)
     /*public function testaddToCollection(){
