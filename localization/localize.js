@@ -100,6 +100,11 @@ function loadLanguage(){
       //Edit picture modal
       $("#editpictureheading").text(editpictureheading);
       $("#uploadpicturebutton").val(uploadpicturebutton);
+      //My friends modal
+      $("#myfriendsheading").text(myfriendsheading);
+      $("#friendstabtext").text(friendstabtext);
+      $("#friendrequeststabtext").text(friendrequeststabtext);
+      $("#pendingfriendstabtext").text(pendingfriendstabtext);
       //search
       $("#finduser").text(finduser);
 
