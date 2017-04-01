@@ -53,8 +53,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<li class="hover-effect"><a id='navbar_shop' href="/shop">Shop</a></li>
 					<li class="hover-effect" id="prof"><a id='navbar_profile' href="/profile">Profile</a></li>
 					<li class="hover-effect"><a id='navbar_community' href="/community">Community</a></li>
-					<li class="hover-effect sign-in signUp"><a id='navbar_signup' data-toggle="modal" data-target="#loginModal" onclick="signUpForm()">Sign Up</a></li>
-					<li class="hover-effect sign-in"><a id='navbar_signin' class='signIn' data-toggle="modal" data-target="#loginModal" onclick="signInForm()">Sign in</a></li>
+					<li class="hover-effect sign-in signUp" data-toggle="collapse" data-target="#navbar"><a id='navbar_signup' data-toggle="modal" data-target="#loginModal" onclick="signUpForm()">Sign Up</a></li>
+					<li class="hover-effect sign-in" data-toggle="collapse" data-target="#navbar"><a id='navbar_signin' class='signIn' data-toggle="modal" data-target="#loginModal" onclick="signInForm()">Sign in</a></li>
 					<li class="dropdown" id='lang'>
 						<a id='navbar_language' class="dropdown-toggle" data-toggle="dropdown" href="/"><span id='curLang'></span></a>
 						<ul class="dropdown-menu">
@@ -66,92 +66,93 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				</ul>
 			</div>
 		</div>
+		<div id="loginModal" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+				<div id="login" class="modal-content">
+					<div class="modal-body">
+						<form id="signForm" method="post"/>
+					</div>
+				</div>
+			</div>
+		</div>
 	</nav>
 	<!-- //Navbar -->
-			<div id="loginModal" class="modal fade" role="dialog">
-				<div class="modal-dialog">
-					<div id="login" class="modal-content">
-						<div class="modal-body">
-							<form id="signForm" method="post"/>
-						</div>
-					</div>
-				</div>
-			</div>
-		<!-- Edit Profile Modal -->
-		<div id="editprofilemodal" class="modal fade" role="dialog">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-body">
-						<h2 id="editprofileheading">Edit Profile </h2>
-							<form action="#" method="post">
-								<p id="editprofilefirstname">First name:</p>
-								<input type="text" class="text" name="newfirstname" placeholder="" required="" value="">
-								<p id="editprofilelastname">Last name:</p>
-								<input type="text" class="text" name="newlastname" placeholder="" required="" value="">
-								<p id="editprofiledescription">Description:</p>
-								<input type="text" class="text" name="newdescription" placeholder="" value="">
-								<p id="editprofilelocation">Location:</p>
-								<input type="text" class="text" name="newlocation" placeholder=""  value="">
-								<p class="errormessage">&nbsp;</p>
-								<input id="saveprofilebutton" type="submit" data-toggle="modal" data-target="#editprofilemodal" class="more_btn" value="Save">
-							</form>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- Edit picture modal -->
-		<div id="editpicturemodal" class="modal fade" role="dialog">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-body">
-						<h2 id="editpictureheading"> Upload Picture </h2>
-						<form class="" action="./Backend/php/uploadpicture.php" method="post" enctype="multipart/form-data" id="upload_form">
-							<div class="form-group">
-								<input name="fileToUpload" type="file" class="filestyle form-control"  data-iconName="glyphicon glyphicon-inbox">
-								<input id="uploadpicturebutton" type="submit" value="Upload" style='margin-top:20px;' class="btn btn-primary form-control"/>
-							</div>
+
+	<!-- Edit Profile Modal -->
+	<div id="editprofilemodal" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-body">
+					<h2 id="editprofileheading">Edit Profile </h2>
+						<form action="#" method="post">
+							<p id="editprofilefirstname">First name:</p>
+							<input type="text" class="text" name="newfirstname" placeholder="" required="" value="">
+							<p id="editprofilelastname">Last name:</p>
+							<input type="text" class="text" name="newlastname" placeholder="" required="" value="">
+							<p id="editprofiledescription">Description:</p>
+							<input type="text" class="text" name="newdescription" placeholder="" value="">
+							<p id="editprofilelocation">Location:</p>
+							<input type="text" class="text" name="newlocation" placeholder=""  value="">
+							<p class="errormessage">&nbsp;</p>
+							<input id="saveprofilebutton" type="submit" data-toggle="modal" data-target="#editprofilemodal" class="more_btn" value="Save">
 						</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Edit picture modal -->
+	<div id="editpicturemodal" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-body">
+					<h2 id="editpictureheading"> Upload Picture </h2>
+					<form class="" action="./Backend/php/uploadpicture.php" method="post" enctype="multipart/form-data" id="upload_form">
+						<div class="form-group">
+							<input name="fileToUpload" type="file" class="filestyle form-control"  data-iconName="glyphicon glyphicon-inbox">
+							<input id="uploadpicturebutton" type="submit" value="Upload" style='margin-top:20px;' class="btn btn-primary form-control"/>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Friends modal -->
+	<div id="friendsmodal" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-body">
+					<h2 id="myfriendsheading">Friends</h2>
+					<ul class="nav nav-tabs">
+					  <li id="mutualfriendstab" role="presentation" class="active"><a href="#"><span id="friendstabtext">Friends</span></a></li>
+					  <li id="friendrequeststab" role="presentation"><a href="#"><span id="friendrequeststabtext">Requests</span></a></li>
+					  <li id="pendingfriendstab" role="presentation"><a href="#"><span id="pendingfriendstabtext">Pending</span></a></li>
+					</ul>
+					<div id="showmutualfriendsdiv" class="showfriendsdiv">
+					</div>
+					<div id="showfriendrequestsdiv" class="showfriendsdiv">
+					</div>
+					<div id="showpendingfriendsdiv" class="showfriendsdiv">
+					</div>
+					<div class="clearfix"></div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<!-- Friends modal -->
-		<div id="friendsmodal" class="modal fade" role="dialog">
+		<!-- My Collection modal -->
+		<div id="mycollectionmodal" class="modal fade" role="dialog">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-body">
-						<h2 id="myfriendsheading">Friends</h2>
-						<ul class="nav nav-tabs">
-						  <li id="mutualfriendstab" role="presentation" class="active"><a href="#"><span id="friendstabtext">Friends</span></a></li>
-						  <li id="friendrequeststab" role="presentation"><a href="#"><span id="friendrequeststabtext">Requests</span></a></li>
-						  <li id="pendingfriendstab" role="presentation"><a href="#"><span id="pendingfriendstabtext">Pending</span></a></li>
-						</ul>
-						<div id="showmutualfriendsdiv" class="showfriendsdiv">
-						</div>
-						<div id="showfriendrequestsdiv" class="showfriendsdiv">
-						</div>
-						<div id="showpendingfriendsdiv" class="showfriendsdiv">
+						<h2 id='profile_collection'>My Collection</h2>
+						<div id="mycollection">
 						</div>
 						<div class="clearfix"></div>
 						</div>
 					</div>
 				</div>
 			</div>
-			<!-- My Collection modal -->
-			<div id="mycollectionmodal" class="modal fade" role="dialog">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-body">
-							<h2>My Collection </h2>
-							<div id="mycollection">
-							</div>
-							<div class="clearfix"></div>
-							</div>
-						</div>
-					</div>
-				</div>
-		</div>
-  </div>
+	</div>
+
 <div class="events-section2-agileinfo">
 <div class="container">
 	<div class="blog1-w3ls">
@@ -228,5 +229,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<script type="text/javascript" src="../js/profile.js"></script>
 	<script src="../js/typeahead.js"></script>
 	<script src="../js/search.js"></script>
+	</div>
 </div>
+</body>
 <!-- //footer -->

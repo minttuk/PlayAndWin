@@ -57,8 +57,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						<li class="hover-effect"><a id='navbar_shop' href="/shop">Shop</a></li>
 						<li class="hover-effect" id="prof"><a id='navbar_profile' href="/profile">Profile</a></li>
 						<li class="hover-effect"><a id='navbar_community' href="/community">Community</a></li>
-						<li class="hover-effect sign-in signUp"><a id='navbar_signup' data-toggle="modal" data-target="#loginModal" onclick="signUpForm()">Sign Up</a></li>
-						<li class="hover-effect sign-in"><a id='navbar_signin' class='signIn' data-toggle="modal" data-target="#loginModal" onclick="signInForm()"></a></li>
+						<li class="hover-effect sign-in signUp" data-toggle="collapse" data-target="#navbar"><a id='navbar_signup' data-toggle="modal" data-target="#loginModal" onclick="signUpForm()">Sign Up</a></li>
+						<li class="hover-effect sign-in" data-toggle="collapse" data-target="#navbar"><a id='navbar_signin' class='signIn' data-toggle="modal" data-target="#loginModal" onclick="signInForm()">Sign in</a></li>
 						<li class="dropdown" id='lang'>
 							<a id='navbar_language' class="dropdown-toggle" data-toggle="dropdown" href="/"><span id='curLang'><span class="flag-icon flag-icon-us"></span> EN<span class="caret"></span></span></a>
 							<ul class="dropdown-menu">
@@ -70,17 +70,17 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					</ul>
 				</div>
 			</div>
-		</nav>
-		<!-- //Navbar -->
-		<div id="loginModal" class="modal fade" role="dialog">
-			<div class="modal-dialog">
-				<div id="login" class="modal-content">
-					<div class="modal-body">
-						<form id="signForm" method="post"/>
+			<div id="loginModal" class="modal fade" role="dialog">
+				<div class="modal-dialog">
+					<div id="login" class="modal-content">
+						<div class="modal-body">
+							<form id="signForm" method="post"/>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+		</nav>
+		<!-- //Navbar -->
 		<!-- Slider -->
 		<div class="slider">
 			<ul class="rslides" id="slider">
@@ -225,39 +225,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					</div>
 				</li>
 			</ul>
-						<script type="text/javascript">
-							$(window).load(function() {
-								$("#flexiselDemo1").flexisel({
-									visibleItems: 4,
-									animationSpeed: 1000,
-									autoPlay: true,
-									autoPlaySpeed: 3000,
-									pauseOnHover: true,
-									enableResponsiveBreakpoints: true,
-									responsiveBreakpoints: {
-										portrait: {
-											changePoint:480,
-											visibleItems: 2
-										},
-										landscape: {
-											changePoint:640,
-											visibleItems:3
-										},
-										tablet: {
-											changePoint:768,
-											visibleItems: 4
-										}
-									}
-								});
-
-							});
-					</script>
-					<script type="text/javascript" src="js/jquery.flexisel.js"></script>
 	</div>
 </div>
 <!-- //trend -->
-
-
 <div class="services-bottom-w3-agileits">
 		<div class="container">
 			<div class="wthree_info">
@@ -273,6 +243,13 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 							</li>
 							<li>
 								<div class="wthree_info_grid">
+									<h3 id='slider_buyprizes'>Buy awesome prizes with your coins!</h3>
+									<p id='slider_buyprizes_text'>Visit the shop to spend your hard earned coins on amazing prizes.</p>
+									<a href="/shop" class="learn fp_learnmore_btn">Learn More</a>
+								</div>
+							</li>
+							<li>
+								<div class="wthree_info_grid">
 									<h3 id='slider_challenge'>Challenge friends!</h3>
 									<p id='slider_challenge_text'>Do you think your high score is unbeatable, challenge your friend to see.</p>
 									<a href="/community" class="learn fp_learnmore_btn">Learn More</a>
@@ -280,9 +257,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 							</li>
 							<li>
 								<div class="wthree_info_grid">
-									<h3 id='slider_buyprizes'>Buy awesome prizes with your coins!</h3>
-									<p id='slider_buyprizes_text'>Visit the shop to spend your hard earned coins on amazing prizes.</p>
-									<a href="/shop" class="learn fp_learnmore_btn">Learn More</a>
+									<h3>Welcome!&nbsp;&nbsp;&nbsp;&nbsp;Tervetuloa!</h3>
+									<h3>歓迎する！</h3>
+									<p></br></br>We support English! Language options are in the top bar.</br>
+										</br>Tuemme suomenkieltä! Yläpalkista löytyy kielivaihtoehdot.</br>
+										</br>日本語をサポートしています。上部のバーで言語を変更します。</p>
 								</div>
 							</li>
 						</ul>
@@ -291,7 +270,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			</div>
 		</div>
 	</div>
-
 <!-- footer -->
 <div class="footer">
 	<div class="clearfix"></div>
@@ -303,14 +281,50 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <!-- //footer -->
 <script defer src="js/jquery.flexslider.js"></script>
 <script src="localization/localize.js"></script>
-
+<script src="js/jquery.flexisel.js"></script>
+<script src="js/jquery.flexisel.js"></script>
+<script src="js/jquery.mousewheel.min.js"></script>
+<script src="js/jquery.simplr.smoothscroll.min.js"></script>
 <script type="text/javascript">
+
 	$(window).load(function(){
+		$(function () {
+		  $.srSmoothscroll({
+		    // defaults
+		    step: 150,
+		    speed: 1000,
+		    ease: 'swing',
+		    target: $('body'),
+		    container: $(window)
+		  })
+		});
 		$('.flexslider').flexslider({
 		animation: "slide",
 		start: function(slider){
 			$('body').removeClass('loading');
 		}
+		});
+		$("#flexiselDemo1").flexisel({
+			visibleItems: 4,
+			animationSpeed: 1000,
+			autoPlay: true,
+			autoPlaySpeed: 3000,
+			pauseOnHover: true,
+			enableResponsiveBreakpoints: true,
+			responsiveBreakpoints: {
+				portrait: {
+					changePoint:480,
+					visibleItems: 2
+				},
+				landscape: {
+					changePoint:640,
+					visibleItems:3
+				},
+				tablet: {
+					changePoint:768,
+					visibleItems: 4
+				}
+			}
 		});
 	});
 	function scrollToGames(){

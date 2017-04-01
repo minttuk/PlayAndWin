@@ -69,7 +69,6 @@ window.onload = function displayAddProductButton() {
       type: "GET",
       dataType: 'json',
       success: function(data) {
-        console.log(data);
         console.log("admin arvo on " + data.admin);
         if (data.admin == 1) $('#addProductButton').css('display','block');
         else $('#addProductButton').css('display','none');
@@ -187,7 +186,7 @@ function buy(product_id){
     $.ajax({url:'/rest/product/buy?product='+product_id,
       success: function (message) {
         translate(message,function(translation){
-          $('.buyMessage').html(translation);
+          $('.buyMessage').hide().text(translation).fadeIn();
         });
         updateCoins();
     }});

@@ -10,6 +10,12 @@
 	}
 }
 
+#errorMsg{
+	text-align: center;
+	color:darkblue;
+	font-weight: bold;
+}
+
 #chatwindow {
 	display:block;
 	width:100%;
@@ -2055,6 +2061,17 @@ color:rgb(2, 24, 136) !important;
 }
 
 @media screen and (max-width: 1200px){
+
+	.modal{
+		margin-top: 70px;
+	}
+
+	.navbar-collapse {
+		margin-top:10px;
+	  opacity: 0.8;
+	  padding-right: 0px;
+	  padding-left: 0px;
+	}
 
 	.dropdown-menu {
 		background-color: transparent !important;

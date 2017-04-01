@@ -395,6 +395,7 @@ function getCollection() {
           productrow.append(header, price, amount);
           var img = $('<img></img>');
           img.attr("src", response[i].picture);
+          img.css({'max-height':'300px','width':'auto','display':'block','margin':'auto'});
           img.attr("alt", "image of " + response[i].name);
           productrow.append(img);
           //var col2 = $('<div class="col-m-6"></div>');

@@ -95,6 +95,7 @@ function loadLanguage(){
       $("#newuserstext").text(profile_newusers);
       $("#memebersincetext").text(profile_memebersince);
       $("#lastonlinetext").text(profile_lastlogged);
+      $("#profile_collection").text(profile_collection);
       //Edit profile modal
       $("#editprofileheading").text(profile_edit);
       $("#editprofilefirstname").text(form_firstname);

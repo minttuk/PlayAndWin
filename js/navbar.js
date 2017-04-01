@@ -10,7 +10,11 @@ $(document).ready(function() {
         location.reload();
       } else {
         translate(result.data, function(translation){
-          $("#errorMsg").html('</br>'+translation);
+          $("#errorMsg").animate({'padding-top': "20px"}, function(){
+            $('#signForm').animate({height: "240px"}, function(){
+              $('#errorMsg').hide().text(translation).fadeIn('slow');
+            });
+          });
         });
       }
     },'json');
@@ -78,3 +82,7 @@ function updateCoins() {
     }});
   }
 }
+
+$('.navbar-toggle').click(function(){
+  $('#loginModal').modal('hide');
+ });
