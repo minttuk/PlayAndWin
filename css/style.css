@@ -2060,6 +2060,12 @@ color:rgb(2, 24, 136) !important;
 	}
 }
 
+@media screen and (min-width: 1201px){
+	#profileButtons {
+		height:22px;
+	}
+}
+
 @media screen and (max-width: 1200px){
 
 	.modal{
@@ -2068,7 +2074,6 @@ color:rgb(2, 24, 136) !important;
 
 	.navbar-collapse {
 		margin-top:10px;
-	  opacity: 0.8;
 	  padding-right: 0px;
 	  padding-left: 0px;
 	}
@@ -2104,7 +2109,7 @@ color:rgb(2, 24, 136) !important;
 	}
 	.navbar-nav {
 		margin: 0;
-		background: #02178e;
+		background:rgba(2, 23, 142, 0.8);
 	}
 	.navbar-collapse.in {
 		overflow-y: inherit;
