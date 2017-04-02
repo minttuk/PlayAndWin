@@ -178,7 +178,7 @@ function logOut() {
       foreach ($gamelist as $game) {
         R::exec('DELETE FROM hs_'.$game.' WHERE id=:id', [':id' => $deleteID]);
       }
-      R::exec('DROP TABLE collection_'.$deleteID);
+      R::exec('DELETE FROM collection WHERE id=:id', [':id' => $deleteID]);
       R::exec('DELETE FROM user WHERE id=:id', [':id' => $deleteID]);
       if ($id == $deleteID) logout();
       return 'User '.$deleteID.' deleted.';
