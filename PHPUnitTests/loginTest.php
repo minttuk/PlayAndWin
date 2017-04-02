@@ -11,12 +11,12 @@ final class loginTest extends TestCase {
       $this->assertEquals('{"data":"Username taken, try again!"}',loginUser('Bobby', 'moiMoir3', 'moiMoir3', 'trololo@trol.com',null, null));
       $this->assertEquals('{"data":"Nope, wrong username or password!"}',loginUser('Fake', 'moiMoir3', 'moiMoir3', null, null, null));
   }
-  public function testlogOut() {
-      session_start();
-      $this->assertEquals('You have been logged out.', logOut());
-  }
   public function testregUser() {
       $this->assertEquals(true, regUser('Fake', 'moiMoir3', 'moiMoir3', 'testi@testi.com', 'Php', 'UnitTest'));
+  }
+  public function testlogOut() {
+      //loginUser('Fake', 'moiMoir3', 'moiMoir3', null, null, null)
+      $this->assertEquals('You have been logged out.', logOut());
   }
   public function testfindUser(){
       $this->assertEquals('Fake', findUser('Fake')->username);
