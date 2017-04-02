@@ -86,3 +86,8 @@ function updateCoins() {
 $('.navbar-toggle').click(function(){
   $('#loginModal').modal('hide');
  });
+$('.sign-in').click(function(){
+  if ($(window).width() < 1200){
+    $('#navbar').collapse("hide");
+  }
+});

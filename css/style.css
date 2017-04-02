@@ -61,6 +61,14 @@ body a:hover {
 body a:focus, a:hover {
 	text-decoration: none;
 }
+body {
+    padding-right:0px !important;
+    margin-right:0px !important;
+}
+body.modal-open {
+    overflow-y: auto;
+		overflow-x: hidden;
+}
 input[type="button"], input[type="submit"] {
 	transition: 0.5s all;
 	-webkit-transition: 0.5s all;
