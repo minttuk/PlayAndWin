@@ -93,6 +93,7 @@ function logOut() {
       R::exec('INSERT INTO hs_'.$game.' (id,highscore) VALUES (:id,0)', [':id' => $newuser]);
     }
     R::exec('INSERT INTO collection (id) VALUES (:id)', [':id' => $newuser]);
+    return true;
   }
 
 /**
