@@ -1,4 +1,5 @@
 var signedIn = document.cookie.match(/^(.*;)?\s*access_token\s*=\s*[^;]+(.*)?$/);
+var failed = false;
 isSignedIn();
 updateCoins();
 
@@ -11,7 +12,8 @@ $(document).ready(function() {
       } else {
         translate(result.data, function(translation){
           $("#errorMsg").animate({'padding-top': "20px"}, function(){
-            $('#signForm').animate({height: "240px"}, function(){
+            $('#signForm').animate({height: "+=30px"}, function(){
+              failed = true;
               $('#errorMsg').hide().text(translation).fadeIn('slow');
             });
           });
@@ -89,5 +91,12 @@ $('.navbar-toggle').click(function(){
 $('.sign-in').click(function(){
   if ($(window).width() < 1200){
     $('#navbar').collapse("hide");
+  }
+});
+$( '#loginModal').on('hidden.bs.modal', function() {
+  if (failed){
+    $("#errorMsg").css('padding-top','');
+    $('#signForm').css('height','');
+    failed = false;
   }
 });
