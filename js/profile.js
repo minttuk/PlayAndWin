@@ -34,6 +34,8 @@ function getSession() {
           sessionId = response.name;
           getUserInfo();
           showFriends();
+        } else {
+          window.location = '/';
         }
       },
       error: function(jqXHR, textStatus, errorThrown) {
@@ -201,9 +203,6 @@ function getUserInfo() {
     }
     else if (sessionId) {
       userId = sessionId;
-    }
-    else {
-      window.location = "/";
     }
     $.ajax({
         url: '/rest/user/'+userId,

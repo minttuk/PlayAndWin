@@ -2847,3 +2847,6 @@ font-weight: bold !important;
 color: #e91e63 !important;
 font-weight: bold !important;
 }
+.sign-in a::before, .sign-in a::after {
+
+}

@@ -17,10 +17,12 @@ function generateProducts(){
         '<div class="clearfix"></div></div>' +
         '<div class="span span2">' + '<p class="left product_cost"></p><p class="right">' + product.price + '</p>' +
         '<div class="clearfix"></div></div>' +
+        '<div class="span span3">' + '<p class="left product_amount"></p><p class="right">' + product.amount + '</p>' +
+        '<div class="clearfix"></div></div>' +
         '<div class="span span3"><button type="button" class="buy-button" onclick="buy(' + product.id + ')">/button>' +
         '<div class="clearfix"></div></div>'+
-        '<div></br><p class="buyMessage" style="text-align:center;font-weight:bold"></p>'  +
-        '<div class="clearfix"></div></div>' +
+        '<div class="span buy_message"><p class="buyMessage" style="text-align:center;font-weight:bold;padding-bottom:0;"></p>'  +
+        '</div>' +
         '</div><div class="clearfix"></div></div></div></div>');
       $('.gallery-grids').append('<div class="gallery-grid">' +
         '<a class="book popup-with-zoom-anim button-isi zoomIn animated" data-wow-delay=".5s" href="#small-dialog' + i + '">' +
@@ -35,6 +37,7 @@ function generateProducts(){
     });
     $('.product_name').text($.i18n.prop('shop_name', localStorage.getItem("lang")));
     $('.product_cost').text($.i18n.prop('shop_cost', localStorage.getItem("lang")));
+    $('.product_amount').text($.i18n.prop('shop_amount', localStorage.getItem("lang")));
     $('.buy-button').text($.i18n.prop('shop_buy', localStorage.getItem("lang")));
     //$('.gallery-grids').append('<div class="clearfix"></div>');
   }, 'json').then(function() {
