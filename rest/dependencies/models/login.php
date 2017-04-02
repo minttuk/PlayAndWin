@@ -25,7 +25,7 @@ function loginUser($uname, $password, $confirmPass, $email, $firstname, $lastnam
         $newuser = findUser($uname);
         if (!$newuser) {
           regUser($uname,$email,$password,$firstname,$lastname);
-          startSession($newuser->id);
+          //startSession($newuser->id);
           setcookie("access_token",generateToken($player->id,$uname), time()+60*60*24*14, '/');
           return json_encode(array('token'=>generateToken($newuser->id,$uname)));
         } else $message['data'] = 'Username taken, try again!';
@@ -34,7 +34,6 @@ function loginUser($uname, $password, $confirmPass, $email, $firstname, $lastnam
     $player = findUser($uname);
 
     if($player ? ($player->password==$password) : false) {
-      startSession($player->id);
       updateLastOnline($player->id);
       setcookie("access_token",generateToken($player->id,$uname), time()+60*60*24*14, '/');
       return json_encode(array('token'=>generateToken($player->id,$uname)));
@@ -45,28 +44,18 @@ function loginUser($uname, $password, $confirmPass, $email, $firstname, $lastnam
   return json_encode($message);
 }
 
+
+//---------------funktiot:
+
 /**
  *Destroys the session, effectively logging out the user.
  *
  *@return string Message of success
  */
 function logOut() {
-  session_destroy();
   setcookie("access_token","", time() - 3600,"/");
   return 'You have been logged out.';
 }
-
-
-//---------------funktiot:
-
-/**
- *Setting the $_SESSION variable to store the user's session on the server side.
- *
- *@param int $id is the user's id.
- */
-  function startSession($id) {
-    $_SESSION['id'] = $id;
-  }
 
 /**
  *Registers the user by sending a query to the database to form a row in the user table for the user.
