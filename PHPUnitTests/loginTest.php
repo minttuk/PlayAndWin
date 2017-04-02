@@ -14,10 +14,6 @@ final class loginTest extends TestCase {
   public function testregUser() {
       $this->assertEquals(true, regUser('Fake', 'moiMoir3', 'moiMoir3', 'testi@testi.com', 'Php', 'UnitTest'));
   }
-  public function testlogOut() {
-      loginUser('Fake', 'moiMoir3', 'moiMoir3', null, null, null);
-      $this->assertEquals('You have been logged out.', logOut());
-  }
   public function testfindUser(){
       $this->assertEquals('Fake', findUser('Fake')->username);
   }
