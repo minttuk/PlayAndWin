@@ -1,5 +1,22 @@
-.col-xs-6 {
-transform: translateY(-50%);
+.center_img {
+  height:194px;
+  display: flex;
+  align-items: center;
+}
+
+.items_info {
+  padding-bottom:50px;
+}
+.col_left {
+  float:right;
+  padding-right:50px;
+}
+
+.item_img {
+  max-height':200px;
+  width:auto;
+  max-width:200px;
+  padding:0;
 }
 
 .personal-score h3{
@@ -81,7 +98,8 @@ h6 {
 }
 
 .collectionrow {
-  padding: 20px 0 10px 0;
+  padding-top: 50px;
+  padding-bottom: 10px;
 }
 
 .showfriendsdiv {
