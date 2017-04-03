@@ -175,7 +175,7 @@ function showFriendActionButton() {
         }
       }
       else if (response.length >= 2) {
-        $('#deletefriendbuttontext').text($.i18n.prop('profile_deleterequest',localStorage.getItem("lang")));
+        $('#deletefriendbuttontext').text($.i18n.prop('profile_deletefriend',localStorage.getItem("lang")));
         $('.deletefriendbutton').fadeOut(0, function() {
           $(this).css('display', 'inline-block').fadeIn(500);
         });
@@ -223,11 +223,11 @@ function updateProfile(response) {
   });
   //registration date
   $('#membersince').fadeOut(0, function() {
-      $(this).text(" " + response.reg_date.slice(0,10)).fadeIn(500);
+      $(this).text(" " + localizeDateTime(response.reg_date).split(' ')[0]).fadeIn(500);
   });
   //last online time
   $('#lastonline').fadeOut(0, function() {
-    $(this).text(" " + response.last_online).fadeIn(500);
+    $(this).text(" " + localizeDateTime(response.last_online)).fadeIn(500);
   });
   //description
   $('#userdescription').fadeOut(0, function() {
