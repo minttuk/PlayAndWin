@@ -439,7 +439,6 @@ function showOtherUsers(response, who) {
     }
     $('#' + who + '').append(div);
   }
-  initHandlers();
 }
 
 // click event handlers are called after DOM elements creation too
