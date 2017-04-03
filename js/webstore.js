@@ -37,7 +37,7 @@ function generateProducts(){
     });
     $('.product_name').text($.i18n.prop('shop_name', localStorage.getItem("lang")));
     $('.product_cost').text($.i18n.prop('shop_cost', localStorage.getItem("lang")));
-    $('.product_amount').text($.i18n.prop('shop_amount', localStorage.getItem("lang")));
+    $('.product_amount').text($.i18n.prop('shop_stock', localStorage.getItem("lang")));
     $('.buy-button').text($.i18n.prop('shop_buy', localStorage.getItem("lang")));
     //$('.gallery-grids').append('<div class="clearfix"></div>');
   }, 'json').then(function() {

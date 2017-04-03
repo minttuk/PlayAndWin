@@ -76,6 +76,7 @@ function loadLanguage(){
       $("#shop_cost").text(shop_cost);
       $("#shop_imageurl").text(shop_imageurl);
       $("#shop_product_desc").text(shop_product_desc);
+      $("#shop_stock").text(shop_stock);
       $("#shop_amount").text(shop_amount);
       $("#submitForm").text(shop_add);
       $("#addProductButton").text(shop_addproducts);
