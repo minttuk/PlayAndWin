@@ -31,9 +31,9 @@ CREATE TABLE product (
   id INT(6) PRIMARY KEY AUTO_INCREMENT NOT NULL,
   name VARCHAR(100) NOT NULL,
   price FLOAT(20) NOT NULL,
-  description VARCHAR(500),
-  image_url VARCHAR(500),
-  amount INT(10)
+  description VARCHAR(500) NOT NULL,
+  image_url VARCHAR(500) NOT NULL,
+  amount INT(10) NOT NULL
 );
 
 CREATE TABLE shoporder (
