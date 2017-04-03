@@ -388,9 +388,11 @@ function getCollection() {
           var header = $('<h3></h3>');
           header.text(response[i].name);
           var price = $('<h4></h4>');
-          price.text("Price: " + response[i].price);
+          //price.text("Price: " + response[i].price);
+          price.text($.i18n.prop('shop_cost',localStorage.getItem("lang")) + ": " + response[i].price);
           var amount = $('<h4></h4>');
-          amount.text("Amount: " + response[i].amount);
+          //amount.text("Amount: " + response[i].amount);
+          amount.text($.i18n.prop('shop_amount',localStorage.getItem("lang")) + ": " + response[i].amount);
           productrow.append(header, price, amount);
           var img = $('<img></img>');
           img.attr("src", response[i].picture);
@@ -461,7 +463,7 @@ function initHandlers() {
           console.log(textStatus, errorThrown);
         }
     });
-  })
+  });
 
   $(".deletefriendbutton").click(function() {
     console.log("deletefriendbutton clicked");
@@ -479,7 +481,7 @@ function initHandlers() {
           console.log(textStatus, errorThrown);
         }
     });
-  })
+  });
 }
 
 $('#userlocation').click(function(){
