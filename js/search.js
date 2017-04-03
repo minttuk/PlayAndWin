@@ -13,7 +13,7 @@ $('#remote .typeahead').typeahead(null, {
   displayKey: 'name',
   source: names,
   templates: {
-    empty: ['<h5><b>No users found!</b></h5>'],
+    empty: ['<h5><b>' + $.i18n.prop('search_nouser',localStorage.getItem("lang")) + '</b></h5>'],
     suggestion: function(data){
           return '<a class="resultlink" href="/profile/'+data.name
           +'"><div class="result"><img class="searchimage" src="/images/user/'
