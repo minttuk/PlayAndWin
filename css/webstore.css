@@ -40,6 +40,10 @@
 		min-height: 42px;
     padding-top: 15px;
 }
+
+ .product_name, .product_cost, .product_amount {
+   text-transform: uppercase;
+ }
 /*
 @media (min-width: 601px) and (min-height: 1100px){
   .copyright {
