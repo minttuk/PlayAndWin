@@ -152,29 +152,30 @@ function showFriendActionButton() {
       //console.log(response);
       if (response.length == 0) {
         $('.addfriendbutton').fadeOut(0, function() {
-          $('#addfriendbuttontext').text('Add Friend');
+          $('#addfriendbuttontext').text($.i18n.prop('profile_addfriend',localStorage.getItem("lang")));
           $(this).css('display', 'inline-block').fadeIn(500);
         });
       }
       else if (response.length == 1) {
         if (response[0]['user_id'] == userId) {
-          $('#addfriendbuttontext').text('Accept Request');
+          $('#addfriendbuttontext').text($.i18n.prop('profile_acceptrequest',localStorage.getItem("lang")));
           $('.addfriendbutton').fadeOut(0, function() {
             $(this).css('display', 'inline-block').fadeIn(500);
           });
-          $('#deletefriendbuttontext').text('Reject Request');
+          $('#deletefriendbuttontext').text($.i18n.prop('profile_rejectrequest',localStorage.getItem("lang")));
           $('.deletefriendbutton').fadeOut(0, function() {
               $(this).css('display', 'inline-block').fadeIn(500);
           });
         }
         else if (response[0]['friend_id'] == userId) {
-          $('#deletefriendbuttontext').text('Cancel Request');
+          $('#deletefriendbuttontext').text($.i18n.prop('profile_cancelrequest',localStorage.getItem("lang")));
           $('.deletefriendbutton').fadeOut(0, function() {
             $(this).css('display', 'inline-block').fadeIn(500);
           });
         }
       }
       else if (response.length >= 2) {
+        $('#deletefriendbuttontext').text($.i18n.prop('profile_deleterequest',localStorage.getItem("lang")));
         $('.deletefriendbutton').fadeOut(0, function() {
           $(this).css('display', 'inline-block').fadeIn(500);
         });
@@ -269,7 +270,6 @@ function updateProfile(response) {
     $('#pendingfriendstab').css("display", "inline-block");
   }
   //addfriendbutton and sendmessagebutton only visible in other users profiles
-  console.log(userId + " " + sessionId);
   if (userId != sessionId) {
     $('.addfriendbutton').css('display', 'none');
     $('.addfriendbutton').attr('data-id', userId);
