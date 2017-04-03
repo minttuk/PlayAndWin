@@ -52,6 +52,25 @@ CREATE TABLE order_row (
   FOREIGN KEY (product_id) REFERENCES product(id)
 );
 
+CREATE TABLE tradeproducts (
+  id INT(6) PRIMARY KEY AUTO_INCREMENT NOT NULL,
+  seller_id INT(6) NOT NULL,
+  buyer_id INT()
+);
+
+CREATE TABLE trades (
+  id INT(6) PRIMARY KEY AUTO_INCREMENT NOT NULL,
+  seller_id INT(6) NOT NULL,
+  product_id INT(6) NOT NULL,
+  price INT(9) NOT NULL,
+  description VARCHAR(100),
+  buyer_id INT(6),
+  trade_time TIMESTAMP DEFAULT NULL,
+  FOREIGN KEY (seller_id) REFERENCES user(id),
+  FOREIGN KEY (buyer_id) REFERENCES user(id),
+  FOREIGN KEY (product_id) REFERENCES product(id)
+);
+
 CREATE TABLE advertisement (
   id INT(6) PRIMARY KEY AUTO_INCREMENT NOT NULL,
   company_name VARCHAR(100) NOT NULL,
@@ -114,3 +133,5 @@ INSERT INTO friendship (user_id, friend_id)
 VALUES (1, 2);
 INSERT INTO friendship (user_id, friend_id)
 VALUES (2, 1);
+
+INSERT INTO trades (seller_id, product_id, price, description) VALUES (1, 1, 50, 'Selling this cause I dont need it');

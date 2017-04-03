@@ -150,8 +150,8 @@ function getMutualFriends($id) {
 
 function getPendingFriends($id) {
   //$pendingfriends = R::getAll( 'SELECT friend_id FROM friendship WHERE user_id = :id AND approved = 0', [':id' => getUserID($id)]);
-  $friendsrow1 = R::getAll('SELECT friend_id FROM friendship WHERE user_id = :id', [':id' => getUserID($id)]);
-  $friendsrow2 = R::getAll('SELECT user_id FROM friendship WHERE friend_id = :id', [':id' => getUserID($id)]);
+  $friendsrow1 = R::getAll('SELECT friend_id FROM friendship WHERE user_id = :id', [':id' => $id]);
+  $friendsrow2 = R::getAll('SELECT user_id FROM friendship WHERE friend_id = :id', [':id' => $id]);
   $friends = array();
   foreach ($friendsrow1 as $friend_id => $row1) {
     $mutual = false;
@@ -180,8 +180,8 @@ function getPendingFriends($id) {
 
 function getFriendRequests($id) {
   //$friendrequests = R::getAll( 'SELECT user_id FROM friendship WHERE friend_id = :id AND approved = 0', [':id' => getUserID($id)]);
-  $friendsrow1 = R::getAll('SELECT friend_id FROM friendship WHERE user_id = :id', [':id' => getUserID($id)]);
-  $friendsrow2 = R::getAll('SELECT user_id FROM friendship WHERE friend_id = :id', [':id' => getUserID($id)]);
+  $friendsrow1 = R::getAll('SELECT friend_id FROM friendship WHERE user_id = :id', [':id' => $id]);
+  $friendsrow2 = R::getAll('SELECT user_id FROM friendship WHERE friend_id = :id', [':id' => $id]);
   $friends = array();
   foreach ($friendsrow2 as $user_id => $row1) {
     $mutual = false;
@@ -408,7 +408,7 @@ function getCoins($id) {
  * @return List of products
  */
 function getCollection($id) {
-  $products = R::load('collection', getUserID($id));
+  $products = R::load('collection', $id);
   $products = json_decode($products['products']);
   $response = array();
   foreach ($products as $id => $amount) {

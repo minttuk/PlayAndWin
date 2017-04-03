@@ -139,21 +139,24 @@ Flight::route('/score/@id', function($id){
 Flight::route('/search/@query', function($query){
     Flight::json(searchUsers($query));
 });
+Flight::route('/searchcollection/@query', function($query){
+    Flight::json(searchCollection($query));
+});
 
 // Friends
 Flight::route('/friends/@id', function($id){
     Flight::json(getMutualFriends($id));
 });
 Flight::route('/friends/requests/@id', function($id){
-    Flight::json(getFriendRequests($id));
+    Flight::json(getFriendRequests(validateToken()));
 });
 Flight::route('/friends/pending/@id', function($id){
-    Flight::json(getPendingFriends($id));
+    Flight::json(getPendingFriends(validateToken()));
 });
 
 // Collection
 Flight::route('/collection/@id', function($id){
-    Flight::json(getCollection($id));
+    Flight::json(getCollection(validateToken()));
 });
 
 // ---------------------------------   END of API  --------------------------------- //

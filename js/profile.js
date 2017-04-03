@@ -175,7 +175,7 @@ function showFriendActionButton() {
         }
       }
       else if (response.length >= 2) {
-        $('#deletefriendbuttontext').text($.i18n.prop('profile_deleterequest',localStorage.getItem("lang")));
+        $('#deletefriendbuttontext').text($.i18n.prop('profile_deletefriend',localStorage.getItem("lang")));
         $('.deletefriendbutton').fadeOut(0, function() {
           $(this).css('display', 'inline-block').fadeIn(500);
         });
@@ -223,11 +223,11 @@ function updateProfile(response) {
   });
   //registration date
   $('#membersince').fadeOut(0, function() {
-      $(this).text(" " + response.reg_date.slice(0,10)).fadeIn(500);
+      $(this).text(" " + localizeDateTime(response.reg_date).split(' ')[0]).fadeIn(500);
   });
   //last online time
   $('#lastonline').fadeOut(0, function() {
-    $(this).text(" " + response.last_online).fadeIn(500);
+    $(this).text(" " + localizeDateTime(response.last_online)).fadeIn(500);
   });
   //description
   $('#userdescription').fadeOut(0, function() {
@@ -297,13 +297,6 @@ function updateProfile(response) {
 
 $('#friendrequeststab').click(function() {
   showFriends();
-  /*getFriendRequests(function(error, response) {
-    if (error) {
-      console.log(error);
-    }
-    console.log("friends " + response);
-    showOtherUsers(response, 'showfriendrequestsdiv');
-  });*/
   $('#friendrequeststab').attr('class', 'active');
   $('#showfriendrequestsdiv').css('display', 'inline-block');
   $('#mutualfriendstab').removeClass('active');
@@ -314,13 +307,6 @@ $('#friendrequeststab').click(function() {
 
 $('#pendingfriendstab').click(function() {
   showFriends();
-  /*getPendingFriends(function(error, response) {
-    if (error) {
-      console.log(error);
-    }
-    console.log("friends " + response);
-    showOtherUsers(response, 'showpendingfriendsdiv');
-  });*/
   $('#pendingfriendstab').attr('class', 'active');
   $('#showpendingfriendsdiv').css('display', 'inline-block');
   $('#mutualfriendstab').removeClass('active');
@@ -439,6 +425,9 @@ function showOtherUsers(response, who) {
     }
     $('#' + who + '').append(div);
   }
+  $(".addfriendbutton").off("click");
+  $(".deletefriendbutton").off("click");
+  initHandlers();
 }
 
 // click event handlers are called after DOM elements creation too

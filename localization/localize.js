@@ -1,5 +1,5 @@
 loadLanguage();
-function loadLanguage(){
+function loadLanguage(page){
   if (!localStorage.getItem("lang") || localStorage.getItem("lang") == "undefined")
     localStorage.setItem("lang", 'en');
 
@@ -118,20 +118,60 @@ function loadLanguage(){
       if (typeof updateLogoutButton == 'function') updateLogoutButton();
       if (typeof generateProducts == 'function') generateProducts();
       if (typeof cookieMessage == 'function') cookieMessage();
-      if (typeof showFriendActionButton == 'function') showFriendActionButton();
     }
   });
 }
 
-function changeLanguage(lang,page){
+function changeLanguage(lang){
   localStorage.setItem("lang", lang);
-  loadLanguage(page);
+  loadLanguage();
   if(document.getElementById("chatwindow")) document.getElementById('chatwindow').contentWindow.location.reload();
   if(document.getElementById('game')) document.getElementById('game').contentWindow.loadLanguage();
+  if (typeof getSession == 'function') getSession();
 }
 
 function translate(text,callback){
   $.get( "https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl="+localStorage.getItem("lang")+"&dt=t&q="+ encodeURI(text), function( data ) {
     callback(JSON.parse(data.split(',,').join(',"",').split(',,').join(',"",'))[0][0][0]);
   },'text');
+}
+
+function localizeDateTime(dateTime) {
+
+  var date = dateTime.split(" ")[0].split("-");
+	var time = dateTime.split(" ")[1].split(':');
+  // Time
+  var hours = Number(time[0]);
+  var minutes = Number(time[1]);
+  var seconds = Number(time[2]);
+  // Date
+  var day = Number(date[2]);
+  var month = Number(date[1]);
+  var year = Number(date[0]);
+
+	switch(localStorage.getItem("lang")) {
+    case 'en':
+        date = month+'/'+day+'/'+ year;
+        if (hours > 0 && hours <= 12)
+          time= "" + hours;
+        else if (hours > 12)
+          time= "" + (hours - 12);
+        else if (hours == 0)
+          time= "12";
+        time += (minutes < 10) ? ":0" + minutes : ":" + minutes;
+        time += (seconds < 10) ? ":0" + seconds : ":" + seconds;
+        time += (hours >= 12) ? " P.M." : " A.M.";
+        break;
+    case 'fi':
+        date = day+'.'+month+'.'+year;
+        time = time[0]+':'+time[1]+':'+time[2];
+        break;
+    case 'ja':
+     		date = year+'年'+month+'月'+day+'日';
+        time = hours+'時'+minutes+'分'+seconds+'秒';
+        break;
+    default:
+        return dateTime;
+	}
+  return date + '\xa0\xa0' + time;
 }
