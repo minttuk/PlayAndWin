@@ -1,3 +1,5 @@
+SET GLOBAL time_zone = '+00:00';
+
 CREATE DATABASE playandwin;
 
 USE playandwin;

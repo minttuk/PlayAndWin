@@ -137,18 +137,21 @@ function translate(text,callback){
 }
 
 function localizeDateTime(dateTime) {
-
-  var date = dateTime.split(" ")[0].split("-");
-	var time = dateTime.split(" ")[1].split(':');
+  // Adjust to user's timezone
+  var t = dateTime.split(/[- :]/);
+  dateTime = Date.UTC(t[0], t[1]-1, t[2], t[3], t[4], t[5]);
+  dateTime = new Date(dateTime-new Date().getTimezoneOffset()*60000).toISOString().substring(0, 19).replace('T', ' ');
   // Time
+  var time = dateTime.split(" ")[1].split(':');
   var hours = Number(time[0]);
   var minutes = Number(time[1]);
   var seconds = Number(time[2]);
   // Date
+  var date = dateTime.split(" ")[0].split("-");
   var day = Number(date[2]);
   var month = Number(date[1]);
   var year = Number(date[0]);
-
+  // Format time and date
 	switch(localStorage.getItem("lang")) {
     case 'en':
         date = month+'/'+day+'/'+ year;

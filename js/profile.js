@@ -369,25 +369,40 @@ function getCollection() {
         console.log(response);
         $('#mycollection').empty();
         for (var i in response) {
-          var productrow = $('<div class="collectionrow"></div>');
-          //var col1 = $('<div class="col-m-6 img-w3-agile"></div>');
-          var header = $('<h3></h3>');
-          header.text(response[i].name);
-          var price = $('<h4></h4>');
-          //price.text("Price: " + response[i].price);
-          price.text($.i18n.prop('shop_cost',localStorage.getItem("lang")) + ": " + response[i].price);
-          var amount = $('<h4></h4>');
-          //amount.text("Amount: " + response[i].amount);
-          amount.text($.i18n.prop('shop_amount',localStorage.getItem("lang")) + ": " + response[i].amount);
-          productrow.append(header, price, amount);
-          var img = $('<img></img>');
-          img.attr("src", response[i].picture);
-          img.css({'max-height':'300px','width':'auto','display':'block','margin':'auto'});
-          img.attr("alt", "image of " + response[i].name);
-          productrow.append(img);
-          //var col2 = $('<div class="col-m-6"></div>');
-          //row.append(col1, col2);
-          $('#mycollection').append(productrow);
+          $('#mycollection').append(
+            '<div class="collectionrow row">'+
+            '<div class="col-xs-6 centering"><img class="item_img" src="'+response[i].picture+'" /></div>'+
+            '<div class="col-xs-6 col_left"><h3 class="col_info">'+response[i].name+'</h3>'+
+            '<h4  class="col_info">'+$.i18n.prop('shop_cost',localStorage.getItem("lang")) + ": " + response[i].price+'</h4>'+
+            '<h4>'+$.i18n.prop('shop_amount',localStorage.getItem("lang")) + ": " + response[i].amount+'</h4></div></div>');
+            $('.col_info').css({'padding-bottom':'50px'});
+
+            $('.col_left').css({'float':'right','padding-right':'50px'});
+            $('.item_img').css({'max-height':'200px','width':'auto','max-width':'200px','vertical-align': 'middle','display':'block','margin':'auto','padding':0});
+          /*
+          for (var i in response) {
+            var row = $('<div class="collectionrow row">');
+            var left_col = $('<div class="col-md-6 img-w3-agile"></div>');
+            var right_col = $('<div class="col-md-6 img-w3-agile"></div>');
+            var name = $('<h3></h3>');
+            var cost = $('<h4></h4>');
+            var amount = $('<h4></h4>');
+            var img = $('<img></img>');
+            img.attr("src", response[i].picture);
+            img.css({'max-height':'300px','width':'auto','display':'block','margin':'auto'});
+            img.attr("alt", "image of " + response[i].name);
+            name.text(response[i].name);
+            cost.text($.i18n.prop('shop_cost',localStorage.getItem("lang")) + ": " + response[i].price);
+            amount.text($.i18n.prop('shop_amount',localStorage.getItem("lang")) + ": " + response[i].amount);
+            right_col.append(img);
+            left_col.append(name);
+            left_col.append(cost);
+            left_col.append(amount);
+            row.append(right_col);
+            row.append(left_col);
+            $('#mycollection').append(row);
+          }
+          */
         }
       },
       error: function(jqXHR, textStatus, errorThrown) {
