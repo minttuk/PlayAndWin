@@ -49,22 +49,22 @@ final class productTest extends TestCase{
     }
 
 
-    /*public function testupdateProductAmount(){
-        $old_amount = R::exec('SELECT amount FROM product WHERE id = 1');
+    public function testupdateProductAmount(){
+        $old_amount = R::getCell('SELECT amount FROM product WHERE id = 1');
         updateProductAmount(1, 20);
-        $new_amount = R::exec('SELECT amount FROM product WHERE id = 1');
+        $new_amount = R::getCell('SELECT amount FROM product WHERE id = 1');
         $this->assertEquals(20, $new_amount);
         R::exec('UPDATE product SET amount = '.$old_amount.' WHERE id = 1');
 
-    }*/
+    }
 
     //function addToCollection($product_id, $coins_left, $session_id) ->(3,1,1)
-    /*public function testaddToCollection(){
+    public function testaddToCollection(){
         $collection = R::load('collection',1);
         //$products = json_decode($collection->products, true);
         $products = $collection->products;
         $amount = $products[3];
-        $this->expectOutputString('{"message":"You have bought this product! You have 1 coins left."}', addToCollection('1', '1', '1') );
+        $this->expectOutputString('{"message":"You have bought this product! You have 1 coins left."}', addToCollection('3', '1', '1') );
         $collection2 = R::load('collection',1);
         //$products = json_decode($collection->products, true);
         $products2 = $collection2->products;
@@ -74,6 +74,6 @@ final class productTest extends TestCase{
         //$collection2->products = json_encode($products2);
         R::store($collection2);
 
-    }*/
+    }
 
 }
