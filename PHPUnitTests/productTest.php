@@ -49,17 +49,17 @@ final class productTest extends TestCase{
     }
 
 
-    /*public function testupdateProductAmount(){
+    public function testupdateProductAmount(){
         $old_amount = R::exec('SELECT amount FROM product WHERE id = 1');
         updateProductAmount(1, 20);
         $new_amount = R::exec('SELECT amount FROM product WHERE id = 1');
         $this->assertEquals(20, $new_amount);
         R::exec('UPDATE product SET amount = '.$old_amount.' WHERE id = 1');
 
-    }*/
+    }
 
     //function addToCollection($product_id, $coins_left, $session_id) ->(3,1,1)
-    /*public function testaddToCollection(){
+    public function testaddToCollection(){
         $collection = R::load('collection',1);
         //$products = json_decode($collection->products, true);
         $products = $collection->products;
@@ -74,6 +74,6 @@ final class productTest extends TestCase{
         //$collection2->products = json_encode($products2);
         R::store($collection2);
 
-    }*/
+    }
 
 }
