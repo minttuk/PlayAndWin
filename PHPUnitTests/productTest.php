@@ -61,17 +61,17 @@ final class productTest extends TestCase{
     //function addToCollection($product_id, $coins_left, $session_id) ->(3,1,1)
     public function testaddToCollection(){
         $collection = R::load('collection',1);
-        //$products = json_decode($collection->products, true);
-        $products = $collection->products;
-        $amount = $products[3];
+        $products = json_decode($collection->products, true);
+        //$products = $collection->products;
+        $amount = $products["3"];
         $this->expectOutputString('{"message":"You have bought this product! You have 1 coins left."}', addToCollection('3', '1', '1') );
         $collection2 = R::load('collection',1);
-        //$products = json_decode($collection->products, true);
-        $products2 = $collection2->products;
-        $newAmount = $products2[3];
+        $products2 = json_decode($collection->products, true);
+        //$products2 = $collection2->products;
+        $newAmount = $products2["3"];
         $this->assertEquals($amount+1, $newAmount);
-        $products2[3]--;
-        //$collection2->products = json_encode($products2);
+        $products2["3"]--;
+        $collection2->products = json_encode($products2);
         R::store($collection2);
 
     }
