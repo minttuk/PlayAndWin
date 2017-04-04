@@ -408,8 +408,7 @@ function getCoins($id) {
  * @return List of products
  */
 function getCollection($id) {
-  $products = R::load('collection', $id);
-  $products = json_decode($products['products']);
+  $products = collection($id);
   $response = array();
   foreach ($products as $id => $amount) {
     $product = R::load('product', $id);
@@ -421,6 +420,12 @@ function getCollection($id) {
      );
   }
   return $response;
+}
+
+function collection($id) {
+  $products = R::load('collection', $id);
+  $products = json_decode($products['products']);
+  return $products;
 }
 
 ?>

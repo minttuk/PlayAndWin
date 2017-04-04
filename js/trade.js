@@ -27,6 +27,7 @@ $('#submitTradeForm').click(function () {
 
 function emptyTradeForm() {
   $('#formTradeName').val("");
+  $('#formTradeProduct').val("");
   $('#formTradeOrgcost').val("");
   $('#formTradeOrgdesc').val("");
   $('#formTradePrice').val("");
@@ -34,7 +35,7 @@ function emptyTradeForm() {
 }
 
 function addTrade(callback) {
-  var trade = {"product": $('#formTradeName').val(), "price": $('#formTradePrice').val(), "description": $('#formTradeDescription').val()};
+  var trade = {"product": $('#formTradeProduct').val(), "price": $('#formTradePrice').val(), "description": $('#formTradeDescription').val()};
   $.ajax({
       url:'/rest/trades/new',
       type: "post",
@@ -78,6 +79,7 @@ $('#formTradeName').focusout(function () {
 function fillTradeForm(response) {
   console.log(response.price);
   $('#formTradeName').val(response.name);
+  $('#formTradeProduct').val(response.id);
   $('#formTradeOrgcost').val(response.price);
   $('#formTradePrice').val(response.price);
   $('#formTradeOrgdesc').val(response.description);

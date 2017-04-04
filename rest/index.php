@@ -129,9 +129,9 @@ Flight::route('/products/@id', function($id) {
 Flight::route('POST /trades/new', function() {
   Flight::json(addNewTrade(
     validateToken(),
-    Flight::request()->data->productid,
-    Flight::request()->data->tradeprice,
-    Flight::request()->data->tradedescription
+    Flight::request()->data->product,
+    Flight::request()->data->price,
+    Flight::request()->data->description
   ));
 });
 

@@ -137,3 +137,4 @@ INSERT INTO friendship (user_id, friend_id)
 VALUES (2, 1);
 
 INSERT INTO trades (seller_id, product_id, price, description) VALUES (1, 1, 50, 'Selling this cause I dont need it');
+INSERT INTO trades (seller_id, product_id, price, description) VALUES (3, 3, 50, 'buy it pls');

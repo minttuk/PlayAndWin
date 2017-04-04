@@ -146,12 +146,33 @@ function addNewTrade($userid, $productid, $tradeprice, $tradedescription) {
   return $msg;
 }
 
-//Work in progress - Check that user owns this product
 function userHasProduct($userid, $productid) {
-  return true;
+  $products = collection($userid);
+  $result = false;
+  foreach ($products as $key => $value) {
+    if ($key == $productid && $value > 0) {
+      $result = true;
+    }
+  }
+  return $result;
 }
 
 //Work in progress - Check that open trades do not exceed the amount of this product owned by the user
 function notAlreadyForTrade($userid, $productid) {
-  return true;
+  $products = collection($userid);
+  $opentrades = countOpenTrades($userid, $productid);
+  $result = false;
+  foreach ($products as $key => $value) {
+    if ($key == $productid) {
+      if ($value > $opentrades) {
+        $result = true;
+      }
+    }
+  }
+  return $result;
+}
+
+function countOpenTrades($userid, $productid) {
+  $result = R::getAll('SELECT COUNT(*) AS count FROM trades WHERE seller_id = :userid AND product_id = :productid AND buyer_id IS NULL', [':userid' => $userid, ':productid' => $productid]);
+  return $result[0]['count'];
 }
