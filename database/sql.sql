@@ -64,7 +64,7 @@ CREATE TABLE trades (
   id INT(6) PRIMARY KEY AUTO_INCREMENT NOT NULL,
   seller_id INT(6) NOT NULL,
   product_id INT(6) NOT NULL,
-  price INT(9) NOT NULL,
+  price INT(15) NOT NULL,
   description VARCHAR(100),
   buyer_id INT(6),
   trade_time TIMESTAMP DEFAULT NULL,

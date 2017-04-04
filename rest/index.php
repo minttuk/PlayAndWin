@@ -121,6 +121,20 @@ Flight::route('/products', function(){
     Flight::json(getProducts());
 });
 
+Flight::route('/products/@id', function($id) {
+    Flight::json(getProductById($id));
+});
+
+//trade
+Flight::route('POST /trades/new', function() {
+  Flight::json(addNewTrade(
+    validateToken(),
+    Flight::request()->data->productid,
+    Flight::request()->data->tradeprice,
+    Flight::request()->data->tradedescription
+  ));
+});
+
 // Chat
 Flight::route('POST /chat', function(){
     if(isToken()) echo addChat(validateToken());

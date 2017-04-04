@@ -111,3 +111,47 @@ function addProduct($id, $name, $price, $description, $image_url, $amount){
     }
 
 }
+
+/**
+* Gets the product information by id
+*
+*@param product id
+*@return array with product information
+*/
+
+function getProductById($id) {
+  $result = R::load('product', $id);
+  return $result;
+}
+
+/**
+* Adds new trade to the trades table
+*
+*@param seller id, product id, trade price, trade description
+*@return message to inform if tradable product was added successfully
+*/
+
+function addNewTrade($userid, $productid, $tradeprice, $tradedescription) {
+  if (userHasProduct($userid, $productid)) {
+    if (notALreadyForTrade($userid, $productid)) {
+      $msg = array("success" => "Product has been put for sale!");
+    }
+    else {
+      $msg = array("error" => "Seems like you are already trading this product! Please choose another product to sell.");
+    }
+  }
+  else {
+    $msg = array("error" => "Oops! You don't seem to own this product. Make sure you filled in the right product!");
+  }
+  return $msg;
+}
+
+//Work in progress - Check that user owns this product
+function userHasProduct($userid, $productid) {
+  return true;
+}
+
+//Work in progress - Check that open trades do not exceed the amount of this product owned by the user
+function notAlreadyForTrade($userid, $productid) {
+  return true;
+}

@@ -35,7 +35,17 @@
 }
 .errormsg {
     color: red;
+    padding: 10px;
+    font-weight: bold;
 }
+
+.successmsg {
+  color: green;
+  text-align: center;
+  padding: 10px;
+  font-weight: bold;
+}
+
 .buy_message {
 		min-height: 42px;
     padding-top: 15px;
@@ -59,4 +69,8 @@
 */
 #addTradeProductButton{
     display: block;
+}
+
+.prefilled {
+  color: grey;
 }
