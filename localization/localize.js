@@ -92,10 +92,10 @@ function loadLanguage(page){
       $("#editpicturebuttontext").text(profile_changepic);
       $("#mycollectionbuttontext").text(profile_collection);
       $("#profilehighscoretext").text(profile_highscore);
+      $("#lastonlinetext").text(profile_lastonline);
       $("#lastloggedintext").text(profile_lastlogged);
       $("#newuserstext").text(profile_newusers);
       $("#memebersincetext").text(profile_memebersince);
-      $("#lastonlinetext").text(profile_lastlogged);
       $("#profile_collection").text(profile_collection);
       //Edit profile modal
       $("#editprofileheading").text(profile_edit);
@@ -127,6 +127,7 @@ function changeLanguage(lang){
   loadLanguage();
   if(document.getElementById("chatwindow")) document.getElementById('chatwindow').contentWindow.location.reload();
   if(document.getElementById('game')) document.getElementById('game').contentWindow.loadLanguage();
+  if (typeof getCollection == 'function') getCollection();
   if (typeof getSession == 'function') getSession();
 }
 
