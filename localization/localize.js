@@ -139,8 +139,8 @@ function translate(text,callback){
 function localizeDateTime(dateTime) {
   // Adjust to user's timezone
   var t = dateTime.split(/[- :]/);
-  dateTime = Date.UTC(t[0], t[1]-1, t[2], t[3], t[4], t[5]);
-  dateTime = new Date(dateTime-new Date().getTimezoneOffset()*60000).toISOString().substring(0, 19).replace('T', ' ');
+  var dateTimeUTC = Date.UTC(t[0], t[1]-1, t[2], t[3], t[4], t[5]);
+  dateTime = new Date(dateTimeUTC-new Date().getTimezoneOffset()*60000).toISOString().substring(0, 19).replace('T', ' ');
   // Time
   var time = dateTime.split(" ")[1].split(':');
   var hours = Number(time[0]);
@@ -170,7 +170,7 @@ function localizeDateTime(dateTime) {
         time = time[0]+':'+time[1]+':'+time[2];
         break;
     case 'ja':
-     		date = year+'年'+month+'月'+day+'日';
+     		date = new Date(dateTimeUTC).toLocaleDateString('ja-JP-u-ca-japanese').substring(0, 4)+'年'+month+'月'+day+'日';
         time = hours+'時'+minutes+'分'+seconds+'秒';
         break;
     default:

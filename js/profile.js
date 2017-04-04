@@ -223,7 +223,7 @@ function updateProfile(response) {
   });
   //registration date
   $('#membersince').fadeOut(0, function() {
-      $(this).text(" " + localizeDateTime(response.reg_date).split(' ')[0]).fadeIn(500);
+      $(this).text(" " + localizeDateTime(response.reg_date).split('\xa0\xa0')[0]).fadeIn(500);
   });
   //last online time
   $('#lastonline').fadeOut(0, function() {
