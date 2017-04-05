@@ -87,6 +87,15 @@ function loadLanguage(page){
       $("#shop_needcoins").text(shop_needcoins);
       $("#shop_desc1").text(shop_desc1);
       $("#shop_desc2").text(shop_desc2);
+      //Trade
+      $("#trade_new_heading").text(trade_new_heading);
+      $("#trade_giveinfo").text(trade_giveinfo);
+      $("#trade_product").text(trade_product);
+      $("#trade_orgcost").text(trade_orgcost);
+      $("#trade_description").text(trade_description);
+      $("#trade_sellingprice").text(trade_sellingprice);
+      $("#trade_product_desc").text(trade_product_desc);
+      $("#trade_submit_form").text(trade_submit_form);
       //Profile
       $("#editprofilebuttontext").text(profile_edit);
       $("#editpicturebuttontext").text(profile_changepic);

@@ -4,7 +4,7 @@
  * @returns
  */
 
-$('#submitTradeForm').click(function () {
+$('#trade_submit_form').click(function () {
   console.log("submintjee");
   if (checkFilled($('#formTradeName').val()) && checkInt($('#formTradePrice').val()) && checkFilled($('#formTradePrice').val())) {
     $('#tradeformerrormsg').text("");
