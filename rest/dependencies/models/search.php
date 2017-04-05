@@ -7,14 +7,3 @@ function searchUsers($query) {
   }
   return $matches;
 }
-
-function searchCollection($query) {
-  $results = R::getAll('SELECT * FROM collection WHERE id = 3');
-  //$results_array = json_decode($results);
-  $matches = array();
-  /*foreach ($results as $result) {
-    $product_info = R::getAll('SELECT * FROM product WHERE id = :product_id', [':product_id' => $results['product_id']])
-    $matches[] = array('name'=>$product_info['name'],'picture'=>$product_info['image_url']);
-  }*/
-  return $results;
-}

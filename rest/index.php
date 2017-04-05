@@ -39,6 +39,9 @@ Flight::route('DELETE /user/@id', function($id){
 Flight::route('/user/admin', function(){
     if (isToken()) Flight::json(getAdmin(validateToken()));
 });
+Flight::route('/user/collection/', function(){
+    if (isToken()) Flight::json(getCollection(validateToken()));
+});
 
 // Friends
 Flight::route('POST /friends', function(){
@@ -154,11 +157,8 @@ Flight::route('/score/@id', function($id){
 });
 
 // Search
-Flight::route('/search/@query', function($query){
+Flight::route('/search/user/@query', function($query){
     Flight::json(searchUsers($query));
-});
-Flight::route('/searchcollection/@query', function($query){
-    Flight::json(searchCollection($query));
 });
 
 // Friends

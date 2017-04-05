@@ -65,19 +65,51 @@ function getCollection() {
   });
 }
 
+// Search Stuff
+
+function createCollection(){
+  $('#user_collection').empty();
+  $.getJSON("/rest/user/collection/", function(response){
+    $.each(response, function(i, item) {
+      $('#user_collection').append(
+        '<div id="row'+i+'" class="collectionrow row" data-name="'+item.name+'">'+
+        '<img class="item_img center-block" src="'+item.picture+'" />'+
+        '<h4 class="item'+i+' item_name">'+item.name+'</h4>'+
+        '<h5>'+$.i18n.prop('shop_cost',localStorage.getItem("lang")) + ": " + item.price+'</h5>'+
+        '<h5>'+$.i18n.prop('shop_amount',localStorage.getItem("lang")) + ": " + item.amount+'</h5></div>'
+      );
+      translate(item.name,function(translation){
+        $('.item'+i).text(translation);
+      });
+      $('#row'+i).data('item_info',item);
+    });
+    $('.collectionrow').click(function(){
+      fillTradeForm($(this).data('item_info'));
+      $('#user_collection').hide();
+    });
+  });
+}
+
+$("#formTradeName").keyup(function(e) {
+    var query = $("#formTradeName").val().toLowerCase();
+    $('.collectionrow').each(function(i) {
+        if ($(this).attr('data-name').toLowerCase().startsWith(query)) $(this).show();
+        else $(this).hide();
+    });
+});
+
+$('#formTradeName').focus(function() {
+    $('#user_collection').fadeIn();
+});
+
 $('#formTradeName').focusout(function () {
   var productid = $('#formTradeName').val();
   console.log(productid);
-  getProductInfo(productid, function(error, response) {
-    console.log(error, response);
-    if (response) {
-      fillTradeForm(response);
-    }
-  });
+  $('#user_collection').fadeOut();
 });
 
+
 function fillTradeForm(response) {
-  console.log(response.price);
   $('#formTradeName').val(response.name);
   $('#formTradeProduct').val(response.id);
   $('#formTradeOrgcost').val(response.price);

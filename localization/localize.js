@@ -127,6 +127,7 @@ function loadLanguage(page){
       if (typeof updateLogoutButton == 'function') updateLogoutButton();
       if (typeof generateProducts == 'function') generateProducts();
       if (typeof cookieMessage == 'function') cookieMessage();
+      if (typeof createCollection == 'function') createCollection();
     }
   });
 }
