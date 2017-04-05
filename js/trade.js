@@ -161,8 +161,11 @@ function showMyTrades(div, response) {
   for (product in response) {
     var row = $('<tr></tr>');
     if (div === "myopentradescontent") {
-      var content = $('<td>' + response[product].name + '</td><td>' + response[product].price + '</td><td>Edit Button, Delete Button </td>')
-
+      var content = $(
+        '<td>' + response[product].name + '</td>' +
+        '<td>' + response[product].price + '</td> ' +
+        '<td><button type="button" data-tradeid="' + response[product].id + '" class="btn btn-primary trade_edit_button">Edit</button>' +
+        '<button type="button" data-tradeid="' + response[product].id + '" class="btn btn-danger trade_delete_button">Delete</button> </td>')
     }
     else {
       var content = $('<td>' + response[product].name + '</td><td>' + response[product].price + '</td><td>' + response[product].time + '</td>');
@@ -170,6 +173,28 @@ function showMyTrades(div, response) {
     row.append(content);
     $div.append(row);
   }
+  resetButtonHandlers();
+}
+
+function resetButtonHandlers() {
+  $(".trade_edit_button").off("click");
+  $(".trade_delete_button").off("click");
+
+  $(".trade_edit_button").click(function() {
+    editTrade();
+  });
+
+  $(".trade_delete_button").click(function() {
+    deleteTrade();
+  });
+}
+
+function editTrade() {
+  console.log("edit clicked")
+}
+
+function deleteTrade() {
+  console.log("delete clicked")
 }
 
 function getTradeInfo(callback) {

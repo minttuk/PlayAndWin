@@ -75,6 +75,7 @@ function formProperReturn($trades) {
   foreach ($trades as $trade => $value) {
     $product = getProductById($value['product_id']);
     $result[] = array(
+      'id' => $value['id'],
       'name' => $product->name,
       'price' => $value['price'],
       'description' => $value['description'],
