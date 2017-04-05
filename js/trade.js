@@ -17,6 +17,7 @@ $('#trade_submit_form').click(function () {
       if(response.hasOwnProperty('success')){
         $('#tradeformsuccessmsg').text(response.success);
         emptyTradeForm();
+        getTradeManageInfo();
       }
     });
   }
@@ -51,20 +52,6 @@ function addTrade(callback) {
       }
   });
 }
-
-function getCollection() {
-  $.ajax({
-      url:'/rest/collection/'+userId,
-      dataType: "json",
-      success: function (response){
-        console.log(response);
-        },
-      error: function(jqXHR, textStatus, errorThrown) {
-        console.log(textStatus, errorThrown);
-      }
-  });
-}
-
 // Search Stuff
 
 function createCollection(){
@@ -104,7 +91,6 @@ $('#formTradeName').focus(function() {
 
 $('#formTradeName').focusout(function () {
   var productid = $('#formTradeName').val();
-  console.log(productid);
   $('#user_collection').fadeOut();
 });
 
@@ -149,7 +135,7 @@ function checkFilled(val) {
   return false;
 }
 
-$('#manageTradesButton').click(function () {
+$('#trade_manage_button').click(function () {
   $('#managetrades').toggle();
 });
 

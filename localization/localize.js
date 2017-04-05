@@ -96,6 +96,8 @@ function loadLanguage(page){
       $("#trade_sellingprice").text(trade_sellingprice);
       $("#trade_product_desc").text(trade_product_desc);
       $("#trade_submit_form").text(trade_submit_form);
+      $("#trade_add_button").text(trade_add_button);
+      $("#trade_manage_button").text(trade_manage_button);
       //Profile
       $("#editprofilebuttontext").text(profile_edit);
       $("#editpicturebuttontext").text(profile_changepic);
