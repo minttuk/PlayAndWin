@@ -8,6 +8,13 @@
 	.advertisement {
 		display: none;
 	}
+	#chat-col {
+		width: 100%;
+	}
+
+	#chat-footer {
+		display:none;
+	}
 }
 
 #errorMsg{
@@ -24,6 +31,8 @@
 	overflow: hidden;
 	margin: auto;
 }
+
+
 
 #game {
 	max-width: 1000px;
