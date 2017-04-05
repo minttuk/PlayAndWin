@@ -411,15 +411,17 @@ function getCollection($id) {
   $products = collection($id);
   $response = array();
   foreach ($products as $id => $amount) {
-    $product = R::load('product', $id);
-    $response[] = array(
-      'id' => $product->id,
-      'name' => $product->name,
-      'description' => $product->description,
-      'amount' => $amount,
-      'picture' => $product->image_url,
-      'price' => $product->price
-     );
+    if ($amount > 0) {
+      $product = R::load('product', $id);
+      $response[] = array(
+        'id' => $product->id,
+        'name' => $product->name,
+        'description' => $product->description,
+        'amount' => $amount,
+        'picture' => $product->image_url,
+        'price' => $product->price
+       );
+    }
   }
   return $response;
 }
