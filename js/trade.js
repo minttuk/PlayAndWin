@@ -83,6 +83,8 @@ function fillTradeForm(response) {
   $('#formTradeOrgcost').val(response.price);
   $('#formTradePrice').val(response.price);
   $('#formTradeOrgdesc').val(response.description);
+  $('#tradeformerrormsg').text("");
+  $('#tradeformsuccessmsg').text("");
 }
 
 function getProductInfo(productid, callback) {
@@ -114,3 +116,58 @@ function checkFilled(val) {
   }
   return false;
 }
+
+$('#manageTradesButton').click(function () {
+  $('#managetrades').toggle();
+});
+
+function getTradeManageInfo() {
+  getTradeInfo(function(error, response) {
+    console.log(error, response);
+    showMyTrades("myopentradescontent", response['opentrades']);
+    showMyTrades("mybuyinghistorycontent", response['buyinghistory']);
+    showMyTrades("mysellinghistorycontent", response['sellinghistory']);
+  });
+}
+
+function showMyTrades(div, response) {
+  console.log(div, response);
+  $div = $('#' + div + '');
+  $div.empty();
+  if (div === "myopentradescontent") {
+    $div.html("<tr><th>Product</th><th>Price</th><th>Action</th></tr>");
+  }
+  else {
+    $div.html("<tr><th>Product</th><th>Price</th><th>Time</th></tr>");
+  }
+  for (product in response) {
+    var row = $('<tr></tr>');
+    if (div === "myopentradescontent") {
+      var content = $('<td>' + response[product].name + '</td><td>' + response[product].price + '</td><td>Edit Button, Delete Button </td>')
+
+    }
+    else {
+      var content = $('<td>' + response[product].name + '</td><td>' + response[product].price + '</td><td>' + response[product].time + '</td>');
+    }
+    row.append(content);
+    $div.append(row);
+  }
+}
+
+function getTradeInfo(callback) {
+  //ajax
+  $.ajax({
+      url:'/rest/trades/history',
+      dataType: "json",
+      success: function (response){
+        callback(null, response);
+        },
+      error: function(jqXHR, textStatus, errorThrown) {
+        callback(errorThrown, null);
+      }
+  });
+}
+
+$( document ).ready(function() {
+    getTradeManageInfo();
+});

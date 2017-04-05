@@ -10,3 +10,4 @@ require 'models/chat.php';
 require 'models/highscore.php';
 require 'models/search.php';
 require 'models/login.php';
+require 'models/trade.php';

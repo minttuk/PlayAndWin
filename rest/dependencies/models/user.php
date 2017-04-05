@@ -402,7 +402,7 @@ function getCoins($id) {
 }
 
 /**
- * Returns the bought items of a usere
+ * Returns the bought items of a user with product name, amount, picture and price
  *
  * @param int $id is the ID number of the user.
  * @return List of products
@@ -422,6 +422,12 @@ function getCollection($id) {
   return $response;
 }
 
+/**
+ * Returns the bought items of a user (product ids and amounts)
+ *
+ * @param int $id is the ID number of the user.
+ * @return List of products
+ */
 function collection($id) {
   $products = R::load('collection', $id);
   $products = json_decode($products['products']);

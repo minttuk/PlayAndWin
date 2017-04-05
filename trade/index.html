@@ -98,8 +98,39 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<div class="gallery-w3layouts" id="gallery">
 		<div class="container">
 			<h2 id="shop_trade">Trade</h2>
+			<button type="button" class="button" id="addTradeProductButton" data-toggle="modal" data-target="#addTradeProductModal">New Trade</button>
+			<button type="button" class="button" id="manageTradesButton">Manage Trades</button>
 			<div class="gallery-grids">
 				<div class="clearfix"> </div>
+			</div>
+			<div id="managetrades">
+				<div class="panel panel-success">
+					<div class="panel-heading">
+						<h3 class="panel-title">My Open Trades</h3>
+					</div>
+					<div class="panel-body">
+						<table style="width:100%" id="myopentradescontent">
+						</table>
+					</div>
+				</div>
+				<div class="panel panel-info">
+					<div class="panel-heading">
+						<h3 class="panel-title">My Buying History</h3>
+					</div>
+					<div class="panel-body">
+						<table style="width:100%" id="mybuyinghistorycontent">
+						</table>
+					</div>
+				</div>
+				<div class="panel panel-danger">
+					<div class="panel-heading">
+						<h3 class="panel-title">My Selling History</h3>
+					</div>
+					<div class="panel-body">
+						<table style="width:100%" id="mysellinghistorycontent">
+						</table>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -110,9 +141,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-body">
+					<h2>New Trade<h2>
 					<form>
-						<h4 id="shop_giveinfo">Give the product information:</h4>
+						<h4 id="trade_giveinfo">Give trade information:</h4>
 						<div class="span span1">
+							<!-- Drop down search for products owned by the user -->
 							<p class="left"><span id="trade_product">Product</span>:</p>
 								<input type="text" id="formTradeName">
 							<div class="clearfix"></div>
@@ -134,7 +167,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<div class="clearfix"></div>
 						</div>
 						<p id="trade_product_desc">Additional information (optional)</p>
-						<textarea id="formTradeDescription" rows="4" style="min-width: 80%"></textarea>
+						<textarea id="formTradeDescription" rows="4" style="min-width: 100%"></textarea>
 						<div class="span span5">
 							<button type="button" class="button" id="submitTradeForm">Put for Sale</button>
 							<p class='errormsg' id="tradeformerrormsg"></p>
@@ -146,9 +179,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			</div>
 		</div>
 	</div>
-
-	<button type="button" class="button" id="addTradeProductButton" data-toggle="modal" data-target="#addTradeProductModal">Sell Product</button>
-	<div class="infos"></div>
+	<div class="infos">
+	</div>
 
 	<div class="footer">
 		<div class="container">

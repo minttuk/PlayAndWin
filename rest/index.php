@@ -135,6 +135,10 @@ Flight::route('POST /trades/new', function() {
   ));
 });
 
+flight::route('/trades/history', function() {
+  Flight::json(getTradeHistory(validateToken()));
+});
+
 // Chat
 Flight::route('POST /chat', function(){
     if(isToken()) echo addChat(validateToken());

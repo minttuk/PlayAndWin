@@ -1,11 +1,11 @@
 .button{
-    margin:auto;
+    margin: 10px auto 10px auto;
     display:block;
     padding: 7px 15px;
     background-color: transparent;
     border: 2px solid rgb(2, 24, 136);
     outline: transparent;
-	color:rgb(2, 24, 136);
+	  color:rgb(2, 24, 136);
 }
 .button:hover {
 	color: #FFf;
@@ -73,4 +73,14 @@
 
 .prefilled {
   color: grey;
+}
+
+#managetrades {
+  display: none;
+}
+
+td, th {
+    padding: 5px;
+    border-bottom: 1px #f5f3f3 solid;
+    width: 33%;
 }
