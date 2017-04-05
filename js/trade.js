@@ -150,7 +150,7 @@ function checkFilled(val) {
   return false;
 }
 
-$('#manageTradesButton').click(function () {
+$('#trade_manage_button').click(function () {
   $('#managetrades').toggle();
 });
 
