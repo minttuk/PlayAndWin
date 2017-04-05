@@ -17,6 +17,7 @@ $('#trade_submit_form').click(function () {
       if(response.hasOwnProperty('success')){
         $('#tradeformsuccessmsg').text(response.success);
         emptyTradeForm();
+        getTradeManageInfo();
       }
     });
   }
