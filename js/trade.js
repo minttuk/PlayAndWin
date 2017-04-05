@@ -52,20 +52,6 @@ function addTrade(callback) {
       }
   });
 }
-
-function getCollection() {
-  $.ajax({
-      url:'/rest/collection/'+userId,
-      dataType: "json",
-      success: function (response){
-        console.log(response);
-        },
-      error: function(jqXHR, textStatus, errorThrown) {
-        console.log(textStatus, errorThrown);
-      }
-  });
-}
-
 // Search Stuff
 
 function createCollection(){
@@ -105,7 +91,6 @@ $('#formTradeName').focus(function() {
 
 $('#formTradeName').focusout(function () {
   var productid = $('#formTradeName').val();
-  console.log(productid);
   $('#user_collection').fadeOut();
 });
 
