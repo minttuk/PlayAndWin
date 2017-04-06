@@ -141,7 +141,6 @@ $('#trade_manage_button').click(function () {
 
 function getTradeManageInfo() {
   getTradeInfo(function(error, response) {
-    console.log(error, response);
     showMyTrades("myopentradescontent", response['opentrades']);
     showMyTrades("mybuyinghistorycontent", response['buyinghistory']);
     showMyTrades("mysellinghistorycontent", response['sellinghistory']);
@@ -149,7 +148,6 @@ function getTradeManageInfo() {
 }
 
 function showMyTrades(div, response) {
-  console.log(div, response);
   $div = $('#' + div + '');
   $div.empty();
   if (div === "myopentradescontent") {
@@ -185,7 +183,10 @@ function resetButtonHandlers() {
   });
 
   $(".trade_delete_button").click(function() {
-    deleteTrade();
+    var tradeid = $(this).attr("data-tradeid");
+    deleteTrade(tradeid, function(error, response) {
+      console.log(error, response);
+    });
   });
 }
 
@@ -193,8 +194,19 @@ function editTrade() {
   console.log("edit clicked")
 }
 
-function deleteTrade() {
+function deleteTrade(tradeid, callback) {
   console.log("delete clicked")
+  $.ajax({
+      url:'/rest/trades/delete/' + tradeid,
+      dataType: "json",
+      success: function (response){
+        callback(null, response);
+        getTradeManageInfo();
+        },
+      error: function(jqXHR, textStatus, errorThrown) {
+        callback(errorThrown, null);
+      }
+  });
 }
 
 function getTradeInfo(callback) {
