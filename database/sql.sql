@@ -41,6 +41,8 @@ CREATE TABLE product (
 CREATE TABLE shoporder (
   id INT(6) PRIMARY KEY AUTO_INCREMENT NOT NULL,
   user_id INT(6) NOT NULL,
+  product_id INT(6) NOT NULL,
+  amount INT(6) NOT NULL,
   ord_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (user_id) REFERENCES user(id)
 );

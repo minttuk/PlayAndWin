@@ -35,16 +35,13 @@ final class productTest extends TestCase{
     //function makeShopOrder($user_id) -> 1
     //function makeOrderRow($product_id) ->1
     public function testmakeShopOrder(){
-        makeShopOrder(1);
+        makeShopOrder(1, 1);
         $id = R::getCell( 'SELECT MAX(ID) FROM shoporder');
         $user_id = R::getCell( 'SELECT user_id FROM shoporder WHERE id = '.$id);
         $this->assertEquals(1, $user_id);
-
-        makeOrderRow(1);
-        $product_id = R::exec( 'SELECT product_id FROM order_row WHERE order_id = '.$id );
+        $product_id = R::getCell('SELECT product_id FROM shoporder WHERE id = '.$id);
         $this->assertEquals(1, $product_id);
 
-        R::exec( 'DELETE FROM order_row WHERE order_id = '.$id );
         R::exec( 'DELETE FROM shoporder WHERE id = '.$id );
     }
 
@@ -62,12 +59,10 @@ final class productTest extends TestCase{
     public function testaddToCollection(){
         $collection = R::load('collection',1);
         $products = json_decode($collection->products, true);
-        //$products = $collection->products;
         $amount = $products["3"];
         $this->assertEquals('You have bought this product! You have 1 coins left.',addToCollection('3', '1', '1') );
         $collection2 = R::load('collection',1);
         $products2 = json_decode($collection2->products, true);
-        //$products2 = $collection2->products;
         $newAmount = $products2["3"];
         $this->assertEquals($amount+1, $newAmount);
         $products2["3"]--;
