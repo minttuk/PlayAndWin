@@ -142,6 +142,10 @@ flight::route('/trades/history', function() {
   Flight::json(getTradeHistory(validateToken()));
 });
 
+flight::route('/trades/delete/@tradeid', function($tradeid){
+  Flight::json(deleteTrade(validateToken(), $tradeid));
+});
+
 // Chat
 Flight::route('POST /chat', function(){
     if(isToken()) echo addChat(validateToken());

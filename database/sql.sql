@@ -54,12 +54,6 @@ CREATE TABLE order_row (
   FOREIGN KEY (product_id) REFERENCES product(id)
 );
 
-CREATE TABLE tradeproducts (
-  id INT(6) PRIMARY KEY AUTO_INCREMENT NOT NULL,
-  seller_id INT(6) NOT NULL,
-  buyer_id INT()
-);
-
 CREATE TABLE trades (
   id INT(6) PRIMARY KEY AUTO_INCREMENT NOT NULL,
   seller_id INT(6) NOT NULL,

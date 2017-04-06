@@ -123,3 +123,7 @@ td, th {
     border-bottom: 1px #f5f3f3 solid;
     width: 33%;
 }
+
+.btn {
+  margin-left: 5px;
+}
