@@ -1,3 +1,5 @@
+var opentrades;
+
 /**
  * An ajax call to show all the products the user has.
  *
@@ -32,7 +34,10 @@ function emptyTradeForm() {
   $('#formTradeOrgcost').val("");
   $('#formTradeOrgdesc').val("");
   $('#formTradePrice').val("");
-  $('#formTradeDescription').val("")
+  $('#formTradeDescription').val("");
+  $('#trade_edit_product_name').text("");
+  $('#formNewTradePrice').val("");
+  $('#formNewTradeDescription').val("");
 }
 
 function addTrade(callback) {
@@ -141,7 +146,8 @@ $('#trade_manage_button').click(function () {
 
 function getTradeManageInfo() {
   getTradeInfo(function(error, response) {
-    showMyTrades("myopentradescontent", response['opentrades']);
+    opentrades = response['opentrades']
+    showMyTrades("myopentradescontent", opentrades);
     showMyTrades("mybuyinghistorycontent", response['buyinghistory']);
     showMyTrades("mysellinghistorycontent", response['sellinghistory']);
   });
@@ -162,7 +168,7 @@ function showMyTrades(div, response) {
       var content = $(
         '<td>' + response[product].name + '</td>' +
         '<td>' + response[product].price + '</td> ' +
-        '<td><button type="button" data-tradeid="' + response[product].id + '" class="btn btn-primary trade_edit_button">Edit</button>' +
+        '<td><button type="button" data-tradeid="' + response[product].id + '" data-toggle="modal" data-target="#editTradeProductModal" class="btn btn-primary trade_edit_button">Edit</button>' +
         '<button type="button" data-tradeid="' + response[product].id + '" class="btn btn-danger trade_delete_button">Delete</button> </td>')
     }
     else {
@@ -179,19 +185,63 @@ function resetButtonHandlers() {
   $(".trade_delete_button").off("click");
 
   $(".trade_edit_button").click(function() {
-    editTrade();
+    fillEditTradeForm($(this).attr("data-tradeid"));
   });
 
   $(".trade_delete_button").click(function() {
     var tradeid = $(this).attr("data-tradeid");
     deleteTrade(tradeid, function(error, response) {
-      console.log(error, response);
+      //console.log(error, response);
     });
   });
 }
 
-function editTrade() {
-  console.log("edit clicked")
+function fillEditTradeForm(tradeid) {
+  var tradetoedit;
+  for (i in opentrades) {
+    if (opentrades[i].id == tradeid) {
+      tradetoedit = opentrades[i];
+    }
+  }
+  $('#trade_to_edit_id').val(tradetoedit.id);
+  $('#trade_edit_product_name').text(tradetoedit.name);
+  $('#formNewTradePrice').val(tradetoedit.price);
+  $('#formNewTradeDescription').val(tradetoedit.description);
+}
+
+//check that price is not empty.
+$('#trade_submit_edited_form').click(function(){
+  if (checkInt($('#formNewTradePrice').val())) {
+    var trade = {"id": $('#trade_to_edit_id').val(), "price": $('#formNewTradePrice').val(), "description": $('#formNewTradeDescription').val()};
+    saveEditedForm(trade, function(error, response){
+      if(response.hasOwnProperty('success')){
+        getTradeManageInfo();
+        console.log(response.success);
+        $('#tradeformsuccessmsg').text(response.success);
+      }
+      if (response.hasOwnProperty('error')){
+        $('#tradeformerrormsg').text(response.error);
+      }
+    });
+  }
+  else {
+    $('#tradeformerrormsg').text("Please give a number for price!");
+  }
+});
+
+function saveEditedForm(trade, callback) {
+  $.ajax({
+      type: "post",
+      url:'/rest/trades/edit',
+      dataType: "json",
+      data: trade,
+      success: function (response){
+        callback(null, response);
+        },
+      error: function(jqXHR, textStatus, errorThrown) {
+        callback(errorThrown, null);
+      }
+  });
 }
 
 function deleteTrade(tradeid, callback) {
