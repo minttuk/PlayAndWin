@@ -24,8 +24,7 @@ function buyProduct($id,$product_id){
         } else {
             //If the user can buy the product subtract price from user's coins
             $user->coins = $user->coins-$product_price;
-            makeShopOrder($user->id);
-            makeOrderRow($product_id);
+            makeShopOrder($user->id, $product_id);
             updateProductAmount($product_id, $product_amount-1);
             R::store($user);
             return addToCollection($product_id, $user->coins,$id);
@@ -37,21 +36,16 @@ function buyProduct($id,$product_id){
  * Inserts a line into shoporder table in database with user id given by parameter.
  *
  * @param int $user_id is the id number of the user signed in.
+ * @param int $product_id is the id number of the product bought.
  */
-function makeShopOrder($user_id){
+function makeShopOrder($user_id, $product_id){
     $shoporder = R::dispense( 'shoporder' );
     $shoporder->user_id = $user_id;
+    $shoporder->product_id = $product_id;
+    $shoporder->amount = 1;
     R::store( $shoporder );
 }
 
-/**
- * Inserts a line into order_row table in database.
- *
- * @param int $product_id is the id number of the product bought.
- */
-function makeOrderRow($product_id){
-    R::exec( 'INSERT INTO order_row (order_id, product_id, amount) VALUES (LAST_INSERT_ID(), :product_id, 1)', [':product_id' => $product_id]);
-}
 
 /**
  * Updates product amount in the database
