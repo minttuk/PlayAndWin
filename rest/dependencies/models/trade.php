@@ -161,10 +161,10 @@ function getTradeSellingHistory($id) {
 }
 
 /**
-* Deletes trade by id
+* Deletes trade by id Checks that product has not been bought yet before deleting.
 *
 *@param userid is the current user and tradeid is the id of the traderow
-*@return An array with message
+*@return An array with success or error message
 */
 
 function deleteTrade($userid, $tradeid) {
@@ -173,6 +173,26 @@ function deleteTrade($userid, $tradeid) {
   if ($tradetoremove->seller_id == $userid && $tradetoremove->buyer_id == null) {
     R::trash($tradetoremove);
     $response = array("success" => "Trade deleted successfully!");
+  }
+  return $response;
+}
+
+/**
+* Edits trade by id. Checks that product has not been bought yet before editing.
+*
+*@param userid is the current user and tradeid is the id of the traderow
+*@return An array with success or error message
+*/
+
+function editTrade($userid, $id, $price, $description) {
+  $tradetoedit = R::load('trades', $id);
+  $response = array("error" => "Could not edit trade.");
+  //$response = array("error" => $trade["id"]);
+  if ($tradetoedit->seller_id == $userid && $tradetoedit->buyer_id == null) {
+    $tradetoedit->price = $price;
+    $tradetoedit->description = $description;
+    R::store($tradetoedit);
+    $response = array("success" => "Trade information edited successfully!");
   }
   return $response;
 }
