@@ -39,7 +39,7 @@ function getSession() {
         }
       },
       error: function(jqXHR, textStatus, errorThrown) {
-        console.log(textStatus, errorThrown);
+        console.log(textStatus, errorThrown); 
       }
   });
 }

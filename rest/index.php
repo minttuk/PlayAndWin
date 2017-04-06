@@ -10,7 +10,7 @@ Flight::route('/', function(){
 });
 
 Flight::route('/test', function(){
-    print_r(isToken());
+    print_r(getCollection(4));
 });
 
 // --------------------------   PRIVATE REST API   -------------------------- //

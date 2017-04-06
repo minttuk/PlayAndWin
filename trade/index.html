@@ -122,7 +122,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						</table>
 					</div>
 				</div>
-				<div class="panel panel-danger">
+				<div class="panel panel-warning">
 					<div class="panel-heading">
 						<h3 class="panel-title">My Selling History</h3>
 					</div>
@@ -148,7 +148,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<!-- Drop down search for products owned by the user -->
 							<p class="left"><span id="trade_product">Product</span>:</p>
 							<input id="formTradeName" class="form-control" type="text" placeholder="">
-							<div id="user_collection" style="display:none;"></div>
+							<div id="user_collection" style="display:none;">
+								<div id='noitems' class ='row collectionrow'><h3 id='trade_noitems'>No items found in your collection!</h3></div>
+								<div id="item_div"></div>
+							</div>
 							<div class="clearfix"></div>
 						</div>
 						<input type="hidden" id="formTradeProduct">

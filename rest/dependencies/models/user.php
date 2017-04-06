@@ -409,7 +409,8 @@ function getCoins($id) {
  */
 function getCollection($id) {
   $products = collection($id);
-  $response = array();
+  //$response = array();
+  if (empty($products)) return;
   foreach ($products as $id => $amount) {
     if ($amount > 0) {
       $product = R::load('product', $id);

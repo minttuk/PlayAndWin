@@ -66,6 +66,7 @@ function loadLanguage(page){
       //Chat
       $("#chat_send").text(chat_send);
       $("#msgbox").attr('placeholder',chat_write);
+      $("#emoji_search").attr('placeholder',chat_emoji);
       //Footer
       $("#footer_cc").text(footer_cc);
       $("#footer_design").text(footer_design);
@@ -98,6 +99,8 @@ function loadLanguage(page){
       $("#trade_submit_form").text(trade_submit_form);
       $("#trade_add_button").text(trade_add_button);
       $("#trade_manage_button").text(trade_manage_button);
+      $("#trade_noitems").text(trade_noitems);
+      trade_noitems
       //Profile
       $("#editprofilebuttontext").text(profile_edit);
       $("#editpicturebuttontext").text(profile_changepic);

@@ -1,5 +1,8 @@
 var opentrades;
 
+if(!document.cookie.match(/^(.*;)?\s*access_token\s*=\s*[^;]+(.*)?$/)) window.location = '/';
+
+
 /**
  * An ajax call to show all the products the user has.
  *
@@ -60,11 +63,13 @@ function addTrade(callback) {
 // Search Stuff
 
 function createCollection(){
-  $('#user_collection').empty();
+  $('#item_div').empty();
   $.getJSON("/rest/user/collection/", function(response){
+    if (!response) return;
+    $('#noitems').hide();
     $.each(response, function(i, item) {
-      $('#user_collection').append(
-        '<div id="row'+i+'" class="collectionrow row" data-name="'+item.name+'">'+
+      $('#item_div').append(
+        '<div id="row'+i+'" class="collectionrow row item_row" data-name="'+item.name+'">'+
         '<img class="item_img center-block" src="'+item.picture+'" />'+
         '<h4 class="item'+i+' item_name">'+item.name+'</h4>'+
         '<h5>'+$.i18n.prop('shop_cost',localStorage.getItem("lang")) + ": " + item.price+'</h5>'+
@@ -75,7 +80,7 @@ function createCollection(){
       });
       $('#row'+i).data('item_info',item);
     });
-    $('.collectionrow').click(function(){
+    $('.item_row').click(function(){
       fillTradeForm($(this).data('item_info'));
       $('#user_collection').hide();
     });
@@ -84,10 +89,12 @@ function createCollection(){
 
 $("#formTradeName").keyup(function(e) {
     var query = $("#formTradeName").val().toLowerCase();
-    $('.collectionrow').each(function(i) {
+    $('.item_row').each(function(i) {
         if ($(this).attr('data-name').toLowerCase().startsWith(query)) $(this).show();
         else $(this).hide();
     });
+    if($('#item_div').children(':visible').length == 0) $('#noitems').show();
+    else $('#noitems').hide();
 });
 
 $('#formTradeName').focus(function() {
@@ -168,7 +175,8 @@ function showMyTrades(div, response) {
       var content = $(
         '<td>' + response[product].name + '</td>' +
         '<td>' + response[product].price + '</td> ' +
-        '<td><button type="button" data-tradeid="' + response[product].id + '" data-toggle="modal" data-target="#editTradeProductModal" class="btn btn-primary trade_edit_button">Edit</button>' +
+        '<td><button type="button" data-tradeid="' + response[product].id +
+        '" data-toggle="modal" data-target="#editTradeProductModal" class="btn btn-primary trade_edit_button">Edit</button>' +
         '<button type="button" data-tradeid="' + response[product].id + '" class="btn btn-danger trade_delete_button">Delete</button> </td>')
     }
     else {
