@@ -1,8 +1,9 @@
 <?php
 require 'dependencies/require_all.php';
-session_start();
 
 connect();
+
+Flight::set('flight.log_errors', true);
 
 // api page redirect
 Flight::route('/', function(){
@@ -29,6 +30,9 @@ Flight::route('PUT /user', function(){
         Flight::request()->data->location
       );
     }
+});
+Flight::route('POST /user/image', function(){
+    if (isToken()) echo uploadImage(validateToken());
 });
 Flight::route('DELETE /user', function(){
     if (isToken()) echo deleteUser(validateToken(),validateToken());

@@ -8,8 +8,10 @@
  */
 function setHighscore($id) {
   if ($id && isset($_REQUEST['game']) && isset($_REQUEST['score'])) {
+    session_start();
     if (isset($_SESSION['score']) && $_REQUEST['score'] == $_SESSION['score']) {
       $_SESSION['score'] = 0;
+      session_destroy();
       $tableName = 'hs_'.$_REQUEST['game'];
       $newScore = $_REQUEST['score'];
       $score = R::load( $tableName, $id );
@@ -22,7 +24,8 @@ function setHighscore($id) {
       }
       return array('highscore'=>$curScore,'message'=>'');
     }
-    return array('highscore'=>'','message'=>'Possible cheating detected!');
+    session_destroy();
+    return array('highscore'=>'','message'=>'Possible cheating detected! ');
   }
   return array('highscore'=>'','message'=>'Highscore not saved! (No user signed in.)');
 }

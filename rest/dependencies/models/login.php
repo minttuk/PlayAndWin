@@ -24,10 +24,9 @@ function loginUser($uname, $password, $confirmPass, $email, $firstname, $lastnam
     if (validatePassword($plainPass, $confirmPass)) {
         $newuser = findUser($uname);
         if (!$newuser) {
-          regUser($uname,$email,$password,$firstname,$lastname);
-          //startSession($newuser->id);
-          setcookie("access_token",generateToken($player->id,$uname), time()+60*60*24*14, '/');
-          return json_encode(array('token'=>generateToken($newuser->id,$uname)));
+          $id = regUser($uname,$email,$password,$firstname,$lastname);
+          setcookie("access_token",generateToken($id,$uname), time()+60*60*24*14, '/');
+          return json_encode(array('token'=>generateToken($id,$uname)));
         } else $message['data'] = 'Username taken, try again!';
     }
   } else if ($uname) {
@@ -82,7 +81,7 @@ function logOut() {
       R::exec('INSERT INTO hs_'.$game.' (id,highscore) VALUES (:id,0)', [':id' => $newuser]);
     }
     R::exec('INSERT INTO collection (id) VALUES (:id)', [':id' => $newuser]);
-    return true;
+    return $newuser;
   }
 
 /**
