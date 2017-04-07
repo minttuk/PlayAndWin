@@ -44,15 +44,7 @@ CREATE TABLE shoporder (
   product_id INT(6) NOT NULL,
   amount INT(6) NOT NULL,
   ord_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (user_id) REFERENCES user(id)
-);
-
-CREATE TABLE order_row (
-  order_id INT(6) NOT NULL,
-  product_id INT(6) NOT NULL,
-  amount INT(6) NOT NULL,
-  CONSTRAINT row_id PRIMARY KEY (order_id, product_id),
-  FOREIGN KEY (order_id) REFERENCES shoporder(id),
+  FOREIGN KEY (user_id) REFERENCES user(id),
   FOREIGN KEY (product_id) REFERENCES product(id)
 );
 
