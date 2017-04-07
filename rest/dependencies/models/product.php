@@ -1,7 +1,7 @@
 <?php
 
 function getProducts(){
-  return R::getAll( 'SELECT * FROM product' );
+  return R::getAll( 'SELECT * FROM product WHERE amount > 0' );
 }
 
 /**
