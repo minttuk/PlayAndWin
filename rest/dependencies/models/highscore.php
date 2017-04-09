@@ -25,7 +25,7 @@ function setHighscore($id) {
       return array('highscore'=>$curScore,'message'=>'');
     }
     session_destroy();
-    return array('highscore'=>'','message'=>'Possible cheating detected! ');
+    return array('highscore'=>'','message'=>'Possible cheating detected! '.$_SESSION['score'].' '.$_REQUEST['score']);
   }
   return array('highscore'=>'','message'=>'Highscore not saved! (No user signed in.)');
 }

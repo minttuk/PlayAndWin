@@ -18,9 +18,10 @@ function begin($time) {
 }
 
 function update($time, $token) {
-  if ($time - $_SESSION['time'] > $GLOBALS['minTime'] &&
-  $time- $_SESSION['time'] < $GLOBALS['maxTime'] &&
-  $token == $_SESSION['token']) {
+  if ($time - $_SESSION['time'] >= $GLOBALS['minTime'] &&
+  $time - $_SESSION['time'] <= $GLOBALS['maxTime'] &&
+  $token == $_SESSION['token'] &&
+  $time/1000-time() < 2) {
     $_SESSION['score']=$_SESSION['score']+1;
     $_SESSION['time'] = $time;
     setToken();

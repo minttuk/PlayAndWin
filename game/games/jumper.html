@@ -25,6 +25,7 @@
     <script src="script.js"></script>
     <script>
         var score;
+        var time = Date.now();
 
         $('#start').click(function() {
             score = 0;
@@ -72,9 +73,12 @@
                     this.camera.y = this.cameraYMin;
                     this.physics.arcade.collide(this.hero, this.platforms, function() {
                         if (hasLanded) {
+                            if (Date.now()-time > 500) {
                             score++;
                             hasLanded = false;
                             update();
+                            }
+                            time = Date.now();
                         }
                     });
                     this.heroMove();
