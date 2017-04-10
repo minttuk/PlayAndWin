@@ -95,7 +95,7 @@ $('#submitForm').click(function(){
     var amount = document.getElementById("formAmount").value;
     console.log("name " + name);
 
-    if (checkName(name) && checkCost(price) && checkDescription(description)){
+    if (checkName(name) && checkCost(price) && checkAmount(amount) && checkDescription(description)){
 
         var array = {"name": name, "price": price, "description": description, "image_url": image_url, "amount": amount};
         var dataString = JSON.stringify(array);
@@ -143,7 +143,7 @@ function checkDescription(description) {
         return true;
     }
     else {
-        $('.errormsg').html("Please write a message!");
+        $('.errormsg').html($.i18n.prop('shop_form_valid_description',localStorage.getItem('lang')));
         return false;
     }
 }
@@ -154,11 +154,11 @@ function checkDescription(description) {
  * @returns {boolean}
  */
 function checkName(name) {
-    if (name.length > 0 && name.length < 255) {
+    if (name.length > 0 && name.length < 40 && name.trim().length !== 0) {
         return true;
     }
     else {
-        $('.errormsg').html("Please give a product name!");
+        $('.errormsg').html($.i18n.prop('shop_form_valid_name',localStorage.getItem('lang')));
         return false;
     }
 }
@@ -169,11 +169,26 @@ function checkName(name) {
  * @returns {boolean}
  */
 function checkCost(price) {
-    if (price.length > 0 && price.length < 25) {
+    if (price.length > 0 && price.length < 25 && price!=0) {
         return true;
     }
     else {
-        $('.errormsg').html("Please give the product's cost!");
+        $('.errormsg').html($.i18n.prop('shop_form_valid_cost',localStorage.getItem('lang')));
+        return false;
+    }
+}
+
+/**
+ * Checks if amount is given and is between 0-25 numbers long.
+ * @param int amount
+ * @returns {boolean}
+ */
+function checkAmount(amount) {
+    if (amount.length > 0 && amount.length < 25) {
+        return true;
+    }
+    else {
+        $('.errormsg').html($.i18n.prop('shop_form_valid_amount',localStorage.getItem('lang')));
         return false;
     }
 }
