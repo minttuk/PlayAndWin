@@ -178,6 +178,17 @@ function deleteTrade($userid, $tradeid) {
 }
 
 /**
+* Deletes trade by insertion information. This method is used with PHPUnitTests to remove the added test trade
+*
+*@param trade seller, procut, price and description
+*/
+
+function deleteTradeForTest($userid, $productid, $price, $description) {
+  R::exec('DELETE FROM trades WHERE seller_id = :id AND product_id = :product AND price = :price AND description = :desc', [':id' => $userid, ':product' => $productid, ':price' => $price, ':desc' => $description]);
+}
+
+
+/**
 * Edits trade by id. Checks that product has not been bought yet before editing.
 *
 *@param userid is the current user and tradeid is the id of the traderow
