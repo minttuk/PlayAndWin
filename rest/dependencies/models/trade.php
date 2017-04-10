@@ -197,4 +197,39 @@ function editTrade($userid, $id, $price, $description) {
   return $response;
 }
 
+// only started, not finished yet. In progress...
+function buyTradeProduct($buyer_id, $trade_id){
+  $trade = R::load('trades', $trade_id);
+  $buyer = R::load('user', $buyer_id);
+  //check if user has enough coins
+  if($buyer->coins < $trade->price){
+    return 'You cannot buy this yet. You need more coins.';
+  }
+  else{
+    $buyer->coins = $buyer->coins-$trade->price;
+    $trade->buyer_id = $buyer_id;
+    $trade->trade_time = date("Y-m-d H:i:s");//CURRENT_TIMESTAMP;
+    //product added to buyer's collection
+      addToCollection($trade->product_id, $buyer->coins, $buyer->id); //buyer->coins is it updated yet here???
+    //product removed from seller's collection
+      removeFromCollection($trade->seller_id, $trade->product_id);
+    R::store($buyer);
+    R::store($trade);
+    return 'You have bought this product!';
+  }
+}
+
+/**
+ * Removes a product from user's collection
+ * @param int $user_id is the id number of the user
+ * @param int $product_id is the id number of the product
+ */
+function removeFromCollection($user_id, $product_id){
+    $collection = R::load('collection',$user_id);
+    $products = json_decode($collection->products, true);
+    $products[$product_id]--;
+    $collection->products = json_encode($products);
+    R::store($collection);
+}
+
 ?>

@@ -8,8 +8,8 @@ function getProducts(){
  * Buying a product from the webstore.
  *
  * Gets the product id through the body of an ajax call. If the user is signed in, it checks if the user
- * has enough coins to buy the product. If the user has enough coins, it calls functions: makeShopOrder(),
- * makeOrderRow(), and addToCollection().
+ * has enough coins to buy the product. If the user has enough coins, it calls functions: makeShopOrder()
+ * and addToCollection().
  *
  */
 function buyProduct($id,$product_id){
