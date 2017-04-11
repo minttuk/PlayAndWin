@@ -95,7 +95,7 @@ final class userTest extends TestCase {
     $this->assertEquals(0, count(getFriendRequests('Bobby')));
     addFriend(2, 'Bobby');
     $this->assertEquals(0, count(getFriendRequests('Boss')));
-    $this->assertEquals(1, count(getFriendRequests('Bobby')));
+    $this->assertEquals(0, count(getFriendRequests('Bobby')));
     $this->assertEquals('Boss', getFriendRequests('Bobby')[0]['username']);
     addFriend(1, 'Boss');
     $this->assertEquals(0, count(getFriendRequests('Bobby')));
@@ -109,7 +109,7 @@ final class userTest extends TestCase {
     $this->assertEquals(0, count(getPendingFriends('Bobby')));
     deleteFriend(1, 'Boss');
     addFriend(1, 'Boss');
-    $this->assertEquals(1, count(getPendingFriends('Bobby')));
+    $this->assertEquals(0, count(getPendingFriends('Bobby')));
     $this->assertEquals('Boss', getPendingFriends('Bobby')[0]['username']);
     addFriend(2, 'Bobby');
     $this->assertEquals(0, count(getPendingFriends('Bobby')));
