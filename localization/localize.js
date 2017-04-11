@@ -72,6 +72,7 @@ function loadLanguage(page){
       $("#footer_design").text(footer_design);
       //Webstore
       $("#shop_prizes").text(shop_prizes);
+      $("#shop_trades").text(shop_trades);
       $("#shop_giveinfo").text(shop_giveinfo);
       $("#shop_name").text(shop_name);
       $("#shop_cost").text(shop_cost);

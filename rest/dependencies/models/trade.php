@@ -128,13 +128,36 @@ function formProperReturn($trades) {
 
 function getOpenTrades($id) {
   if ($id != null) {
-    $result = R::getAll('SELECT * FROM trades WHERE (seller_id = :sessionid AND buyer_id IS NULL)', [':sessionid' => $id]);
+    $result = R::getAll('SELECT * FROM trades WHERE (seller_id = :id AND buyer_id IS NULL)', [':id' => $id]);
   }
   else {
     $result = R::getAll('SELECT * FROM trades WHERE buyer_id IS NULL');
   }
   return $result;
 }
+
+function getActiveTrades() {
+  $trades = getOpenTrades(null);
+  $products = getProducts();
+  $active = array();
+  foreach ($trades as $trade) {
+    $trade['name'] = getProductAttribute($trade['product_id'],'name');
+    $trade['image_url'] = getProductAttribute($trade['product_id'],'image_url');
+    if ($trade['description']=='') $trade['description'] = getProductAttribute($trade['product_id'],'description');
+    unset($trade['seller_id']);
+    unset($trade['product_id']);
+    unset($trade['buyer_id']);
+    unset($trade['trade_time']);
+    $active[] = $trade;
+  }
+
+  return $active;
+}
+
+function getProductAttribute($id,$attribute) {
+  return R::getCell('SELECT '.$attribute.' FROM product WHERE id = '.$id);
+}
+
 
 /**
 * Gets all the rows from database where current user is the buyer
@@ -144,7 +167,7 @@ function getOpenTrades($id) {
 */
 
 function getTradeBuyingHistory($id) {
-  $result = R::getAll('SELECT * FROM trades WHERE buyer_id = :sessionid', [':sessionid' => $id]);
+  $result = R::getAll('SELECT * FROM trades WHERE buyer_id = :id', [':id' => $id]);
   return $result;
 }
 
@@ -156,7 +179,7 @@ function getTradeBuyingHistory($id) {
 */
 
 function getTradeSellingHistory($id) {
-  $result = R::getAll('SELECT * FROM trades WHERE (seller_id = :sessionid AND buyer_id IS NOT NULL)', [':sessionid' => $id]);
+  $result = R::getAll('SELECT * FROM trades WHERE (seller_id = :id AND buyer_id IS NOT NULL)', [':id' => $id]);
   return $result;
 }
 

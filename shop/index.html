@@ -27,6 +27,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<link href="../css/popup-box.css" rel="stylesheet" type="text/css" media="all" />
 	<link href="../css/style.css" rel="stylesheet" type="text/css" media="all" />
 	<link href="../css/webstore.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="../css/trade.css" rel="stylesheet" type="text/css" media="all" />
 	<link href="/localization/flags/css/flag-icon.min.css" rel="stylesheet" type="text/css" media="all" />
 
 	<!--// css -->
@@ -95,14 +96,57 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<!-- //Navbar -->
 	</div>
 	<!-- gallery -->
+
+
 	<div class="gallery-w3layouts" id="gallery">
 		<div class="container">
-			<h2 id="shop_prizes">Prizes</h2>
+			<h2 class='shop_title'><span id="shop_prizes" onclick='generateProducts()'>Prizes</span>&nbsp;&nbsp;&nbsp;&nbsp;<span id="shop_trades" onclick='generateTrades()'>Trades</span></h2>
 			<div class="gallery-grids">
 				<div class="clearfix"> </div>
 			</div>
 		</div>
+		<div class='text-center'>
+			<button type="button" class="button" id="addProductButton" data-toggle="modal" data-target="#addProductModal">ADD PRODUCTS</button>
+			<button type="button" class="button trade_btn" id="trade_add_button" data-toggle="modal" data-target="#addTradeProductModal" style='display:none;'>New Trade</button>
+			<button type="button" class="button trade_btn" id="trade_manage_button" style='display:none;'>Manage Trades</button>
+
+		</div>
+
+
+		<div id="managetrades" style='display:none;'>
+			<div class="panel panel-success">
+				<div class="panel-heading">
+					<h3 class="panel-title">My Open Trades</h3>
+				</div>
+				<div class="panel-body">
+					<table style="width:100%" id="myopentradescontent">
+					</table>
+				</div>
+			</div>
+			<div class="panel panel-info">
+				<div class="panel-heading">
+					<h3 class="panel-title">My Buying History</h3>
+				</div>
+				<div class="panel-body">
+					<table style="width:100%" id="mybuyinghistorycontent">
+					</table>
+				</div>
+			</div>
+			<div class="panel panel-warning">
+				<div class="panel-heading">
+					<h3 class="panel-title">My Selling History</h3>
+				</div>
+				<div class="panel-body">
+					<table style="width:100%" id="mysellinghistorycontent">
+					</table>
+				</div>
+			</div>
+		</div>
 	</div>
+
+
+
+
 	<!--//gallery -->
 
 	<!-- Add Product Modal -->
@@ -145,7 +189,82 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		</div>
 	</div>
 
-	<button type="button" class="button" id="addProductButton" data-toggle="modal" data-target="#addProductModal">ADD PRODUCTS</button>
+	<!-- Add Trade Modal -->
+	<div id="addTradeProductModal" class="modal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-body">
+					<h2 id="trade_new_heading">New Trade<h2>
+					<form>
+						<h4 id="trade_giveinfo">Give trade information:</h4>
+						<div class="span span1">
+							<!-- Drop down search for products owned by the user -->
+							<p class="left"><span id="trade_product">Product</span>:</p>
+							<input id="formTradeName" class="form-control" type="text" placeholder="">
+							<div id="user_collection" style="display:none;">
+								<div id='noitems' class ='row collectionrow'><h3 id='trade_noitems'>No items found in your collection!</h3></div>
+								<div id="item_div"></div>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+						<input type="hidden" id="formTradeProduct">
+						<div class="span span2">
+							<p class="left"><span id="trade_orgcost">Original Cost</span>:</p>
+								<input type="text" disabled="disabled" id="formTradeOrgcost" class="prefilled">
+							<div class="clearfix"></div>
+						</div>
+						<div class="span span3">
+							<p class="left"><span id="trade_description">Description</span>:</p>
+								<textarea type="text" disabled="disabled" id="formTradeOrgdesc" class="prefilled"></textarea>
+							<div class="clearfix"></div>
+						</div>
+						<div class="span span4">
+							<p class="left"><span id="trade_sellingprice">Selling Price</span>:</p>
+							<input type="number" id="formTradePrice">
+							<div class="clearfix"></div>
+						</div>
+						<p id="trade_product_desc">Additional information (optional)</p>
+						<textarea id="formTradeDescription" rows="4" style="min-width: 100%"></textarea>
+						<div class="span span5">
+							<button type="button" class="button" id="trade_submit_form">Put for Sale</button>
+							<p class='errormsg' id="tradeformerrormsg"></p>
+							<p class='successmsg' id="tradeformsuccessmsg"></p>
+							<div class="clearfix"></div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Edit trade modal -->
+	<div id="editTradeProductModal" class="modal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-body">
+					<h2 id="trade_edit_heading">Edit Trade<h2>
+					<h4 id="trade_edit_product_name"></h4>
+					<form>
+						<input id="trade_to_edit_id" type="hidden">
+						<div class="span span1">
+							<p class="left"><span id="trade_sellingprice">Selling Price</span>:</p>
+							<input type="number" id="formNewTradePrice">
+							<div class="clearfix"></div>
+						</div>
+						<p id="trade_product_desc">Additional information (optional)</p>
+						<textarea id="formNewTradeDescription" rows="4" style="min-width: 100%"></textarea>
+						<div class="span span2">
+							<button type="button" class="button" id="trade_submit_edited_form">Save Changes</button>
+							<p class='errormsg' id="tradeformerrormsg"></p>
+							<p class='successmsg' id="tradeformsuccessmsg"></p>
+							<div class="clearfix"></div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<div class="infos"></div>
 
 	<div class="footer">
@@ -200,6 +319,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<script src="/localization/localize.js"></script>
 	<script src="/js/navbar.js"></script>
 	<script src="/js/webstore.js"></script>
+	<script src="/js/trade.js"></script>
 	<script src="/js/jquery.magnific-popup.js" type="text/javascript"></script>
 	<script src="/js/modernizr.custom.53451.js" type="text/javascript"></script>
 

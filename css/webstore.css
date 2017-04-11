@@ -1,3 +1,13 @@
+.shop_title {
+    cursor: pointer; cursor: hand;
+}
+
+#shop_prizes:hover, #shop_trades:hover{
+    transform: scale(1.1);
+    color:#5301eb;
+    font-size: 40px;
+}
+
 .button{
     margin:auto;
     display:block;
@@ -24,6 +34,12 @@
 .buy-button:hover {
     color: rgb(2, 24, 136);
     border: 2px solid rgb(2, 24, 136);
+}
+
+.trade_btn {
+   display:inline-block;
+   margin-right:5px;
+   margin-bottom: 10px;
 }
 /*.span3 {
     border-bottom: none;

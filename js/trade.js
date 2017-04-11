@@ -43,6 +43,10 @@ function emptyTradeForm() {
   $('#formNewTradeDescription').val("");
 }
 
+function buyTrade(trade_id) {
+  alert('Tried to buy trade #'+trade_id);
+}
+
 function addTrade(callback) {
   var trade = {"product": $('#formTradeProduct').val(), "price": $('#formTradePrice').val(), "description": $('#formTradeDescription').val()};
   $.ajax({

@@ -1,11 +1,42 @@
-/**
- * Created by minttu on 19-Feb-17.
- */
+
+function generateTrades(){
+	$('#shop_prizes').animate({'font-size': '0.5em'});
+	$('#shop_trades').animate({'font-size': '1em'});
+	$('#addProductButton').hide();
+	displayAddProductButton(function(admin){
+		if(admin) {
+			$('#trade_add_button').show();
+			$('#trade_manage_button').show();
+		}
+	});
+	generateItemView('/rest/trades', function(){
+		$('.amount_div').hide();
+		$('.buy-button').click(function(){
+			buyTrade($(this).data('id'));
+		});
+	});
+}
 
 function generateProducts(){
-  $('.infos').html('');
+	$('#shop_prizes').animate({'font-size': '1em'});
+	$('#shop_trades').animate({'font-size': '0.5em'});
+	$('#trade_add_button').hide();
+	$('#trade_manage_button').hide();
+	$('#managetrades').hide();
+	displayAddProductButton(function(admin){
+		if(admin) $('#addProductButton').show();
+	});
+	generateItemView('/rest/products',function(){
+		$('.buy-button').click(function(){
+			buyPrize($(this).data('id'));
+		});
+	});
+}
+
+function generateItemView(url, callback) {
+	$('.infos').html('');
   $('.gallery-grid').html('');
-  $.get('/rest/products', function(products) {
+  $.get(url, function(products) {
     $.each(products, function(i, product) {
       $('.infos').append('<div class="pop-up"><div id="small-dialog' + i + '" class="mfp-hide book-form"><div class="pop-up-content-agileits-w3layouts"><div class="col-md-6 w3ls-left">' +
         '<img src="' + product.image_url + '" alt=" " class="img-responsive zoom-img" /></div>' +
@@ -17,9 +48,9 @@ function generateProducts(){
         '<div class="clearfix"></div></div>' +
         '<div class="span span2">' + '<p class="left product_cost"></p><p class="right">' + product.price + '</p>' +
         '<div class="clearfix"></div></div>' +
-        '<div class="span span3">' + '<p class="left product_amount"></p><p class="right">' + product.amount + '</p>' +
+        '<div class="span span3 amount_div">' + '<p class="left product_amount"></p><p class="right">' + product.amount + '</p>' +
         '<div class="clearfix"></div></div>' +
-        '<div class="span span3"><button type="button" class="buy-button" onclick="buy(' + product.id + ')">/button>' +
+        '<div class="span span3"><button type="button" class="buy-button" data-id="'+ product.id +'">/button>' +
         '<div class="clearfix"></div></div>'+
         '<div class="span buy_message"><p class="buyMessage" style="text-align:center;font-weight:bold;padding-bottom:0;"></p>'  +
         '</div>' +
@@ -39,7 +70,7 @@ function generateProducts(){
     $('.product_cost').text($.i18n.prop('shop_cost', localStorage.getItem("lang")));
     $('.product_amount').text($.i18n.prop('shop_stock', localStorage.getItem("lang")));
     $('.buy-button').text($.i18n.prop('shop_buy', localStorage.getItem("lang")));
-    //$('.gallery-grids').append('<div class="clearfix"></div>');
+    callback();
   }, 'json').then(function() {
     $('.popup-with-zoom-anim').magnificPopup({
       type: 'inline',
@@ -66,16 +97,10 @@ function generateProducts(){
  *
  * @returns {boolean}
  */
-window.onload = function displayAddProductButton() {
-    $.ajax({
-      url: "/rest/user/admin",
-      type: "GET",
-      dataType: 'json',
-      success: function(data) {
-        console.log("admin arvo on " + data.admin);
-        if (data.admin == 1) $('#addProductButton').css('display','block');
-        else $('#addProductButton').css('display','none');
-    }});
+function displayAddProductButton(callback) {
+	  $.getJSON("/rest/user/admin", function(result){
+				callback(result.admin == 1);
+    });
 }
 
 /**
@@ -200,7 +225,7 @@ function checkAmount(amount) {
  * @param int product_id
  * @returns {boolean}
  */
-function buy(product_id){
+function buyPrize(product_id){
     $.ajax({url:'/rest/product/buy?product='+product_id,
       success: function (message) {
         translate(message,function(translation){

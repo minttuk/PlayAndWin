@@ -11,7 +11,7 @@ Flight::route('/', function(){
 });
 
 Flight::route('/test', function(){
-    print_r(getCollection(4));
+    print_r(getActiveTrades());
 });
 
 // --------------------------   PRIVATE REST API   -------------------------- //
@@ -157,6 +157,10 @@ flight::route('POST /trades/edit', function(){
     Flight::request()->data->price,
     Flight::request()->data->description
   ));
+});
+
+flight::route('/trades', function() {
+  Flight::json(getActiveTrades());
 });
 
 // Chat
