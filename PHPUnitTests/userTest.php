@@ -94,6 +94,7 @@ final class userTest extends TestCase {
     deleteFriend(1, 'Boss');
     $this->assertEquals(0, count(getFriendRequests('Bobby')));
     addFriend(2, 'Bobby');
+    $this->assertEquals(0, count(getFriendRequests('Boss')));
     $this->assertEquals(1, count(getFriendRequests('Bobby')));
     $this->assertEquals('Boss', getFriendRequests('Bobby')[0]['username']);
     addFriend(1, 'Boss');
