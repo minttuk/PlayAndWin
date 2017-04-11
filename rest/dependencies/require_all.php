@@ -12,4 +12,4 @@ require 'models/search.php';
 require 'models/login.php';
 require 'models/trade.php';
 require 'models/upload.php';
-require 'models/friends.php';
+require 'models/friend.php';
