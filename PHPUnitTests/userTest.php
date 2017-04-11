@@ -92,27 +92,27 @@ final class userTest extends TestCase {
 
   public function testgetFriendRequests() {
     deleteFriend(1, 'Boss');
-    $this->assertEquals(0, count(getFriendRequests('Bobby')));
+    $this->assertEquals(0, count(getFriendRequests(1)));
     addFriend(2, 'Bobby');
-    $this->assertEquals(0, count(getFriendRequests('Boss')));
-    $this->assertEquals(1, count(getFriendRequests('Bobby')));
-    $this->assertEquals('Boss', getFriendRequests('Bobby')[0]['username']);
+    $this->assertEquals(0, count(getFriendRequests(2)));
+    $this->assertEquals(1, count(getFriendRequests(1)));
+    $this->assertEquals('Boss', getFriendRequests(1)[0]['username']);
     addFriend(1, 'Boss');
-    $this->assertEquals(0, count(getFriendRequests('Bobby')));
+    $this->assertEquals(0, count(getFriendRequests(1)));
     deleteFriend(1, 'Boss');
   }
 
   public function testgetPendingFriends() {
     deleteFriend(1, 'Boss');
-    $this->assertEquals(0, count(getPendingFriends('Bobby')));
+    $this->assertEquals(0, count(getPendingFriends(1)));
     addFriend(2, 'Bobby');
-    $this->assertEquals(0, count(getPendingFriends('Bobby')));
+    $this->assertEquals(0, count(getPendingFriends(1)));
     deleteFriend(1, 'Boss');
     addFriend(1, 'Boss');
-    $this->assertEquals(1, count(getPendingFriends('Bobby')));
-    $this->assertEquals('Boss', getPendingFriends('Bobby')[0]['username']);
+    $this->assertEquals(1, count(getPendingFriends(1)));
+    $this->assertEquals('Boss', getPendingFriends(1)[0]['username']);
     addFriend(2, 'Bobby');
-    $this->assertEquals(0, count(getPendingFriends('Bobby')));
+    $this->assertEquals(0, count(getPendingFriends(1)));
     deleteFriend(1, 'Boss');
   }
 
