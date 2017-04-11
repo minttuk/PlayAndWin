@@ -1,8 +1,5 @@
 var opentrades;
 
-if(!document.cookie.match(/^(.*;)?\s*access_token\s*=\s*[^;]+(.*)?$/)) window.location = '/';
-
-
 /**
  * An ajax call to show all the products the user has.
  *
