@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1491821660">
-  <project timestamp="1491821660">
+<coverage generated="1491893774">
+  <project timestamp="1491893774">
     <file name="/Users/sainipatala/Documents/PHP/PlayAndWin/rest/dependencies/models/chat.php">
       <line num="11" type="stmt" count="0"/>
       <line num="12" type="stmt" count="0"/>
@@ -309,7 +309,25 @@
       <line num="195" type="stmt" count="1"/>
       <line num="196" type="stmt" count="1"/>
       <line num="197" type="stmt" count="1"/>
-      <metrics loc="200" ncloc="132" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="79" coveredstatements="55" elements="79" coveredelements="55"/>
+      <line num="202" type="stmt" count="0"/>
+      <line num="203" type="stmt" count="0"/>
+      <line num="205" type="stmt" count="0"/>
+      <line num="206" type="stmt" count="0"/>
+      <line num="209" type="stmt" count="0"/>
+      <line num="210" type="stmt" count="0"/>
+      <line num="211" type="stmt" count="0"/>
+      <line num="213" type="stmt" count="0"/>
+      <line num="215" type="stmt" count="0"/>
+      <line num="216" type="stmt" count="0"/>
+      <line num="217" type="stmt" count="0"/>
+      <line num="218" type="stmt" count="0"/>
+      <line num="228" type="stmt" count="0"/>
+      <line num="229" type="stmt" count="0"/>
+      <line num="230" type="stmt" count="0"/>
+      <line num="231" type="stmt" count="0"/>
+      <line num="232" type="stmt" count="0"/>
+      <line num="233" type="stmt" count="0"/>
+      <metrics loc="235" ncloc="150" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="97" coveredstatements="55" elements="97" coveredelements="55"/>
     </file>
     <file name="/Users/sainipatala/Documents/PHP/PlayAndWin/rest/dependencies/models/upload.php">
       <line num="3" type="stmt" count="0"/>
@@ -526,6 +544,6 @@
       <line num="439" type="stmt" count="5"/>
       <metrics loc="442" ncloc="264" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="176" coveredstatements="135" elements="176" coveredelements="135"/>
     </file>
-    <metrics files="9" loc="1199" ncloc="739" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="498" coveredstatements="293" elements="498" coveredelements="293"/>
+    <metrics files="9" loc="1234" ncloc="757" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="516" coveredstatements="293" elements="516" coveredelements="293"/>
   </project>
 </coverage>
