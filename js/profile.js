@@ -39,7 +39,7 @@ function getSession() {
         }
       },
       error: function(jqXHR, textStatus, errorThrown) {
-        console.log(textStatus, errorThrown); 
+        console.log(textStatus, errorThrown);
       }
   });
 }
@@ -218,6 +218,20 @@ function getUserInfo() {
 }
 
 function updateProfile(response) {
+  showProfileInformation(response);
+  //editprofile button and change picture button only visible in your own profile
+  if (userId == sessionId) {
+    showOwnProfileFields();
+  }
+  //addfriendbutton and sendmessagebutton only visible in other users profiles
+  if (userId != sessionId) {
+    initFriendActionButton();
+    showFriendActionButton();
+  }
+  prefillEditForm(response);
+}
+
+function showProfileInformation(response) {
   $('#username').fadeOut(0, function() {
       $(this).text(response.username).fadeIn(500);
   });
@@ -255,28 +269,30 @@ function updateProfile(response) {
       $(this).attr("src", "../images/user/" + response.profilepicture).fadeIn(500);
     });
   }
-  //editprofilebutton, only visible in your own profile
-  if (userId == sessionId) {
-    $('#editprofilebutton').fadeOut(0, function() {
-      $(this).css('display', 'inline-block').fadeIn(500);
-    });
-    $('#editpicturebutton').fadeOut(0, function() {
-      $(this).css('display', 'inline-block').fadeIn(500);
-    });
-    $('#mycollectionbutton').fadeOut(0, function() {
-      $(this).css('display', 'inline-block').fadeIn(500);
-    });
-    $('#friendrequeststab').css("display", "inline-block");
-    $('#pendingfriendstab').css("display", "inline-block");
-  }
-  //addfriendbutton and sendmessagebutton only visible in other users profiles
-  if (userId != sessionId) {
-    $('.addfriendbutton').css('display', 'none');
-    $('.addfriendbutton').attr('data-id', userId);
-    $('.deletefriendbutton').css('display', 'none');
-    $('.deletefriendbutton').attr('data-id', userId);
-    showFriendActionButton();
-  }
+}
+
+function showOwnProfileFields() {
+  $('#editprofilebutton').fadeOut(0, function() {
+    $(this).css('display', 'inline-block').fadeIn(500);
+  });
+  $('#editpicturebutton').fadeOut(0, function() {
+    $(this).css('display', 'inline-block').fadeIn(500);
+  });
+  $('#mycollectionbutton').fadeOut(0, function() {
+    $(this).css('display', 'inline-block').fadeIn(500);
+  });
+  $('#friendrequeststab').css("display", "inline-block");
+  $('#pendingfriendstab').css("display", "inline-block");
+}
+
+function initFriendActionButton() {
+  $('.addfriendbutton').css('display', 'none');
+  $('.addfriendbutton').attr('data-id', userId);
+  $('.deletefriendbutton').css('display', 'none');
+  $('.deletefriendbutton').attr('data-id', userId);
+}
+
+function prefillEditForm(response) {
   //firstname
   if (response.firstname != null) {
     $('input[name="newfirstname"]').val(response.firstname);
