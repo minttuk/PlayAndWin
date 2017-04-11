@@ -168,10 +168,10 @@ function showMyTrades(div, response) {
   $div = $('#' + div + '');
   $div.empty();
   if (div === "myopentradescontent") {
-    $div.html("<tr><th>Product</th><th>Price</th><th>Action</th></tr>");
+    $div.html("<tr><th>" + $.i18n.prop('trade_product',localStorage.getItem("lang")) + "</th><th>" + $.i18n.prop('trade_price',localStorage.getItem("lang")) + "</th><th>" + $.i18n.prop('trade_action',localStorage.getItem("lang")) + "</th></tr>");
   }
   else {
-    $div.html("<tr><th>Product</th><th>Price</th><th>Time</th></tr>");
+    $div.html("<tr><th>" + $.i18n.prop('trade_product',localStorage.getItem("lang")) + "</th><th>" + $.i18n.prop('trade_price',localStorage.getItem("lang")) + "</th><th>" + $.i18n.prop('trade_time',localStorage.getItem("lang")) + "</th></tr>");
   }
   for (product in response) {
     var row = $('<tr></tr>');

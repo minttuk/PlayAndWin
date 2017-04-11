@@ -101,6 +101,9 @@ function loadLanguage(page){
       $("#trade_add_button").text(trade_add_button);
       $("#trade_manage_button").text(trade_manage_button);
       $("#trade_noitems").text(trade_noitems);
+      $("#trade_myopentrades").text(trade_myopentrades);
+      $("#trade_mybuyinghistory").text(trade_mybuyinghistory);
+      $("#trade_mysellinghistory").text(trade_mysellinghistory);
       trade_noitems
       //Profile
       $("#editprofilebuttontext").text(profile_edit);
@@ -134,6 +137,7 @@ function loadLanguage(page){
       if (typeof generateProducts == 'function') generateProducts();
       if (typeof cookieMessage == 'function') cookieMessage();
       if (typeof createCollection == 'function') createCollection();
+      if (typeof getTradeManageInfo == 'function') getTradeManageInfo();
     }
   });
 }
