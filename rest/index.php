@@ -31,6 +31,7 @@ Flight::route('PUT /user', function(){
       );
     }
 });
+
 Flight::route('POST /user/image', function(){
     if (isToken()) echo uploadImage(validateToken());
 });
@@ -146,21 +147,23 @@ flight::route('/trades/history', function() {
   Flight::json(getTradeHistory(validateToken()));
 });
 
-flight::route('/trades/delete/@tradeid', function($tradeid){
-  Flight::json(deleteTrade(validateToken(), $tradeid));
-});
-
-flight::route('POST /trades/edit', function(){
-  Flight::json(editTrade(
-    validateToken(),
-    Flight::request()->data->id,
-    Flight::request()->data->price,
-    Flight::request()->data->description
-  ));
-});
-
-flight::route('/trades', function() {
+flight::route('GET /trades', function() {
   Flight::json(getActiveTrades());
+});
+
+flight::route('PUT /trades', function(){
+  if(isToken()) {
+    Flight::json(editTrade(
+      validateToken(),
+      Flight::request()->data->id,
+      Flight::request()->data->price,
+      Flight::request()->data->description
+    ));
+  }
+});
+
+flight::route('DELETE /trades', function(){
+  Flight::json(deleteTrade(validateToken(), Flight::request()->query->tradeid));
 });
 
 // Chat
@@ -168,6 +171,7 @@ Flight::route('POST /chat', function(){
     if(isToken()) echo addChat(validateToken());
     else echo addChat(null);
 });
+
 Flight::route('/chat', function(){
     echo getChat();
 });

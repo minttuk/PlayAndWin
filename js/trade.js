@@ -178,7 +178,7 @@ function showMyTrades(div, response) {
         '<td>' + response[product].price + '</td> ' +
         '<td><button type="button" data-tradeid="' + response[product].id +
         '" data-toggle="modal" data-target="#editTradeProductModal" class="btn btn-primary trade_edit_button">' + $.i18n.prop('trade_edit',localStorage.getItem("lang")) + '</button>' +
-        '<button type="button" data-tradeid="' + response[product].id + '" class="btn btn-danger trade_delete_button">' + $.i18n.prop('trade_price',localStorage.getItem("lang")) + '</button> </td>')
+        '<button type="button" data-tradeid="' + response[product].id + '" class="btn btn-danger trade_delete_button">' + $.i18n.prop('trade_delete',localStorage.getItem("lang")) + '</button> </td>')
     }
     else {
       var content = $('<td>' + response[product].name + '</td><td>' + response[product].price + '</td><td>' + localizeDateTime(response[product].time) + '</td>');
@@ -239,16 +239,21 @@ $('#trade_submit_edited_form').click(function(){
 });
 
 function saveEditedForm(trade, callback) {
+  console.log(trade);
+  console.log("moi");
   $.ajax({
-      type: "post",
-      url:'/rest/trades/edit',
+      type: "PUT",
+      url: "/rest/trades",
+      contentType: "application/json",
       dataType: "json",
-      data: trade,
+      data: JSON.stringify(trade),
       success: function (response){
         callback(null, response);
+        console.log(response);
         },
       error: function(jqXHR, textStatus, errorThrown) {
         callback(errorThrown, null);
+        console.log(response);
       }
   });
 }
@@ -256,7 +261,8 @@ function saveEditedForm(trade, callback) {
 function deleteTrade(tradeid, callback) {
   console.log("delete clicked")
   $.ajax({
-      url:'/rest/trades/delete/' + tradeid,
+      type: 'DELETE',
+      url:'/rest/trades?' + $.param({"tradeid": tradeid}),
       dataType: "json",
       success: function (response){
         callback(null, response);
