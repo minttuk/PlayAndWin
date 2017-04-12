@@ -239,8 +239,6 @@ $('#trade_submit_edited_form').click(function(){
 });
 
 function saveEditedForm(trade, callback) {
-  console.log(trade);
-  console.log("moi");
   $.ajax({
       type: "PUT",
       url: "/rest/trades",
@@ -249,17 +247,16 @@ function saveEditedForm(trade, callback) {
       data: JSON.stringify(trade),
       success: function (response){
         callback(null, response);
-        console.log(response);
+        //console.log(response);
         },
       error: function(jqXHR, textStatus, errorThrown) {
         callback(errorThrown, null);
-        console.log(response);
+        //console.log(response);
       }
   });
 }
 
 function deleteTrade(tradeid, callback) {
-  console.log("delete clicked")
   $.ajax({
       type: 'DELETE',
       url:'/rest/trades?' + $.param({"tradeid": tradeid}),

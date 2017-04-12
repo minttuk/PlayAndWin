@@ -209,8 +209,8 @@ function deleteTrade($userid, $tradeid) {
 
 function editTrade($userid, $id, $price, $description) {
   $tradetoedit = R::load('trades', $id);
-  //$response = array("error" => "Could not edit trade.");
-  $response = array("error" => $price);
+  $response = array("error" => "Could not edit trade.");
+  //$response = array("error" => $price);
   if ($tradetoedit->seller_id == $userid && $tradetoedit->buyer_id == null) {
     $tradetoedit->price = $price;
     $tradetoedit->description = $description;
