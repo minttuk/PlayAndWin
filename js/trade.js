@@ -177,11 +177,11 @@ function showMyTrades(div, response) {
         '<td>' + response[product].name + '</td>' +
         '<td>' + response[product].price + '</td> ' +
         '<td><button type="button" data-tradeid="' + response[product].id +
-        '" data-toggle="modal" data-target="#editTradeProductModal" class="btn btn-primary trade_edit_button">Edit</button>' +
-        '<button type="button" data-tradeid="' + response[product].id + '" class="btn btn-danger trade_delete_button">Delete</button> </td>')
+        '" data-toggle="modal" data-target="#editTradeProductModal" class="btn btn-primary trade_edit_button">' + $.i18n.prop('trade_edit',localStorage.getItem("lang")) + '</button>' +
+        '<button type="button" data-tradeid="' + response[product].id + '" class="btn btn-danger trade_delete_button">' + $.i18n.prop('trade_price',localStorage.getItem("lang")) + '</button> </td>')
     }
     else {
-      var content = $('<td>' + response[product].name + '</td><td>' + response[product].price + '</td><td>' + response[product].time + '</td>');
+      var content = $('<td>' + response[product].name + '</td><td>' + response[product].price + '</td><td>' + localizeDateTime(response[product].time) + '</td>');
     }
     row.append(content);
     $div.append(row);
