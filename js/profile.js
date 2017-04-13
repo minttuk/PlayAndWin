@@ -541,8 +541,8 @@ $('#userlocation').click(function(){
          function(data){
            console.log("Found location ["+console.log(data.results[1].address_components)+"]");
            location = data.results[1].address_components;
-           $('#userlocation').html( location[0].long_name);
-           $.ajax({url:'/rest/user/location/'+location[0].long_name,type:'PUT'});
+           $('#userlocation').html( location[1].long_name);
+           $.ajax({url:'/rest/user/location/'+location[1].long_name,type:'PUT'});
        });
      }
   } else {
