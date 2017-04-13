@@ -534,12 +534,11 @@ $('#userlocation').click(function(){
       });
     }
      function location(pos){
-       console.log('pos.coords.latitude');
        $.getJSON("https://maps.googleapis.com/maps/api/geocode/json?latlng="
          +pos.coords.latitude+","
          +pos.coords.longitude+"&key=AIzaSyDvCgxjSDBrtcbsLc2nUAco0ObaYGeO3f4",
          function(data){
-           console.log("Found location ["+console.log(data.results[1].address_components)+"]");
+           console.log("Found location ["+data.results[1].address_components[1].long_name+"]");
            location = data.results[1].address_components;
            $('#userlocation').html( location[1].long_name);
            $.ajax({url:'/rest/user/location/'+location[1].long_name,type:'PUT'});
