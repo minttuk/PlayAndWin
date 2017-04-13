@@ -7,6 +7,10 @@ require_once '../rest/dependencies/require_all.php';
 
 final class tradeTest extends TestCase {
 
+  /*
+  * Tests that addNewTrade adds a new trade to the database
+  */
+
   public function testaddNewTrade() {
     $user = 1;
     $product = 1;
@@ -26,6 +30,10 @@ final class tradeTest extends TestCase {
     R::exec('DELETE FROM trades WHERE seller_id = :id', [':id' => $user]);
   }
 
+  /*
+  * Tests that countOpenTrades returns the right amount of trades by user.
+  */
+
   public function testcountOpenTrades() {
     $user = 1;
     $product = 1;
@@ -39,6 +47,10 @@ final class tradeTest extends TestCase {
     R::exec('DELETE FROM trades WHERE seller_id = :id', [':id' => $user]);
     $this->assertEquals(0, countOpenTrades($user, $product));
   }
+
+  /*
+  * Tests that a trades price and description can be edited with editTrade()
+  */
 
   public function testeditTrade() {
     $user = 1;
@@ -57,6 +69,10 @@ final class tradeTest extends TestCase {
     R::exec('DELETE FROM trades WHERE seller_id = :id', [':id' => $user]);
   }
 
+  /*
+  * Tests that a trade can be deleted from database with deleteTrade()
+  */
+
   public function testdeleteTrade() {
     $user = 1;
     $product = 1;
@@ -70,6 +86,10 @@ final class tradeTest extends TestCase {
     $this->assertEquals(0, countOpenTrades($user, $product));
     R::exec('DELETE FROM trades WHERE seller_id = :id', [':id' => $user]);
   }
+
+  /*
+  * Tests that userHasProduct() returns true if user has the product and false if user doesn't have it.
+  */
 
   public function testuserHasProduct() {
     $user = 1;
