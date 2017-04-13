@@ -22,7 +22,7 @@
     border: 2px solid #FF166D;
 	background:#FF166D;
 }
-.buy-button{
+.item_buttons {
     margin:auto;
     display:block;
     padding: 7px 15px;
@@ -31,9 +31,57 @@
     outline: transparent;
   	color: #FFF;
 }
-.buy-button:hover {
+.item_buttons:hover {
     color: rgb(2, 24, 136);
     border: 2px solid rgb(2, 24, 136);
+}
+
+.yes_btn, .no_btn {
+    float:right;
+    display:none;
+}
+
+.yes_btn {
+    margin-right:5px;
+}
+
+.shop_confirm {
+    margin:5px 0 0 0 !important;
+    width:138px !important;
+    display: none;
+    animation: blink-animation 1s steps(5, start) infinite;
+    -moz-transition:all 0.5s ease-in-out;
+    -webkit-transition:all 0.5s ease-in-out;
+    -o-transition:all 0.5s ease-in-out;
+    -ms-transition:all 0.5s ease-in-out;
+    transition:all 0.5s ease-in-out;
+    -moz-animation:blink normal 1.5s infinite ease-in-out;
+    -webkit-animation:blink normal 1.5s infinite ease-in-out;
+    -ms-animation:blink normal 1.5s infinite ease-in-out;
+    animation:blink normal 1.5s infinite ease-in-out;
+}
+
+@keyframes blink {
+    0% {
+           color: rgba(255,255,255,1)
+    }
+    50% {
+           color: rgba(255,255,255,0.2)
+    }
+    100% {
+           color: rgba(255,255,255,1)
+    }
+}
+@-webkit-keyframes blink {
+    0% {
+           color: rgba(255,255,255,1)
+    }
+    50% {
+           color: rgba(255,255,255,0.2)
+    }
+    100% {
+           color: rgba(255,255,255,1)
+    }
 }
 
 .trade_btn {
