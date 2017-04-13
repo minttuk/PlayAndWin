@@ -19,7 +19,8 @@ $(document).ready(function() {
   });
 });
 function signUpForm() {
-  $("#signForm").html('<input type="text" class="text" name="Username" placeholder="'+$.i18n.prop('form_username',localStorage.getItem("lang"))+'" required="">'+
+  $("#signForm").html('<input type="text" class="text" name="Username" placeholder="'+$.i18n.prop('form_username',localStorage.getItem("lang"))+
+            '" required="" title="'+$.i18n.prop('form_valid_username',localStorage.getItem("lang"))+'">'+
 				    '<input type="text" class="text" name="Firstname"  placeholder="'+ $.i18n.prop('form_firstname',localStorage.getItem("lang"))+
             '" pattern="[a-zA-Z]+" required="" title="'+$.i18n.prop('form_valid_name',localStorage.getItem("lang"))+'">'+
             '<input type="text" class="text" name="Lastname"  placeholder="'+ $.i18n.prop('form_lastname',localStorage.getItem("lang"))+
@@ -28,7 +29,8 @@ function signUpForm() {
             '" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required="" title="'+$.i18n.prop('form_valid_email',localStorage.getItem("lang"))+'">'+
             '<input type="password" class="text" name="Password"  placeholder="'+ $.i18n.prop('form_password',localStorage.getItem("lang"))+
             '" pattern="(?=.*\\d).{6,}" required="" title="'+$.i18n.prop('form_valid_password',localStorage.getItem("lang"))+'">'+
-            '<input type="password" class="text" name="ConfirmPassword" placeholder="'+$.i18n.prop('form_confirm',localStorage.getItem("lang"))+'" required="">'+
+            '<input type="password" class="text" name="ConfirmPassword" placeholder="'+$.i18n.prop('form_confirm',localStorage.getItem("lang"))+
+            '" required="" title="'+$.i18n.prop('form_confim_password',localStorage.getItem("lang"))+'">'+
 				    '<input type="submit" class="more_btn" name="submit" value="'+$.i18n.prop('navbar_signup',localStorage.getItem("lang"))+'"><p id="errorMsg"></p>');
 }
 function signInForm() {
@@ -38,9 +40,11 @@ function signInForm() {
       location.reload();
     });
   } else {
-    $("#signForm").html('<input type="text" class="text" name="Username" placeholder='+$.i18n.prop('form_username',localStorage.getItem("lang"))+' required="">'
-                      +'<input type="password" class="text" name="Password" placeholder='+$.i18n.prop('form_password',localStorage.getItem("lang"))+' required="">'
-                      +'<input type="submit" class="more_btn" name="submit" value="'+$.i18n.prop('navbar_signin',localStorage.getItem("lang"))+'"><p id="errorMsg"></p>');
+    $("#signForm").html('<input type="text" class="text" name="Username" placeholder='+$.i18n.prop('form_username',localStorage.getItem("lang"))+' required="" title="'+
+            $.i18n.prop('form_user_username',localStorage.getItem("lang"))+'">'+
+            '<input type="password" class="text" name="Password" placeholder='+$.i18n.prop('form_password',localStorage.getItem("lang"))+' required="" title="'+
+            $.i18n.prop('form_user_password',localStorage.getItem("lang"))+'">'+
+            '<input type="submit" class="more_btn" name="submit" value="'+$.i18n.prop('navbar_signin',localStorage.getItem("lang"))+'"><p id="errorMsg"></p>');
   }
 }
 
@@ -49,7 +53,6 @@ function isSignedIn() {
   if (signedIn) {
     $('#prof').css('display','block');
     $('.signUp').html('');
-    //$('.signIn').html('Log out');
     $('.signUp').css({"color": "white", "font-size": "20px",'padding-top':'16px', 'width':'95px'});
   }
 }

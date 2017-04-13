@@ -132,6 +132,8 @@ function loadLanguage(page){
       $("#pendingfriendstabtext").text(profile_pending);
       //search
       $("#finduser").text(profile_find);
+      //General
+      $(".form_close_btn").text(form_close_btn);
 
       if (typeof updateLogoutButton == 'function') updateLogoutButton();
       if (typeof generateProducts == 'function') generateProducts();
