@@ -65,17 +65,17 @@ final class productTest extends TestCase{
     /**
      * Tests that a product is added to user's collection.
      */
-    //function addToCollection($product_id, $coins_left, $session_id) ->(3,1,1)
+    //function addToCollection($product_id, $coins_left, $session_id) ->(1,1,1)
     public function testaddToCollection(){
         $collection = R::load('collection',1);
         $products = json_decode($collection->products, true);
-        $amount = $products["3"];
-        $this->assertEquals('You have bought this product! You have 1 coins left.',addToCollection('3', '1', '1') );
+        $amount = $products["1"];
+        $this->assertEquals('You have bought this product! You have 1 coins left.',addToCollection('1', '1', '1') );
         $collection2 = R::load('collection',1);
         $products2 = json_decode($collection2->products, true);
-        $newAmount = $products2["3"];
+        $newAmount = $products2["1"];
         $this->assertEquals($amount+1, $newAmount);
-        $products2["3"]--;
+        $products2["1"]--;
         $collection2->products = json_encode($products2);
         R::store($collection2);
 
