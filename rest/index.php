@@ -11,10 +11,18 @@ Flight::route('/', function(){
 });
 
 Flight::route('/test', function(){
-    print_r(sendEmail('darktwinkle@gmail.com','Ali','refer','Samu'));
+    print_r(sendEmail('darktwinkle@gmail.com','Ali','friend','Samu'));
 });
 
 // --------------------------   PRIVATE REST API   -------------------------- //
+
+//Referrals
+Flight::route('POST /refer', function(){
+    if (isToken()) echo referFriend(validateToken(),
+        Flight::request()->data->email,
+        Flight::request()->data->name
+    );
+});
 
 //User
 Flight::route('PUT /user/location/@location', function($location){
@@ -31,7 +39,6 @@ Flight::route('PUT /user', function(){
       );
     }
 });
-
 Flight::route('POST /user/image', function(){
     if (isToken()) echo uploadImage(validateToken());
 });

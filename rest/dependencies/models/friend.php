@@ -178,6 +178,9 @@ function addFriend($myId, $friendId) {
     if (!$alreadyExists) {
       R::exec('INSERT INTO friendship (user_id, friend_id) VALUES (:sessionid, :friendid)', [':sessionid' => $myId, ':friendid' => $friendId]);
       $response = array('message' => 'Friend added succesfully!');
+      $user = R::load('user',$myId);
+      $friend = R::load('user',$friendId);
+      //sendEmail($friend->email,$friend->username,'friend',$user->username);
     }
     else {
       $response = array('message' => 'Friend has already been added');

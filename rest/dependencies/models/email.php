@@ -40,9 +40,7 @@ function sendEmail($email,$username,$context,$friendname='') {
     $mail->msgHTML($content['body']);
 
     if (!$mail->send()) {
-        echo "Mailer Error: " . $mail->ErrorInfo;
-    } else {
-        echo "Message sent!";
+        echo "Mailer Error: " . $mail->ErrorInfo . ' ';
     }
 }
 
@@ -60,11 +58,14 @@ function constructBody($context,$username,$friendname) {
     case 'refer':
         $subject = 'A friend invited you to join Play Talk .Win!';
         $body = str_replace('%emailbody%',
-            "Join Today!</h1>
+            "Hello ".$username."!</h1>
             <br>Your friend ".$friendname." has invited you to join the Play Talk .Win community.
             <br><br>Play Talk .Win is a gaming and social networking site were you can buy prizes by playing
             games and earning coins. Come check us out by clicking on the link below and consider joining today! There's also
             a special bonus waiting for you and your friend &#128521;"
+        ,$body);
+        $body = str_replace('%actionlink%',
+            "'https://www.playtalk.win/'>Check Us Out"
         ,$body);
         return array('subject' => $subject,'body' => $body);
     case 'welcome':
@@ -73,6 +74,20 @@ function constructBody($context,$username,$friendname) {
             "Welcome ".$username."!</h1>
             <br> We're excited you're here! Enjoy your time with us and activate your new account by clicking the link below!
             <br><br> Remember to invite your friends to join for more fun and bonus coins for both of you!"
+        ,$body);
+        $body = str_replace('%actionlink%',
+            "'https://www.playtalk.win/rest/activate'>Verify my email"
+        ,$body);
+        return array('subject' => $subject,'body' => $body);
+    case 'friend':
+        $subject = 'You have recieved a friend request!';
+        $body = str_replace('%emailbody%',
+            "Hello ".$username."!</h1>
+            <br> ".$friendname." has sent you a friend request on Play Talk .Win!
+            <br><br>If you want to accept, press the button below to go to your profile page!"
+        ,$body);
+        $body = str_replace('%actionlink%',
+            "'https://www.playtalk.win/user/".$username."'>Go to Profile"
         ,$body);
         return array('subject' => $subject,'body' => $body);
     }

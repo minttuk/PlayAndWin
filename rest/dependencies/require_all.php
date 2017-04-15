@@ -15,3 +15,4 @@ require 'models/trade.php';
 require 'models/upload.php';
 require 'models/friend.php';
 require 'models/email.php';
+require 'models/referral.php';

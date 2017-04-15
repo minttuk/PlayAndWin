@@ -75,6 +75,7 @@ function logOut() {
     $user->password = $password;
     $user->firstname = $firstname;
     $user->lastname = $lastname;
+    if (handleReferral($email)) $user->coins = 100;
     $newuser = R::store( $user );
     R::exec( 'update user set reg_date=NOW() where username = :username', [':username' => $username]);
     R::exec( 'update user set last_online=NOW() where username = :username', [':username' => $username]);

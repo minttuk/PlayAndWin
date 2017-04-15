@@ -47,6 +47,14 @@ function loadLanguage(page){
       $("#fp_refer_btn").text(fp_refer_btn);
       $("#fp_shop_btn").text(fp_shop_btn);
       $(".fp_learnmore_btn").text(fp_learnmore_btn);
+      // Referral Modal
+      $("#refer_title").text(refer_title);
+      $("#refer_desc").text(refer_desc);
+      $("#refer_submit_btn").val(refer_submit_btn);
+      $("#refer_name").attr('placeholder',form_name);
+      $("#refer_name").attr('title',form_valid_name);
+      $("#refer_email").attr('placeholder',form_email);
+      $("#refer_email").attr('title',form_valid_email);
       // Navbar
       $("#navbar_home").text(navbar_home);
       $("#navbar_shop").text(navbar_shop);
@@ -134,6 +142,8 @@ function loadLanguage(page){
       $("#finduser").text(profile_find);
       //General
       $(".form_close_btn").text(form_close_btn);
+      $('.form_required').attr('oninvalid','this.setCustomValidity("'+form_required+'")');
+      $('.form_required').attr('onchange','this.setCustomValidity("")');
 
       if (typeof updateLogoutButton == 'function') updateLogoutButton();
       if (typeof generateProducts == 'function') generateProducts();

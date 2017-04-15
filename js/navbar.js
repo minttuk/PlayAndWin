@@ -19,19 +19,21 @@ $(document).ready(function() {
   });
 });
 function signUpForm() {
-  $("#signForm").html('<input type="text" class="text" name="Username" placeholder="'+$.i18n.prop('form_username',localStorage.getItem("lang"))+
-            '" required="" title="'+$.i18n.prop('form_valid_username',localStorage.getItem("lang"))+'">'+
-				    '<input type="text" class="text" name="Firstname"  placeholder="'+ $.i18n.prop('form_firstname',localStorage.getItem("lang"))+
-            '" pattern="[a-zA-Z]+" required="" title="'+$.i18n.prop('form_valid_name',localStorage.getItem("lang"))+'">'+
-            '<input type="text" class="text" name="Lastname"  placeholder="'+ $.i18n.prop('form_lastname',localStorage.getItem("lang"))+
-            '" pattern="[a-zA-Z]+" required="" title="'+$.i18n.prop('form_valid_name',localStorage.getItem("lang"))+'">'+
-            '<input type="email" class="text" name="Email"  placeholder="'+ $.i18n.prop('form_email',localStorage.getItem("lang"))+
-            '" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required="" title="'+$.i18n.prop('form_valid_email',localStorage.getItem("lang"))+'">'+
+  $("#signForm").html('<input type="text" class="text form_required" name="Username" placeholder="'+$.i18n.prop('form_username',localStorage.getItem("lang"))+
+            '" required title="'+$.i18n.prop('form_valid_username',localStorage.getItem("lang"))+'">'+
+				    '<input type="text" class="text form_required" name="Firstname"  placeholder="'+ $.i18n.prop('form_firstname',localStorage.getItem("lang"))+
+            '" pattern="[a-zA-Z]{1,16}+" required title="'+$.i18n.prop('form_valid_name',localStorage.getItem("lang"))+'">'+
+            '<input type="text" class="text form_required" name="Lastname"  placeholder="'+ $.i18n.prop('form_lastname',localStorage.getItem("lang"))+
+            '" pattern="[a-zA-Z]{1,16}+" required title="'+$.i18n.prop('form_valid_name',localStorage.getItem("lang"))+'">'+
+            '<input type="email" class="text form_required" name="Email"  placeholder="'+ $.i18n.prop('form_email',localStorage.getItem("lang"))+
+            '" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required title="'+$.i18n.prop('form_valid_email',localStorage.getItem("lang"))+'">'+
             '<input type="password" class="text" name="Password"  placeholder="'+ $.i18n.prop('form_password',localStorage.getItem("lang"))+
-            '" pattern="(?=.*\\d).{6,}" required="" title="'+$.i18n.prop('form_valid_password',localStorage.getItem("lang"))+'">'+
-            '<input type="password" class="text" name="ConfirmPassword" placeholder="'+$.i18n.prop('form_confirm',localStorage.getItem("lang"))+
-            '" required="" title="'+$.i18n.prop('form_confim_password',localStorage.getItem("lang"))+'">'+
+            '" pattern="(?=.*\\d).{6,}" required title="'+$.i18n.prop('form_valid_password',localStorage.getItem("lang"))+'">'+
+            '<input type="password" class="text form_required" name="ConfirmPassword" placeholder="'+$.i18n.prop('form_confirm',localStorage.getItem("lang"))+
+            '" required title="'+$.i18n.prop('form_confim_password',localStorage.getItem("lang"))+'">'+
 				    '<input type="submit" class="more_btn" name="submit" value="'+$.i18n.prop('navbar_signup',localStorage.getItem("lang"))+'"><p id="errorMsg"></p>');
+  $('.form_required').attr('oninvalid','this.setCustomValidity("'+$.i18n.prop('form_required',localStorage.getItem("lang"))+'")');
+  $('.form_required').attr('onchange','this.setCustomValidity("")');
 }
 function signInForm() {
   if(signedIn) {
@@ -40,11 +42,13 @@ function signInForm() {
       location.reload();
     });
   } else {
-    $("#signForm").html('<input type="text" class="text" name="Username" placeholder='+$.i18n.prop('form_username',localStorage.getItem("lang"))+' required="" title="'+
+    $("#signForm").html('<input type="text" class="text form_required" name="Username" placeholder='+$.i18n.prop('form_username',localStorage.getItem("lang"))+' required title="'+
             $.i18n.prop('form_user_username',localStorage.getItem("lang"))+'">'+
-            '<input type="password" class="text" name="Password" placeholder='+$.i18n.prop('form_password',localStorage.getItem("lang"))+' required="" title="'+
+            '<input type="password" class="text form_required" name="Password" placeholder='+$.i18n.prop('form_password',localStorage.getItem("lang"))+' required title="'+
             $.i18n.prop('form_user_password',localStorage.getItem("lang"))+'">'+
             '<input type="submit" class="more_btn" name="submit" value="'+$.i18n.prop('navbar_signin',localStorage.getItem("lang"))+'"><p id="errorMsg"></p>');
+    $('.form_required').attr('oninvalid','this.setCustomValidity("'+$.i18n.prop('form_required',localStorage.getItem("lang"))+'")');
+    $('.form_required').attr('onchange','this.setCustomValidity("")');
   }
 }
 
@@ -94,4 +98,20 @@ $('.sign-in').click(function(){
 });
 $( '#loginModal').on('hidden.bs.modal', function() {
     $("#errorMsg").css('padding-top','');
+});
+
+  $("#referral_form").submit(function(e) {
+    e.preventDefault();
+    $.post( "/rest/refer", $( "#referral_form" ).serialize(), function(result) {
+      translate(result, function(translation){
+        $("#referral_msg").animate({'padding-top': "20px",'padding-bottom': "10px"},300, function(){
+            $('#referral_msg').hide().text(translation).fadeIn('slow');
+        });
+      });
+    });
+  });
+
+  $( '#loginModal').on('hidden.bs.modal', function() {
+    $("#referral_msg").empty();
+    $("#referral_msg").css('padding-top','');
 });

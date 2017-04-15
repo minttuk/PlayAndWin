@@ -163,6 +163,28 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	</div>
 	<!-- //new games-->
 
+	<!--Referral Modal-->
+	<div class="modal fade" id="referModal" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title" id='refer_title'>Refer a Friend</h4>
+				</div>
+				<div class="modal-body">
+					<p class='text-center' id='refer_desc'>Please enter your friends information.</p>
+					<form id='referral_form'>
+						<input id='refer_name' type="text" pattern='[a-zA-Z]{1,16}$' class="text form_required" name="name" placeholder='Name' required title="">
+						<input id='refer_email' type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" class="text form_required" name="email" placeholder='Email' required title="">
+						<input id='refer_submit_btn' type="submit" class="more_btn" name="submit" value="Send Referral">
+						<p id="referral_msg"></p>
+					</form>
+					<button class="form_close_btn" data-toggle="modal" data-target="#referModal">Cancel</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
 <!-- services-->
 <div class="services-agileits-w3layouts">
 	<div class="container">
@@ -183,7 +205,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			<span class="glyphicon glyphicon-yen" aria-hidden="true"></span>
 			<h4 id='fp_refer'>Refer Friends</h4>
 			<p id='fp_refer_text'>There is no reason to play alone, so refer friends to challenge. Refering new users will also earn you coins!</p>
-			<a id='fp_refer_btn' href="/profile">Refer a Friend</a>
+			<a id='fp_refer_btn' data-toggle="modal" data-target="#referModal">Refer a Friend</a>
 		</div>
 		<div class="col-md-3 service-grid-agileits service-grid-agileits-bottom">
 			<span class="glyphicon glyphicon-object-align-right" aria-hidden="true"></span>
