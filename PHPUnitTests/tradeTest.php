@@ -112,7 +112,6 @@ final class tradeTest extends TestCase {
      * Tests that a product is removed from collection.
      */
   public function testremoveFromCollection(){
-      R::exec('UPDATE collection SET products = \'{"1": 1, "4": 1}\' WHERE id = 1;');
       $collection = R::load('collection', 1);
       $products = json_decode($collection->products, true);
       $amount = $products["1"];
