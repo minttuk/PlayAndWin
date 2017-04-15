@@ -264,6 +264,11 @@ function removeFromCollection($user_id, $product_id){
     R::store($collection);
 }
 
+/**
+ * Adds amount of coins given in the parameter to the user.
+ * @param int $user_id is the id number of the user.
+ * @param int $coins_added is the amount of coins to be added to the user.
+ */
 function addCoinsToUser($user_id, $coins_added){
   $user = R::load('user', $user_id);
   $user->coins = $user->coins + $coins_added;

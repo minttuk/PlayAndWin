@@ -97,4 +97,32 @@ final class tradeTest extends TestCase {
     $this->assertEquals(false, userHasProduct($user, 2));
   }
 
+    /**
+     * Tests that coins are added corrected to the user.
+     */
+  public function testaddCoinsToUser(){
+      $old_coins = R::getCell('SELECT coins FROM user WHERE id = 1');
+      addCoinsToUser(1, 50);
+      $new_coins = R::getCell('SELECT coins FROM user WHERE id = 1');
+      $this->assertEquals($old_coins + 50, $new_coins);
+      R::exec('UPDATE user SET coins = '.$old_coins.'WHERE id = 1');
+  }
+
+    /**
+     * Tests that a product is removed from collection.
+     */
+  public function testremoveFromCollection(){
+      $collection = R::load('collection', 1);
+      $products = json_decode($collection->products, true);
+      $amount = $products["1"];
+      removeFromCollection(1,1);
+      $collection2 = R::load('collection',1);
+      $products2 = json_decode($collection2->products, true);
+      $newAmount = $products2["1"];
+      $this->assertEquals($amount-1, $newAmount);
+      $products2["3"]++;
+      $collection2->products = json_encode($products2);
+      R::store($collection2);
+  }
+
 }

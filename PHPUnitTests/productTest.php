@@ -12,6 +12,9 @@ require_once '../rest/dependencies/require_all.php';
 
 final class productTest extends TestCase{
 
+    /**
+     * Tests that a product is added to the database.
+     */
     public function testaddProduct(){
         addProduct(2, 'testname', '1000', 'testdescription', 'testurl', '50');
         $id = R::getCell( 'SELECT MAX(ID) FROM product');
@@ -32,8 +35,9 @@ final class productTest extends TestCase{
 
     }
 
-    //function makeShopOrder($user_id) -> 1
-    //function makeOrderRow($product_id) ->1
+    /**
+     * Tests that a shoporder row is correctly added.
+     */
     public function testmakeShopOrder(){
         makeShopOrder(1, 1);
         $id = R::getCell( 'SELECT MAX(ID) FROM shoporder');
@@ -46,6 +50,9 @@ final class productTest extends TestCase{
     }
 
 
+    /**
+     * Test that the product amount in product table can be updated correctly.
+     */
     public function testupdateProductAmount(){
         $old_amount = R::getCell('SELECT amount FROM product WHERE id = 1');
         updateProductAmount(1, 20);
@@ -55,6 +62,9 @@ final class productTest extends TestCase{
 
     }
 
+    /**
+     * Tests that a product is added to user's collection.
+     */
     //function addToCollection($product_id, $coins_left, $session_id) ->(3,1,1)
     public function testaddToCollection(){
         $collection = R::load('collection',1);
