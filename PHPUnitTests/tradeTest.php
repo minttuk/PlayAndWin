@@ -100,13 +100,13 @@ final class tradeTest extends TestCase {
     /**
      * Tests that coins are added corrected to the user.
      */
-  public function testaddCoinsToUser(){
+  /*public function testaddCoinsToUser(){
       $old_coins = R::getCell('SELECT coins FROM user WHERE id = 1');
       addCoinsToUser(1, 50);
       $new_coins = R::getCell('SELECT coins FROM user WHERE id = 1');
       $this->assertEquals($old_coins + 50, $new_coins);
       R::exec('UPDATE user SET coins = '.$old_coins.'WHERE id = 1');
-  }
+  }*/
 
     /**
      * Tests that a product is removed from collection.
