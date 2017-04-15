@@ -220,23 +220,32 @@ function editTrade($userid, $id, $price, $description) {
   return $response;
 }
 
-// only started, not finished yet. In progress...
+/**
+ * When buying a traded product, this function makes changes to buyer's and seller's coins and
+ * collection. Trade information is saved in the trades database table.
+ *
+ * @param int $buyer_id is the id number of the buyer.
+ * @param int $trade_id is the id number of the trade.
+ * @return string
+ */
 function buyTradeProduct($buyer_id, $trade_id){
   $trade = R::load('trades', $trade_id);
   $buyer = R::load('user', $buyer_id);
   //check if user has enough coins
   if($buyer->coins < $trade->price){
-    return 'You cannot buy this yet. You need more coins.';
+    return 'trade_buy_failure';
   }
   else{
+    $seller_id = $trade->seller_id;
     $buyer->coins = $buyer->coins-$trade->price;
     $trade->buyer_id = $buyer_id;
     $trade->trade_time = date("Y-m-d H:i:s");//CURRENT_TIMESTAMP;
     //product added to buyer's collection
-      addToCollection($trade->product_id, $buyer->coins, $buyer->id); //buyer->coins is it updated yet here???
+      addToCollection($trade->product_id, $buyer->coins, $buyer->id);
+      R::store($buyer);
     //product removed from seller's collection
       removeFromCollection($trade->seller_id, $trade->product_id);
-    R::store($buyer);
+      addCoinsToUser($seller_id, $trade->price);
     R::store($trade);
     return 'You have bought this product!';
   }
@@ -253,6 +262,12 @@ function removeFromCollection($user_id, $product_id){
     $products[$product_id]--;
     $collection->products = json_encode($products);
     R::store($collection);
+}
+
+function addCoinsToUser($user_id, $coins_added){
+  $user = R::load('user', $user_id);
+  $user->coins = $user->coins + $coins_added;
+  R::store($user);
 }
 
 ?>

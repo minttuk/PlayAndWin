@@ -166,6 +166,12 @@ flight::route('DELETE /trades', function(){
   Flight::json(deleteTrade(validateToken(), Flight::request()->query->tradeid));
 });
 
+Flight::route('/trades/buy', function(){
+    if (isToken() && Flight::request()->query->trade != null) {
+        echo buyTradeProduct(validateToken(),Flight::request()->query->trade);
+    }
+});
+
 // Chat
 Flight::route('POST /chat', function(){
     if(isToken()) echo addChat(validateToken());

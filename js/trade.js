@@ -40,8 +40,20 @@ function emptyTradeForm() {
   $('#formNewTradeDescription').val("");
 }
 
+/**
+ * To buy a product from the traded products.
+ * @param int trade_id
+ */
 function buyTrade(trade_id) {
-  alert('Tried to buy trade #'+trade_id);
+    $.ajax({
+       url: '/rest/trades/buy?trade=' + trade_id,
+        success: function (message) {
+            translate(message, function (translation) {
+                $('.buyMessage').hide().text(translation).fadeIn();
+            });
+            updateCoins();
+        }
+    });
 }
 
 function addTrade(callback) {
