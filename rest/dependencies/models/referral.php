@@ -1,4 +1,4 @@
-<?
+<?php
 
 function referFriend($id,$friendEmail,$name) {
     if (!$friendEmail || !$name) return 'Missing parameters';
