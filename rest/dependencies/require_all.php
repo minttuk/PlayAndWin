@@ -1,5 +1,6 @@
 <?php
 require 'libraries/flight/Flight.php';
+require 'libraries/phpmailer.php';
 require 'libraries/JWT.php';
 require 'libraries/rb.php';
 require 'models/connection.php';
@@ -13,3 +14,4 @@ require 'models/login.php';
 require 'models/trade.php';
 require 'models/upload.php';
 require 'models/friend.php';
+require 'models/email.php';

@@ -11,7 +11,7 @@ Flight::route('/', function(){
 });
 
 Flight::route('/test', function(){
-    print_r(getActiveTrades());
+    print_r(sendEmail('darktwinkle@gmail.com','Ali','refer','Samu'));
 });
 
 // --------------------------   PRIVATE REST API   -------------------------- //

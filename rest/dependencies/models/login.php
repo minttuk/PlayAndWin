@@ -25,6 +25,7 @@ function loginUser($uname, $password, $confirmPass, $email, $firstname, $lastnam
         $newuser = findUser($uname);
         if (!$newuser) {
           $id = regUser($uname,$email,$password,$firstname,$lastname);
+          sendEmail($email,$uname,'welcome');
           setcookie("access_token",generateToken($id,$uname), time()+60*60*24*14, '/');
           return json_encode(array('token'=>generateToken($id,$uname)));
         } else $message['data'] = 'Username taken, try again!';
