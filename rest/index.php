@@ -11,7 +11,7 @@ Flight::route('/', function(){
 });
 
 Flight::route('/test', function(){
-    print_r(sendEmail('darktwinkle@gmail.com','Ali','friend','Samu'));
+    echo uridecode('Ali%20A');
 });
 
 // --------------------------   PRIVATE REST API   -------------------------- //
@@ -195,7 +195,7 @@ Flight::route('/score/@id', function($id){
 });
 
 // Search
-Flight::route('/search/user/@query', function($query){
+Flight::route('/search/@query', function($query){
     Flight::json(searchUsers($query));
 });
 

@@ -66,7 +66,7 @@ function getHighscores($user) {
     }
     return ($html);
   } else {
-    return $json;
+    return json_encode($json);
   }
 }
 

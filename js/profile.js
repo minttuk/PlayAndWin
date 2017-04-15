@@ -20,7 +20,7 @@ function getLastDir() {
   var last = last.pop();
   if (last == 'profile' || last == '')
     return '';
-  return last.replace('#','');
+  return decodeURIComponent(last.replace('#',''));
 }
 
 function getSession() {
