@@ -84,19 +84,22 @@ function createCollection(){
     $.each(response, function(i, item) {
         switch (localStorage.getItem("lang")) {
             case 'fi':
-                $item_name = item.name_fi;
+                item['name'] = item.name_fi;
+                item['description'] = item.description_fi;
                 break;
             case 'en':
-                $item_name = item.name_en;
+                item['name'] = item.name_en;
+                item['description'] = item.description_en;
                 break;
             case 'ja':
-                $item_name = item.name_ja;
+                item['name'] = item.name_ja;
+                item['description'] = item.description_ja;
                 break;
         }
       $('#item_div').append(
-        '<div id="row'+i+'" class="collectionrow row item_row" data-name="'+$item_name+'">'+
+        '<div id="row'+i+'" class="collectionrow row item_row" data-name="'+item.name+'">'+
         '<img class="item_img center-block" src="'+item.picture+'" />'+
-        '<h4 class="item'+i+' item_name">'+$item_name+'</h4>'+
+        '<h4 class="item'+i+' item_name">'+item.name+'</h4>'+
         '<h5>'+$.i18n.prop('shop_cost',localStorage.getItem("lang")) + ": " + item.price+'</h5>'+
         '<h5>'+$.i18n.prop('shop_amount',localStorage.getItem("lang")) + ": " + item.amount+'</h5></div>'
       );

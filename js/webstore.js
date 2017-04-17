@@ -78,15 +78,18 @@ function generateItemView(url, callback) {
             switch (localStorage.getItem("lang")) {
                 case 'fi':
                     $product_name = product.name_fi;
-                    $product_description = product.description_fi;
+                    if(!product.description) $product_description = product.description_fi;
+                    else $product_description = product.description;
                     break;
                 case 'en':
                     $product_name = product.name_en;
-                    $product_description = product.description_en;
+                    if(!product.description) $product_description = product.description_en;
+                    else $product_description = product.description;
                     break;
                 case 'ja':
                     $product_name = product.name_ja;
-                    $product_description = product.description_ja;
+                    if(!product.description) $product_description = product.description_ja;
+                    else $product_description = product.description;
                     break;
             }
             $('.infos').append('<div class="pop-up"><div id="small-dialog' + i + '" class="mfp-hide book-form"><div class="pop-up-content-agileits-w3layouts"><div class="col-md-6 w3ls-left">' +
@@ -174,7 +177,8 @@ $('#submitForm').click(function () {
     var price = document.getElementById('formPrice').value;
     var image_url = document.getElementById("formImage_url").value;
     var amount = document.getElementById("formAmount").value;
-    console.log("name " + name);
+    var lang = localStorage.getItem("lang");
+    //console.log("lang " + lang);
 
     if (checkName(name) && checkCost(price) && checkAmount(amount) && checkDescription(description)) {
 
@@ -183,7 +187,8 @@ $('#submitForm').click(function () {
             "price": price,
             "description": description,
             "image_url": image_url,
-            "amount": amount
+            "amount": amount,
+            "lang": lang
         };
         var dataString = JSON.stringify(array);
 
