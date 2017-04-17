@@ -110,7 +110,8 @@ function formProperReturn($trades) {
     $product = getProductById($value['product_id']);
     $result[] = array(
       'id' => $value['id'],
-      'name' => $product->name,
+      'name_en' => $product->name_en,
+        'name_fi'=> $product->name_fi,
       'price' => $value['price'],
       'description' => $value['description'],
       'time' => $value['trade_time']
@@ -138,12 +139,19 @@ function getOpenTrades($id) {
 
 function getActiveTrades() {
   $trades = getOpenTrades(null);
-  $products = getProducts();
+  //$products = getProducts();
   $active = array();
   foreach ($trades as $trade) {
-    $trade['name'] = getProductAttribute($trade['product_id'],'name');
+    $product = getProductById($trade['product_id']);
+    $trade['name_fi'] = $product->name_fi;
+    $trade['name_en'] = $product->name_en;
+      //$trade['name'] = getProductAttribute($trade['product_id'],'name');
     $trade['image_url'] = getProductAttribute($trade['product_id'],'image_url');
-    if ($trade['description']=='') $trade['description'] = getProductAttribute($trade['product_id'],'description');
+    if ($trade['description']==''){
+        $trade['description_en'] = $product->description_en;
+        $trade['description_fi'] = $product->description_fi;
+    }
+    //if ($trade['description']=='') $trade['description'] = getProductAttribute($trade['product_id'],'description');
     unset($trade['seller_id']);
     unset($trade['product_id']);
     unset($trade['buyer_id']);

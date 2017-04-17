@@ -78,19 +78,31 @@ function addTrade(callback) {
 function createCollection(){
   $('#item_div').empty();
   $.getJSON("/rest/user/collection/", function(response){
+      //console.log(response);
     if (!response) return;
     $('#noitems').hide();
     $.each(response, function(i, item) {
+        switch (localStorage.getItem("lang")) {
+            case 'fi':
+                $item_name = item.name_fi;
+                break;
+            case 'en':
+                $item_name = item.name_en;
+                break;
+            case 'ja':
+                $item_name = item.name_ja;
+                break;
+        }
       $('#item_div').append(
-        '<div id="row'+i+'" class="collectionrow row item_row" data-name="'+item.name+'">'+
+        '<div id="row'+i+'" class="collectionrow row item_row" data-name="'+$item_name+'">'+
         '<img class="item_img center-block" src="'+item.picture+'" />'+
-        '<h4 class="item'+i+' item_name">'+item.name+'</h4>'+
+        '<h4 class="item'+i+' item_name">'+$item_name+'</h4>'+
         '<h5>'+$.i18n.prop('shop_cost',localStorage.getItem("lang")) + ": " + item.price+'</h5>'+
         '<h5>'+$.i18n.prop('shop_amount',localStorage.getItem("lang")) + ": " + item.amount+'</h5></div>'
       );
-      translate(item.name,function(translation){
+      /*translate(item.name,function(translation){
         $('.item'+i).text(translation);
-      });
+      });*/
       $('#row'+i).data('item_info',item);
     });
     $('.item_row').click(function(){
@@ -183,17 +195,28 @@ function showMyTrades(div, response) {
     $div.html("<tr><th>" + $.i18n.prop('trade_product',localStorage.getItem("lang")) + "</th><th>" + $.i18n.prop('trade_price',localStorage.getItem("lang")) + "</th><th>" + $.i18n.prop('trade_time',localStorage.getItem("lang")) + "</th></tr>");
   }
   for (product in response) {
+      switch (localStorage.getItem("lang")) {
+          case 'fi':
+              $product_name = response[product].name_fi;
+              break;
+          case 'en':
+              $product_name = response[product].name_en;
+              break;
+          case 'ja':
+              $product_name = response[product].name_ja;
+              break;
+      }
     var row = $('<tr></tr>');
     if (div === "myopentradescontent") {
       var content = $(
-        '<td>' + response[product].name + '</td>' +
+        '<td>' + $product_name + '</td>' +
         '<td>' + response[product].price + '</td> ' +
         '<td><button type="button" data-tradeid="' + response[product].id +
         '" data-toggle="modal" data-target="#editTradeProductModal" class="btn btn-primary trade_edit_button">' + $.i18n.prop('trade_edit',localStorage.getItem("lang")) + '</button>' +
         '<button type="button" data-tradeid="' + response[product].id + '" class="btn btn-danger trade_delete_button">' + $.i18n.prop('trade_delete',localStorage.getItem("lang")) + '</button> </td>')
     }
     else {
-      var content = $('<td>' + response[product].name + '</td><td>' + response[product].price + '</td><td>' + localizeDateTime(response[product].time) + '</td>');
+      var content = $('<td>' + $product_name + '</td><td>' + response[product].price + '</td><td>' + localizeDateTime(response[product].time) + '</td>');
     }
     row.append(content);
     $div.append(row);

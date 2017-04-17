@@ -191,12 +191,19 @@ function getCollection($id) {
   if (empty($products)) return;
   foreach ($products as $id => $amount) {
     if ($amount > 0) {
-      $product = R::load('product', $id);
-      $response[] = array(
+        //$response = R::getAll('SELECT * FROM product INNER JOIN product_en ON product.id = product_en.id INNER JOIN product_fi ON product.id = product_fi.id  WHERE product.id = :id', [':id'=>$id]);
+        //tästä palautuu väärä amount arvo!!!!
+
+        $product = R::load('product', $id);
+        $fin = R::load('product_fi', $id);
+        $eng = R::load('product_en', $id);
+        $response[] = array(
         'id' => $product->id,
-        'name' => $product->name,
-        'description' => $product->description,
-        'amount' => $amount,
+        'name_en' => $eng->name_en,
+          'name_fi' => $fin->name_fi,
+          'description_en' => $eng->description_en,
+          'description_fi' => $fin->description_fi,
+          'amount' => $amount,
         'picture' => $product->image_url,
         'price' => $product->price
        );

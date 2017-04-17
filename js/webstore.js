@@ -75,13 +75,27 @@ function generateItemView(url, callback) {
     $('.gallery-grid').html('');
     $.get(url, function (products) {
         $.each(products, function (i, product) {
+            switch (localStorage.getItem("lang")) {
+                case 'fi':
+                    $product_name = product.name_fi;
+                    $product_description = product.description_fi;
+                    break;
+                case 'en':
+                    $product_name = product.name_en;
+                    $product_description = product.description_en;
+                    break;
+                case 'ja':
+                    $product_name = product.name_ja;
+                    $product_description = product.description_ja;
+                    break;
+            }
             $('.infos').append('<div class="pop-up"><div id="small-dialog' + i + '" class="mfp-hide book-form"><div class="pop-up-content-agileits-w3layouts"><div class="col-md-6 w3ls-left">' +
                 '<img src="' + product.image_url + '" alt=" " class="img-responsive zoom-img" /></div>' +
                 '<div class="col-md-6 w3ls-right">' +
-                '<h4 id="title' + i + '">' + product.name + '</h4>' +
-                '<p id="description' + i + '">' + product.description + '</p>' +
+                '<h4 id="title' + i + '">' + $product_name + '</h4>' +
+                '<p id="description' + i + '">' + $product_description + '</p>' +
                 '<div class="span span1">' +
-                '<p class="left product_name"></p>' + '<p id="name' + i + '" class="right">' + product.name + '</p>' +
+                '<p class="left product_name"></p>' + '<p id="name' + i + '" class="right">' + $product_name + '</p>' +
                 '<div class="clearfix"></div></div>' +
                 '<div class="span span2">' + '<p class="left product_cost"></p><p class="right">' + product.price + '</p>' +
                 '<div class="clearfix"></div></div>' +
@@ -96,13 +110,13 @@ function generateItemView(url, callback) {
             $('.gallery-grids').append('<div class="gallery-grid">' +
                 '<a class="book popup-with-zoom-anim button-isi zoomIn animated" data-wow-delay=".5s" href="#small-dialog' + i + '">' +
                 '<img src="' + product.image_url + '" alt=" " style="max-height:340px;max-width:340px;" class="img-responsive zoom-img" /></a></div>');
-            translate(product.description, function (translation) {
+            /*translate(product.description, function (translation) {
                 $('#description' + i).text(translation);
-            });
-            translate(product.name, function (translation) {
+            });*/
+            /*translate(product.name, function (translation) {
                 $('#name' + i).text(translation);
                 $('#title' + i).text(translation);
-            });
+            });*/
         });
         $('.product_name').text($.i18n.prop('shop_name', localStorage.getItem("lang")));
         $('.product_cost').text($.i18n.prop('shop_cost', localStorage.getItem("lang")));

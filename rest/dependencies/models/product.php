@@ -1,7 +1,9 @@
 <?php
 
 function getProducts(){
-  return R::getAll( 'SELECT * FROM product WHERE amount > 0' );
+  //return R::getAll( 'SELECT * FROM product WHERE amount > 0' );
+  return R::getAll('SELECT * FROM product INNER JOIN product_en ON product.id = product_en.id INNER JOIN product_fi ON product.id = product_fi.id  WHERE amount > 0');
+    //missing japanese cause could not get product_ja to work in mysql
 }
 
 /**
@@ -114,6 +116,15 @@ function addProduct($id, $name, $price, $description, $image_url, $amount){
 */
 
 function getProductById($id) {
-  $result = R::load('product', $id);
-  return $result;
+    //return R::getAll('SELECT * FROM product INNER JOIN product_en ON product.id = product_en.id INNER JOIN product_fi ON product.id = product_fi.id  WHERE product.id = :id', [':id'=>$id]);
+
+    $product = R::load('product', $id);
+    $fin = R::load('product_fi', $id);
+    $eng = R::load('product_en', $id);
+    $product['name_en'] = $eng->name_en;
+    $product['name_fi'] = $fin->name_fi;
+    $product['description_en'] = $eng->description_en;
+    $product['description_fi'] = $fin->description_fi;
+
+  return $product;
 }
