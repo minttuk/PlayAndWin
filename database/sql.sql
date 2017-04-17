@@ -1,6 +1,8 @@
 SET GLOBAL time_zone = '+00:00';
 
 CREATE DATABASE playandwin;
+ALTER DATABASE playandwin CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
+ALTER TABLE chatroom CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 USE playandwin;
 
@@ -120,3 +122,6 @@ INSERT INTO user(username, firstname, lastname, email, password, coins, admin, r
 VALUES('Boss', 'admin', 'admin', 'admin@playandwin.fi', 'ec15d79e36e14dd258cfff3d48b73d35', '50000', '1', '2017-03-06 10:05:09', '2017-03-06 10:05:09');
 
 INSERT INTO trades (seller_id, product_id, price, description) VALUES (1, 1, 50, 'Selling this cause I dont need it');
+
+ALTER DATABASE playandwin CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
+ALTER TABLE chatroom CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;

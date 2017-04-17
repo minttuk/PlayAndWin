@@ -7,17 +7,18 @@ $('#chatbox').perfectScrollbar();
 
 $.get("emoji.html", function(data) {
     $('.modal-body').html(data);
-    $('.emoji_option').click(function() {
-        $('#msgbox').val($('#msgbox').val() + ' ' + $(this).text());
+    emojify.run($('.modal-body')[0]);
+    $('.emoji').click(function() {
+        $('#msgbox').val($('#msgbox').val() + ' ' + $(this).attr('alt'));
         $(".modal").modal('hide');
     });
 });
 
 $("#emoji_search").keyup(function(e) {
     var query = $("#emoji_search").val().toLowerCase();
-    $('.emoji_option').each(function(i) {
-        if ($(this).attr('title').includes(query)) $(this).show();
-        else $(this).hide();
+    $('.emoji').each(function(i) {
+        if ($(this).attr('alt').includes(query)) $(this).parents('em').show();
+        else $(this).parents('em').hide();
     });
 });
 
@@ -28,7 +29,7 @@ $("#msgbox").keydown(function(e) {
 
 $('.modal-body').keydown(function(e) {
     if (e.which == 13) {
-        $('#msgbox').val($('#msgbox').val() + ' ' + $(':focus').text());
+        $('#msgbox').val($('#msgbox').val() + ' ' + $(':focus').children(':first').attr('alt'));
         $(".modal").modal('hide');
     }
 });
@@ -57,6 +58,7 @@ $(document).ready(function() {
             $('.timestamp').each(function() {
                 $(this).text(localizeDateTime($(this).text()));
             });
+            emojify.run();
             $('#chatbox').scrollTop($('#chatbox')[0].scrollHeight);
             $('#chatbox').perfectScrollbar('update');
             inputFocus();
@@ -69,7 +71,7 @@ $(document).ready(function() {
 
 function sendMsg() {
     $.post("/rest/chat", {
-        message: $('#msgbox').val().emojify(),
+        message: $('#msgbox').val(),
     }, function(data) {
         $('#msgbox').val('');
         inputFocus();
@@ -92,6 +94,7 @@ function update() {
                 '<p class="col-lg-10">' + result[result.length - 1].msg + '</p>' +
                 '</div>' +
                 '</div>');
+            emojify.run();
             $('#chatbox').scrollTop($('#chatbox')[0].scrollHeight);
             $('#chatbox').perfectScrollbar('update');
         }
