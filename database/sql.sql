@@ -76,7 +76,7 @@ CREATE TABLE trades (
   price INT(15) NOT NULL,
   description VARCHAR(100),
   buyer_id INT(6),
-  trade_time TIMESTAMP DEFAULT NULL,
+  trade_time DATETIME NOT NULL,
   FOREIGN KEY (seller_id) REFERENCES user(id),
   FOREIGN KEY (buyer_id) REFERENCES user(id),
   FOREIGN KEY (product_id) REFERENCES product(id)
