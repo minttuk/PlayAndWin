@@ -2,8 +2,8 @@
 
 function getProducts(){
   //return R::getAll( 'SELECT * FROM product WHERE amount > 0' );
-  return R::getAll('SELECT * FROM product INNER JOIN product_en ON product.id = product_en.id INNER JOIN product_fi ON product.id = product_fi.id  WHERE amount > 0');
-    //missing japanese cause could not get product_ja to work in mysql
+  return R::getAll('SELECT * FROM product INNER JOIN product_en ON product.id = product_en.id INNER JOIN
+  product_fi ON product.id = product_fi.id INNER JOIN product_ja ON product.id = product_ja.id WHERE amount > 0');
 }
 
 /**
@@ -104,15 +104,15 @@ function addProduct($id, $name, $price, $description, $image_url, $amount, $lang
         R::store($product);
         switch ($lang) {
             case 'fi':
-                R::exec( 'INSERT INTO product_fi (id, name_fi, description_fi) 
+                R::exec( 'INSERT INTO product_fi (id, name_fi, description_fi)
                         VALUES (LAST_INSERT_ID(), :name, :description)', [':name' => $name, ':description'=>$description]);
                 break;
             case 'en':
-                R::exec( 'INSERT INTO product_en (id, name_en, description_en) 
+                R::exec( 'INSERT INTO product_en (id, name_en, description_en)
                         VALUES (LAST_INSERT_ID(), :name, :description)', [':name' => $name, ':description'=>$description]);
                 break;
             case 'ja':
-                R::exec( 'INSERT INTO product_ja (id, name_ja, description_ja) 
+                R::exec( 'INSERT INTO product_ja (id, name_ja, description_ja)
                         VALUES (LAST_INSERT_ID(), :name, :description)', [':name' => $name, ':description'=>$description]);
                 break;
         }
