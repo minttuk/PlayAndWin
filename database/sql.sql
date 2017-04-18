@@ -116,9 +116,10 @@ CREATE TABLE chatroom (
 
 CREATE TABLE collection (
   id INT(6) PRIMARY KEY NOT NULL,
-  products JSON DEFAULT NULL,
+  products TEXT DEFAULT NULL,
   FOREIGN KEY (id) REFERENCES user(id)
 );
+
 INSERT INTO collection (id, products) VALUES
   (1, '{"1": 1, "4": 1}'),
   (2, '{"1": 2, "3": 4}');
@@ -168,4 +169,3 @@ INSERT INTO trades (seller_id, product_id, price, description) VALUES (1, 1, 50,
 
 ALTER DATABASE playandwin CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
 ALTER TABLE chatroom CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
