@@ -116,6 +116,7 @@
 
 #managetrades {
   display: none;
+  padding: 50px;
 }
 
 td, th {
