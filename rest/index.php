@@ -11,7 +11,7 @@ Flight::route('/', function(){
 });
 
 Flight::route('/test', function(){
-    echo uridecode('Ali%20A');
+     getActiveTrades();
 });
 
 // --------------------------   PRIVATE REST API   -------------------------- //
@@ -137,6 +137,10 @@ Flight::route('/products', function(){
     Flight::json(getProducts());
 });
 
+Flight::route('/products/@lang', function($lang){
+    Flight::json(getProducts($lang));
+});
+
 Flight::route('/products/@id', function($id) {
     Flight::json(getProductById($id));
 });
@@ -157,6 +161,10 @@ flight::route('/trades/history', function() {
 
 flight::route('GET /trades', function() {
   Flight::json(getActiveTrades());
+});
+
+flight::route('GET /trades/@lang', function($lang) {
+  Flight::json(getActiveTrades($lang));
 });
 
 flight::route('PUT /trades', function(){

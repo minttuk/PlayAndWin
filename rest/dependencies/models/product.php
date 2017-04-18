@@ -1,9 +1,12 @@
 <?php
 
-function getProducts(){
-  //return R::getAll( 'SELECT * FROM product WHERE amount > 0' );
-  return R::getAll('SELECT * FROM product INNER JOIN product_en ON product.id = product_en.id INNER JOIN
-  product_fi ON product.id = product_fi.id INNER JOIN product_ja ON product.id = product_ja.id WHERE amount > 0');
+function getProducts($lang = null){
+    if ($lang && array_search('product_'.$lang,R::inspect())!='') {
+        $arr1 = R::getAll('SELECT * FROM product JOIN product_'.$lang.' ON product.id = product_'.$lang.'.id WHERE amount > 0');
+        $arr2 = R::getAll('SELECT * FROM product WHERE  product.id NOT IN (SELECT product_'.$lang.'.id FROM product_'.$lang.') AND amount > 0');
+        return array_merge($arr1,$arr2);
+    }
+  return R::getAll( 'SELECT * FROM product WHERE amount > 0');
 }
 
 /**
@@ -127,16 +130,23 @@ function addProduct($id, $name, $price, $description, $image_url, $amount, $lang
 *@return array with product information
 */
 
-function getProductById($id) {
+function getProductById($id, $lang=null) {
     //return R::getAll('SELECT * FROM product INNER JOIN product_en ON product.id = product_en.id INNER JOIN product_fi ON product.id = product_fi.id  WHERE product.id = :id', [':id'=>$id]);
-
     $product = R::load('product', $id);
-    $fin = R::load('product_fi', $id);
-    $eng = R::load('product_en', $id);
-    $product['name_en'] = $eng->name_en;
-    $product['name_fi'] = $fin->name_fi;
-    $product['description_en'] = $eng->description_en;
-    $product['description_fi'] = $fin->description_fi;
+    if ($lang && array_search('product_'.$lang,R::inspect())!='') {
+        $trans = R::load('product_'.$lang, $id);
+        if ($trans!=''){
+            $product['name'] = $trans->name;
+            $product['description'] = $trans->description;
+        }
+    }
+
+    //$fin = R::load('product_fi', $id);
+    //$eng = R::load('product_en', $id);
+    //$product['name_en'] = $eng->name_en;
+    //$product['name_fi'] = $fin->name_fi;
+    //$product['description_en'] = $eng->description_en;
+    //$product['description_fi'] = $fin->description_fi;
 
   return $product;
 }

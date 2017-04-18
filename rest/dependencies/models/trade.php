@@ -137,32 +137,27 @@ function getOpenTrades($id) {
   return $result;
 }
 
-function getActiveTrades() {
+function getActiveTrades($lang=null) {
   $trades = getOpenTrades(null);
-  //$products = getProducts();
   $active = array();
   foreach ($trades as $trade) {
-    $product = getProductById($trade['product_id']);
-    $trade['name_fi'] = $product->name_fi;
-    $trade['name_en'] = $product->name_en;
-      //$trade['name'] = getProductAttribute($trade['product_id'],'name');
+    $trade['name'] = getProductAttribute($trade['product_id'],'name',$lang);
     $trade['image_url'] = getProductAttribute($trade['product_id'],'image_url');
-    if ($trade['description']==''){
-        $trade['description_en'] = $product->description_en;
-        $trade['description_fi'] = $product->description_fi;
-    }
-    //if ($trade['description']=='') $trade['description'] = getProductAttribute($trade['product_id'],'description');
+    if ($trade['description']=='') $trade['description'] = getProductAttribute($trade['product_id'],'description',$lang);
     unset($trade['seller_id']);
     unset($trade['product_id']);
     unset($trade['buyer_id']);
     unset($trade['trade_time']);
     $active[] = $trade;
   }
-
   return $active;
 }
 
-function getProductAttribute($id,$attribute) {
+function getProductAttribute($id,$attribute,$lang=null) {
+  if ($lang && array_search('product_'.$lang,R::inspect())!='' && ($attribute == 'name' || $attribute == 'description')) {
+    $attr = R::getCell('SELECT '.$attribute.' FROM product_'.$lang.' WHERE id = '.$id);
+  }
+  if (isset($attr) && $attr)  return $attr;
   return R::getCell('SELECT '.$attribute.' FROM product WHERE id = '.$id);
 }
 
