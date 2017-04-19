@@ -51,6 +51,9 @@ Flight::route('DELETE /user/@id', function($id){
 Flight::route('/user/admin', function(){
     if (isToken()) Flight::json(getAdmin(validateToken()));
 });
+Flight::route('/user/collection/@lang', function($lang){
+    if (isToken()) Flight::json(getCollection(validateToken(),$lang));
+});
 Flight::route('/user/collection/', function(){
     if (isToken()) Flight::json(getCollection(validateToken()));
 });
@@ -217,11 +220,6 @@ Flight::route('/friends/requests/@id', function($id){
 });
 Flight::route('/friends/pending/@id', function($id){
     Flight::json(getPendingFriends(validateToken()));
-});
-
-// Collection
-Flight::route('/collection/@id', function($id){
-    Flight::json(getCollection(validateToken()));
 });
 
 // ---------------------------------   END of API  --------------------------------- //

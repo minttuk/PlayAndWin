@@ -379,33 +379,22 @@ $('#mycollectionbutton').click(function (){
 
 function getCollection() {
   $.ajax({
-      url:'/rest/collection/'+userId,
+      url:'/rest/user/collection/'+localStorage.getItem("lang"),
       dataType: "json",
       success: function (response){
         console.log(response);
         $('#mycollection').empty();
         $.each(response, function(i, item) {
-            switch (localStorage.getItem("lang")) {
-                case 'fi':
-                    $item_name = item.name_fi;
-                    break;
-                case 'en':
-                    $item_name = item.name_en;
-                    break;
-                case 'ja':
-                    $item_name = item.name_ja;
-                    break;
-            }
           $('#mycollection').append(
             '<div class="collectionrow row">'+
             '<div class="col-xs-6 center_img"><img class="item_img center-block" src="'+item.picture+'" /></div>'+
-            '<div class="col-xs-6 col_left"><h3 class="items_info item'+i+'">'+$item_name+'</h3>'+
+            '<div class="col-xs-6 col_left"><h3 class="items_info item'+i+'">'+item.name+'</h3>'+
             '<h4  class="items_info">'+$.i18n.prop('shop_cost',localStorage.getItem("lang")) + ": " + item.price+'</h4>'+
             '<h4>'+$.i18n.prop('shop_amount',localStorage.getItem("lang")) + ": " + item.amount+'</h4></div></div>'
           );
-          /*translate(item.name,function(translation){
+          translate(item.name,function(translation){
             $('.item'+i).text(translation);
-          });*/
+          });
           /*
           for (var i in response) {
             var row = $('<div class="collectionrow row">');

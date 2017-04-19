@@ -185,7 +185,7 @@ function getCoins($id) {
  * @param int $id is the ID number of the user.
  * @return List of products
  */
-function getCollection($id) {
+function getCollection($id,$lang=null) {
   $products = collection($id);
   //$response = array();
   if (empty($products)) return;
@@ -193,19 +193,13 @@ function getCollection($id) {
     if ($amount > 0) {
         //$response = R::getAll('SELECT * FROM product INNER JOIN product_en ON product.id = product_en.id INNER JOIN product_fi ON product.id = product_fi.id  WHERE product.id = :id', [':id'=>$id]);
         //tästä palautuu väärä amount arvo!!!!
-
-        $product = R::load('product', $id);
-        $fin = R::load('product_fi', $id);
-        $eng = R::load('product_en', $id);
         $response[] = array(
-        'id' => $product->id,
-        'name_en' => $eng->name_en,
-          'name_fi' => $fin->name_fi,
-          'description_en' => $eng->description_en,
-          'description_fi' => $fin->description_fi,
-          'amount' => $amount,
-        'picture' => $product->image_url,
-        'price' => $product->price
+        'id' => getProductAttribute($id,'id'),
+        'name' => getProductAttribute($id,'name',$lang),
+        'description' => getProductAttribute($id,'description',$lang),
+        'amount' => $amount,
+        'picture' => getProductAttribute($id,'image_url'),
+        'price' => getProductAttribute($id,'price')
        );
     }
   }
