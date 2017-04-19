@@ -397,7 +397,7 @@ function getCollection() {
             '<div class="col-xs-6 col_left text-center"><h3 class="items_info item'+i+'">'+item.name+'</h3>'+
             '<h4  class="items_info">'+$.i18n.prop('shop_cost',localStorage.getItem("lang")) + ": " + item.price+'</h4>'+
             '<h4 class="items_info">'+$.i18n.prop('shop_amount',localStorage.getItem("lang")) + ': <span id="amt_'+item.id+'">'+item.amount+'</span></h4>'+
-            '<button class="item_redeem" onclick=redeemItem("'+item.id+'");>Redeem</button></div></div>'
+            '<button class="item_redeem" onclick=redeemItem("'+item.id+'");>'+$.i18n.prop('profile_redeem',localStorage.getItem("lang"))+'</button></div></div>'
           );
           translate(item.name,function(translation){
             $('.item'+i).text(translation);

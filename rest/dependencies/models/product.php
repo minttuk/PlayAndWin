@@ -167,6 +167,6 @@ function redeemProduct($id,$product) {
     if ($amount < 1) unset($arr[$product]);
     $collection->products = json_encode($arr);
     R::store($collection);
-    sendEmail(getUserAttribute($id,'email'),getUserAttribute($id,'username'),'redeem', getProductAttribute($id,'name'));
+    sendEmail(getUserAttribute($id,'email'),getUserAttribute($id,'username'),'redeem', getProductAttribute($product,'name'));
     return $amount;
 }
