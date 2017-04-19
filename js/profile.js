@@ -377,20 +377,27 @@ $('#mycollectionbutton').click(function (){
   getCollection();
 });
 
+function redeemItem(id) {
+    $.post('/rest/collection/redeem', {product: id}, function(data){
+      data < 1 ? ($('#item_'+id).fadeOut(500)) : ($('#amt_'+id).text(data));
+  });
+}
+
 function getCollection() {
   $.ajax({
-      url:'/rest/user/collection/'+localStorage.getItem("lang"),
+      url:'/rest/collection/'+localStorage.getItem("lang"),
       dataType: "json",
       success: function (response){
         console.log(response);
         $('#mycollection').empty();
         $.each(response, function(i, item) {
           $('#mycollection').append(
-            '<div class="collectionrow row">'+
+            '<div class="collectionrow row" id="item_'+item.id+'">'+
             '<div class="col-xs-6 center_img"><img class="item_img center-block" src="'+item.picture+'" /></div>'+
-            '<div class="col-xs-6 col_left"><h3 class="items_info item'+i+'">'+item.name+'</h3>'+
+            '<div class="col-xs-6 col_left text-center"><h3 class="items_info item'+i+'">'+item.name+'</h3>'+
             '<h4  class="items_info">'+$.i18n.prop('shop_cost',localStorage.getItem("lang")) + ": " + item.price+'</h4>'+
-            '<h4>'+$.i18n.prop('shop_amount',localStorage.getItem("lang")) + ": " + item.amount+'</h4></div></div>'
+            '<h4 class="items_info">'+$.i18n.prop('shop_amount',localStorage.getItem("lang")) + ': <span id="amt_'+item.id+'">'+item.amount+'</span></h4>'+
+            '<button class="item_redeem" onclick=redeemItem("'+item.id+'");>Redeem</button></div></div>'
           );
           translate(item.name,function(translation){
             $('.item'+i).text(translation);

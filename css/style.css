@@ -247,6 +247,7 @@ img {
 
 .rslides li {
 	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
 	position: absolute;
 	display: none;
 	width: 100%;
@@ -844,6 +845,7 @@ figure.effect-zoe p.description {
     -webkit-transition: opacity 0.35s;
     transition: opacity 0.35s;
     -webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
 }
 
 figure.effect-zoe h3,
@@ -1156,6 +1158,7 @@ img.zoom-img {
 	-moz-transition-duration: .5s;
 	-ms-transition-duration: .5s;
 	-o-transition-duration: .5s;
+	transition-duration: .5s;
 }
 img.zoom-img:hover{
     transform: scale(.9);
@@ -1169,8 +1172,10 @@ img.zoom-img:hover{
 	-moz-transition-duration: 750ms;
 	-ms-transition-timing-function: ease-in-out;
 	-o-transition-timing-function: ease-in-out;
+	transition-timing-function: ease-in-out;
 	-ms-transition-duration: 750ms;
 	-o-transition-duration: 750ms;
+	transition-duration: 750ms;
 	overflow: hidden;
 }
 .span1 {
@@ -2868,7 +2873,4 @@ font-weight: bold !important;
 .dropdown-menu > li > a:hover {
 color: #e91e63 !important;
 font-weight: bold !important;
-}
-.sign-in a::before, .sign-in a::after {
-
 }

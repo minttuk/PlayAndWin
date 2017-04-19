@@ -8,7 +8,7 @@
 
 function addNewTrade($userid, $productid, $tradeprice, $tradedescription) {
   if (userHasProduct($userid, $productid)) {
-    if (notALreadyForTrade($userid, $productid)) {
+    if (notAlreadyForTrade($userid, $productid)) {
       $trade = R::dispense('trades');
       $trade->seller_id = $userid;
       $trade->product_id = $productid;
@@ -16,12 +16,10 @@ function addNewTrade($userid, $productid, $tradeprice, $tradedescription) {
       $trade->description = $tradedescription;
       R::store($trade);
       $msg = array("success" => "Product has been put for sale!");
-    }
-    else {
+    } else {
       $msg = array("error" => "Seems like you are already trading this product! Please choose another product to sell.");
     }
-  }
-  else {
+  } else {
     $msg = array("error" => "Oops! You don't seem to own this product. Make sure you filled in the right product!");
   }
   return $msg;
@@ -36,13 +34,12 @@ function addNewTrade($userid, $productid, $tradeprice, $tradedescription) {
 
 function userHasProduct($userid, $productid) {
   $products = collection($userid);
-  $result = false;
   foreach ($products as $key => $value) {
     if ($key == $productid && $value > 0) {
-      $result = true;
+      return true;
     }
   }
-  return $result;
+  return false;
 }
 
 /**
@@ -55,15 +52,14 @@ function userHasProduct($userid, $productid) {
 function notAlreadyForTrade($userid, $productid) {
   $products = collection($userid);
   $opentrades = countOpenTrades($userid, $productid);
-  $result = false;
   foreach ($products as $key => $value) {
     if ($key == $productid) {
       if ($value > $opentrades) {
-        $result = true;
+        return true;
       }
     }
   }
-  return $result;
+  return false;
 }
 
 /**
@@ -74,7 +70,8 @@ function notAlreadyForTrade($userid, $productid) {
 */
 
 function countOpenTrades($userid, $productid) {
-  $result = R::getAll('SELECT COUNT(*) AS count FROM trades WHERE seller_id = :userid AND product_id = :productid AND buyer_id IS NULL', [':userid' => $userid, ':productid' => $productid]);
+  $result = R::getAll('SELECT COUNT(*) AS count FROM trades WHERE seller_id = :userid AND product_id = :productid
+    AND buyer_id IS NULL', [':userid' => $userid, ':productid' => $productid]);
   return $result[0]['count'];
 }
 
@@ -151,14 +148,6 @@ function getActiveTrades($lang=null) {
     $active[] = $trade;
   }
   return $active;
-}
-
-function getProductAttribute($id,$attribute,$lang=null) {
-  if ($lang && array_search('product_'.$lang,R::inspect())!='' && ($attribute == 'name' || $attribute == 'description')) {
-    $attr = R::getCell('SELECT '.$attribute.' FROM product_'.$lang.' WHERE id = '.$id);
-  }
-  if (isset($attr) && $attr)  return $attr;
-  return R::getCell('SELECT '.$attribute.' FROM product WHERE id = '.$id);
 }
 
 

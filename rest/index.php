@@ -51,12 +51,19 @@ Flight::route('DELETE /user/@id', function($id){
 Flight::route('/user/admin', function(){
     if (isToken()) Flight::json(getAdmin(validateToken()));
 });
-Flight::route('/user/collection/@lang', function($lang){
+
+// Collection
+Flight::route('POST /collection/redeem', function(){
+    if (isToken() && Flight::request()->data->product != null)
+        echo redeemProduct(validateToken(),Flight::request()->data->product);
+});
+Flight::route('/collection/@lang', function($lang){
     if (isToken()) Flight::json(getCollection(validateToken(),$lang));
 });
-Flight::route('/user/collection/', function(){
+Flight::route('/collection', function(){
     if (isToken()) Flight::json(getCollection(validateToken()));
 });
+
 
 // Friends
 Flight::route('POST /friends', function(){
@@ -65,11 +72,17 @@ Flight::route('POST /friends', function(){
 Flight::route('DELETE /friends', function(){
     if (isFriendParams()) Flight::json(deleteFriend(validateToken(), Flight::request()->query->id));
 });
+Flight::route('/friends/requests/@id', function($id){
+    Flight::json(getFriendRequests(validateToken()));
+});
+Flight::route('/friends/pending/@id', function($id){
+    Flight::json(getPendingFriends(validateToken()));
+});
 Flight::route('GET /friends', function(){
     if (isFriendParams()) Flight::json(getFriendship(validateToken(), Flight::request()->query->id));
 });
 
-//Product
+// Product
 Flight::route('POST /product', function(){
     if (isToken()){
         addProduct(
@@ -85,9 +98,8 @@ Flight::route('POST /product', function(){
 
 });
 Flight::route('/product/buy', function(){
-    if (isToken() && Flight::request()->query->product != null) {
+    if (isToken() && Flight::request()->query->product != null)
       echo buyProduct(validateToken(),Flight::request()->query->product);
-    }
 });
 
 // Highscore
@@ -101,6 +113,41 @@ Flight::route('/score', function(){
 // Coins
 Flight::route('/coins', function(){
     if (isToken()) echo getCoins(validateToken());
+});
+
+// Trade
+Flight::route('POST /trades/new', function() {
+  Flight::json(addNewTrade(
+    validateToken(),
+    Flight::request()->data->product,
+    Flight::request()->data->price,
+    Flight::request()->data->description
+  ));
+});
+
+flight::route('/trades/history', function() {
+  Flight::json(getTradeHistory(validateToken()));
+});
+
+flight::route('PUT /trades', function(){
+  if(isToken()) {
+    Flight::json(editTrade(
+      validateToken(),
+      Flight::request()->data->id,
+      Flight::request()->data->price,
+      Flight::request()->data->description
+    ));
+  }
+});
+
+flight::route('DELETE /trades', function(){
+  Flight::json(deleteTrade(validateToken(), Flight::request()->query->tradeid));
+});
+
+Flight::route('/trades/buy', function(){
+    if (isToken() && Flight::request()->query->trade != null) {
+        echo buyTradeProduct(validateToken(),Flight::request()->query->trade);
+    }
 });
 
 
@@ -148,19 +195,7 @@ Flight::route('/products/@id', function($id) {
     Flight::json(getProductById($id));
 });
 
-//trade
-Flight::route('POST /trades/new', function() {
-  Flight::json(addNewTrade(
-    validateToken(),
-    Flight::request()->data->product,
-    Flight::request()->data->price,
-    Flight::request()->data->description
-  ));
-});
-
-flight::route('/trades/history', function() {
-  Flight::json(getTradeHistory(validateToken()));
-});
+// Trade
 
 flight::route('GET /trades', function() {
   Flight::json(getActiveTrades());
@@ -168,27 +203,6 @@ flight::route('GET /trades', function() {
 
 flight::route('GET /trades/@lang', function($lang) {
   Flight::json(getActiveTrades($lang));
-});
-
-flight::route('PUT /trades', function(){
-  if(isToken()) {
-    Flight::json(editTrade(
-      validateToken(),
-      Flight::request()->data->id,
-      Flight::request()->data->price,
-      Flight::request()->data->description
-    ));
-  }
-});
-
-flight::route('DELETE /trades', function(){
-  Flight::json(deleteTrade(validateToken(), Flight::request()->query->tradeid));
-});
-
-Flight::route('/trades/buy', function(){
-    if (isToken() && Flight::request()->query->trade != null) {
-        echo buyTradeProduct(validateToken(),Flight::request()->query->trade);
-    }
 });
 
 // Chat
@@ -215,12 +229,7 @@ Flight::route('/search/@query', function($query){
 Flight::route('/friends/@id', function($id){
     Flight::json(getMutualFriends($id));
 });
-Flight::route('/friends/requests/@id', function($id){
-    Flight::json(getFriendRequests(validateToken()));
-});
-Flight::route('/friends/pending/@id', function($id){
-    Flight::json(getPendingFriends(validateToken()));
-});
+
 
 // ---------------------------------   END of API  --------------------------------- //
 

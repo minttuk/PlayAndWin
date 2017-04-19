@@ -150,3 +150,23 @@ function getProductById($id, $lang=null) {
 
   return $product;
 }
+
+function getProductAttribute($id,$attribute,$lang=null) {
+  if ($lang && array_search('product_'.$lang,R::inspect())!='' && ($attribute == 'name' || $attribute == 'description')) {
+    $attr = R::getCell('SELECT '.$attribute.' FROM product_'.$lang.' WHERE id = '.$id);
+  }
+  if (isset($attr) && $attr)  return $attr;
+  return R::getCell('SELECT '.$attribute.' FROM product WHERE id = :id',[':id' => $id]);
+}
+
+function redeemProduct($id,$product) {
+    $collection = R::load('collection',$id);
+    $arr = json_decode($collection->products,true);
+    $arr[$product]--;
+    $amount = $arr[$product];
+    if ($amount < 1) unset($arr[$product]);
+    $collection->products = json_encode($arr);
+    R::store($collection);
+    sendEmail(getUserAttribute($id,'email'),getUserAttribute($id,'username'),'redeem', getProductAttribute($id,'name'));
+    return $amount;
+}

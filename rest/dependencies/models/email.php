@@ -90,5 +90,16 @@ function constructBody($context,$username,$friendname) {
             "'https://www.playtalk.win/user/".$username."'>Go to Profile"
         ,$body);
         return array('subject' => $subject,'body' => $body);
+    case 'redeem':
+        $subject = 'You have redeemed a prize!';
+        $body = str_replace('%emailbody%',
+            "Hello ".$username."!</h1>
+            <br> Your ".$friendname." has been redeemed!
+            <br><br>Press the button below to get it now."
+        ,$body);
+        $body = str_replace('%actionlink%',
+            "'https://www.playtalk.win/".''."'>Get Prize"
+        ,$body);
+        return array('subject' => $subject,'body' => $body);
     }
 }

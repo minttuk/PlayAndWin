@@ -213,9 +213,11 @@ function getCollection($id,$lang=null) {
  * @return List of products
  */
 function collection($id) {
-  $products = R::load('collection', $id);
-  $products = json_decode($products['products']);
-  return $products;
+  return json_decode(R::getCell('SELECT products FROM collection WHERE id = :id',[':id' => $id]),true);
+}
+
+function getUserAttribute($id,$attribute) {
+  return R::getCell('SELECT '.$attribute.' FROM user WHERE id = :id',[':id' => $id]);
 }
 
 ?>
