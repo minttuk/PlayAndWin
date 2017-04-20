@@ -125,6 +125,10 @@ Flight::route('POST /trades/new', function() {
   ));
 });
 
+flight::route('/trades/history/@lang', function($lang) {
+  Flight::json(getTradeHistory(validateToken(),$lang));
+});
+
 flight::route('/trades/history', function() {
   Flight::json(getTradeHistory(validateToken()));
 });

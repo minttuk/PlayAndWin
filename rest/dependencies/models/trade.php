@@ -82,11 +82,11 @@ function countOpenTrades($userid, $productid) {
 *@return An array of trades
 */
 
-function getTradeHistory($id) {
+function getTradeHistory($id,$lang=null) {
   $response = array(
-    'opentrades' => formProperReturn(getOpenTrades($id)),
-    'buyinghistory' => formProperReturn(getTradeBuyingHistory($id)),
-    'sellinghistory' => formProperReturn(getTradeSellingHistory($id))
+    'opentrades' => formProperReturn(getOpenTrades($id),$lang),
+    'buyinghistory' => formProperReturn(getTradeBuyingHistory($id),$lang),
+    'sellinghistory' => formProperReturn(getTradeSellingHistory($id),$lang)
   );
   return $response;
 }
@@ -98,17 +98,15 @@ function getTradeHistory($id) {
 *@return boolean true or false
 */
 
-function formProperReturn($trades) {
+function formProperReturn($trades,$lang=null) {
   if ($trades == null) {
     return null;
   }
   $result = array();
   foreach ($trades as $trade => $value) {
-    $product = getProductById($value['product_id']);
     $result[] = array(
       'id' => $value['id'],
-      'name_en' => $product->name_en,
-        'name_fi'=> $product->name_fi,
+      'name' => getProductAttribute($value['product_id'],'name',$lang),
       'price' => $value['price'],
       'description' => $value['description'],
       'time' => $value['trade_time']

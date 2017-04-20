@@ -12,6 +12,14 @@
   margin-left: -150px;
 }
 
+.left {
+  text-align: left;
+}
+
+#addTradeProductModal h2 {
+  font-size: 1.5em;
+}
+
 .item_name {
   padding-bottom: 5px;
 }
@@ -37,20 +45,6 @@
   max-width:100px;
 }
 
-.button{
-    margin: 10px auto 10px auto;
-    display:block;
-    padding: 7px 15px;
-    background-color: transparent;
-    border: 2px solid rgb(2, 24, 136);
-    outline: transparent;
-	  color:rgb(2, 24, 136);
-}
-.button:hover {
-	color: #FFf;
-    border: 2px solid #FF166D;
-	background:#FF166D;
-}
 .buy-button{
     margin:auto;
     display:block;

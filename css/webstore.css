@@ -2,6 +2,18 @@
     cursor: pointer; cursor: hand;
 }
 
+.shop_add_close {
+    bottom:73px;
+}
+
+.trade_add_close {
+    bottom:81px;
+}
+
+.trade_edit_close {
+    bottom:93px;
+}
+
 #shop_prizes:hover, #shop_trades:hover{
     transform: scale(1.1);
     color:#5301eb;
