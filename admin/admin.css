@@ -1,0 +1,72 @@
+
+.admin_container {
+  height:100vh;
+}
+
+/* Sidepanel */
+
+.admin_sidepanel {
+  background-color: #337ab7;
+  color: lavender;
+  height:100vh;
+}
+
+.admin_sidepanelcontent {
+  margin: 20px;
+  font-size: 16px;
+}
+
+.admin_sidenav {
+  margin-top: 40px;
+}
+
+.admin_sidenav h3 {
+  text-align: left;
+  border-bottom: 1px solid white;
+  margin-top: 40px;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+li:hover {
+  color: white;
+}
+
+/* Mainarea */
+
+.admin_mainarea {
+  background: #efefef;
+  height:100vh;
+  overflow-y: auto;
+}
+
+.contentbox {
+  background-color: white;
+  margin: 20px;
+  padding: 30px;
+}
+
+.admin_addproductform {
+  display: none;
+}
+
+.admin_bottombuttons {
+  text-align: center;
+}
+
+.btn {
+  min-width: 80px;
+}
+
+.admin_addtranslationarea {
+  display: none;
+}

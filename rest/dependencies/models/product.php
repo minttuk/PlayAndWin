@@ -108,7 +108,6 @@ function addProduct($id, $name, $price, $description, $image_url, $amount){
         $product->amount = $amount;
         R::store($product);
      }
-
 }
 
 /**

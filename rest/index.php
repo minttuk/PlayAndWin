@@ -93,9 +93,11 @@ Flight::route('POST /product', function(){
             Flight::request()->data->image_url,
             Flight::request()->data->amount
         );
+        
     }
 
 });
+
 Flight::route('/product/buy', function(){
     if (isToken() && Flight::request()->query->product != null)
       echo buyProduct(validateToken(),Flight::request()->query->product);
