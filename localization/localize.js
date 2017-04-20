@@ -142,6 +142,8 @@ function loadLanguage(page){
       $("#finduser").text(profile_find);
       //General
       $(".form_close_btn").text(form_close_btn);
+      $(".form_dismiss_btn").text(form_dismiss_btn);
+      $(".close_friends_btn").text(form_dismiss_btn);
       $('.form_required').attr('oninvalid','this.setCustomValidity("'+form_required+'")');
       $('.form_required').attr('onchange','this.setCustomValidity("")');
 

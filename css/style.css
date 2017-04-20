@@ -4,7 +4,7 @@
 	-webkit-font-smoothing: antialiased;
 }
 
-.form_close_btn {
+.form_close_btn, .form_dismiss_btn {
 	position:relative;
 	bottom: 38px;
 	padding: 7px 15px;

@@ -4,6 +4,23 @@
   align-items: center;
 }
 
+.form_dismiss_btn {
+  float:none;
+  margin-top: 20px;
+}
+
+.close_friends_btn {
+  padding: 7px 15px;
+  background-color: transparent;
+  border: 2px solid rgb(2, 24, 136);
+  outline: transparent;
+  color: rgb(2, 24, 136);
+}
+.modal-footer{
+  padding: 0;
+  padding-top: 15px;
+}
+
 .items_info {
   padding-bottom:20px;
 }
@@ -113,6 +130,7 @@ h6 {
 }
 
 .showfriendsdiv {
+  min-height: 98px;
   margin-top: 10px;
 }
 
