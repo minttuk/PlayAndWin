@@ -16,23 +16,22 @@ final class productTest extends TestCase{
      * Tests that a product is added to the database.
      */
     public function testaddProduct(){
-        addProduct(2, 'testname', '1000', 'testdescription', 'testurl', '50', 'en');
+        addProduct(2, 'testname', '1000', 'testdescription', 'testurl', '50');
         $id = R::getCell( 'SELECT MAX(ID) FROM product');
 
-        $name = R::getCell( 'SELECT name_en FROM product_en WHERE id = '.$id);
+        $name = R::getCell( 'SELECT name FROM product WHERE id = '.$id);
         $this->assertEquals('testname', $name);
 
         $price = R::getCell( 'SELECT price FROM product WHERE id = '.$id);
         $this->assertEquals('1000', $price);
 
-        $description = R::getCell( 'SELECT description_en FROM product_en WHERE id = '.$id);
+        $description = R::getCell( 'SELECT description FROM product WHERE id = '.$id);
         $this->assertEquals('testdescription', $description);
 
         $url = R::getCell( 'SELECT image_url FROM product WHERE id = '.$id);
         $this->assertEquals('testurl', $url);
 
         R::exec( 'DELETE FROM product WHERE id = '.$id);
-        R::exec( 'DELETE FROM product_en WHERE id = '.$id);
 
     }
 

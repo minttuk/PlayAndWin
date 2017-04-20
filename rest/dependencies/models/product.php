@@ -97,29 +97,17 @@ function addToCollection($product_id, $coins, $id){
  * @param String $image_url
  *
  */
-function addProduct($id, $name, $price, $description, $image_url, $amount, $lang){
+function addProduct($id, $name, $price, $description, $image_url, $amount){
     $data = getAdmin($id);
     if ($data['admin'] == 1){
         $product = R::dispense('product');
+        $product->name = $name;
         $product->price = $price;
+        $product->description = $description;
         $product->image_url = $image_url;
         $product->amount = $amount;
         R::store($product);
-        switch ($lang) {
-            case 'fi':
-                R::exec( 'INSERT INTO product_fi (id, name_fi, description_fi)
-                        VALUES (LAST_INSERT_ID(), :name, :description)', [':name' => $name, ':description'=>$description]);
-                break;
-            case 'en':
-                R::exec( 'INSERT INTO product_en (id, name_en, description_en)
-                        VALUES (LAST_INSERT_ID(), :name, :description)', [':name' => $name, ':description'=>$description]);
-                break;
-            case 'ja':
-                R::exec( 'INSERT INTO product_ja (id, name_ja, description_ja)
-                        VALUES (LAST_INSERT_ID(), :name, :description)', [':name' => $name, ':description'=>$description]);
-                break;
-        }
-    }
+     }
 
 }
 
