@@ -177,7 +177,6 @@ $('#submitForm').click(function () {
     var price = document.getElementById('formPrice').value;
     var image_url = document.getElementById("formImage_url").value;
     var amount = document.getElementById("formAmount").value;
-    var lang = localStorage.getItem("lang");
     //console.log("lang " + lang);
 
     if (checkName(name) && checkCost(price) && checkAmount(amount) && checkDescription(description)) {
@@ -187,8 +186,7 @@ $('#submitForm').click(function () {
             "price": price,
             "description": description,
             "image_url": image_url,
-            "amount": amount,
-            "lang": lang
+            "amount": amount
         };
         var dataString = JSON.stringify(array);
 
