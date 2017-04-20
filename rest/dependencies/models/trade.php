@@ -231,7 +231,7 @@ function buyTradeProduct($buyer_id, $trade_id){
     $trade->buyer_id = $buyer_id;
     $trade->trade_time = date("Y-m-d H:i:s");//CURRENT_TIMESTAMP;
     //product added to buyer's collection
-      addToCollection($trade->product_id, $buyer->coins, $buyer->id);
+      addToCollection($trade->product_id, $buyer->id);
       R::store($buyer);
     //product removed from seller's collection
       removeFromCollection($trade->seller_id, $trade->product_id);

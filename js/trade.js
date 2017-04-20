@@ -52,6 +52,7 @@ function buyTrade(trade_id) {
                 $('.buyMessage').hide().text(translation).fadeIn();
             });
             updateCoins();
+            generateTrades();
         }
     });
 }
@@ -66,7 +67,8 @@ function addTrade(callback) {
       success: function (response){
         console.log(response);
         callback(null, response);
-        },
+        generateTrades();
+      },
       error: function(jqXHR, textStatus, errorThrown) {
         console.log(textStatus, errorThrown);
         callback(errorThrown, null);
