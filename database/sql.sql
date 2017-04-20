@@ -42,15 +42,15 @@ CREATE TABLE product (
 
 CREATE TABLE product_fi (
   id INT(6) PRIMARY KEY NOT NULL,
-  name_fi VARCHAR(100) NOT NULL,
-  description_fi VARCHAR (500) NOT NULL,
+  name VARCHAR(100) NOT NULL,
+  description VARCHAR (500) NOT NULL,
   FOREIGN KEY (id) REFERENCES product(id)
 );
 
 CREATE TABLE product_ja (
   id INT(6) PRIMARY KEY NOT NULL,
-  name_ja VARCHAR(100)NOT NULL,
-  description_ja VARCHAR (500) NOT NULL,
+  name VARCHAR(100)NOT NULL,
+  description VARCHAR (500) NOT NULL,
   FOREIGN KEY (id) REFERENCES product(id)
 );
 
@@ -119,23 +119,15 @@ INSERT INTO collection (id, products) VALUES
   (1, '{"1": 1, "4": 1}'),
   (2, '{"1": 2, "3": 4}');
 
-INSERT INTO product (price, image_url, amount) VALUES
-(9000000, "https://tctechcrunch2011.files.wordpress.com/2015/08/tesla_model_s.jpg?w=738", 10),
-(5000, "https://alixblog.com/wp-content/uploads/2015/02/Aliexpress-China.png", 5000),
-(400, "https://s-media-cache-ak0.pinimg.com/originals/f2/74/43/f27443c6ef7a2d6b3d7b4fbdc24da127.jpg", 20000),
-(50, "http://christmasgator.com/wp-content/uploads/2016/09/christmas-greeting-card-messages-for-teacher.jpg", 20000),
-(2000, "https://i5.walmartimages.com/asr/8be4f68d-4b73-4d7e-ae23-a885586a2761_1.a3c11afed43b10c584682428d033d94b.jpeg", 200),
-(10000, "https://pbs.twimg.com/profile_images/705724583794630656/Id7jmjPO.jpg", 5000);
+INSERT INTO product (price, name, description, image_url, amount) VALUES
+(9000000, "Tesla car", "Super cool luxury car!", "https://tctechcrunch2011.files.wordpress.com/2015/08/tesla_model_s.jpg?w=738", 10),
+(5000, "Aliexpress giftcard", "20 dollar giftcard to Aliexpress!", "https://alixblog.com/wp-content/uploads/2015/02/Aliexpress-China.png", 5000),
+(400, "Shower Cap", "This shower cap will keep your hair dry!", "https://s-media-cache-ak0.pinimg.com/originals/f2/74/43/f27443c6ef7a2d6b3d7b4fbdc24da127.jpg", 20000),
+(50, "Christmas Card", "Merry Christmas!", "http://christmasgator.com/wp-content/uploads/2016/09/christmas-greeting-card-messages-for-teacher.jpg", 20000),
+(2000, "Coca-Cola Fridge", "A perfect Coca-Cola fridge to always keep a few Cokes cold for you!", "https://i5.walmartimages.com/asr/8be4f68d-4b73-4d7e-ae23-a885586a2761_1.a3c11afed43b10c584682428d033d94b.jpeg", 200),
+(10000, "Zalando Giftcard", "Fashion for you! Get this 40 dollar giftcard to Zalando for only 10000 coins!", "https://pbs.twimg.com/profile_images/705724583794630656/Id7jmjPO.jpg", 5000);
 
-INSERT INTO product_en (id, name_en, description_en) VALUES
-(1, "Tesla car", "Super cool luxury car!"),
-(2, "Aliexpress giftcard", "20 dollar giftcard to Aliexpress!"),
-(3, "Shower Cap", "This shower cap will keep your hair dry!"),
-(4, "Christmas Card", "Merry Christmas!"),
-(5, "Coca-Cola Fridge", "A perfect Coca-Cola fridge to always keep a few Cokes cold for you!"),
-(6, "Zalando Giftcard", "Fashion for you! Get this 40 dollar giftcard to Zalando for only 10000 coins!");
-
-INSERT INTO product_fi (id, name_fi, description_fi) VALUES
+INSERT INTO product_fi (id, name, description) VALUES
 (1, "Tesla auto", "Erittäin siisti luksus auto!"),
 (2, "Aliexpress lahjakortti", "20 dollarin lahjakortti Aliexpressiin!"),
 (3, "Suihkumyssy", "Tämä suihkumyssy pitää hiuksesi takuulla kuivana!"),
@@ -143,7 +135,7 @@ INSERT INTO product_fi (id, name_fi, description_fi) VALUES
 (5, "Coca-Cola jääkaappi", "Täydellinen Coca-Cola jääkaappi pitää juomasi kylmänä!"),
 (6, "Zalando lahjakortti", "Muotia sinulle! Tämän 40 dollarin Zalandon lahjakortin saat vain 1000 kolikolla!");
 
-INSERT INTO product_ja (id, name_ja, description_ja) VALUES
+INSERT INTO product_ja (id, name, description) VALUES
 (1, "テスラカー", "超クールな高級車！"),
 (2, "Aliexpressギフトカード", "Aliexpressに20ドルギフトカード！"),
 (3, "シャワーキャップ", "このシャワーキャップはあなたの髪を乾燥させます！"),
