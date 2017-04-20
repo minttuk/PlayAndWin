@@ -112,6 +112,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<div class="form-group">
 							<input name="fileToUpload" type="file" class="filestyle form-control"  data-iconName="glyphicon glyphicon-inbox">
 							<input id="uploadpicturebutton" type="submit" value="Upload" style='margin-top:20px;' class="btn btn-primary form-control"/>
+							<button class="btn btn-danger form-control" style='margin-top:20px;' data-dismiss="modal">Close</button>
 						</div>
 					</form>
 				</div>
@@ -129,17 +130,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					  <li id="friendrequeststab" role="presentation"><a href="#"><span id="friendrequeststabtext">Requests</span></a></li>
 					  <li id="pendingfriendstab" role="presentation"><a href="#"><span id="pendingfriendstabtext">Pending</span></a></li>
 					</ul>
-					<div id="showmutualfriendsdiv" class="showfriendsdiv">
-					</div>
-					<div id="showfriendrequestsdiv" class="showfriendsdiv">
-					</div>
-					<div id="showpendingfriendsdiv" class="showfriendsdiv">
-					</div>
-					<div class="clearfix"></div>
-					</div>
+					<div id="showmutualfriendsdiv" class="showfriendsdiv"></div>
+					<div id="showfriendrequestsdiv" class="showfriendsdiv"></div>
+					<div id="showpendingfriendsdiv" class="showfriendsdiv"></div>
+
+					      <div class="modal-footer">
+        <button class="close_friends_btn" data-dismiss="modal">Close</button>
+      </div>
 				</div>
 			</div>
 		</div>
+	</div>
 		<!-- My Collection modal -->
 		<div id="mycollectionmodal" class="modal fade" role="dialog">
 			<div class="modal-dialog">
@@ -148,6 +149,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<h2 id='profile_collection'>My Collection</h2>
 						<div id="mycollection"></div>
 					</div>
+					<button class="form_dismiss_btn" data-dismiss="modal">Cancel</button>
 				</div>
 			</div>
 		</div>
