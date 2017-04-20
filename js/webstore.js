@@ -213,7 +213,8 @@ $('#submitForm').click(function () {
                 var text = ajaxRequest.responseText;
                 console.log(text);
                 $('#addProductModal').hide();
-                window.location = '/shop';
+                generateProducts();
+                //window.location = '/shop';
             }
         };
 
@@ -294,6 +295,7 @@ function buyPrize(product_id) {
                 $('.buyMessage').hide().text(translation).fadeIn();
             });
             updateCoins();
+            generateProducts();
         }
     });
 }
