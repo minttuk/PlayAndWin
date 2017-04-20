@@ -32,7 +32,7 @@ function buyProduct($id,$product_id){
             makeShopOrder($user->id, $product_id);
             updateProductAmount($product_id, $product_amount-1);
             R::store($user);
-            return addToCollection($product_id, $user->coins,$id);
+            return addToCollection($product_id, $id);
         }
     }
 }
@@ -69,7 +69,7 @@ function updateProductAmount($product_id, $newAmount){
  * @param int $coins_left is the amount of coins the user has left after buying the product.
  * @param int $id is the id number of the user who has bought the product.
  */
-function addToCollection($product_id, $coins, $id){
+function addToCollection($product_id, $id){
     $collection = R::load('collection',$id);
     $products = json_decode($collection->products, true);
 
@@ -82,7 +82,7 @@ function addToCollection($product_id, $coins, $id){
     }
     $collection->products = json_encode($products);
     R::store($collection);
-    return 'You have bought this product! You have '.$coins.' coins left.';
+    return 'You have bought this product!';
 }
 
 /**

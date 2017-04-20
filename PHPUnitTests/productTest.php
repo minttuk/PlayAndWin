@@ -70,7 +70,7 @@ final class productTest extends TestCase{
         $collection = R::load('collection',1);
         $products = json_decode($collection->products, true);
         $amount = $products["1"];
-        $this->assertEquals('You have bought this product! You have 1 coins left.',addToCollection('1', '1', '1') );
+        $this->assertEquals('You have bought this product!', addToCollection('1', '1') );
         $collection2 = R::load('collection',1);
         $products2 = json_decode($collection2->products, true);
         $newAmount = $products2["1"];
