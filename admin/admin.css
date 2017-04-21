@@ -6,7 +6,7 @@
 /* Sidepanel */
 
 .admin_sidepanel {
-  background-color: #337ab7;
+  background-color: #003d71;
   color: lavender;
   height:100vh;
 }
@@ -46,7 +46,7 @@ li:hover {
 .admin_mainarea {
   background: #efefef;
   height:100vh;
-  overflow-y: auto;
+  overflow-y: scroll;
 }
 
 .contentbox {
@@ -63,10 +63,18 @@ li:hover {
   text-align: center;
 }
 
+.greyrow {
+  background-color: #fafafa;
+}
+
 .btn {
   min-width: 80px;
 }
 
 .admin_addtranslationarea {
   display: none;
+}
+
+img {
+  margin: 10px 0 10px 0;
 }

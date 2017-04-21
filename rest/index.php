@@ -84,7 +84,7 @@ Flight::route('GET /friends', function(){
 
 // Product
 Flight::route('POST /product', function(){
-    if (isToken()){
+    if (isToken() && getAdmin(validateToken())){
         addProduct(
             validateToken(),
             Flight::request()->data->name,
@@ -93,9 +93,32 @@ Flight::route('POST /product', function(){
             Flight::request()->data->image_url,
             Flight::request()->data->amount
         );
-        
     }
+});
 
+Flight::route('PUT /product', function(){
+    if (isToken() && getAdmin(validateToken())){
+        updateProduct(
+            Flight::request()->data->id,
+            Flight::request()->data->name,
+            Flight::request()->data->price,
+            Flight::request()->data->description,
+            Flight::request()->data->image_url,
+            Flight::request()->data->amount
+        );
+    }
+});
+
+Flight::route('/products', function() {
+  if (isToken() && getAdmin(validateToken())) {
+    Flight::json(getAllProducts());
+  }
+});
+
+Flight::route('/product/@id', function($id) {
+  if (isToken()) {
+    Flight::json(getProductById($id));
+  }
 });
 
 Flight::route('/product/buy', function(){

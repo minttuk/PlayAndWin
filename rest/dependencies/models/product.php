@@ -10,6 +10,16 @@ function getProducts($lang = null){
 }
 
 /**
+ * Selects all the products in the database for admins
+ *
+ * @return array of products
+ */
+
+function getAllProducts() {
+  return R::getAll('SELECT * FROM product');
+}
+
+/**
  * Buying a product from the webstore.
  *
  * Gets the product id through the body of an ajax call. If the user is signed in, it checks if the user
@@ -108,6 +118,16 @@ function addProduct($id, $name, $price, $description, $image_url, $amount){
         $product->amount = $amount;
         R::store($product);
      }
+}
+
+function updateProduct($id, $name, $price, $description, $image_url, $amount) {
+  $product = R::load('product', $id);
+  $product->name = $name;
+  $product->price = $price;
+  $product->description = $description;
+  $product->image_url = $image_url;
+  $product->amount = $amount;
+  R::store($product);
 }
 
 /**
