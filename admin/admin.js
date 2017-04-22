@@ -9,6 +9,7 @@ function hideElement(elementname) {
 }
 
 // Navigation
+var lang;
 
 $('#admin-manage-products-nav').click(function() {
   hideElement('.admin_addtranslationarea');
@@ -17,7 +18,10 @@ $('#admin-manage-products-nav').click(function() {
 
 $('.admin-trasnlate-products-nav').click(function() {
   hideElement('#admin-manage-products');
+  lang = $(this).data('lang');
+  $('#admin-translate-form-heading').text('Translate [' + lang + ']');
   showElement('.admin_addtranslationarea');
+  showTranslations();
 });
 
 
@@ -249,3 +253,78 @@ function checkAmount(amount) {
 }
 
 // Translate products
+
+function showTranslations() {
+  getProductTranslations(function(error, response) {
+    if (response) {
+      generateTableHeadings();
+      var first = true;
+      for (i in response) {
+        console.log(response[i]);
+        if (response[i].trans_name == null || response[i].trans_description == null) {
+          appendToTranslationMissing(response[i]);
+          if (first) {
+            prefillTranslationForm(response[i]);
+            first = false;
+          }
+        }
+        else {
+          appendToTranslations(response[i]);
+        }
+      }
+    }
+  });
+}
+
+function generateTableHeadings() {
+  var translationheadings = $('<tr><th>Name</th><th>Description</th><th>Name [' + lang + ']</th><th>Description [' + lang + ']</th><th>Translate</th></tr>');
+  $('#admin-missing-translation-table').append(translationheadings);
+  var translationheadings = $('<tr><th>Name</th><th>Description</th><th>Name [' + lang + ']</th><th>Description [' + lang + ']</th><th>Edit</th></tr>');
+  $('#admin-translation-table').append(translationheadings);
+}
+
+function prefillTranslationForm(response) {
+  $('#original-name').val(response.name);
+  $('#original-name').attr('data-id', response.id);
+  $('#original-description').text(response.description);
+}
+
+function appendToTranslationMissing(response) {
+  var row = $('<tr></tr>');
+  if (i % 2 != 0) {
+    row.attr('class', 'greyrow');
+  }
+  var tablerow = $('<td>' + response.name + '</td> ' +
+  '<td>' + response.description + '</td><td>' + response.trans_name + '</td>' +
+  '<td>' + response.trans_description + '</td> ' +
+  '<td><button type="button" data-productid="' + response.id +'" class="btn btn-primary admin_translateproductbtn">Translate</button></td>');
+  row.append(tablerow);
+  $('#admin-missing-translation-table').append(row);
+}
+
+function appendToTranslations(response) {
+  var row = $('<tr></tr>');
+  if (i % 2 != 0) {
+    row.attr('class', 'greyrow');
+  }
+  var tablerow = $('<td>' + response.name + '</td>' +
+  '<td>' + response.description + '</td>' +
+  '<td>' + response.trans_name + '</td>' +
+  '<td>' + response.trans_description + '</td>' +
+  '<td><button type="button" data-productid="' + response.id +'" class="btn btn-primary admin_edittranslationbtn">Edit</button></td>');
+  row.append(tablerow);
+  $('#admin-translation-table').append(row);
+}
+
+function getProductTranslations(callback) {
+  $.ajax({
+      url:'/rest/translations/' + lang,
+      contentType: "application/json",
+      success: function (response){
+        callback(null, response);
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        callback(errorThrown, null);
+      }
+  });
+}

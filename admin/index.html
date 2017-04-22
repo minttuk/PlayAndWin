@@ -47,7 +47,7 @@
             </ul>
             <h3>Translation</h3>
             <ul>
-              <li class="admin-trasnlate-products-nav" data-lang="jp">Japanese Translation</li>
+              <li class="admin-trasnlate-products-nav" data-lang="ja">Japanese Translation</li>
               <li class="admin-trasnlate-products-nav" data-lang="fi">Finnish Translation</li>
             </ul>
           </div>
@@ -111,42 +111,69 @@
           </div>
         </div>
 
-        <div class="admin_addtranslationarea row contentbox">
-          <h3>Translate</h3>
-          <div class="col-md-6">
-            <div class="admin_addtranslationoriginal">
-              Original
-              <div class="form-group">
-                <label for="example-text-input" class="col-2 col-form-label">Product Name</label>
-                <div class="col-10">
-                  <input class="form-control" disabled data-productid="" type="text" value="" id="example-text-input">
+        <div class="admin_addtranslationarea row">
+          <div id="row admin-translation-form" class="contentbox">
+            <h3 id="admin-translate-form-heading"></h3>
+            <div class="col-md-6">
+              <div class="admin_addtranslationoriginal">
+                Original
+                <div class="form-group">
+                  <label class="col-2 col-form-label">Product Name</label>
+                  <div class="col-10">
+                    <input class="form-control" disabled data-id="" type="text" value="" id="original-name">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="exampleTextarea">Product Description</label>
+                  <textarea class="form-control" disabled id="original-description" rows="6"></textarea>
                 </div>
               </div>
-              <div class="form-group">
-                <label for="exampleTextarea">Product Description</label>
-                <textarea class="form-control" disabled id="exampleTextarea" rows="6"></textarea>
+            </div>
+            <div class="col-md-6">
+              <div class="admin_addtranslation">
+                Translation
+                <div class="form-group">
+                  <label for="example-text-input" class="col-2 col-form-label">Product Name</label>
+                  <div class="col-10">
+                    <input class="form-control" data-productid="" type="text" value="" id="trans-name">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="exampleTextarea">Product Description</label>
+                  <textarea class="form-control"id="trans-description" rows="6"></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="row admin_bottombuttons">
+              <button type="button" class="btn btn-success">Save</button>
+              <button type="button" class="btn btn-danger">Cancel</button>
+            </div>
+          </div>
+
+          <div class="row admin-products-without-translation contentbox">
+            <div class="panel panel-warning">
+              <div class="panel-heading">
+                <h3 class="panel-title">Missing Translation</h3>
+              </div>
+              <div class="panel-body">
+                <table style="width:100%" id="admin-missing-translation-table">
+                </table>
               </div>
             </div>
           </div>
-          <div class="col-md-6">
-            <div class="admin_addtranslation">
-              Translation
-              <div class="form-group">
-                <label for="example-text-input" class="col-2 col-form-label">Product Name</label>
-                <div class="col-10">
-                  <input class="form-control" data-productid="" type="text" value="" id="example-text-input">
-                </div>
+
+          <div class="row admin-products-with-translation contentbox">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">Edit Translations</h3>
               </div>
-              <div class="form-group">
-                <label for="exampleTextarea">Product Description</label>
-                <textarea class="form-control" id="exampleTextarea" rows="6"></textarea>
+              <div class="panel-body">
+                <table style="width:100%" id="admin-translation-table">
+                </table>
               </div>
             </div>
           </div>
-          <div class="row admin_bottombuttons">
-            <button type="button" class="btn btn-success">Save</button>
-            <button type="button" class="btn btn-danger">Cancel</button>
-          </div>
+
         </div>
       </div>
     </div>

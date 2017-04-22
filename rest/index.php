@@ -126,6 +126,14 @@ Flight::route('/product/buy', function(){
       echo buyProduct(validateToken(),Flight::request()->query->product);
 });
 
+// Translation
+
+Flight::route('/translations/@lang', function($lang) {
+  if (isToken() && getAdmin(validateToken())) {
+    Flight::json(getTranslations($lang));
+  }
+});
+
 // Highscore
 Flight::route('POST /score', function(){
     if (isToken()) Flight::json(setHighscore(validateToken()));

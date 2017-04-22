@@ -177,3 +177,26 @@ function redeemProduct($id,$product) {
     sendEmail(getUserAttribute($id,'email'),getUserAttribute($id,'username'),'redeem', getProductAttribute($product,'name'));
     return $amount;
 }
+
+function getTranslations($lang) {
+  $products = getAllProducts();
+  $trans = getTranslationsByLanguage($lang);
+  $response = array();
+  foreach ($products as $id => $product) {
+    $response[] = array(
+      'id' => $product[id],
+      'name' => $product[name],
+      'description' => $product[description],
+      'trans_name' => $trans[$id][name],
+      'trans_description' => $trans[$id][description]
+    );
+  }
+  return $response;
+}
+
+function getTranslationsByLanguage($lang) {
+  if ($lang && array_search('product_'.$lang,R::inspect())!='') {
+    return R::getAll('select * from product_' . $lang);
+  }
+  return null;
+}
