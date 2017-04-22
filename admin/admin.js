@@ -1,27 +1,44 @@
-$('#admin_addproductbtn').click(function () {
-  showProductForm();
+// General
+
+function showElement(elementname) {
+  $(elementname).css('display', 'block');
+}
+
+function hideElement(elementname) {
+  $(elementname).css('display', 'none');
+}
+
+// Navigation
+
+$('#admin-manage-products-nav').click(function() {
+  hideElement('.admin_addtranslationarea');
+  showElement('#admin-manage-products');
 });
 
-$('#admin_addproductcancelbtn').click(function () {
+$('.admin-trasnlate-products-nav').click(function() {
+  hideElement('#admin-manage-products');
+  showElement('.admin_addtranslationarea');
+});
+
+
+// Manage products
+
+$('#admin_addproductbtn').click(function() {
+  showElement('.admin_addproductarea');
+});
+
+$('#admin_addproductcancelbtn').click(function() {
   clearAddproductForm();
-  hideProductForm();
+  hideElement('.admin_addproductarea');
 });
 
 function initHandlersForDynamicElements() {
   $('.admin_editproductbtn').unbind();
   $('.admin_editproductbtn').click(function () {
     prefillAddproductForm($(this).data('productid'));
-    showProductForm();
+    showElement('.admin_addproductarea');
     $('.admin_mainarea').animate({ scrollTop: 0 }, "fast");
   });
-}
-
-function showProductForm() {
-  $('.admin_addproductarea').css('display', 'block');
-}
-
-function hideProductForm() {
-  $('.admin_addproductarea').css('display', 'none');
 }
 
 $('#admin_addproductsavebtn').click(function () {
@@ -43,7 +60,7 @@ function handleAddProductForm() {
     clearAddproductForm();
     if (product.id) {
       updateProduct(product, function(error, response) {
-        hideProductForm();
+        hideElement('.admin_addproductarea');
         displayAllProducts();
       });
     }
@@ -230,3 +247,5 @@ function checkAmount(amount) {
       return false;
     }
 }
+
+// Translate products
