@@ -107,11 +107,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-body">
-					<button type="button" class="close" data-dismiss="modal">×</button>
 					<h2 id="editprofileheading">Edit Profile </h2>
 					<ul class="nav nav-tabs" id="tabContent">
-						<li class="active"><a href="#public" data-toggle="tab">Public</a></li>
-						<li><a href="#private" data-toggle="tab">Private</a></li>
+						<li class="active"><a id="editprofilepublic" href="#public" data-toggle="tab">Public</a></li>
+						<li><a id="editprofileprivate" href="#private" data-toggle="tab">Private</a></li>
 					</ul>
 					<div class="tab-content">
 						<div class="tab-pane active" id="public">
@@ -134,9 +133,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<p id="editprofileage">Age</p>
 								<input type="number" class="text" name="age">
 								<p id="editprofilegender">Gender</p>
-								<input type="radio" name="gender" value="male"> Male<br>
-								<input type="radio" name="gender" value="female"> Female<br>
-								<input type="radio" name="gender" value="other"> Other
+								<label id="editprofilemale">Male</label>
+								<input type="radio" name="gender" value="male"><br>
+								<label id="editprofilefemale">Female</label>
+								<input type="radio" name="gender" value="female"><br>
+								<label id="editprofileother">Other</label>
+								<input type="radio" name="gender" value="other">
 								<p class="errormessage">&nbsp;</p>
 								<input id="saveprivateprofilebutton" type="submit" data-toggle="modal" data-target="#editprofilemodal" class="more_btn" value="Save">
 							</form>
