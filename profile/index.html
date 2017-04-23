@@ -80,7 +80,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<!-- //Navbar -->
 
 	<!-- Edit Profile Modal -->
-	<div id="editprofilemodal" class="modal fade" role="dialog">
+	<!--<div id="editprofilemodal" class="modal fade" role="dialog">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-body">
@@ -101,7 +101,54 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				</div>
 			</div>
 		</div>
+	</div> -->
+
+	<div id="editprofilemodal" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-body">
+					<button type="button" class="close" data-dismiss="modal">×</button>
+					<h2 id="editprofileheading">Edit Profile </h2>
+					<ul class="nav nav-tabs" id="tabContent">
+						<li class="active"><a href="#public" data-toggle="tab">Public</a></li>
+						<li><a href="#private" data-toggle="tab">Private</a></li>
+					</ul>
+					<div class="tab-content">
+						<div class="tab-pane active" id="public">
+							<form action="#" method="post">
+								<p id="editprofiledescription">Description:</p>
+								<input type="text" class="text" name="newdescription" placeholder="" value="">
+								<p id="editprofilelocation">Location:</p>
+								<input type="text" class="text" name="newlocation" placeholder=""  value="">
+								<p class="errormessage">&nbsp;</p>
+								<input id="savepublicprofilebutton" type="submit" data-toggle="modal" data-target="#editprofilemodal" class="more_btn" value="Save">
+							</form>
+						</div>
+
+						<div class="tab-pane" id="private">
+							<form action="#" method="post">
+								<p id="editprofilefirstname">First name:</p>
+								<input type="text" class="text" name="newfirstname" placeholder="" required="" value="">
+								<p id="editprofilelastname">Last name:</p>
+								<input type="text" class="text" name="newlastname" placeholder="" required="" value="">
+								<p id="editprofileage">Age</p>
+								<input type="number" class="text" name="age">
+								<p id="editprofilegender">Gender</p>
+								<input type="radio" name="gender" value="male"> Male<br>
+								<input type="radio" name="gender" value="female"> Female<br>
+								<input type="radio" name="gender" value="other"> Other
+								<p class="errormessage">&nbsp;</p>
+								<input id="saveprivateprofilebutton" type="submit" data-toggle="modal" data-target="#editprofilemodal" class="more_btn" value="Save">
+							</form>
+						</div>
+						<button class="form_close_btn" data-dismiss="modal">Cancel</button>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
+
+
 	<!-- Edit picture modal -->
 	<div id="editpicturemodal" class="modal fade" role="dialog">
 		<div class="modal-dialog">

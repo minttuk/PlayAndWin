@@ -44,20 +44,16 @@ function getSession() {
   });
 }
 
-$( "#saveprofilebutton" ).click(function() {
-  console.log("saveprofilebutton clicked");
-  var $newfirstname = $('input[name="newfirstname"]').val();
-  var $newlastname = $('input[name="newlastname"]').val();
+$( "#savepublicprofilebutton" ).click(function() {
+  console.log("savepublicprofilebutton clicked");
   var $newdescription = $('input[name="newdescription"]').val();
   var $newlocation = $('input[name="newlocation"]').val();
-  var inputOk = checkEditedProfile($newfirstname, $newlastname);
-  if (inputOk) {
     $.ajax({
-        url: '/rest/user',
+        url: '/rest/user/public',
         type: "PUT",
         contentType: "application/json",
         dataType: "json",
-        data: JSON.stringify({"id": userId, "firstname": $newfirstname, "lastname": $newlastname, "description": $newdescription, "location": $newlocation}),
+        data: JSON.stringify({"description": $newdescription, "location": $newlocation}),
         success: function (response){
           //console.log('success');
           getUserInfo();
@@ -66,9 +62,33 @@ $( "#saveprofilebutton" ).click(function() {
           console.log(textStatus, errorThrown);
         }
     });
-  } else {
-    $('.errormessage').text("Please fill in your first and last name.");
-  }
+});
+
+$( "#saveprivateprofilebutton" ).click(function() {
+    console.log("saveprivateprofilebutton clicked");
+    var $newfirstname = $('input[name="newfirstname"]').val();
+    var $newlastname = $('input[name="newlastname"]').val();
+    var $age = $('input[name="age"]').val();
+    var $gender = $('input[name="gender"]:checked').val();
+    var inputOk = checkEditedProfile($newfirstname, $newlastname);
+    if (inputOk) {
+        $.ajax({
+            url: '/rest/user/private',
+            type: "PUT",
+            contentType: "application/json",
+            dataType: "json",
+            data: JSON.stringify({"firstname": $newfirstname, "lastname": $newlastname, "age": $age, "gender": $gender}),
+            success: function (response){
+                //console.log('success');
+                getUserInfo();
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log(textStatus, errorThrown);
+            }
+        });
+    } else {
+        $('.errormessage').text("Please fill in your first and last name.");
+    }
 });
 
 function checkEditedProfile(firstname, lastname) {
@@ -301,6 +321,22 @@ function prefillEditForm(response) {
   if (response.lastname != null) {
     $('input[name="newlastname"]').val(response.lastname);
   }
+    //age
+    if (response.age != null) {
+        $('input[name="age"]').val(response.age);
+    }
+    //gender
+    if (response.gender != null) {
+      if(response.gender == "male"){
+          $('input[name="gender"][value="male"]').attr("checked", true);
+      }
+        if(response.gender == "female"){
+            $('input[name="gender"][value="female"]').attr("checked", true);
+        }
+        if(response.gender == "other"){
+            $('input[name="gender"][value="other"]').attr("checked", true);
+        }
+    }
   //description
   if (response.description != null) {
     $('input[name="newdescription"]').val(response.description);

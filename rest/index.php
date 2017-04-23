@@ -28,7 +28,7 @@ Flight::route('POST /refer', function(){
 Flight::route('PUT /user/location/@location', function($location){
     if(isToken()) echo setUserLocation(validateToken(),$location);
 });
-Flight::route('PUT /user', function(){
+/*Flight::route('PUT /user', function(){
     if(isToken()) {
       echo setUserInfo(
         validateToken(),
@@ -38,7 +38,28 @@ Flight::route('PUT /user', function(){
         Flight::request()->data->location
       );
     }
+});*/
+Flight::route('PUT /user/public', function(){
+    if(isToken()) {
+        echo setUserPublicInfo(
+            validateToken(),
+            Flight::request()->data->description,
+            Flight::request()->data->location
+        );
+    }
 });
+Flight::route('PUT /user/private', function(){
+    if(isToken()) {
+        echo setUserPrivateInfo(
+            validateToken(),
+            Flight::request()->data->firstname,
+            Flight::request()->data->lastname,
+            Flight::request()->data->age,
+            Flight::request()->data->gender
+        );
+    }
+});
+
 Flight::route('POST /user/image', function(){
     if (isToken()) echo uploadImage(validateToken());
 });

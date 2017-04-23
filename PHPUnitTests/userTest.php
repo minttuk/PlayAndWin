@@ -39,13 +39,21 @@ final class userTest extends TestCase {
   * Tests that user information can be edited with setUserInfo() function
   */
 
-  public function testsetUserInfo() {
-    setUserInfo(2, 'assert', 'equal', '  ', 'Hong Kong');
+  public function testsetUserPublicInfo() {
+    setUserInfo(2, ' ', 'Hong Kong');
     $user = getUserInfo('Boss');
-    $this->assertEquals('assert', $user['firstname']);
+    $this->assertEquals('Hong Kong', $user['location']);
     $this->assertEquals(null, $user['description']);
-    setUserInfo(2, 'admin', 'admin', '', '');
+    setUserInfo(2, '', '');
   }
+
+    public function testsetUserPrivateInfo() {
+        setUserInfo(2, 'assert', 'equal', '20', 'male');
+        $user = getUserInfo('Boss');
+        $this->assertEquals('assert', $user['firstname']);
+        $this->assertEquals(20, $user['age']);
+        setUserInfo(2, 'admin', 'admin', '', '');
+    }
 
   /*
   * Tests that getLastLoggedIn returns a bunch of users

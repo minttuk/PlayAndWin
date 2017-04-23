@@ -15,6 +15,8 @@ CREATE TABLE user (
   lastname VARCHAR(30),
   description VARCHAR(500),
   location VARCHAR(500),
+  age INT(6),
+  gender VARCHAR(30),
   reg_date TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00',
   last_online TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00',
   profilepicture VARCHAR(100) DEFAULT 'default.png',

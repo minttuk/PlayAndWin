@@ -18,6 +18,8 @@ function getUserInfo($id) {
       'profilepicture' => $user->profilepicture,
       'firstname' => $user->firstname,
       'lastname' => $user->lastname,
+        'age' => $user->age,
+        'gender' => $user->gender,
       'description' => $user->description,
       'location' => $user->location,
       'reg_date' => $user->reg_date,
@@ -43,14 +45,22 @@ function getUserInfo($id) {
  * @return PHP array
  */
 
-function setUserInfo($id, $firstname, $lastname, $description, $location) {
+function setUserPublicInfo($id, $description, $location) {
   $user = R::load( 'user', $id);
-  $user->firstname = $firstname;
-  $user->lastname = $lastname;
   $user->description = checkEmpty($description);
   $user->location = checkEmpty($location);
   R::store( $user );
   return $user;
+}
+
+function setUserPrivateInfo($id, $firstname, $lastname, $age, $gender) {
+    $user = R::load( 'user', $id);
+    $user->firstname = $firstname;
+    $user->lastname = $lastname;
+    $user->age = checkEmpty($age);
+    $user->gender = checkEmpty($gender);
+    R::store( $user );
+    return $user;
 }
 
 /**
