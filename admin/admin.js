@@ -255,12 +255,13 @@ function checkAmount(amount) {
 // Translate products
 
 function showTranslations() {
+  $('#admin-translation-table').html('');
+  $('#admin-missing-translation-table').html('');
   getProductTranslations(function(error, response) {
     if (response) {
       generateTableHeadings();
       var first = true;
       for (i in response) {
-        console.log(response[i]);
         if (response[i].trans_name == null || response[i].trans_description == null) {
           appendToTranslationMissing(response[i]);
           if (first) {
@@ -284,9 +285,24 @@ function generateTableHeadings() {
 }
 
 function prefillTranslationForm(response) {
+  clearTranslationForm();
   $('#original-name').val(response.name);
   $('#original-name').attr('data-id', response.id);
   $('#original-description').text(response.description);
+  if (response.trans_name) {
+    $('#trans-name').val(response.trans_name);
+  }
+  if (response.trans_description) {
+    $('#trans-description').text(response.trans_description);
+  }
+}
+
+function clearTranslationForm() {
+  $('#original-name').val('');
+  $('#original-name').attr('');
+  $('#original-description').text('');
+  $('#trans-name').val('');
+  $('#trans-description').text('');
 }
 
 function appendToTranslationMissing(response) {
@@ -300,6 +316,7 @@ function appendToTranslationMissing(response) {
   '<td><button type="button" data-productid="' + response.id +'" class="btn btn-primary admin_translateproductbtn">Translate</button></td>');
   row.append(tablerow);
   $('#admin-missing-translation-table').append(row);
+  initTranslateHandlers();
 }
 
 function appendToTranslations(response) {
@@ -311,9 +328,10 @@ function appendToTranslations(response) {
   '<td>' + response.description + '</td>' +
   '<td>' + response.trans_name + '</td>' +
   '<td>' + response.trans_description + '</td>' +
-  '<td><button type="button" data-productid="' + response.id +'" class="btn btn-primary admin_edittranslationbtn">Edit</button></td>');
+  '<td><button type="button" data-productid="' + response.id +'" class="btn btn-primary admin_translateproductbtn">Edit</button></td>');
   row.append(tablerow);
   $('#admin-translation-table').append(row);
+  initTranslateHandlers();
 }
 
 function getProductTranslations(callback) {
@@ -328,3 +346,53 @@ function getProductTranslations(callback) {
       }
   });
 }
+
+function getProductTranslationById(id, callback) {
+  $.ajax({
+      url:'/rest/translation/' + lang + '/' + id,
+      contentType: "application/json",
+      success: function (response){
+        callback(null, response);
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        callback(errorThrown, null);
+      }
+  });
+}
+
+function updateTranslation(translation) {
+  $.ajax({
+      url:'/rest/translation/',
+      type: 'PUT',
+      contentType: "application/json",
+      data: translation,
+      success: function (response){
+        callback(null, response);
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        callback(errorThrown, null);
+      }
+  });
+}
+
+function initTranslateHandlers() {
+  $('.admin_translateproductbtn').unbind();
+  $('.admin_translateproductbtn').click(function() {
+    showElement('#admin-translation-form');
+    $('#admin-translation-form').animate({ scrollTop: 0 }, "fast");
+    translateButtonClicked($(this).attr('data-productid'));
+    console.log('click');
+  });
+}
+
+function translateButtonClicked(id) {
+  getProductTranslationById(id, function(error, response) {
+    if (response) {
+      prefillTranslationForm(response);
+    }
+  });
+}
+
+$('#admin-cancel-translation-btn').click(function() {
+  hideElement('#admin-translation-form');
+});

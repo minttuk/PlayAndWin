@@ -194,6 +194,26 @@ function getTranslations($lang) {
   return $response;
 }
 
+function getTranslation($lang, $id) {
+  $product = getProductById($id);
+  $trans = getProductTranslationByLanguage($lang, $id);
+  $response = array(
+    'id' => $product[id],
+    'name' => $product[name],
+    'description' => $product[description],
+    'trans_name' => $trans[name],
+    'trans_description' => $trans[description]
+  );
+  return $response;
+}
+
+function getProductTranslationByLanguage($lang, $id) {
+  if ($lang && array_search('product_'.$lang,R::inspect())!='') {
+    return R::load('product_' . $lang . '', $id);
+  }
+  return null;
+}
+
 function getTranslationsByLanguage($lang) {
   if ($lang && array_search('product_'.$lang,R::inspect())!='') {
     return R::getAll('select * from product_' . $lang);

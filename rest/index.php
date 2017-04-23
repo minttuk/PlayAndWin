@@ -155,6 +155,12 @@ Flight::route('/translations/@lang', function($lang) {
   }
 });
 
+Flight::route('/translation/@lang/@id', function($lang, $id) {
+  if (isToken() && getAdmin(validateToken())) {
+    Flight::json(getTranslation($lang, $id));
+  }
+});
+
 // Highscore
 Flight::route('POST /score', function(){
     if (isToken()) Flight::json(setHighscore(validateToken()));
