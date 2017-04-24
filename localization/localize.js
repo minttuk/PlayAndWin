@@ -112,7 +112,6 @@ function loadLanguage(page){
       $("#trade_myopentrades").text(trade_myopentrades);
       $("#trade_mybuyinghistory").text(trade_mybuyinghistory);
       $("#trade_mysellinghistory").text(trade_mysellinghistory);
-      trade_noitems
       //Profile
       $("#editprofilebuttontext").text(profile_edit);
       $("#editpicturebuttontext").text(profile_changepic);
@@ -126,21 +125,21 @@ function loadLanguage(page){
       $("#userfriendstext").text(profile_friends);
       //Edit profile modal
       $("#editprofileheading").text(profile_edit);
-
       $("#editprofilefirstname").text(form_firstname);
       $("#editprofilelastname").text(form_lastname);
       $("#editprofiledescription").text(form_desc);
       $("#editprofilelocation").text(form_location);
-      $("#editprofileage").text(form_age);
-        $("#editprofilegender").text(form_gender);
-        $("#editprofilemale").text(form_male);
-        $("#editprofilefemale").text(form_female);
-        $("#editprofileother").text(form_other);
-        $("#editprofilepublic").text(form_public);
-        $("#editprofileprivate").text(form_private);
+      $("#editprofileage").text(form_birthday);
+      $("#editprofilegender").text(form_gender);
+      $("#editprofilemale").text(form_male);
+      $("#editprofilefemale").text(form_female);
+      $("#editprofileother").text(form_other);
+      $("#editprofilepublic").text(form_public);
+      $("#editprofileprivate").text(form_private);
+      $("#gender-select").text(form_select_am);
 
-        $("#saveprivateprofilebutton").val(form_save);
-        $("#savepublicprofilebutton").val(form_save);
+      $("#saveprivateprofilebutton").val(form_save);
+      $("#savepublicprofilebutton").val(form_save);
 
         //Edit picture modal
       $("#editpictureheading").text(profile_changepic);
