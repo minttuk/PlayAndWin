@@ -1,3 +1,15 @@
+.tab-content{
+    padding-top: 20px;
+}
+
+#profileButtons {
+  width: 110%;
+}
+
+.item_info {
+  width: 110%;
+}
+
 .center_img {
   height:194px;
   display: flex;
@@ -7,6 +19,15 @@
 .form_dismiss_btn {
   float:none;
   margin-top: 20px;
+}
+
+.form-style {
+    padding-left:10px;
+    height:51px;
+    border: none;
+    border-left: 1px solid rgb(2, 24, 136);
+    border-bottom: 1px solid rgb(2, 24, 136);
+    border-radius: 0px;
 }
 
 .close_friends_btn {
@@ -34,6 +55,10 @@
   width:auto;
   max-width:200px;
   padding:0;
+}
+
+#editprofilegender {
+  padding-top: 20px;
 }
 
 .item_redeem {

@@ -130,15 +130,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<input type="text" class="text" name="newfirstname" placeholder="" required="" value="">
 								<p id="editprofilelastname">Last name:</p>
 								<input type="text" class="text" name="newlastname" placeholder="" required="" value="">
-								<p id="editprofileage">Age</p>
-								<input type="number" class="text" name="age">
+								<p id="editprofileage">Date of Birth</p>
+								<input type="date" class="form-control form-style">
 								<p id="editprofilegender">Gender</p>
-								<label id="editprofilemale">Male</label>
-								<input type="radio" name="gender" value="male"><br>
-								<label id="editprofilefemale">Female</label>
-								<input type="radio" name="gender" value="female"><br>
-								<label id="editprofileother">Other</label>
-								<input type="radio" name="gender" value="other">
+								<select class="form-control form-style">
+									<option id="gender-select" value="" disabled selected>I am...</option>
+									<option id="editprofilemale" value='male'>Male</option>
+									<option id="editprofilefemale" value='female'>Female</option>
+									<option id="editprofileother" value='other'>Other</option>
+								</select>
 								<p class="errormessage">&nbsp;</p>
 								<input id="saveprivateprofilebutton" type="submit" data-toggle="modal" data-target="#editprofilemodal" class="more_btn" value="Save">
 							</form>
