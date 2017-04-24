@@ -123,6 +123,7 @@ function loadLanguage(page){
       $("#newuserstext").text(profile_newusers);
       $("#memebersincetext").text(profile_memebersince);
       $("#profile_collection").text(profile_collection);
+      $("#userfriendstext").text(profile_friends);
       //Edit profile modal
       $("#editprofileheading").text(profile_edit);
 

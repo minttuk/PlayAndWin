@@ -282,7 +282,7 @@ function showProfileInformation(response) {
       }
   });
   $('#userfriendsbutton').fadeOut(0, function() {
-    $(this).text(response.friends).fadeIn(500);
+    $(this).text(" (" + response.friends + ")").fadeIn(500);
   });
   if (response.profilepicture != 'default.png') {
     $('.profilepicture').fadeOut(0, function() {
