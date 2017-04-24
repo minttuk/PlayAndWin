@@ -207,6 +207,30 @@ function getTranslation($lang, $id) {
   return $response;
 }
 
+function updateTranslation($id, $lang, $name, $description) {
+  if ($lang && array_search('product_' . $lang,R::inspect())!='') {
+    $row  = R::findOne( 'product_' . $lang, ' id = ? ', [ $id ] );
+    if ($row || $row != null) {
+      $translation = R::load('product_' . $lang, $id);
+      $translation->name = $name;
+      $translation->description = $description;
+      R::store($translation);
+      return array('message'=>'Translation saved.');
+    }
+    else {
+      return createNewTranslation($id, $lang, $name, $description);
+    }
+  }
+  else {
+    return array('message'=>'Could not save translation.');
+  }
+}
+
+function createNewTranslation($id, $lang, $name, $description) {
+  R::exec('insert into product_' . $lang . ' (id, name, description) values(' . $id . ', ' . $name . ', ' . $description . ')');
+  return array('message'=>'Translation saved.');
+}
+
 function getProductTranslationByLanguage($lang, $id) {
   if ($lang && array_search('product_'.$lang,R::inspect())!='') {
     return R::load('product_' . $lang . '', $id);

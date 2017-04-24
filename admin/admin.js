@@ -288,21 +288,24 @@ function prefillTranslationForm(response) {
   clearTranslationForm();
   $('#original-name').val(response.name);
   $('#original-name').attr('data-id', response.id);
-  $('#original-description').text(response.description);
+  $('#original-description').val(response.description);
   if (response.trans_name) {
-    $('#trans-name').val(response.trans_name);
+    $('#trans-name-form').val(response.trans_name);
   }
   if (response.trans_description) {
-    $('#trans-description').text(response.trans_description);
+    $('#trans-description-form  ').val(response.trans_description);
   }
 }
 
 function clearTranslationForm() {
   $('#original-name').val('');
   $('#original-name').attr('');
+  $('#original-description').val('');
   $('#original-description').text('');
-  $('#trans-name').val('');
-  $('#trans-description').text('');
+  $('#trans-name-form').val('');
+  $('#trans-description-form').val('');
+  $('#trans-description-form').text('');
+  $('.errormsg').html('');
 }
 
 function appendToTranslationMissing(response) {
@@ -360,12 +363,13 @@ function getProductTranslationById(id, callback) {
   });
 }
 
-function updateTranslation(translation) {
+function updateTranslation(translation, callback) {
   $.ajax({
       url:'/rest/translation/',
       type: 'PUT',
       contentType: "application/json",
-      data: translation,
+      dataType: "json",
+      data: JSON.stringify(translation),
       success: function (response){
         callback(null, response);
       },
@@ -396,3 +400,17 @@ function translateButtonClicked(id) {
 $('#admin-cancel-translation-btn').click(function() {
   hideElement('#admin-translation-form');
 });
+
+$('#admin-save-translation-btn').click(function() {
+  saveTranslationButtonClicked();
+});
+
+function saveTranslationButtonClicked() {
+  if (checkName($('#trans-name-form').val()) && checkDescription($('#trans-description-form').val())) {
+    var translation = {"id": $('#original-name').attr('data-id'), "lang": lang, "name": $('#trans-name-form').val(),"description": $('#trans-description-form').val()};
+    console.log(translation);
+    updateTranslation(translation, function(error, response) {
+      console.log(error, response);
+    });
+  }
+}

@@ -92,3 +92,8 @@ tr {
 #admin-translate-form-heading {
   margin-bottom: 20px;
 }
+
+.errormsg {
+  color: red;
+  text-align: center;
+}

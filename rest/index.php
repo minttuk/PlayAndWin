@@ -161,6 +161,17 @@ Flight::route('/translation/@lang/@id', function($lang, $id) {
   }
 });
 
+Flight::route('PUT /translation', function(){
+    if (isToken() && getAdmin(validateToken())) {
+        Flight::json(updateTranslation(
+            Flight::request()->data->id,
+            Flight::request()->data->lang,
+            Flight::request()->data->name,
+            Flight::request()->data->description
+        ));
+    };
+});
+
 // Highscore
 Flight::route('POST /score', function(){
     if (isToken()) Flight::json(setHighscore(validateToken()));

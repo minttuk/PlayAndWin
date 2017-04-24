@@ -135,19 +135,20 @@
                 <div class="form-group">
                   <label for="example-text-input" class="col-2 col-form-label">Product Name</label>
                   <div class="col-10">
-                    <input class="form-control" data-productid="" type="text" value="" id="trans-name">
+                    <input class="form-control" type="text" value="" id="trans-name-form">
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="exampleTextarea">Product Description</label>
-                  <textarea class="form-control" id="trans-description" rows="6"></textarea>
+                  <textarea class="form-control" id="trans-description-form" rows="6"></textarea>
                 </div>
               </div>
             </div>
             <div class="row admin_bottombuttons">
-              <button type="button" class="btn btn-success">Save</button>
+              <button type="button" class="btn btn-success" id="admin-save-translation-btn">Save</button>
               <button type="button" class="btn btn-danger" id="admin-cancel-translation-btn" >Cancel</button>
             </div>
+            <p class='errormsg'></p>
           </div>
 
           <div class="row admin-products-without-translation contentbox">
