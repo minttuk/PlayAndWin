@@ -61,10 +61,8 @@ function handleAddProductForm() {
   };
   //console.log(product.name, product.image_url, product.price, product.amount, product.description, product.id);
   if(checkName(product.name) && checkPrice(product.price) && checkAmount(product.amount) && checkDescription(product.description)) {
-    clearAddproductForm();
     if (product.id) {
       updateProduct(product, function(error, response) {
-        hideElement('.admin_addproductarea');
         displayAllProducts();
       });
     }
@@ -73,6 +71,8 @@ function handleAddProductForm() {
         displayAllProducts();
       });
     }
+    hideElement('.admin_addproductarea');
+    clearAddproductForm();
   }
 }
 

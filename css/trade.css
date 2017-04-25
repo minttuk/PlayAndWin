@@ -24,6 +24,10 @@
   padding-bottom: 5px;
 }
 
+.greyrow {
+  background-color: #fafafa;
+}
+
 .collectionrow {
   min-height: 70px;
   padding-top: 10px;

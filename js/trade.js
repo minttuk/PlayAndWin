@@ -186,6 +186,9 @@ function showMyTrades(div, response) {
   }
   for (product in response) {
     var row = $('<tr></tr>');
+    if (product % 2 != 0) {
+      row.attr('class', 'greyrow');
+    }
     if (div === "myopentradescontent") {
       var content = $(
         '<td>' + response[product].name + '</td>' +
