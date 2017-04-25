@@ -75,23 +75,6 @@ function generateItemView(url, callback) {
     $('.gallery-grid').html('');
     $.get(url, function (products) {
         $.each(products, function (i, product) {
-            // switch (localStorage.getItem("lang")) {
-            //     case 'fi':
-            //         $product_name = product.name_fi;
-            //         if(!product.description) $product_description = product.description_fi;
-            //         else $product_description = product.description;
-            //         break;
-            //     case 'en':
-            //         $product_name = product.name_en;
-            //         if(!product.description) $product_description = product.description_en;
-            //         else $product_description = product.description;
-            //         break;
-            //     case 'ja':
-            //         $product_name = product.name_ja;
-            //         if(!product.description) $product_description = product.description_ja;
-            //         else $product_description = product.description;
-            //         break;
-            // }
             $('.infos').append('<div class="pop-up"><div id="small-dialog' + i + '" class="mfp-hide book-form"><div class="pop-up-content-agileits-w3layouts"><div class="col-md-6 w3ls-left">' +
                 '<img src="' + product.image_url + '" alt=" " class="img-responsive zoom-img" /></div>' +
                 '<div class="col-md-6 w3ls-right">' +
@@ -282,20 +265,18 @@ function checkAmount(amount) {
 
 /**
  * An ajax call send when the user clicks "BUY" on the webstore's product pop-up window. Response text of the call
- * returns a JSON array containing a message for the user to be displayed on the pop-up window.
+ * returns a string containing a message for the user to be displayed on the pop-up window.
  *
  * @param int product_id
- * @returns {boolean}
+ * @returns {string}
  */
 function buyPrize(product_id) {
-    $.ajax({
-        url: '/rest/product/buy?product=' + product_id,
-        success: function (message) {
+    $.post('/rest/product/buy?product=' + product_id,
+        function (message) {
             translate(message, function (translation) {
                 $('.buyMessage').hide().text(translation).fadeIn();
             });
             updateCoins();
             generateProducts();
-        }
     });
 }

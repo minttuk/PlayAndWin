@@ -136,13 +136,13 @@ Flight::route('/products', function() {
   }
 });
 
-Flight::route('/product/@id', function($id) {
+Flight::route('GET /product/@id', function($id) {
   if (isToken()) {
     Flight::json(getProductById($id));
   }
 });
 
-Flight::route('/product/buy', function(){
+Flight::route('POST /product/buy', function(){
     if (isToken() && Flight::request()->query->product != null)
       echo buyProduct(validateToken(),Flight::request()->query->product);
 });
