@@ -101,3 +101,13 @@ tr {
   color: red;
   text-align: center;
 }
+
+@media (max-width: 992px) {
+  .admin_sidepanel {
+    height:70vh;
+  }
+}
+
+body {
+  width: 99%;
+}

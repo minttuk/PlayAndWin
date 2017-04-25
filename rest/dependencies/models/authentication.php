@@ -22,7 +22,14 @@ function validateToken(){
   if (isset($_COOKIE['access_token'])) $jwt = $_COOKIE['access_token'];
   else if (isset(getallheaders()['access_token'])) $jwt = getallheaders()['access_token'];
   global $key;
-  $decoded = JWT::decode($jwt, $key, array('HS256'));
+  try {
+    $decoded = JWT::decode($jwt, $key, array('HS256'));
+  }
+  catch (ExpiredException $e) {
+    echo "Access token expired! Please login for a new token.";
+    if (isset($_COOKIE['access_token'])) setcookie("access_token","", time() - 3600,"/");
+    die();
+  }
   $decoded_array = (array) $decoded;
   $userData = (array) $decoded_array['data'];
   return $userData['userId'];
