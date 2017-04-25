@@ -206,7 +206,11 @@ function fillProductsTable(products) {
       '" class="btn btn-primary admin_editproductbtn">Edit</button>');
       row.append(content);
       div.append(row);
-      if ($(window).width() < 992) $('.admin_managewebstore').css('width',$('#admin-allproducts-table').width()+100);
+      if ($(window).width() < 992) {
+        $('.contentbox').css('margin',0);
+        $('.admin_managewebstore').css('width',$('#admin-allproducts-table').width()+100);
+        $('.admin_mainarea').scrollLeft(100);
+      }
     }
     initHandlersForDynamicElements();
 }
