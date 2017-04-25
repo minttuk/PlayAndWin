@@ -180,15 +180,15 @@ function redeemProduct($id,$product) {
 
 function getTranslations($lang) {
   $products = getAllProducts();
-  $trans = getTranslationsByLanguage($lang);
   $response = array();
   foreach ($products as $id => $product) {
+    $trans = getProductTranslationByLanguage($lang, $product[id]);
     $response[] = array(
       'id' => $product[id],
       'name' => $product[name],
       'description' => $product[description],
-      'trans_name' => $trans[$id][name],
-      'trans_description' => $trans[$id][description]
+      'trans_name' => $trans[name],
+      'trans_description' => $trans[description]
     );
   }
   return $response;
@@ -234,13 +234,6 @@ function createNewTranslation($id, $lang, $name, $description) {
 function getProductTranslationByLanguage($lang, $id) {
   if ($lang && array_search('product_'.$lang,R::inspect())!='') {
     return R::load('product_' . $lang . '', $id);
-  }
-  return null;
-}
-
-function getTranslationsByLanguage($lang) {
-  if ($lang && array_search('product_'.$lang,R::inspect())!='') {
-    return R::getAll('select * from product_' . $lang);
   }
   return null;
 }

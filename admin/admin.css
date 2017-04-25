@@ -93,6 +93,10 @@ tr {
   margin-bottom: 20px;
 }
 
+#admin-translation-form {
+  display: none;
+}
+
 .errormsg {
   color: red;
   text-align: center;

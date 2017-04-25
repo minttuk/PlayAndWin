@@ -261,8 +261,10 @@ function showTranslations() {
     if (response) {
       generateTableHeadings();
       var first = true;
+      var havemissing = false;
       for (i in response) {
         if (response[i].trans_name == null || response[i].trans_description == null) {
+          havemissing = true;
           appendToTranslationMissing(response[i]);
           if (first) {
             prefillTranslationForm(response[i]);
@@ -272,6 +274,11 @@ function showTranslations() {
         else {
           appendToTranslations(response[i]);
         }
+      }
+      initTranslateHandlers();
+      if (!havemissing) {
+        clearTranslationForm();
+        $('#admin-translation-form').css('display', 'none');
       }
     }
   });
@@ -295,16 +302,17 @@ function prefillTranslationForm(response) {
   if (response.trans_description) {
     $('#trans-description-form  ').val(response.trans_description);
   }
+  $('#admin-translation-form').css('display', 'block');
 }
 
 function clearTranslationForm() {
   $('#original-name').val('');
   $('#original-name').attr('');
   $('#original-description').val('');
-  $('#original-description').text('');
+  //$('#original-description').text('');
   $('#trans-name-form').val('');
   $('#trans-description-form').val('');
-  $('#trans-description-form').text('');
+  //$('#trans-description-form').text('');
   $('.errormsg').html('');
 }
 
@@ -319,7 +327,6 @@ function appendToTranslationMissing(response) {
   '<td><button type="button" data-productid="' + response.id +'" class="btn btn-primary admin_translateproductbtn">Translate</button></td>');
   row.append(tablerow);
   $('#admin-missing-translation-table').append(row);
-  initTranslateHandlers();
 }
 
 function appendToTranslations(response) {
@@ -334,7 +341,6 @@ function appendToTranslations(response) {
   '<td><button type="button" data-productid="' + response.id +'" class="btn btn-primary admin_translateproductbtn">Edit</button></td>');
   row.append(tablerow);
   $('#admin-translation-table').append(row);
-  initTranslateHandlers();
 }
 
 function getProductTranslations(callback) {
@@ -372,6 +378,7 @@ function updateTranslation(translation, callback) {
       data: JSON.stringify(translation),
       success: function (response){
         callback(null, response);
+        showTranslations();
       },
       error: function(jqXHR, textStatus, errorThrown) {
         callback(errorThrown, null);
@@ -383,7 +390,7 @@ function initTranslateHandlers() {
   $('.admin_translateproductbtn').unbind();
   $('.admin_translateproductbtn').click(function() {
     showElement('#admin-translation-form');
-    $('#admin-translation-form').animate({ scrollTop: 0 }, "fast");
+    $('.admin_addtranslationarea').animate({ scrollTop: 0 }, "fast");
     translateButtonClicked($(this).attr('data-productid'));
     console.log('click');
   });
