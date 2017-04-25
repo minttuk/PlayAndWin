@@ -227,7 +227,7 @@ function updateTranslation($id, $lang, $name, $description) {
 }
 
 function createNewTranslation($id, $lang, $name, $description) {
-  R::exec('insert into product_' . $lang . ' (id, name, description) values(' . $id . ', ' . $name . ', ' . $description . ')');
+  R::exec('INSERT INTO product_'.$lang.' VALUES (:id, :name, :description)', [':id' => $id, ':name' => $name, ':description' => $description]);
   return array('message'=>'Translation saved.');
 }
 
