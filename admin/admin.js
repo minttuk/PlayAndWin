@@ -1,8 +1,20 @@
 // General
 
+/**
+ * Changes elements css display into block
+ *
+ * @param {string} elementname The div name to display
+ */
+
 function showElement(elementname) {
   $(elementname).css('display', 'block');
 }
+
+/**
+ * Changes elements css display into none
+ *
+ * @param {string} elementname The div name to hide
+ */
 
 function hideElement(elementname) {
   $(elementname).css('display', 'none');
@@ -36,6 +48,10 @@ $('#admin_addproductcancelbtn').click(function() {
   hideElement('.admin_addproductarea');
 });
 
+/**
+ * unbinds and sets new event handlers for elements after page has loaded
+ */
+
 function initHandlersForDynamicElements() {
   $('.admin_editproductbtn').unbind();
   $('.admin_editproductbtn').click(function () {
@@ -49,6 +65,11 @@ $('#admin_addproductsavebtn').click(function () {
   clearErrormsg();
   handleAddProductForm();
 });
+
+/**
+ * Forms a product object from form data and checks that form was properly filled
+ *
+ */
 
 function handleAddProductForm() {
   var product = {
@@ -76,6 +97,13 @@ function handleAddProductForm() {
   }
 }
 
+/**
+ * Adds product to database
+ *
+ * @param {object} product Object with product information
+ * @param {function} callback
+ */
+
 function addProduct(product, callback) {
   $.ajax({
       url:'/rest/product',
@@ -90,6 +118,14 @@ function addProduct(product, callback) {
       }
   });
 }
+
+/**
+ * Updates product in database
+ *
+ * @param {object} product Object with product information
+ * @param {function} callback
+ */
+
 
 function updateProduct(product, callback) {
   $.ajax({
@@ -107,6 +143,11 @@ function updateProduct(product, callback) {
   });
 }
 
+/**
+ * Displays all products on the site
+ */
+
+
 function displayAllProducts() {
   getAllProducts(function(error, response) {
     if (response) {
@@ -116,6 +157,13 @@ function displayAllProducts() {
 }
 
 displayAllProducts();
+
+/**
+ * Gets all product from database
+ *
+ * @param {function} callback
+ */
+
 
 function getAllProducts(callback) {
   $.ajax({
@@ -129,6 +177,12 @@ function getAllProducts(callback) {
       }
   });
 }
+
+/**
+ * Fills all products into a table
+ *
+ * @param {array} products Array of product objects
+ */
 
 function fillProductsTable(products) {
   var div = $('#admin-allproducts-table');
@@ -156,6 +210,13 @@ function fillProductsTable(products) {
     initHandlersForDynamicElements();
 }
 
+/**
+ * Fills the old product information to the add product form when product is edited
+ *
+ * @param {number} id Product id
+ */
+
+
 function prefillAddproductForm(id) {
   $('#admin-addproductform-heading').text('Edit Product');
   getProductById(id, function(error, response) {
@@ -167,6 +228,13 @@ function prefillAddproductForm(id) {
     $('#admin-product-name-input').attr('data-addproduct-id', id);
   });
 }
+
+/**
+ * Gets product information by id from database
+ *
+ * @param {number} id product id
+ * @param {function} callback
+ */
 
 function getProductById(id, callback) {
   $.ajax({
@@ -181,6 +249,11 @@ function getProductById(id, callback) {
   });
 }
 
+/**
+ * Clears all the values from add product form
+ *
+ */
+
 function clearAddproductForm() {
   $('#admin-product-name-input').val('');
   $('#admin-product-image-input').val('');
@@ -190,6 +263,11 @@ function clearAddproductForm() {
   $('#admin-product-name-input').attr('data-addproduct-id', '');
   $('#admin-addproductform-heading').text('Add Product');
 }
+
+/**
+ * Clears error message on the form
+
+ */
 
 function clearErrormsg() {
   $('.errormsg').html();
@@ -201,6 +279,7 @@ function clearErrormsg() {
  * @param String description
  * @returns {boolean}
  */
+
 function checkDescription(description) {
     if (description.length > 0 && description.length < 500 && description.trim().length !== 0) {
         return true;
@@ -254,6 +333,10 @@ function checkAmount(amount) {
 
 // Translate products
 
+/**
+ * Shows product translations on the site
+ */
+
 function showTranslations() {
   $('#admin-translation-table').html('');
   $('#admin-missing-translation-table').html('');
@@ -284,12 +367,22 @@ function showTranslations() {
   });
 }
 
+/**
+ * Generates headings to the tables
+ */
+
 function generateTableHeadings() {
   var translationheadings = $('<tr><th>Name</th><th>Description</th><th>Name [' + lang + ']</th><th>Description [' + lang + ']</th><th>Translate</th></tr>');
   $('#admin-missing-translation-table').append(translationheadings);
   var translationheadings = $('<tr><th>Name</th><th>Description</th><th>Name [' + lang + ']</th><th>Description [' + lang + ']</th><th>Edit</th></tr>');
   $('#admin-translation-table').append(translationheadings);
 }
+
+/**
+ * Fills product information into translation from
+ *
+ * @param {object} response Object with product information
+ */
 
 function prefillTranslationForm(response) {
   clearTranslationForm();
@@ -305,6 +398,10 @@ function prefillTranslationForm(response) {
   $('#admin-translation-form').css('display', 'block');
 }
 
+/**
+ * Clears values from translation form
+ */
+
 function clearTranslationForm() {
   $('#original-name').val('');
   $('#original-name').attr('');
@@ -315,6 +412,12 @@ function clearTranslationForm() {
   //$('#trans-description-form').text('');
   $('.errormsg').html('');
 }
+
+/**
+ * Adds product row into translation missing table
+ *
+ * @param {object} response Object with product information
+ */
 
 function appendToTranslationMissing(response) {
   var row = $('<tr></tr>');
@@ -328,6 +431,12 @@ function appendToTranslationMissing(response) {
   row.append(tablerow);
   $('#admin-missing-translation-table').append(row);
 }
+
+/**
+ * Adds product row into translations table
+ *
+ * @param {object} response Object with product information
+ */
 
 function appendToTranslations(response) {
   var row = $('<tr></tr>');
@@ -343,6 +452,12 @@ function appendToTranslations(response) {
   $('#admin-translation-table').append(row);
 }
 
+/**
+ * Gets all product translations by language
+ *
+ * @param {function} callback
+ */
+
 function getProductTranslations(callback) {
   $.ajax({
       url:'/rest/translations/' + lang,
@@ -356,6 +471,13 @@ function getProductTranslations(callback) {
   });
 }
 
+/**
+ * Gets a product translation by language and product id
+ *
+ * @param {number} id product id
+ * @param {function} callback
+ */
+
 function getProductTranslationById(id, callback) {
   $.ajax({
       url:'/rest/translation/' + lang + '/' + id,
@@ -368,6 +490,13 @@ function getProductTranslationById(id, callback) {
       }
   });
 }
+
+/**
+ * Updates product translation to database
+ *
+ * @param {object} translation object with product id and translation
+ * @param {function} callback
+ */
 
 function updateTranslation(translation, callback) {
   $.ajax({
@@ -386,6 +515,10 @@ function updateTranslation(translation, callback) {
   });
 }
 
+/**
+ * Unbinds and sets even handlers to dynamically created elements
+ */
+
 function initTranslateHandlers() {
   $('.admin_translateproductbtn').unbind();
   $('.admin_translateproductbtn').click(function() {
@@ -395,6 +528,12 @@ function initTranslateHandlers() {
     console.log('click');
   });
 }
+
+/**
+ * Handles translate button click
+ *
+ * @param {number} id id of the product to translate
+ */
 
 function translateButtonClicked(id) {
   getProductTranslationById(id, function(error, response) {
@@ -411,6 +550,10 @@ $('#admin-cancel-translation-btn').click(function() {
 $('#admin-save-translation-btn').click(function() {
   saveTranslationButtonClicked();
 });
+
+/**
+ * Handles save button click
+ */
 
 function saveTranslationButtonClicked() {
   if (checkName($('#trans-name-form').val()) && checkDescription($('#trans-description-form').val())) {

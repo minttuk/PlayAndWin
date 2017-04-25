@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Gets all products that are for sale (amaount is over 0)
+ *
+ * @return array of products
+ */
+
 function getProducts($lang = null){
     if ($lang && array_search('product_'.$lang,R::inspect())!='') {
         $arr1 = R::getAll('SELECT * FROM product JOIN product_'.$lang.' ON product.id = product_'.$lang.'.id WHERE amount > 0');
@@ -120,6 +126,17 @@ function addProduct($id, $name, $price, $description, $image_url, $amount){
      }
 }
 
+/**
+ * Updates product information
+ *
+ * @param int $id
+ * @param String $name
+ * @param int $price
+ * @param String $description
+ * @param String $image_url
+ *
+ */
+
 function updateProduct($id, $name, $price, $description, $image_url, $amount) {
   $product = R::load('product', $id);
   $product->name = $name;
@@ -133,8 +150,8 @@ function updateProduct($id, $name, $price, $description, $image_url, $amount) {
 /**
 * Gets the product information by id
 *
-*@param product id
-*@return array with product information
+* @param product id
+* @return array with product information
 */
 
 function getProductById($id, $lang=null) {
@@ -147,14 +164,6 @@ function getProductById($id, $lang=null) {
             $product['description'] = $trans->description;
         }
     }
-
-    //$fin = R::load('product_fi', $id);
-    //$eng = R::load('product_en', $id);
-    //$product['name_en'] = $eng->name_en;
-    //$product['name_fi'] = $fin->name_fi;
-    //$product['description_en'] = $eng->description_en;
-    //$product['description_fi'] = $fin->description_fi;
-
   return $product;
 }
 
@@ -178,6 +187,13 @@ function redeemProduct($id,$product) {
     return $amount;
 }
 
+/**
+* Gets all products with translations by language
+*
+* @param $lang is the language
+* @return array with products and their translations
+*/
+
 function getTranslations($lang) {
   $products = getAllProducts();
   $response = array();
@@ -194,6 +210,13 @@ function getTranslations($lang) {
   return $response;
 }
 
+/**
+* Gets a product with translation by language
+*
+* @param $lang is the language
+* @return product with its translation
+*/
+
 function getTranslation($lang, $id) {
   $product = getProductById($id);
   $trans = getProductTranslationByLanguage($lang, $id);
@@ -206,6 +229,16 @@ function getTranslation($lang, $id) {
   );
   return $response;
 }
+
+/**
+* Updates product translation
+*
+* @param $id product id
+* @param $lang language
+* @param $name translated name
+* @param $description translated description
+* @return array with success / failure message
+*/
 
 function updateTranslation($id, $lang, $name, $description) {
   if ($lang && array_search('product_' . $lang,R::inspect())!='') {
@@ -226,10 +259,28 @@ function updateTranslation($id, $lang, $name, $description) {
   }
 }
 
+/**
+* Adds a new product translation to language table
+*
+* @param $id product id
+* @param $lang language
+* @param $name translated name
+* @param $description translated description
+* @return array with success / failure message
+*/
+
 function createNewTranslation($id, $lang, $name, $description) {
   R::exec('INSERT INTO product_'.$lang.' VALUES (:id, :name, :description)', [':id' => $id, ':name' => $name, ':description' => $description]);
   return array('message'=>'Translation saved.');
 }
+
+/**
+* Gets translation of a product in given language
+*
+* @param $lang language
+* @param $id product id
+* @return object with translation
+*/
 
 function getProductTranslationByLanguage($lang, $id) {
   if ($lang && array_search('product_'.$lang,R::inspect())!='') {
