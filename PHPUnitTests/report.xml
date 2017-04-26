@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1493214811">
-  <project timestamp="1493214811">
+<coverage generated="1493220190">
+  <project timestamp="1493220190">
     <file name="/Users/sainipatala/Documents/PHP/PlayAndWin/rest/dependencies/models/chat.php">
       <line num="11" type="stmt" count="0"/>
       <line num="12" type="stmt" count="0"/>
@@ -322,23 +322,23 @@
       <line num="125" type="stmt" count="1"/>
       <line num="126" type="stmt" count="1"/>
       <line num="127" type="stmt" count="1"/>
-      <line num="141" type="stmt" count="0"/>
-      <line num="142" type="stmt" count="0"/>
-      <line num="143" type="stmt" count="0"/>
-      <line num="144" type="stmt" count="0"/>
-      <line num="145" type="stmt" count="0"/>
-      <line num="146" type="stmt" count="0"/>
-      <line num="147" type="stmt" count="0"/>
-      <line num="148" type="stmt" count="0"/>
-      <line num="159" type="stmt" count="0"/>
-      <line num="160" type="stmt" count="0"/>
-      <line num="161" type="stmt" count="0"/>
-      <line num="162" type="stmt" count="0"/>
-      <line num="163" type="stmt" count="0"/>
-      <line num="164" type="stmt" count="0"/>
-      <line num="165" type="stmt" count="0"/>
-      <line num="166" type="stmt" count="0"/>
-      <line num="167" type="stmt" count="0"/>
+      <line num="141" type="stmt" count="1"/>
+      <line num="142" type="stmt" count="1"/>
+      <line num="143" type="stmt" count="1"/>
+      <line num="144" type="stmt" count="1"/>
+      <line num="145" type="stmt" count="1"/>
+      <line num="146" type="stmt" count="1"/>
+      <line num="147" type="stmt" count="1"/>
+      <line num="148" type="stmt" count="1"/>
+      <line num="159" type="stmt" count="2"/>
+      <line num="160" type="stmt" count="2"/>
+      <line num="161" type="stmt" count="1"/>
+      <line num="162" type="stmt" count="1"/>
+      <line num="163" type="stmt" count="1"/>
+      <line num="164" type="stmt" count="1"/>
+      <line num="165" type="stmt" count="1"/>
+      <line num="166" type="stmt" count="1"/>
+      <line num="167" type="stmt" count="2"/>
       <line num="171" type="stmt" count="0"/>
       <line num="172" type="stmt" count="0"/>
       <line num="173" type="stmt" count="1"/>
@@ -390,7 +390,7 @@
       <line num="286" type="stmt" count="0"/>
       <line num="287" type="stmt" count="0"/>
       <line num="289" type="stmt" count="0"/>
-      <metrics loc="290" ncloc="180" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="116" coveredstatements="27" elements="116" coveredelements="27"/>
+      <metrics loc="290" ncloc="180" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="116" coveredstatements="44" elements="116" coveredelements="44"/>
     </file>
     <file name="/Users/sainipatala/Documents/PHP/PlayAndWin/rest/dependencies/models/referral.php">
       <line num="4" type="stmt" count="0"/>
@@ -429,7 +429,7 @@
       <metrics loc="9" ncloc="9" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="6" elements="6" coveredelements="6"/>
     </file>
     <file name="/Users/sainipatala/Documents/PHP/PlayAndWin/rest/dependencies/models/trade.php">
-      <line num="10" type="stmt" count="1"/>
+      <line num="10" type="stmt" count="4"/>
       <line num="11" type="stmt" count="0"/>
       <line num="12" type="stmt" count="0"/>
       <line num="13" type="stmt" count="0"/>
@@ -443,8 +443,8 @@
       <line num="22" type="stmt" count="0"/>
       <line num="23" type="stmt" count="0"/>
       <line num="25" type="stmt" count="0"/>
-      <line num="36" type="stmt" count="1"/>
-      <line num="37" type="stmt" count="1"/>
+      <line num="36" type="stmt" count="5"/>
+      <line num="37" type="stmt" count="5"/>
       <line num="38" type="stmt" count="0"/>
       <line num="39" type="stmt" count="0"/>
       <line num="41" type="stmt" count="0"/>
@@ -458,9 +458,9 @@
       <line num="60" type="stmt" count="0"/>
       <line num="61" type="stmt" count="0"/>
       <line num="62" type="stmt" count="0"/>
-      <line num="73" type="stmt" count="0"/>
-      <line num="74" type="stmt" count="0"/>
-      <line num="75" type="stmt" count="0"/>
+      <line num="73" type="stmt" count="1"/>
+      <line num="74" type="stmt" count="1"/>
+      <line num="75" type="stmt" count="1"/>
       <line num="87" type="stmt" count="0"/>
       <line num="88" type="stmt" count="0"/>
       <line num="89" type="stmt" count="0"/>
@@ -531,17 +531,17 @@
       <line num="238" type="stmt" count="0"/>
       <line num="239" type="stmt" count="0"/>
       <line num="240" type="stmt" count="0"/>
-      <line num="250" type="stmt" count="0"/>
-      <line num="251" type="stmt" count="0"/>
-      <line num="252" type="stmt" count="0"/>
+      <line num="250" type="stmt" count="1"/>
+      <line num="251" type="stmt" count="1"/>
+      <line num="252" type="stmt" count="1"/>
       <line num="253" type="stmt" count="0"/>
       <line num="254" type="stmt" count="0"/>
       <line num="255" type="stmt" count="0"/>
-      <line num="263" type="stmt" count="0"/>
-      <line num="264" type="stmt" count="0"/>
-      <line num="265" type="stmt" count="0"/>
-      <line num="266" type="stmt" count="0"/>
-      <metrics loc="268" ncloc="174" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="112" coveredstatements="3" elements="112" coveredelements="3"/>
+      <line num="263" type="stmt" count="1"/>
+      <line num="264" type="stmt" count="1"/>
+      <line num="265" type="stmt" count="1"/>
+      <line num="266" type="stmt" count="1"/>
+      <metrics loc="268" ncloc="174" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="112" coveredstatements="13" elements="112" coveredelements="13"/>
     </file>
     <file name="/Users/sainipatala/Documents/PHP/PlayAndWin/rest/dependencies/models/user.php">
       <line num="12" type="stmt" count="3"/>
@@ -629,10 +629,10 @@
       <line num="214" type="stmt" count="0"/>
       <line num="215" type="stmt" count="0"/>
       <line num="216" type="stmt" count="0"/>
-      <line num="226" type="stmt" count="1"/>
+      <line num="226" type="stmt" count="5"/>
       <line num="230" type="stmt" count="0"/>
       <metrics loc="233" ncloc="147" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="87" coveredstatements="66" elements="87" coveredelements="66"/>
     </file>
-    <metrics files="10" loc="1444" ncloc="905" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="602" coveredstatements="280" elements="602" coveredelements="280"/>
+    <metrics files="10" loc="1444" ncloc="905" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="602" coveredstatements="307" elements="602" coveredelements="307"/>
   </project>
 </coverage>

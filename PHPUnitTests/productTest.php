@@ -34,6 +34,42 @@ final class productTest extends TestCase{
           R::exec( 'DELETE FROM product WHERE id = '.$id);
       }
 
+      /**
+       * Tests that product can be retrieved by product id and language.
+       */
+
+       public function testgetProductById() {
+         $product = getProductById(1);
+         $this->assertEquals('Tesla car', $product['name']);
+         $product = getProductById(1, 'fi');
+         $this->assertEquals('Tesla auto', $product['name']);
+         $product = getProductById(1, 'ja');
+         $this->assertEquals('テスラカー', $product['name']);
+       }
+
+      /**
+       * Tests that product information can be edited.
+       */
+
+      public function testupdateProduct() {
+          $id = 1;
+          $originalproduct = getProductById($id);
+          $newname = 'testname';
+          $newdescription = 'testdescription';
+          $newprice = 5555555;
+          $newamount = 0;
+          $newimageurl = 'testimageurl';
+          updateProduct($id, $newname, $newprice, $newdescription, $newimageurl, $newamount);
+          $updatedproduct = getProductById($id);
+          $this->assertEquals($newname, $updatedproduct['name']);
+          $this->assertEquals($newdescription, $updatedproduct['description']);
+          $this->assertEquals($newprice, $updatedproduct['price']);
+          $this->assertEquals($newimageurl, $updatedproduct['image_url']);
+          $this->assertEquals($newamount, $updatedproduct['amount']);
+          // Changes product back to original
+          updateProduct($id, $originalproduct['name'], $originalproduct['price'], $originalproduct['description'], $originalproduct['image_url'], $originalproduct['amount']);
+      }  
+
     /**
      * Tests that a shoporder row is correctly added.
      */
