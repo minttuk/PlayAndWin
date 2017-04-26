@@ -140,6 +140,11 @@ function loadLanguage(page){
         $("#editprofilepicture").text(form_changepicture);
         $("#saveprivateprofilebutton").val(form_save);
       $("#savepublicprofilebutton").val(form_save);
+        $("#newpassword").val(form_newpassword);
+        $("#confirmpassword").val(form_confirmpassword);
+        $("#editprofilepassword").val(form_editpassword);
+        $("#savenewpassword").val(form_save);
+
 
         //Edit picture modal
       //$("#editpictureheading").text(profile_changepic);

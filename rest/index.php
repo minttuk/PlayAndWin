@@ -59,6 +59,15 @@ Flight::route('PUT /user/private', function(){
         );
     }
 });
+Flight::route('PUT /user/password', function(){
+    if(isToken()) {
+        echo changePassword(
+            validateToken(),
+            Flight::request()->data->newpassword,
+            Flight::request()->data->confirmpassword
+        );
+    }
+});
 
 Flight::route('POST /user/image', function(){
     if (isToken()) echo uploadImage(validateToken());

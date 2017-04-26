@@ -63,6 +63,16 @@ function setUserPrivateInfo($id, $firstname, $lastname, $age, $gender) {
     return $user;
 }
 
+function changePassword($id, $newpassword, $confirmpassword){
+    $user = R::load( 'user', $id);
+    if (validatePassword($newpassword, $confirmpassword)){
+        $password = md5(md5($user->username.$newpassword));
+        $user->password = $password;
+        R::store($user);
+    }
+    return $user;
+}
+
 /**
  * Updates user's location.
  *

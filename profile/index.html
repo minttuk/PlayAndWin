@@ -155,6 +155,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							</form>
 						</div>
 						<div class="tab-pane" id="change_password">
+							<form>
+								<p id="newpassword">New Password</p>
+								<input type="password" class="text" name="NewPassword" pattern="(?=.*\\d).{6,}" required>
+								<p id="confirmpassword">Confirm Password</p>
+								<input type="password" class="text form_required" name="ConfirmPassword" required>
+								<p class="errormessage">&nbsp;</p>
+								<input id="savenewpassword" type="submit" data-toggle="modal" data-target="#editprofilemodal" class="more_btn" value="Save">
+							</form>
 
 						</div>
 

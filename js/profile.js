@@ -97,6 +97,28 @@ $( "#saveprivateprofilebutton" ).click(function() {
     }
 });
 
+$( "#savenewpassword" ).click(function() {
+    console.log("savenewpassword clicked");
+    var $newpassword = $('input[name="NewPassword"]').val();
+    var $confirmpassword = $('input[name="ConfirmPassword"]').val();
+    $.ajax({
+        url: '/rest/user/password',
+        type: "PUT",
+        contentType: "application/json",
+        dataType: "json",
+        data: JSON.stringify({"newpassword": $newpassword, "confirmpassword": $confirmpassword}),
+        success: function (response){
+            //console.log('success');
+            $('input[name="NewPassword"]').val("");
+            $('input[name="ConfirmPassword"]').val("");
+            getUserInfo();
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log(textStatus, errorThrown);
+        }
+    });
+});
+
 function checkEditedProfile(firstname, lastname) {
   if (firstname.length > 0 && lastname.length > 0) {
     return true;
