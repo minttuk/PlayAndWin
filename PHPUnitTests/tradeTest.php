@@ -19,7 +19,7 @@ final class tradeTest extends TestCase {
     // Testing to insert a new trade
 
     R::exec('DELETE FROM trades WHERE seller_id = :id', [':id' => $user]);
-    //$response = addNewTrade($user, $product, $price, $desc);
+    $response = addNewTrade($user, $product, $price, $desc);
     $this->assertEquals('Product has been put for sale!', $response['success']);
     // Testing to insert the same trade twice
     $response = addNewTrade($user, $product, $price, $desc);
