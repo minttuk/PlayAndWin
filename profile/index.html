@@ -132,8 +132,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<input type="text" class="text" name="newfirstname" placeholder="" required="" value="">
 								<p id="editprofilelastname">Last name:</p>
 								<input type="text" class="text" name="newlastname" placeholder="" required="" value="">
-								<p id="editprofileage">Date of Birth</p>
-								<input type="date" class="form-style" min="1900-01-01" placeholder="(YYYY-MM-DD)">
 								<p id="editprofilegender">Gender</p>
 								<select class="form-style">
 									<option id="gender-select" value="" disabled selected>I am...</option>
@@ -146,12 +144,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							</form>
 						</div>
 						<div class="tab-pane" id="change_picture">
-							<form class="" action="/rest/user/image" method="post" enctype="multipart/form-data" id="upload_form">
+							<form class="text-center" action="/rest/user/image" method="post" enctype="multipart/form-data" id="upload_form">
 								<div class="form-group">
 									<input name="fileToUpload" type="file" class="filestyle form-control"  data-iconName="glyphicon glyphicon-inbox">
-									<input id="uploadpicturebutton" type="submit" value="Upload" style='margin-top:20px; margin-bottom:30px;' class="btn btn-primary form-control"/>
-									<!--<button class="btn btn-danger form-control" style='margin-top:20px;' data-dismiss="modal">Close</button>-->
 								</div>
+								<input id="uploadpicturebutton" type="submit" value="Upload" class="btn btn-primary form-control"/>
 							</form>
 						</div>
 						<div class="tab-pane" id="change_password">

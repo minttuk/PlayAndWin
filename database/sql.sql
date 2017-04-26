@@ -21,7 +21,8 @@ CREATE TABLE user (
   last_online TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00',
   profilepicture VARCHAR(100) DEFAULT 'default.png',
   coins INT(10) DEFAULT 0,
-  admin BOOLEAN DEFAULT 0
+  admin BOOLEAN DEFAULT 0,
+  birthday DATE NOT NULL;
 );
 
 

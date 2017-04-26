@@ -6,12 +6,12 @@ function generateTrades() {
         'font-size': '1em'
     });
     $('#addProductButton').hide();
-    displayAddProductButton(function (admin) {
-        if (admin) {
-            $('#trade_add_button').show();
-            $('#trade_manage_button').show();
-        }
-    });
+
+    if (document.cookie.match(/^(.*;)?\s*access_token\s*=\s*[^;]+(.*)?$/)) {
+        $('#trade_add_button').show();
+        $('#trade_manage_button').show();
+    }
+
     generateItemView('/rest/trades/'+localStorage.getItem("lang"), function () {
         $('.amount_div').hide();
         $('.buy-button').click(function () {
@@ -53,9 +53,7 @@ function generateProducts() {
     $('#trade_add_button').hide();
     $('#trade_manage_button').hide();
     $('#managetrades').hide();
-    displayAddProductButton(function (admin) {
-        if (admin) $('#addProductButton').show();
-    });
+
     generateItemView('/rest/products/'+localStorage.getItem("lang"), function () {
         $('.buy-button').click(function () {
             showConfirmButtons()

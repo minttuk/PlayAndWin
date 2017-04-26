@@ -1,7 +1,45 @@
+.form-style {
+    background-color:#fff;
+    width:100%;
+    padding-left:10px;
+    height:51px;
+    border: none;
+    border-left: 1px solid rgb(2, 24, 136);
+    border-bottom: 1px solid rgb(2, 24, 136);
+    border-radius: 0px;
+    -webkit-appearance:none;
+	margin: 0 10px 25px 0;
+}
+
+.form-style:focus{
+    outline: none;
+}
+
+.form-style::-webkit-outer-spin-button,
+.form-style::-webkit-inner-spin-button { margin-top: 12px; }
+
 .glyphicon-copyright-mark {
 	top:4px;
 	font-size: 1.1em;
 	-webkit-font-smoothing: antialiased;
+}
+
+label input[type=date]:invalid::-webkit-datetime-edit {
+    color:rgba(2, 24, 136,0.8) !important;
+}
+
+label ::-webkit-input-placeholder{
+	color:rgba(2, 24, 136,0.5) !important;
+}
+
+label {
+	color: rgb(2, 24, 136);
+	width:100%;
+}
+
+label input {
+	font-weight: 400;
+	color:#000;
 }
 
 .form_close_btn, .form_dismiss_btn {

@@ -11,7 +11,7 @@ Flight::route('/', function(){
 });
 
 Flight::route('/test', function(){
-     getActiveTrades();
+     echo validateBirthday('1111-04-30');
 });
 
 // --------------------------   PRIVATE REST API   -------------------------- //
@@ -251,12 +251,13 @@ Flight::route('/trades/buy', function(){
 // User
 Flight::route('POST /user', function(){
     echo loginUser(
-      Flight::request()->data->Username,
-      Flight::request()->data->Password,
-      Flight::request()->data->ConfirmPassword,
-      Flight::request()->data->Email,
-      Flight::request()->data->Firstname,
-      Flight::request()->data->Lastname
+      Flight::request()->data->username,
+      Flight::request()->data->password,
+      Flight::request()->data->confirm,
+      Flight::request()->data->email,
+      Flight::request()->data->firstname,
+      Flight::request()->data->lastname,
+      Flight::request()->data->birthday
     );
 });
 Flight::route('/user/logout', function(){
@@ -266,7 +267,7 @@ Flight::route('/user/@id', function($id){
     Flight::json(getUserInfo($id));
 });
 Flight::route('/user', function(){
-    echo loginUser(null,null,null,null,null,null);
+    echo loginUser(null,null,null,null,null,null,null);
 });
 
 // Users

@@ -13,7 +13,7 @@ $message = array('data'=>'');
  *
  *@return string Message of success or errors
  */
-function loginUser($uname, $password, $confirmPass, $email, $firstname, $lastname) {
+function loginUser($uname, $password, $confirmPass, $email, $firstname, $lastname, $birthday) {
   global $message;
   if ($uname)  {
     $plainPass = $password;
@@ -21,10 +21,10 @@ function loginUser($uname, $password, $confirmPass, $email, $firstname, $lastnam
   }
 
   if ($email) {
-    if (validatePassword($plainPass, $confirmPass)) {
+    if (validatePassword($plainPass, $confirmPass) && validateBirthday($birthday)) {
         $newuser = findUser($uname);
         if (!$newuser) {
-          $id = regUser($uname,$email,$password,$firstname,$lastname);
+          $id = regUser($uname,$email,$password,$firstname,$lastname,$birthday);
           sendEmail($email,$uname,'welcome');
           setcookie("access_token",generateToken($id,$uname), time()+60*60*24*14, '/');
           return json_encode(array('token'=>generateToken($id,$uname)));
@@ -67,7 +67,7 @@ function logOut() {
  *@param string $firstname is the user's first name.
  *@param string $lastname is the user's last name.
  */
-  function regUser ($username, $email, $password, $firstname, $lastname) {
+  function regUser ($username, $email, $password, $firstname, $lastname, $birthday) {
     $gamelist = array('snake','flappy','reaction','jumper');
     $user = R::dispense( 'user' );
     $user->username = $username;
@@ -75,6 +75,8 @@ function logOut() {
     $user->password = $password;
     $user->firstname = $firstname;
     $user->lastname = $lastname;
+    $user->lastname = $lastname;
+    $user->birthday = $birthday;
     if (handleReferral($email)) $user->coins = 100;
     $newuser = R::store( $user );
     R::exec( 'update user set reg_date=NOW() where username = :username', [':username' => $username]);
@@ -151,6 +153,25 @@ function logOut() {
         $accepted = false;
     }*/
     return $accepted;
+  }
+
+  function validateBirthday($birthday) {
+    global $message;
+    $date = DateTime::createFromFormat("Y-m-d", $birthday);
+    if ($date !== false && array_sum($date->getLastErrors()) || !preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/",$birthday)) {
+        $message['data'] .= "Your date is not valid!</br>";
+        return false;
+    }
+    $diff = date_diff($date,date_create());
+    if ($diff->format('%R%a') < 4745) {
+        $message['data'] .= "Sorry, but you must be at least 13 years old to use our site.</br>";
+        return false;
+    }
+    if ($diff->format('%R%a') > 45000) {
+        $message['data'] .= "Sorry, but you seem to be older than possible.</br>";
+        return false;
+    }
+    return true;
   }
 
   /**

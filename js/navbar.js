@@ -19,21 +19,24 @@ $(document).ready(function() {
   });
 });
 function signUpForm() {
-  $("#signForm").html('<input type="text" class="text form_required" name="Username" placeholder="'+$.i18n.prop('form_username',localStorage.getItem("lang"))+
-            '" required title="'+$.i18n.prop('form_valid_username',localStorage.getItem("lang"))+'">'+
-				    '<input type="text" class="text form_required" name="Firstname"  placeholder="'+ $.i18n.prop('form_firstname',localStorage.getItem("lang"))+
-            '" pattern="[a-zA-Z]{1,16}+" required title="'+$.i18n.prop('form_valid_name',localStorage.getItem("lang"))+'">'+
-            '<input type="text" class="text form_required" name="Lastname"  placeholder="'+ $.i18n.prop('form_lastname',localStorage.getItem("lang"))+
-            '" pattern="[a-zA-Z]{1,16}+" required title="'+$.i18n.prop('form_valid_name',localStorage.getItem("lang"))+'">'+
-            '<input type="email" class="text form_required" name="Email"  placeholder="'+ $.i18n.prop('form_email',localStorage.getItem("lang"))+
-            '" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required title="'+$.i18n.prop('form_valid_email',localStorage.getItem("lang"))+'">'+
-            '<input type="password" class="text" name="Password"  placeholder="'+ $.i18n.prop('form_password',localStorage.getItem("lang"))+
-            '" pattern="(?=.*\\d).{6,}" required title="'+$.i18n.prop('form_valid_password',localStorage.getItem("lang"))+'">'+
-            '<input type="password" class="text form_required" name="ConfirmPassword" placeholder="'+$.i18n.prop('form_confirm',localStorage.getItem("lang"))+
-            '" required title="'+$.i18n.prop('form_confim_password',localStorage.getItem("lang"))+'">'+
-				    '<input type="submit" class="more_btn" name="submit" value="'+$.i18n.prop('navbar_signup',localStorage.getItem("lang"))+'"><p id="errorMsg"></p>');
+  $("#signForm").html('<label>'+$.i18n.prop('form_username',localStorage.getItem("lang"))+'<input type="text" class="text form_required" name="username" placeholder="MrAmazing'+
+            '" required title="'+$.i18n.prop('form_valid_username',localStorage.getItem("lang"))+'"></label>'+
+				    '<label>'+$.i18n.prop('form_firstname',localStorage.getItem("lang"))+'<input type="text" class="text form_required" name="firstname"  placeholder="John'+
+            '" pattern="[a-zA-Z]{1,16}" required title="'+$.i18n.prop('form_valid_name',localStorage.getItem("lang"))+'"></label>'+
+            '<label>'+$.i18n.prop('form_lastname',localStorage.getItem("lang"))+'<input type="text" class="text form_required" name="lastname"  placeholder="Doe'+
+            '" pattern="[a-zA-Z]{1,16}" required title="'+$.i18n.prop('form_valid_name',localStorage.getItem("lang"))+'"></label>'+
+            '<label>'+$.i18n.prop('form_birthday',localStorage.getItem("lang"))+'<input type="date" class="form-style form_required" name="birthday" min="1900-01-01" '+
+            'max="'+ new Date().toJSON().split('T')[0] +'" required placeholder="(YYYY-MM-DD)"></label>'+
+            '<label>'+$.i18n.prop('form_email',localStorage.getItem("lang"))+'<input type="email" class="text form_required" name="email"  placeholder="user@example.com'+
+            '" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required title="'+$.i18n.prop('form_valid_email',localStorage.getItem("lang"))+'"></label>'+
+            '<label>'+$.i18n.prop('form_password',localStorage.getItem("lang"))+'<input type="password" class="text" name="password"'+
+            '" pattern="(?=.*\\d).{6,}" required title="'+$.i18n.prop('form_valid_password',localStorage.getItem("lang"))+'" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"></label>'+
+            '<label>'+$.i18n.prop('form_confirm',localStorage.getItem("lang"))+'<input type="password" class="text form_required" name="confirm"'+
+            '" required title="'+$.i18n.prop('form_confim_password',localStorage.getItem("lang"))+'" placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"></label>'+
+				    '<input type="submit" class="more_btn" name="submit" value="'+$.i18n.prop('navbar_signup',localStorage.getItem("lang"))+' "><p id="errorMsg"></p>');
   $('.form_required').attr('oninvalid','this.setCustomValidity("'+$.i18n.prop('form_required',localStorage.getItem("lang"))+'")');
   $('.form_required').attr('onchange','this.setCustomValidity("")');
+
 }
 function signInForm() {
   if(signedIn) {
@@ -42,9 +45,9 @@ function signInForm() {
       location.reload();
     });
   } else {
-    $("#signForm").html('<input type="text" class="text form_required" name="Username" placeholder='+$.i18n.prop('form_username',localStorage.getItem("lang"))+' required title="'+
+    $("#signForm").html('<input type="text" class="text form_required" name="username" placeholder='+$.i18n.prop('form_username',localStorage.getItem("lang"))+' required title="'+
             $.i18n.prop('form_user_username',localStorage.getItem("lang"))+'">'+
-            '<input type="password" class="text form_required" name="Password" placeholder='+$.i18n.prop('form_password',localStorage.getItem("lang"))+' required title="'+
+            '<input type="password" class="text form_required" name="password" placeholder='+$.i18n.prop('form_password',localStorage.getItem("lang"))+' required title="'+
             $.i18n.prop('form_user_password',localStorage.getItem("lang"))+'">'+
             '<input type="submit" class="more_btn" name="submit" value="'+$.i18n.prop('navbar_signin',localStorage.getItem("lang"))+'"><p id="errorMsg"></p>');
     $('.form_required').attr('oninvalid','this.setCustomValidity("'+$.i18n.prop('form_required',localStorage.getItem("lang"))+'")');
