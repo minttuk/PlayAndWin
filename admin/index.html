@@ -38,18 +38,24 @@
     <div class="row admin_container">
       <div class="col-md-2 admin_sidepanel">
         <div class="admin_sidepanelcontent">
-          <h1>PlayTalk.Win</h1>
-          <h3>Admin Board</h3>
+          <a id='admin-title' href='/'>
+            <h1>PlayTalk.Win</h1>
+            <h3>Admin Board</h3>
+          </a>
           <div class="admin_sidenav">
             <h3>Product</h3>
             <ul>
               <li id="admin-manage-products-nav">Manage Products</li>
             </ul>
             <h3>Translation</h3>
-            <ul>
-              <li class="admin-trasnlate-products-nav" data-lang="ja">Japanese Translation</li>
-              <li class="admin-trasnlate-products-nav" data-lang="fi">Finnish Translation</li>
-            </ul>
+            <div class="dropdown">
+              <div class="dropdown-toggle" type="button" data-toggle="dropdown">Translate Products
+              <span class="caret"></span></div>
+              <ul class="dropdown-menu">
+                <li class="admin-trasnlate-products-nav" data-lang="ja"><a href="#">Japanese</a></li>
+                <li class="admin-trasnlate-products-nav" data-lang="fi"><a href="#">Finnish</a></li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>

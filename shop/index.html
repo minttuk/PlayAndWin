@@ -88,7 +88,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<div id="login" class="modal-content">
 						<div class="modal-body">
 							<form id="signForm" method="post"></form>
-							<button class="form_close_btn">Cancel</button>
+							<button class="form_close_btn" data-dismiss="modal" data-target="#loginModal">Cancel</button>
 						</div>
 					</div>
 				</div>
@@ -107,7 +107,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			</div>
 		</div>
 		<div class='text-center'>
-			<button type="button" class="button" id="addProductButton" data-toggle="modal" data-target="#addProductModal">ADD PRODUCTS</button>
 			<button type="button" class="button trade_btn" id="trade_add_button" data-toggle="modal" data-target="#addTradeProductModal" style='display:none;'>New Trade</button>
 			<button type="button" class="button trade_btn" id="trade_manage_button" style='display:none;'>Manage Trades</button>
 
@@ -149,47 +148,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 
 	<!--//gallery -->
-
-	<!-- Add Product Modal -->
-	<div id="addProductModal" class="modal">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-body">
-					<form>
-						<h4 id="shop_giveinfo">Give the product information:</h4>
-						<div class="span span1">
-							<p class="left"><span id="shop_name">NAME</span>:</p>
-							<input type="text" id="formName">
-							<div class="clearfix"></div>
-						</div>
-						<div class="span span2">
-							<p class="left"><span id="shop_cost">COST</span>:</p>
-							<input type="number" id="formPrice">
-							<div class="clearfix"></div>
-						</div>
-						<div class="span span3">
-							<p class="left" id="shop_imageurl">Image URL:</p>
-							<input type="url" id="formImage_url">
-							<div class="clearfix"></div>
-						</div>
-						<div class="span span4">
-							<p class="left"><span id="shop_amount">AMOUNT</span>:</p>
-							<input type="number" id="formAmount">
-							<div class="clearfix"></div>
-						</div>
-						<p id="shop_product_desc">Give the product description:</p>
-						<textarea id="formDescription" rows="4" style="min-width: 80%"></textarea>
-						<div class="span span4">
-							<button type="button" class="button" id="submitForm">ADD</button>
-							<p class='errormsg'></p>
-							<div class="clearfix"></div>
-						</div>
-					</form>
-					<button class="form_close_btn shop_add_close" data-dismiss='modal'>Cancel</button>
-				</div>
-			</div>
-		</div>
-	</div>
 
 	<!-- Add Trade Modal -->
 	<div id="addTradeProductModal" class="modal">

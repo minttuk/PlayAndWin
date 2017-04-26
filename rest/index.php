@@ -134,6 +134,9 @@ Flight::route('/products', function() {
   if (isToken() && getAdmin(validateToken())) {
     Flight::json(getAllProducts());
   }
+  else {
+    Flight::json(array("error" => "No access!"));
+  }
 });
 
 Flight::route('GET /product/@id', function($id) {
@@ -153,11 +156,17 @@ Flight::route('/translations/@lang', function($lang) {
   if (isToken() && getAdmin(validateToken())) {
     Flight::json(getTranslations($lang));
   }
+  else {
+    Flight::json(array("error" => "No access!"));
+  }
 });
 
 Flight::route('/translation/@lang/@id', function($lang, $id) {
   if (isToken() && getAdmin(validateToken())) {
     Flight::json(getTranslation($lang, $id));
+  }
+  else {
+    Flight::json(array("error" => "No access!"));
   }
 });
 
@@ -169,7 +178,10 @@ Flight::route('PUT /translation', function(){
             Flight::request()->data->name,
             Flight::request()->data->description
         ));
-    };
+    }
+    else {
+      Flight::json(array("error" => "No access!"));
+    }
 });
 
 // Highscore
