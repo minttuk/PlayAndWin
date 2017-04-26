@@ -75,7 +75,6 @@ function logOut() {
     $user->password = $password;
     $user->firstname = $firstname;
     $user->lastname = $lastname;
-    $user->lastname = $lastname;
     $user->birthday = $birthday;
     if (handleReferral($email)) $user->coins = 100;
     $newuser = R::store( $user );
