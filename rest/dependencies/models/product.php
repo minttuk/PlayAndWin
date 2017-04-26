@@ -198,13 +198,13 @@ function getTranslations($lang) {
   $products = getAllProducts();
   $response = array();
   foreach ($products as $id => $product) {
-    $trans = getProductTranslationByLanguage($lang, $product[id]);
+    $trans = getProductTranslationByLanguage($lang, $product['id']);
     $response[] = array(
-      'id' => $product[id],
-      'name' => $product[name],
-      'description' => $product[description],
-      'trans_name' => $trans[name],
-      'trans_description' => $trans[description]
+      'id' => $product['id'],
+      'name' => $product['name'],
+      'description' => $product['description'],
+      'trans_name' => $trans['name'],
+      'trans_description' => $trans['description']
     );
   }
   return $response;
@@ -221,11 +221,11 @@ function getTranslation($lang, $id) {
   $product = getProductById($id);
   $trans = getProductTranslationByLanguage($lang, $id);
   $response = array(
-    'id' => $product[id],
-    'name' => $product[name],
-    'description' => $product[description],
-    'trans_name' => $trans[name],
-    'trans_description' => $trans[description]
+    'id' => $product['id'],
+    'name' => $product['name'],
+    'description' => $product['description'],
+    'trans_name' => $trans['name'],
+    'trans_description' => $trans['description']
   );
   return $response;
 }

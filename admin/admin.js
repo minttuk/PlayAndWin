@@ -529,9 +529,9 @@ function updateTranslation(translation, callback) {
 function initTranslateHandlers() {
   $('.admin_translateproductbtn').unbind();
   $('.admin_translateproductbtn').click(function() {
-    showElement('#admin-translation-form');
-    $('.admin_addtranslationarea').animate({ scrollTop: 0, scrollLeft: 0 }, "fast");
-    translateButtonClicked($(this).attr('data-productid'));
+  showElement('#admin-translation-form');
+  $('.admin_mainarea').animate({ scrollTop: 0, scrollLeft: 0 }, "fast");
+  translateButtonClicked($(this).attr('data-productid'));
     console.log('click');
   });
 }
