@@ -71,7 +71,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div id="login" class="modal-content">
 					<div class="modal-body">
 						<form id="signForm" method="post"></form>
-						<button class="form_close_btn" data-toggle="modal" data-target="#loginModal">Cancel</button>
+						<button class="form_close_btn" data-dismiss="modal" data-target="#loginModal">Cancel</button>
 					</div>
 				</div>
 			</div>
@@ -131,9 +131,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<p id="editprofilelastname">Last name:</p>
 								<input type="text" class="text" name="newlastname" placeholder="" required="" value="">
 								<p id="editprofileage">Date of Birth</p>
-								<input type="date" class="form-control form-style">
+								<input type="date" class="form-style" min="1900-01-01" placeholder="(YYYY-MM-DD)">
 								<p id="editprofilegender">Gender</p>
-								<select class="form-control form-style">
+								<select class="form-style">
 									<option id="gender-select" value="" disabled selected>I am...</option>
 									<option id="editprofilemale" value='male'>Male</option>
 									<option id="editprofilefemale" value='female'>Female</option>

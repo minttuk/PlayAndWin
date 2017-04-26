@@ -22,12 +22,15 @@
 }
 
 .form-style {
+    background-color:#fff;
+    width:100%;
     padding-left:10px;
     height:51px;
     border: none;
     border-left: 1px solid rgb(2, 24, 136);
     border-bottom: 1px solid rgb(2, 24, 136);
     border-radius: 0px;
+    -webkit-appearance:none;
 }
 
 .close_friends_btn {

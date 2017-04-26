@@ -1,6 +1,12 @@
 var userId;
 var sessionId;
 
+
+    $('input[type="date"]').attr('max', function(){
+        return new Date().toJSON().split('T')[0];
+    });
+
+
 function getScoreTable() {
   $.ajax({url: '/rest/score/'+getLastDir()+'?table',
     datatype:'html',success: function(result){$("#highscores").html(result);
