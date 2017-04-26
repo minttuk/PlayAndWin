@@ -114,7 +114,7 @@ function loadLanguage(page){
       $("#trade_mysellinghistory").text(trade_mysellinghistory);
       //Profile
       $("#editprofilebuttontext").text(profile_edit);
-      $("#editpicturebuttontext").text(profile_changepic);
+      //$("#editpicturebuttontext").text(profile_changepic);
       $("#mycollectionbuttontext").text(profile_collection);
       $("#profilehighscoretext").text(profile_highscore);
       $("#lastonlinetext").text(profile_lastonline);
@@ -137,12 +137,12 @@ function loadLanguage(page){
       $("#editprofilepublic").text(form_public);
       $("#editprofileprivate").text(form_private);
       $("#gender-select").text(form_select_am);
-
-      $("#saveprivateprofilebutton").val(form_save);
+        $("#editprofilepicture").text(form_changepicture);
+        $("#saveprivateprofilebutton").val(form_save);
       $("#savepublicprofilebutton").val(form_save);
 
         //Edit picture modal
-      $("#editpictureheading").text(profile_changepic);
+      //$("#editpictureheading").text(profile_changepic);
       $("#uploadpicturebutton").val(form_upload);
       //My friends modal
       $("#myfriendsheading").text(profile_friends);
