@@ -35,10 +35,12 @@ ul {
 li {
   padding-top: 10px;
   padding-bottom: 10px;
+  cursor: pointer;
 }
 
 li:hover {
   color: white;
+  font-weight: bold;
 }
 
 /* Mainarea */
@@ -100,6 +102,10 @@ tr {
 .errormsg {
   color: red;
   text-align: center;
+}
+
+#admin-title {
+  color:#fff;
 }
 
 @media (max-width: 992px) {
