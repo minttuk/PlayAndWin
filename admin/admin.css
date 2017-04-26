@@ -3,6 +3,10 @@
   height:100vh;
 }
 
+h3 {
+  margin-bottom: 10px;
+}
+
 /* Sidepanel */
 
 .admin_sidepanel {
@@ -33,7 +37,6 @@ ul {
 }
 
 li {
-  padding-top: 10px;
   padding-bottom: 10px;
   cursor: pointer;
 }

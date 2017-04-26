@@ -12,28 +12,27 @@ require_once '../rest/dependencies/require_all.php';
 
 final class productTest extends TestCase{
 
-    /**
-     * Tests that a product is added to the database.
-     */
-    public function testaddProduct(){
-        addProduct(2, 'testname', '1000', 'testdescription', 'testurl', '50');
-        $id = R::getCell( 'SELECT MAX(ID) FROM product');
+      /**
+       * Tests that a product is added to the database.
+       */
+      public function testaddProduct(){
+          addProduct(2, 'testname', '1000', 'testdescription', 'testurl', '50');
+          $id = R::getCell( 'SELECT MAX(ID) FROM product');
 
-        $name = R::getCell( 'SELECT name FROM product WHERE id = '.$id);
-        $this->assertEquals('testname', $name);
+          $name = R::getCell( 'SELECT name FROM product WHERE id = '.$id);
+          $this->assertEquals('testname', $name);
 
-        $price = R::getCell( 'SELECT price FROM product WHERE id = '.$id);
-        $this->assertEquals('1000', $price);
+          $price = R::getCell( 'SELECT price FROM product WHERE id = '.$id);
+          $this->assertEquals('1000', $price);
 
-        $description = R::getCell( 'SELECT description FROM product WHERE id = '.$id);
-        $this->assertEquals('testdescription', $description);
+          $description = R::getCell( 'SELECT description FROM product WHERE id = '.$id);
+          $this->assertEquals('testdescription', $description);
 
-        $url = R::getCell( 'SELECT image_url FROM product WHERE id = '.$id);
-        $this->assertEquals('testurl', $url);
+          $url = R::getCell( 'SELECT image_url FROM product WHERE id = '.$id);
+          $this->assertEquals('testurl', $url);
 
-        R::exec( 'DELETE FROM product WHERE id = '.$id);
-
-    }
+          R::exec( 'DELETE FROM product WHERE id = '.$id);
+      }
 
     /**
      * Tests that a shoporder row is correctly added.
@@ -78,7 +77,6 @@ final class productTest extends TestCase{
         $products2["1"]--;
         $collection2->products = json_encode($products2);
         R::store($collection2);
-
     }
 
 }

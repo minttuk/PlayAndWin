@@ -1,15 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="Test" tests="35" assertions="62" failures="4" errors="1" time="1.230017">
-    <testsuite name="connectionTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/aconnectionTest.php" tests="1" assertions="1" failures="0" errors="0" time="0.038222">
-      <testcase name="testConnect" class="connectionTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/aconnectionTest.php" line="9" assertions="1" time="0.038222"/>
+  <testsuite name="Test" tests="33" assertions="57" failures="2" errors="2" time="1.279290">
+    <testsuite name="connectionTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/aconnectionTest.php" tests="1" assertions="1" failures="0" errors="0" time="0.023354">
+      <testcase name="testConnect" class="connectionTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/aconnectionTest.php" line="9" assertions="1" time="0.023354"/>
     </testsuite>
-    <testsuite name="chatTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/chatTest.php" tests="1" assertions="1" failures="0" errors="0" time="0.006834">
-      <testcase name="testcardColor" class="chatTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/chatTest.php" line="11" assertions="1" time="0.006834"/>
+    <testsuite name="adminTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/adminTest.php" tests="1" assertions="0" failures="0" errors="0" time="0.005723">
+      <testcase name="Warning" assertions="0" time="0.005723"/>
     </testsuite>
-    <testsuite name="highscoreTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/highscoreTest.php" tests="4" assertions="4" failures="2" errors="0" time="0.096294">
-      <testcase name="testSetHS" class="highscoreTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/highscoreTest.php" line="11" assertions="1" time="0.006756"/>
-      <testcase name="testGetHS" class="highscoreTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/highscoreTest.php" line="15" assertions="1" time="0.044252">
+    <testsuite name="chatTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/chatTest.php" tests="1" assertions="1" failures="0" errors="0" time="0.007299">
+      <testcase name="testcardColor" class="chatTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/chatTest.php" line="11" assertions="1" time="0.007299"/>
+    </testsuite>
+    <testsuite name="friendTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/friendTest.php" tests="7" assertions="26" failures="0" errors="0" time="0.376895">
+      <testcase name="testgetFriendsCount" class="friendTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/friendTest.php" line="13" assertions="4" time="0.051865"/>
+      <testcase name="testaddFriend" class="friendTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/friendTest.php" line="28" assertions="3" time="0.027394"/>
+      <testcase name="testdeleteFriend" class="friendTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/friendTest.php" line="38" assertions="2" time="0.017050"/>
+      <testcase name="testgetFriendship" class="friendTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/friendTest.php" line="49" assertions="3" time="0.070785"/>
+      <testcase name="testgetMutualFriends" class="friendTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/friendTest.php" line="68" assertions="4" time="0.079890"/>
+      <testcase name="testgetFriendRequests" class="friendTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/friendTest.php" line="83" assertions="5" time="0.059154"/>
+      <testcase name="testgetPendingFriends" class="friendTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/friendTest.php" line="100" assertions="5" time="0.070757"/>
+    </testsuite>
+    <testsuite name="highscoreTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/highscoreTest.php" tests="4" assertions="4" failures="2" errors="0" time="0.063615">
+      <testcase name="testSetHS" class="highscoreTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/highscoreTest.php" line="11" assertions="1" time="0.007240"/>
+      <testcase name="testGetHS" class="highscoreTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/highscoreTest.php" line="15" assertions="1" time="0.027202">
         <failure type="PHPUnit_Framework_ExpectationFailedException">highscoreTest::testGetHS
 Failed asserting that two strings are equal.
 --- Expected
@@ -21,7 +33,7 @@ Failed asserting that two strings are equal.
 /Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/highscoreTest.php:16
 </failure>
       </testcase>
-      <testcase name="testarrayBuilder" class="highscoreTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/highscoreTest.php" line="18" assertions="1" time="0.013375">
+      <testcase name="testarrayBuilder" class="highscoreTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/highscoreTest.php" line="18" assertions="1" time="0.014791">
         <failure type="PHPUnit_Framework_ExpectationFailedException">highscoreTest::testarrayBuilder
 Failed asserting that two arrays are equal.
 --- Expected
@@ -35,64 +47,61 @@ Failed asserting that two arrays are equal.
 /Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/highscoreTest.php:19
 </failure>
       </testcase>
-      <testcase name="testGetCoins" class="highscoreTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/highscoreTest.php" line="21" assertions="1" time="0.031911"/>
+      <testcase name="testGetCoins" class="highscoreTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/highscoreTest.php" line="21" assertions="1" time="0.014382"/>
     </testsuite>
-    <testsuite name="loginTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/loginTest.php" tests="6" assertions="7" failures="0" errors="0" time="0.170327">
-      <testcase name="testloginUser" class="loginTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/loginTest.php" line="9" assertions="2" time="0.014682"/>
-      <testcase name="testregUser" class="loginTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/loginTest.php" line="14" assertions="1" time="0.097158"/>
-      <testcase name="testfindUser" class="loginTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/loginTest.php" line="17" assertions="1" time="0.010185"/>
-      <testcase name="testgetUser" class="loginTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/loginTest.php" line="20" assertions="1" time="0.014258"/>
-      <testcase name="testdeleteUser" class="loginTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/loginTest.php" line="23" assertions="1" time="0.026672"/>
-      <testcase name="testvalidatePassword" class="loginTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/loginTest.php" line="27" assertions="1" time="0.007372"/>
+    <testsuite name="loginTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/loginTest.php" tests="6" assertions="7" failures="0" errors="0" time="0.155502">
+      <testcase name="testloginUser" class="loginTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/loginTest.php" line="9" assertions="2" time="0.012710"/>
+      <testcase name="testregUser" class="loginTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/loginTest.php" line="14" assertions="1" time="0.063145"/>
+      <testcase name="testfindUser" class="loginTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/loginTest.php" line="17" assertions="1" time="0.011714"/>
+      <testcase name="testgetUser" class="loginTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/loginTest.php" line="20" assertions="1" time="0.013043"/>
+      <testcase name="testdeleteUser" class="loginTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/loginTest.php" line="23" assertions="1" time="0.041469"/>
+      <testcase name="testvalidatePassword" class="loginTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/loginTest.php" line="27" assertions="1" time="0.013421"/>
     </testsuite>
-    <testsuite name="productTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/productTest.php" tests="4" assertions="7" failures="0" errors="1" time="0.123646">
-      <testcase name="testaddProduct" class="productTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/productTest.php" line="15" assertions="4" time="0.054920"/>
-      <testcase name="testmakeShopOrder" class="productTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/productTest.php" line="37" assertions="2" time="0.040994"/>
-      <testcase name="testupdateProductAmount" class="productTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/productTest.php" line="49" assertions="1" time="0.016010"/>
-      <testcase name="testaddToCollection" class="productTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/productTest.php" line="59" assertions="0" time="0.011722">
-        <error type="PHPUnit_Framework_Error_Notice">productTest::testaddToCollection
-Undefined offset: 3
+    <testsuite name="productTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/productTest.php" tests="4" assertions="7" failures="0" errors="1" time="0.160716">
+      <testcase name="testaddProduct" class="productTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/productTest.php" line="18" assertions="4" time="0.058630"/>
+      <testcase name="testmakeShopOrder" class="productTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/productTest.php" line="40" assertions="2" time="0.037195"/>
+      <testcase name="testupdateProductAmount" class="productTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/productTest.php" line="55" assertions="1" time="0.017106"/>
+      <testcase name="testaddToCollection" class="productTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/productTest.php" line="68" assertions="0" time="0.047785">
+        <error type="RedBeanPHP\RedException\SQL">productTest::testaddToCollection
+RedBeanPHP\RedException\SQL: SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'id' cannot be null
 
-/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/productTest.php:62
+/Users/sainipatala/Documents/PHP/PlayAndWin/rest/dependencies/libraries/rb.php:720
+/Users/sainipatala/Documents/PHP/PlayAndWin/rest/dependencies/libraries/rb.php:882
+/Users/sainipatala/Documents/PHP/PlayAndWin/rest/dependencies/libraries/rb.php:919
+/Users/sainipatala/Documents/PHP/PlayAndWin/rest/dependencies/libraries/rb.php:3539
+/Users/sainipatala/Documents/PHP/PlayAndWin/rest/dependencies/libraries/rb.php:4968
+/Users/sainipatala/Documents/PHP/PlayAndWin/rest/dependencies/libraries/rb.php:5095
+/Users/sainipatala/Documents/PHP/PlayAndWin/rest/dependencies/libraries/rb.php:7638
+/Users/sainipatala/Documents/PHP/PlayAndWin/rest/dependencies/libraries/rb.php:7225
+/Users/sainipatala/Documents/PHP/PlayAndWin/rest/dependencies/libraries/rb.php:8302
+/Users/sainipatala/Documents/PHP/PlayAndWin/rest/dependencies/libraries/rb.php:10619
+/Users/sainipatala/Documents/PHP/PlayAndWin/rest/dependencies/models/product.php:100
+/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/productTest.php:72
 </error>
       </testcase>
     </testsuite>
-    <testsuite name="searchTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/searchTest.php" tests="1" assertions="1" failures="0" errors="0" time="0.009908">
-      <testcase name="testsearchUsers" class="searchTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/searchTest.php" line="11" assertions="1" time="0.009908"/>
+    <testsuite name="searchTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/searchTest.php" tests="1" assertions="1" failures="0" errors="0" time="0.010579">
+      <testcase name="testsearchUsers" class="searchTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/searchTest.php" line="11" assertions="1" time="0.010579"/>
     </testsuite>
-    <testsuite name="tradeTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/tradeTest.php" tests="5" assertions="12" failures="0" errors="0" time="0.261491">
-      <testcase name="testaddNewTrade" class="tradeTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/tradeTest.php" line="10" assertions="3" time="0.055472"/>
-      <testcase name="testcountOpenTrades" class="tradeTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/tradeTest.php" line="29" assertions="3" time="0.051586"/>
-      <testcase name="testeditTrade" class="tradeTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/tradeTest.php" line="43" assertions="2" time="0.086483"/>
-      <testcase name="testdeleteTrade" class="tradeTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/tradeTest.php" line="60" assertions="2" time="0.056225"/>
-      <testcase name="testuserHasProduct" class="tradeTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/tradeTest.php" line="74" assertions="2" time="0.011725"/>
+    <testsuite name="tradeTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/tradeTest.php" tests="1" assertions="0" failures="0" errors="1" time="0.013465">
+      <testcase name="testaddNewTrade" class="tradeTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/tradeTest.php" line="13" assertions="0" time="0.013465">
+        <error type="PHPUnit_Framework_Error_Warning">tradeTest::testaddNewTrade
+Invalid argument supplied for foreach()
+
+/Users/sainipatala/Documents/PHP/PlayAndWin/rest/dependencies/models/trade.php:37
+/Users/sainipatala/Documents/PHP/PlayAndWin/rest/dependencies/models/trade.php:10
+/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/tradeTest.php:22
+</error>
+      </testcase>
     </testsuite>
-    <testsuite name="userTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/userTest.php" tests="13" assertions="29" failures="2" errors="0" time="0.523295">
-      <testcase name="testcheckEmpty" class="userTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/userTest.php" line="14" assertions="3" time="0.007272"/>
-      <testcase name="testgetAdmin" class="userTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/userTest.php" line="20" assertions="0" time="0.009812"/>
-      <testcase name="testgetUserInfo" class="userTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/userTest.php" line="25" assertions="1" time="0.016352"/>
-      <testcase name="testsetUserInfo" class="userTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/userTest.php" line="37" assertions="2" time="0.160157"/>
-      <testcase name="testgetFriendsCount" class="userTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/userTest.php" line="45" assertions="4" time="0.039202"/>
-      <testcase name="testaddFriend" class="userTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/userTest.php" line="56" assertions="3" time="0.023248"/>
-      <testcase name="testdeleteFriend" class="userTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/userTest.php" line="62" assertions="2" time="0.018248"/>
-      <testcase name="testgetFriendship" class="userTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/userTest.php" line="67" assertions="3" time="0.067973"/>
-      <testcase name="testgetMutualFriends" class="userTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/userTest.php" line="82" assertions="4" time="0.086008"/>
-      <testcase name="testgetFriendRequests" class="userTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/userTest.php" line="93" assertions="2" time="0.023616">
-        <failure type="PHPUnit_Framework_ExpectationFailedException">userTest::testgetFriendRequests
-Failed asserting that 0 matches expected 1.
-
-/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/userTest.php:97
-</failure>
-      </testcase>
-      <testcase name="testgetPendingFriends" class="userTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/userTest.php" line="104" assertions="3" time="0.039698">
-        <failure type="PHPUnit_Framework_ExpectationFailedException">userTest::testgetPendingFriends
-Failed asserting that 0 matches expected 1.
-
-/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/userTest.php:111
-</failure>
-      </testcase>
-      <testcase name="testgetLastLoggedIn" class="userTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/userTest.php" line="118" assertions="1" time="0.014165"/>
-      <testcase name="testgetNewUsers" class="userTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/userTest.php" line="121" assertions="1" time="0.017544"/>
+    <testsuite name="userTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/userTest.php" tests="7" assertions="10" failures="0" errors="0" time="0.462143">
+      <testcase name="testcheckEmpty" class="userTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/userTest.php" line="14" assertions="3" time="0.011039"/>
+      <testcase name="testgetAdmin" class="userTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/userTest.php" line="24" assertions="0" time="0.010779"/>
+      <testcase name="testgetUserInfo" class="userTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/userTest.php" line="33" assertions="1" time="0.022806"/>
+      <testcase name="testsetUserPublicInfo" class="userTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/userTest.php" line="42" assertions="2" time="0.190763"/>
+      <testcase name="testsetUserPrivateInfo" class="userTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/userTest.php" line="50" assertions="2" time="0.198156"/>
+      <testcase name="testgetLastLoggedIn" class="userTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/userTest.php" line="62" assertions="1" time="0.013620"/>
+      <testcase name="testgetNewUsers" class="userTest" file="/Users/sainipatala/Documents/PHP/PlayAndWin/PHPUnitTests/userTest.php" line="70" assertions="1" time="0.014980"/>
     </testsuite>
   </testsuite>
 </testsuites>

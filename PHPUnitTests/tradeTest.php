@@ -6,19 +6,20 @@ echo "xxxxx" . getcwd();
 require_once '../rest/dependencies/require_all.php';
 
 final class tradeTest extends TestCase {
-
   /*
   * Tests that addNewTrade adds a new trade to the database
   */
 
   public function testaddNewTrade() {
+    //R::exec('insert into collection VALUES(1, "{"1": 1}")');
     $user = 1;
     $product = 1;
     $price = 999;
     $desc = 'test';
     // Testing to insert a new trade
+
     R::exec('DELETE FROM trades WHERE seller_id = :id', [':id' => $user]);
-    $response = addNewTrade($user, $product, $price, $desc);
+    //$response = addNewTrade($user, $product, $price, $desc);
     $this->assertEquals('Product has been put for sale!', $response['success']);
     // Testing to insert the same trade twice
     $response = addNewTrade($user, $product, $price, $desc);
@@ -100,6 +101,7 @@ final class tradeTest extends TestCase {
     /**
      * Tests that coins are added corrected to the user.
      */
+
   public function testaddCoinsToUser(){
       $old_coins = R::getCell('SELECT coins FROM user WHERE id = 1');
       addCoinsToUser(1, 50);
@@ -111,6 +113,7 @@ final class tradeTest extends TestCase {
     /**
      * Tests that a product is removed from collection.
      */
+
   public function testremoveFromCollection(){
       $collection = R::load('collection', 1);
       $products = json_decode($collection->products, true);
