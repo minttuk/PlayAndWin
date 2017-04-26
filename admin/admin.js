@@ -150,8 +150,11 @@ function updateProduct(product, callback) {
 
 function displayAllProducts() {
   getAllProducts(function(error, response) {
-    if (response) {
+    if (response && !response.error) {
       fillProductsTable(response);
+    }
+    else if (response.error) {
+      window.location.replace("../");
     }
   });
 }
@@ -342,7 +345,7 @@ function showTranslations() {
   $('#admin-translation-table').html('');
   $('#admin-missing-translation-table').html('');
   getProductTranslations(function(error, response) {
-    if (response) {
+    if (response && !response.error) {
       generateTableHeadings();
       var first = true;
       var havemissing = false;
@@ -364,6 +367,9 @@ function showTranslations() {
         clearTranslationForm();
         $('#admin-translation-form').css('display', 'none');
       }
+    }
+    else if (response.error) {
+      window.location.replace("../");
     }
   });
 }
@@ -538,8 +544,11 @@ function initTranslateHandlers() {
 
 function translateButtonClicked(id) {
   getProductTranslationById(id, function(error, response) {
-    if (response) {
+    if (response && !response.error) {
       prefillTranslationForm(response);
+    }
+    else if (response.error) {
+      window.location.replace("../");
     }
   });
 }
