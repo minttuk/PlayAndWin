@@ -43,7 +43,15 @@
             <h3>Admin Board</h3>
           </a>
           <div class="admin_sidenav">
-            <h3>Product</h3>
+            <h3>Users</h3>
+            <ul>
+              <li id="admin-manage-users-nav">Manage Users</li>
+            </ul>
+            <h3>Chat</h3>
+            <ul>
+              <li id="admin-manage-chat-nav">Manage Chat</li>
+            </ul>
+            <h3>Products</h3>
             <ul>
               <li id="admin-manage-products-nav">Manage Products</li>
             </ul>
@@ -61,7 +69,31 @@
       </div>
 
       <div class="col-md-10 admin_mainarea">
-        <div id="admin-manage-products">
+        <div id="admin-manage-users">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">Users</h3>
+              </div>
+              <div class="panel-body">
+                <table style="width:100%" id="admin-users-table">
+                  <tr><th>Username</th><th>Name</th><th>Email</th><th>Coins</th><th>Last Online</th><th>Action</th></tr>
+                </table>
+              </div>
+            </div>
+        </div>
+        <div id="admin-manage-chat" class='hidden'>
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">Chat</h3>
+              </div>
+              <div class="panel-body">
+                <table style="width:100%" id="admin-chat-table">
+                  <tr><th>Username</th><th>Message</th><th>Time</th><th>Action</th></tr>
+                </table>
+              </div>
+            </div>
+        </div>
+        <div id="admin-manage-products" class='hidden'>
           <div class="admin_addproductarea contentbox">
             <div class="admin_addproductform">
               <h4 id="admin-addproductform-heading">Product Information</h4>
@@ -117,7 +149,7 @@
           </div>
         </div>
 
-        <div class="admin_addtranslationarea row">
+        <div class="admin_addtranslationarea row hidden">
           <div id="admin-translation-form" class="row contentbox">
             <h3 id="admin-translate-form-heading"></h3>
             <div class="col-md-6">

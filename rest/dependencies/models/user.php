@@ -208,6 +208,15 @@ function getAdmin($id){
 }
 
 /**
+ * Checks the admin status of the user signed in. Returns a boolean value of the admin status.
+ *
+ * @param int $id is the id number of the user
+ */
+function isAdmin($id){
+    return R::getCell('select admin from user where id= :id',[':id'=>$id]) === '1';
+}
+
+/**
  * Gets the amount of coins associated with a given user ID from the database.
  *
  * @param int $id is the ID number of the user.
@@ -257,6 +266,18 @@ function collection($id) {
 
 function getUserAttribute($id,$attribute) {
   return R::getCell('SELECT '.$attribute.' FROM user WHERE id = :id',[':id' => $id]);
+}
+
+function getUsers($id){
+  return R::getAll( 'SELECT id, username,
+  email, coins, firstname, lastname, reg_date last_online, banned FROM user' );
+}
+
+function banUser($id){
+  $user = R::load('user',$id);
+  $user->banned == 0 ? $user->banned = 1 : $user->banned = 0;
+  R::store($user);
+  return $user->banned;
 }
 
 ?>

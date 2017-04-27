@@ -1,38 +1,102 @@
-// General
-
-/**
- * Changes elements css display into block
- *
- * @param {string} elementname The div name to display
- */
-
-function showElement(elementname) {
-  $(elementname).css('display', 'block');
-}
-
-/**
- * Changes elements css display into none
- *
- * @param {string} elementname The div name to hide
- */
-
-function hideElement(elementname) {
-  $(elementname).css('display', 'none');
-}
 
 // Navigation
 var lang;
 
+  $.getJSON('/rest/users', function (data) {
+    $.each(data, function (i,user) {
+      var banned =  user.banned == 0 ? 'Ban' : 'Unban';
+      var btnClass =  user.banned == 0 ? 'btn-warning' : 'btn-success';
+      $('#admin-users-table').append(
+      '<tr><td>' + user.username + '</td>' +
+      '<td>' + user.firstname + ' ' + user.lastname + '</td>' +
+      '<td>' + user.email + '</td> ' +
+      '<td>' + user.coins + '</td> ' +
+      '<td>' + user.last_online + '</td> ' +
+      '<td><button type="button" data-userID="' + user.id +
+      '" class="btn ' + btnClass + ' admin-ban-user">' + banned + '</button>' +
+      '<button type="button" data-userid="' + user.id +
+      '" class="btn btn-danger admin-delete-user">Delete</button></td></tr>');
+    });
+    $('.admin-ban-user').click(function() {
+      $.ajax({
+        type: "PUT",
+        url: "/rest/user/ban/"+$(this).data('userid'),
+        context: this,
+        success: function (response) {
+          $(this).text(response == 0 ? 'Ban' : 'Unban');
+          $(this).toggleClass(response == 0 ? 'btn-success btn-warning' : 'btn-warning btn-success');
+        }
+      });
+    });
+
+    $('.admin-delete-user').click(function() {
+      if(confirm('Are you sure you want to delete the user!\nAll the information associated with this account will be lost.')){
+        $.ajax({
+          type: "DELETE",
+          url: "/rest/user/"+$(this).data('userid'),
+          context: this,
+          success: function (response) {
+            $(this).closest('tr').remove();
+          }
+        });
+      }
+    });
+  });
+
+
+    $.getJSON('/rest/chat', function (data) {
+      $.each(data, function (i,msg) {
+        $('#admin-chat-table').append(
+        '<tr><td>' + msg.username + '</td>' +
+        '<td>' + msg.msg + '</td>' +
+        '<td>' + msg.ts + '</td> ' +
+        '<td><button type="button" data-msgid="' + msg.id +
+        '" class="btn btn-danger admin-delete-msg">Delete</button></tr>');
+      });
+      $('.admin-delete-msg').click(function() {
+        $.ajax({
+          type: "DELETE",
+          url: "/rest/chat/"+$(this).data('msgid'),
+          context: this,
+          success: function (response) {
+            $(this).closest('tr').remove();
+          }
+        });
+      });
+    });
+
+
+
+
+
+  $('#admin-manage-users-nav').click(function() {
+    $('#admin-manage-users').show();
+    $('#admin-manage-chat').hide();
+    $('.admin_addtranslationarea').hide();
+    $('#admin-manage-products').hide();
+  });
+
+  $('#admin-manage-chat-nav').click(function() {
+    $('#admin-manage-users').hide();
+    $('#admin-manage-chat').show();
+    $('.admin_addtranslationarea').hide();
+    $('#admin-manage-products').hide();
+  });
+
 $('#admin-manage-products-nav').click(function() {
-  hideElement('.admin_addtranslationarea');
-  showElement('#admin-manage-products');
+  $('#admin-manage-users').hide();
+  $('#admin-manage-chat').hide();
+  $('.admin_addtranslationarea').hide();
+  $('#admin-manage-products').show();
 });
 
 $('.admin-trasnlate-products-nav').click(function() {
-  hideElement('#admin-manage-products');
+  $('#admin-manage-users').hide();
+  $('#admin-manage-chat').hide();
+  $('#admin-manage-products').hide();
   lang = $(this).data('lang');
   $('#admin-translate-form-heading').text('Translate [' + lang + ']');
-  showElement('.admin_addtranslationarea');
+  $('.admin_addtranslationarea').show();
   showTranslations();
 });
 
@@ -40,12 +104,18 @@ $('.admin-trasnlate-products-nav').click(function() {
 // Manage products
 
 $('#admin_addproductbtn').click(function() {
-  showElement('.admin_addproductarea');
+  $('.admin_addproductarea').show();
 });
 
 $('#admin_addproductcancelbtn').click(function() {
   clearAddproductForm();
-  hideElement('.admin_addproductarea');
+  $('.admin_addproductarea').hide();
+});
+
+$('#admin-manage-users-nav').click(function() {
+  $('#admin-manage-users').show();
+  $('.admin_addtranslationarea').hide();
+  $('#admin-manage-products').hide();
 });
 
 /**
@@ -56,7 +126,7 @@ function initHandlersForDynamicElements() {
   $('.admin_editproductbtn').unbind();
   $('.admin_editproductbtn').click(function () {
     prefillAddproductForm($(this).data('productid'));
-    showElement('.admin_addproductarea');
+    $('.admin_addproductarea').show();
     $('.admin_mainarea').animate({ scrollTop: 0, scrollLeft: 0 }, "fast");
   });
 }
@@ -92,7 +162,7 @@ function handleAddProductForm() {
         displayAllProducts();
       });
     }
-    hideElement('.admin_addproductarea');
+    $('.admin_addproductarea').hide();
     clearAddproductForm();
   }
 }
@@ -533,9 +603,9 @@ function updateTranslation(translation, callback) {
 function initTranslateHandlers() {
   $('.admin_translateproductbtn').unbind();
   $('.admin_translateproductbtn').click(function() {
-  showElement('#admin-translation-form');
-  $('.admin_mainarea').animate({ scrollTop: 0, scrollLeft: 0 }, "fast");
-  translateButtonClicked($(this).attr('data-productid'));
+    $('#admin-translation-form').show();
+    $('.admin_mainarea').animate({ scrollTop: 0, scrollLeft: 0 }, "fast");
+    translateButtonClicked($(this).attr('data-productid'));
     console.log('click');
   });
 }
@@ -558,7 +628,7 @@ function translateButtonClicked(id) {
 }
 
 $('#admin-cancel-translation-btn').click(function() {
-  hideElement('#admin-translation-form');
+  $('#admin-translation-form').hide();
 });
 
 $('#admin-save-translation-btn').click(function() {

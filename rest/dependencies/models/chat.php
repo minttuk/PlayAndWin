@@ -27,6 +27,17 @@ function getChat(){
 }
 
 /**
+ * Delete a chat entry from the database.
+ *
+ * Deletes a chat entry from the database based on the given chat message ID
+ */
+function deleteChat($id) {
+    $msg = R::load('chatroom',$id);
+    R::trash($msg);
+    return 'Chat message '.$id.' has been deleted.';
+}
+
+/**
  * Add a new chat entry to the database.
  *
  * Stores a chat entry into the database based on the users Session ID and

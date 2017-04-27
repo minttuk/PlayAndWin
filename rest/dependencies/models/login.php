@@ -28,16 +28,24 @@ function loginUser($uname, $password, $confirmPass, $email, $firstname, $lastnam
           sendEmail($email,$uname,'welcome');
           setcookie("access_token",generateToken($id,$uname), time()+60*60*24*14, '/');
           return json_encode(array('token'=>generateToken($id,$uname)));
-        } else $message['data'] = 'Username taken, try again!';
+        } else {
+          $message['data'] = 'Username taken, try again!';
+        }
     }
   } else if ($uname) {
     $player = findUser($uname);
 
     if($player ? ($player->password==$password) : false) {
-      updateLastOnline($player->id);
-      setcookie("access_token",generateToken($player->id,$uname), time()+60*60*24*14, '/');
-      return json_encode(array('token'=>generateToken($player->id,$uname)));
-    } else  $message['data'] = 'Nope, wrong username or password!';
+      if ($player->banned == 0) {
+        updateLastOnline($player->id);
+        setcookie("access_token",generateToken($player->id,$uname), time()+60*60*24*14, '/');
+        return json_encode(array('token'=>generateToken($player->id,$uname)));
+      } else {
+        $message['data'] = 'Sorry but you have been banned.';
+      }
+    } else {
+      $message['data'] = 'Nope, wrong username or password!';
+    }
   } else {
     $message = isset(getallheaders()['access_token'])||isset($_COOKIE['access_token']) ? array('id'=>validateToken(),'name'=>R::getCell('SELECT username FROM user WHERE id='.validateToken())) : -1;
   }

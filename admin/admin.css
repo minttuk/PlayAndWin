@@ -1,6 +1,7 @@
 
 .admin_container {
   height:100vh;
+  background-color: #003d71;
 }
 
 h3 {
@@ -41,9 +42,15 @@ li {
   cursor: pointer;
 }
 
-li:hover {
-  color: white;
-  font-weight: bold;
+li:hover ,.dropdown-toggle:hover {
+  color: white !important;
+  font-weight: bold !important;
+}
+
+.dropdown-toggle {
+  cursor: pointer;
+  font-weight: 400 !important;
+  color: lavender !important;
 }
 
 /* Mainarea */
@@ -91,12 +98,14 @@ tr {
   padding-bottom: 10px;
 }
 
-#admin-translate-form-heading {
-  margin-bottom: 20px;
+td {
+  max-width:200px;
+  word-wrap:break-word;
+  padding-right:10px;
 }
 
-#admin-translation-form {
-  display: none;
+#admin-translate-form-heading {
+  margin-bottom: 20px;
 }
 
 .errormsg {
@@ -108,9 +117,24 @@ tr {
   color:#fff;
 }
 
+#admin-manage-users, #admin-manage-chat {
+  padding-top:20px;
+}
+
+.dropdown > ul {
+  width: 75%;
+  text-align: center;
+}
+
 @media (max-width: 992px) {
   .admin_sidepanel {
     height:70vh;
+  }
+}
+
+@media (min-width: 992px) {
+  h1 {
+    font-size: 2.5vw;
   }
 }
 

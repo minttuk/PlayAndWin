@@ -11,7 +11,7 @@ Flight::route('/', function(){
 });
 
 Flight::route('/test', function(){
-     echo validateBirthday('1111-04-30');
+     echo isAdmin(4);
 });
 
 // --------------------------   PRIVATE REST API   -------------------------- //
@@ -68,7 +68,9 @@ Flight::route('PUT /user/password', function(){
         );
     }
 });
-
+Flight::route('PUT /user/ban/@id', function($id){
+    if (adminPrivilages()) echo banUser($id);
+});
 Flight::route('POST /user/image', function(){
     if (isToken()) echo uploadImage(validateToken());
 });
@@ -80,6 +82,11 @@ Flight::route('DELETE /user/@id', function($id){
 });
 Flight::route('/user/admin', function(){
     if (isToken()) Flight::json(getAdmin(validateToken()));
+});
+
+// Users
+Flight::route('/users', function(){
+    if (adminPrivilages()) Flight::json(getUsers(validateToken()));
 });
 
 // Collection
@@ -216,11 +223,11 @@ Flight::route('POST /trades/new', function() {
   ));
 });
 
-flight::route('/trades/history/@lang', function($lang) {
+Flight::route('/trades/history/@lang', function($lang) {
   Flight::json(getTradeHistory(validateToken(),$lang));
 });
 
-flight::route('/trades/history', function() {
+Flight::route('/trades/history', function() {
   Flight::json(getTradeHistory(validateToken()));
 });
 
@@ -235,7 +242,7 @@ flight::route('PUT /trades', function(){
   }
 });
 
-flight::route('DELETE /trades', function(){
+Flight::route('DELETE /trades', function(){
   Flight::json(deleteTrade(validateToken(), Flight::request()->query->tradeid));
 });
 
@@ -243,6 +250,11 @@ Flight::route('/trades/buy', function(){
     if (isToken() && Flight::request()->query->trade != null) {
         echo buyTradeProduct(validateToken(),Flight::request()->query->trade);
     }
+});
+
+// Chat
+Flight::route('DELETE /chat/@id', function($id){
+    if(adminPrivilages()) echo deleteChat($id);
 });
 
 
@@ -346,4 +358,9 @@ function isFriendParams() {
 function isToken() {
     if (isset(getallheaders()['access_token'])||isset($_COOKIE['access_token'])) return true;
     else echo 'Not logged in or no access token provided.'; return false;
+}
+
+function adminPrivilages() {
+    if (isToken()) return isAdmin(validateToken());
+    else echo 'You must be an administrator to make this request.'; return false;
 }
