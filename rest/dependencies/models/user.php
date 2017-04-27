@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Returns users id, username, profile picture, firstname, lastname, description, location, registration date, last time online time and a list of friends ids
+ * Returns users id, username, profile picture, firstname, lastname, age, gender, description, location, registration date, last time online time and a list of friends ids
  *
  * @param $id is the user id whose information is retrieved
  *
@@ -38,9 +38,9 @@ function getUserInfo($id) {
 }
 
 /**
- * Updates user firstname, lastname, description and location. Returns updated user
+ * Updates user's public information: description and location. Returns updated user
  *
- * @param $id is the user id that will be updated. $firstname, $lastname, $description and $location are the values to update the user table with
+ * @param $id is the user id that will be updated. $description and $location are the values to update the user table with
  *
  * @return PHP array
  */
@@ -53,6 +53,16 @@ function setUserPublicInfo($id, $description, $location) {
   return $user;
 }
 
+/**
+ * Updates user's private information: firstname, lastname and gender to the database.
+ *
+ * @param $id is the id number of the user
+ * @param $firstname
+ * @param $lastname
+ * @param $age
+ * @param $gender
+ * @return \RedBeanPHP\OODBBean
+ */
 function setUserPrivateInfo($id, $firstname, $lastname, $age, $gender) {
     $user = R::load( 'user', $id);
     $user->firstname = $firstname;
@@ -63,14 +73,23 @@ function setUserPrivateInfo($id, $firstname, $lastname, $age, $gender) {
     return $user;
 }
 
+/**
+ * Changes the password of a user.
+ *
+ * @param $id
+ * @param $newpassword
+ * @param $confirmpassword
+ * @return string is the message informing user if password could not be changed
+ */
 function changePassword($id, $newpassword, $confirmpassword){
+    global $message;
     $user = R::load( 'user', $id);
     if (validatePassword($newpassword, $confirmpassword)){
         $password = md5(md5($user->username.$newpassword));
         $user->password = $password;
         R::store($user);
     }
-    return $user;
+    return json_encode($message);
 }
 
 /**

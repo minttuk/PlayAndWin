@@ -109,9 +109,19 @@ $( "#savenewpassword" ).click(function() {
         data: JSON.stringify({"newpassword": $newpassword, "confirmpassword": $confirmpassword}),
         success: function (response){
             //console.log('success');
-            $('input[name="NewPassword"]').val("");
-            $('input[name="ConfirmPassword"]').val("");
-            getUserInfo();
+            if (response.data){
+                translate(response.data, function(translation){
+                    $(".errormessage").animate({'padding-top': "20px",'padding-bottom': "10px"},300, function(){
+                        $('.errormessage').hide().text(translation).fadeIn('slow');
+                    });
+                });
+            }
+            else {
+                $('input[name="NewPassword"]').val("");
+                $('input[name="ConfirmPassword"]').val("");
+                $('.errormessage').text("");
+            }
+
         },
         error: function(jqXHR, textStatus, errorThrown) {
             console.log(textStatus, errorThrown);
