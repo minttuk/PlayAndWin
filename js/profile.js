@@ -50,6 +50,9 @@ function getSession() {
   });
 }
 
+/**
+ * Saving public profile information from the Account Settings form
+ */
 $( "#savepublicprofilebutton" ).click(function() {
   console.log("savepublicprofilebutton clicked");
   var $newdescription = $('input[name="newdescription"]').val();
@@ -70,6 +73,9 @@ $( "#savepublicprofilebutton" ).click(function() {
     });
 });
 
+/**
+ * Saving private profile information from the Account Settings form
+ */
 $( "#saveprivateprofilebutton" ).click(function() {
     console.log("saveprivateprofilebutton clicked");
     var $newfirstname = $('input[name="newfirstname"]').val();
@@ -96,7 +102,9 @@ $( "#saveprivateprofilebutton" ).click(function() {
         $('.errormessage').text("Please fill in your first and last name.");
     }
 });
-
+/**
+ * Saving a new password from the Account Settings form after it is checked
+ */
 $( "#savenewpassword" ).click(function() {
     console.log("savenewpassword clicked");
     var $newpassword = $('input[name="NewPassword"]').val();

@@ -1,3 +1,6 @@
+/**
+ * Generates the view of traded products
+ */
 function generateTrades() {
     $('#shop_prizes').animate({
         'font-size': '0.5em'
@@ -43,6 +46,9 @@ function showConfirmButtons() {
     });
 }
 
+/**
+ * Generates the view of prizes in the webstore.
+ */
 function generateProducts() {
     $('#shop_prizes').animate({
         'font-size': '1em'
