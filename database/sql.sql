@@ -22,7 +22,7 @@ CREATE TABLE user (
   profilepicture VARCHAR(100) DEFAULT 'default.png',
   coins INT(10) DEFAULT 0,
   admin BOOLEAN DEFAULT 0,
-  birthday DATE NOT NULL;
+  birthday DATE NOT NULL
 );
 
 
@@ -47,6 +47,7 @@ CREATE TABLE product_fi (
   id INT(6) PRIMARY KEY NOT NULL,
   name VARCHAR(100) NOT NULL,
   description VARCHAR (500) NOT NULL,
+  original_edited BOOLEAN default 0,
   FOREIGN KEY (id) REFERENCES product(id)
 );
 
@@ -54,6 +55,7 @@ CREATE TABLE product_ja (
   id INT(6) PRIMARY KEY NOT NULL,
   name VARCHAR(100)NOT NULL,
   description VARCHAR (500) NOT NULL,
+  original_edited BOOLEAN default 0,
   FOREIGN KEY (id) REFERENCES product(id)
 );
 
@@ -118,10 +120,6 @@ CREATE TABLE collection (
   FOREIGN KEY (id) REFERENCES user(id)
 );
 
-INSERT INTO collection (id, products) VALUES
-  (1, '{"1": 1, "4": 1}'),
-  (2, '{"1": 2, "3": 4}');
-
 INSERT INTO product (price, name, description, image_url, amount) VALUES
 (9000000, "Tesla car", "Super cool luxury car!", "https://tctechcrunch2011.files.wordpress.com/2015/08/tesla_model_s.jpg?w=738", 10),
 (5000, "Aliexpress giftcard", "20 dollar giftcard to Aliexpress!", "https://alixblog.com/wp-content/uploads/2015/02/Aliexpress-China.png", 5000),
@@ -154,6 +152,10 @@ VALUES('Bobby', 'testi1', 'testi1', 'testi1@testi1.fi', '6dcf1cff0946426cc3bba39
 
 INSERT INTO user(username, firstname, lastname, email, password, coins, admin, reg_date, last_online)
 VALUES('Boss', 'admin', 'admin', 'admin@playandwin.fi', 'ec15d79e36e14dd258cfff3d48b73d35', '50000', '1', '2017-03-06 10:05:09', '2017-03-06 10:05:09');
+
+INSERT INTO collection (id, products) VALUES
+  (1, '{"1": 1, "4": 1}'),
+  (2, '{"1": 2, "3": 4}');
 
 INSERT INTO trades (seller_id, product_id, price, description) VALUES (1, 1, 50, 'Selling this cause I dont need it');
 

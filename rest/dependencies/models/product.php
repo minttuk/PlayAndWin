@@ -145,6 +145,18 @@ function updateProduct($id, $name, $price, $description, $image_url, $amount) {
   $product->image_url = $image_url;
   $product->amount = $amount;
   R::store($product);
+  $languages = array('fi', 'ja');
+  foreach ($languages as $language) {
+    updateTranslationOriginalEdited($id, $language, 1);
+  }
+}
+
+function updateTranslationOriginalEdited($id, $lang, $edited) {
+  $trans = R::load('product_'.$lang, $id);
+  if ($trans!=''){
+      $trans['original_edited'] = $edited;
+      R::store($trans);
+  }
 }
 
 /**
@@ -204,7 +216,8 @@ function getTranslations($lang) {
       'name' => $product['name'],
       'description' => $product['description'],
       'trans_name' => $trans['name'],
-      'trans_description' => $trans['description']
+      'trans_description' => $trans['description'],
+      'edited' => $trans['original_edited']
     );
   }
   return $response;
@@ -247,6 +260,7 @@ function updateTranslation($id, $lang, $name, $description) {
       $translation = R::load('product_' . $lang, $id);
       $translation->name = $name;
       $translation->description = $description;
+      $translation->original_edited = 0;
       R::store($translation);
       return array('message'=>'Translation saved.');
     }

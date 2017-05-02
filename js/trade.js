@@ -7,10 +7,8 @@ var opentrades;
  */
 
 $('#trade_submit_form').click(function () {
-  console.log("submintjee");
   if (checkFilled($('#formTradeName').val()) && checkInt($('#formTradePrice').val()) && checkFilled($('#formTradePrice').val())) {
     $('#tradeformerrormsg').text("");
-    console.log("kaikki true");
     addTrade(function (error, response) {
       console.log(error, response);
       if(response.hasOwnProperty('error')){
@@ -235,7 +233,6 @@ function fillEditTradeForm(tradeid) {
   $('#formNewTradeDescription').val(tradetoedit.description);
 }
 
-//check that price is not empty.
 $('#trade_submit_edited_form').click(function(){
   if (checkInt($('#formNewTradePrice').val())) {
     var trade = {"id": $('#trade_to_edit_id').val(), "price": $('#formNewTradePrice').val(), "description": $('#formNewTradeDescription').val()};

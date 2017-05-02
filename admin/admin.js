@@ -65,10 +65,6 @@ var lang;
       });
     });
 
-
-
-
-
   $('.admin-manage-users-nav').click(function() {
     $('#admin-manage-users').show();
     $('#admin-manage-chat').hide();
@@ -424,7 +420,7 @@ function showTranslations() {
       var first = true;
       var havemissing = false;
       for (i in response) {
-        if (response[i].trans_name == null || response[i].trans_description == null) {
+        if (response[i].trans_name == null || response[i].trans_description == null || response[i].edited == 1) {
           havemissing = true;
           appendToTranslationMissing(response[i]);
           if (first) {
