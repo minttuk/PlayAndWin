@@ -35,6 +35,42 @@
   </head>
 
   <body>
+      <nav id="myNavbar" class="navbar navbar-default mobile-nav" role="navigation">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="container">
+              <div class="navbar-header">
+                  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                      <span class="sr-only">Toggle navigation</span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                  </button>
+                  <a class="navbar-brand" href="#">PlayTalk.Win Admin Board</a>
+              </div>
+              <!-- Collect the nav links, forms, and other content for toggling -->
+              <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+                <ul>
+                  <li class="admin-manage-users-nav" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">Manage Users</li>
+                </ul>
+                <ul>
+                  <li class="admin-manage-chat-nav" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">Manage Chat</li>
+                </ul>
+                <ul>
+                  <li class="admin-manage-products-nav" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">Manage Products</li>
+                </ul>
+                <div class="dropdown">
+                  <div class="dropdown-toggle" type="button" data-toggle="dropdown">Translate Products
+                  <span class="caret"></span></div>
+                  <ul class="dropdown-menu">
+                    <li class="admin-trasnlate-products-nav" data-lang="ja" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"><a href="#">Japanese</a></li>
+                    <li class="admin-trasnlate-products-nav" data-lang="fi" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"><a href="#">Finnish</a></li>
+                  </ul>
+                </div>
+              </div><!-- /.navbar-collapse -->
+          </div>
+      </nav>
+
     <div class="row admin_container">
       <div class="col-md-2 admin_sidepanel">
         <div class="admin_sidepanelcontent">
@@ -45,15 +81,15 @@
           <div class="admin_sidenav">
             <h3>Users</h3>
             <ul>
-              <li id="admin-manage-users-nav">Manage Users</li>
+              <li class="admin-manage-users-nav">Manage Users</li>
             </ul>
             <h3>Chat</h3>
             <ul>
-              <li id="admin-manage-chat-nav">Manage Chat</li>
+              <li class="admin-manage-chat-nav">Manage Chat</li>
             </ul>
             <h3>Products</h3>
             <ul>
-              <li id="admin-manage-products-nav">Manage Products</li>
+              <li class="admin-manage-products-nav">Manage Products</li>
             </ul>
             <h3>Translation</h3>
             <div class="dropdown">

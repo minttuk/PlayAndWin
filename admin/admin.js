@@ -69,21 +69,21 @@ var lang;
 
 
 
-  $('#admin-manage-users-nav').click(function() {
+  $('.admin-manage-users-nav').click(function() {
     $('#admin-manage-users').show();
     $('#admin-manage-chat').hide();
     $('.admin_addtranslationarea').hide();
     $('#admin-manage-products').hide();
   });
 
-  $('#admin-manage-chat-nav').click(function() {
+  $('.admin-manage-chat-nav').click(function() {
     $('#admin-manage-users').hide();
     $('#admin-manage-chat').show();
     $('.admin_addtranslationarea').hide();
     $('#admin-manage-products').hide();
   });
 
-$('#admin-manage-products-nav').click(function() {
+$('.admin-manage-products-nav').click(function() {
   $('#admin-manage-users').hide();
   $('#admin-manage-chat').hide();
   $('.admin_addtranslationarea').hide();

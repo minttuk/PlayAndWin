@@ -18,7 +18,7 @@ h3 {
 
 .admin_sidepanelcontent {
   margin: 20px;
-  font-size: 16px;
+  font-size: 15px;
 }
 
 .admin_sidenav {
@@ -28,7 +28,7 @@ h3 {
 .admin_sidenav h3 {
   text-align: left;
   border-bottom: 1px solid white;
-  margin-top: 40px;
+  margin-top: 30px;
 }
 
 ul {
@@ -126,9 +126,96 @@ td {
   text-align: center;
 }
 
+body {
+  width: 99%;
+}
+
+.navbar-default .navbar-brand {
+  color: white;
+}
+
+.nav {
+  background-color: #003d71;
+}
+
+.navbar {
+  padding: 0px;
+  background-color: #003d71;
+  padding: 5px;
+}
+
+.dropdown-menu > li > a {
+  color: white !important;
+  font-weight: normal !important;
+  text-align: left;
+}
+
+.dropdown-menu > li > a:hover {
+    color: white !important;
+    font-weight: bold !important;
+    background-color: transparent;
+}
+
+.dropdown-menu {
+  background-color: #003d71 !important;
+  float: left !important;
+  font-weight: normal !important;
+  color: white;
+  border: none;
+  box-shadow: none;
+}
+
+.mobile-nav {
+  display: none;
+}
+
+.mobile-nav .navbar-default .navbar-nav>li>a {
+  color: white;
+}
+
+.navbar-collapse {
+  color: white;
+  font-size: 15px;
+  padding: 10px 10px 20px 10px;
+}
+
+.navbar-collapse.in {
+  color: white;
+  font-size: 15px;
+  padding: 10px 10px 20px 10px;
+}
+
+.dropdown > ul {
+    width: 100%;
+}
+
+.admin_managewebstore.contentbox {
+  width: 100% !important;
+}
+
+
 @media (max-width: 992px) {
   .admin_sidepanel {
-    height:70vh;
+    display: none;
+  }
+  ul {
+    padding-bottom: 20px;
+  }
+
+  .mobile-nav {
+    display: block;
+  }
+
+  .admin_mainarea {
+    padding-top: 70px;
+  }
+
+  .navbar-default .navbar-toggle {
+    border: 2px solid white;
+  }
+
+  .navbar-default .navbar-toggle .icon-bar {
+    background-color: white;
   }
 }
 
@@ -136,8 +223,4 @@ td {
   h1 {
     font-size: 2.5vw;
   }
-}
-
-body {
-  width: 99%;
 }
