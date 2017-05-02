@@ -139,17 +139,28 @@ function addProduct($id, $name, $price, $description, $image_url, $amount){
 
 function updateProduct($id, $name, $price, $description, $image_url, $amount) {
   $product = R::load('product', $id);
+  if ($product->name != $name || $product->description != $description) {
+    $languages = array('fi', 'ja');
+    foreach ($languages as $language) {
+      updateTranslationOriginalEdited($id, $language, 1);
+    }
+  }
   $product->name = $name;
   $product->price = $price;
   $product->description = $description;
   $product->image_url = $image_url;
   $product->amount = $amount;
   R::store($product);
-  $languages = array('fi', 'ja');
-  foreach ($languages as $language) {
-    updateTranslationOriginalEdited($id, $language, 1);
-  }
 }
+
+/**
+ * Updates translation tables to inform that the original product information has been changed and translation should be checked too
+ *
+ * @param int $id
+ * @param String $lang
+ * @param boolean $edited
+ *
+ */
 
 function updateTranslationOriginalEdited($id, $lang, $edited) {
   $trans = R::load('product_'.$lang, $id);
