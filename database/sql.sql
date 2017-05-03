@@ -22,7 +22,8 @@ CREATE TABLE user (
   profilepicture VARCHAR(100) DEFAULT 'default.png',
   coins INT(10) DEFAULT 0,
   admin BOOLEAN DEFAULT 0,
-  birthday DATE NOT NULL
+  birthday DATE NOT NULL,
+  banned TINYINT(1) NOT NULL DEFAULT '0';
 );
 
 
