@@ -40,9 +40,9 @@ final class productTest extends TestCase{
 
        public function testgetProductById() {
          $product = getProductById(1);
-         $this->assertEquals('Tesla car', $product['name']);
+         $this->assertEquals('testname', $product['name']);
          $product = getProductById(1, 'fi');
-         $this->assertEquals('Tesla auto', $product['name']);
+         $this->assertEquals('testinimi', $product['name']);
          $product = getProductById(1, 'ja');
          $this->assertEquals('テスラカー', $product['name']);
        }
@@ -68,7 +68,7 @@ final class productTest extends TestCase{
           $this->assertEquals($newamount, $updatedproduct['amount']);
           // Changes product back to original
           updateProduct($id, $originalproduct['name'], $originalproduct['price'], $originalproduct['description'], $originalproduct['image_url'], $originalproduct['amount']);
-      }  
+      }
 
     /**
      * Tests that a shoporder row is correctly added.
