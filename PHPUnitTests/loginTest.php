@@ -8,11 +8,11 @@ require_once '../rest/dependencies/require_all.php';
 final class loginTest extends TestCase {
   public function testloginUser() {
       //$this->assertEquals(-1, json_decode(loginUser(null, null, null, null, null, null)));
-      $this->assertEquals('{"data":"Username taken, try again!"}',loginUser('Bobby', 'moiMoir3', 'moiMoir3', 'trololo@trol.com',null, null));
-      $this->assertEquals('{"data":"Nope, wrong username or password!"}',loginUser('Fake', 'moiMoir3', 'moiMoir3', null, null, null));
+      $this->assertEquals('{"data":"Username taken, try again!"}',loginUser('Bobby', 'moiMoir3', 'moiMoir3', 'trololo@trol.com',null, null, '1950-10-10'));
+      $this->assertEquals('{"data":"Nope, wrong username or password!"}',loginUser('Fake', 'moiMoir3', 'moiMoir3', null, null, null, '1950-10-10'));
   }
   public function testregUser() {
-      $this->assertInternalType('int', regUser('Fake', 'moiMoir3', 'moiMoir3', 'testi@testi.com', 'Php', 'UnitTest'));
+      $this->assertInternalType('int', regUser('Fake', 'moiMoir3', 'moiMoir3', 'testi@testi.com', 'Php', 'UnitTest', '1950-10-10'));
   }
   public function testfindUser(){
       $this->assertEquals('Fake', findUser('Fake')->username);
