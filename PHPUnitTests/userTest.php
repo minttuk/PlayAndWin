@@ -48,10 +48,9 @@ final class userTest extends TestCase {
   }
 
     public function testsetUserPrivateInfo() {
-        setUserPrivateInfo(2, 'assert', 'equal', '20', 'male');
+        setUserPrivateInfo(2, 'assert', 'equal', 'male');
         $user = getUserInfo('Boss');
         $this->assertEquals('assert', $user['firstname']);
-        $this->assertEquals(20, $user['age']);
         setUserPrivateInfo(2, 'admin', 'admin', '', '');
     }
 
