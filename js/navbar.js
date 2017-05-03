@@ -60,7 +60,7 @@ function isSignedIn() {
   if (signedIn) {
     $('#prof').css('display','block');
     $('.signUp').html('');
-    $('.signUp').css({"color": "white", "font-size": "20px",'padding-top':'16px', 'width':'95px'});
+    $('.signUp').css({"color": "white", "font-size": "20px",'padding-top':'16px', 'min-width':'95px', 'padding-right':'30px'});
   }
 }
 
