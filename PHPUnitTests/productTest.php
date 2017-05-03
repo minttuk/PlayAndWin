@@ -67,7 +67,7 @@ final class productTest extends TestCase{
           $this->assertEquals($newimageurl, $updatedproduct['image_url']);
           $this->assertEquals($newamount, $updatedproduct['amount']);
           // Changes product back to original
-          updateProduct($id, $originalproduct['name'], $originalproduct['price'], $originalproduct['description'], $originalproduct['image_url'], $originalproduct['amount']);
+          updateProduct($id, $originalproduct->name, $originalproduct->price, $originalproduct->description, $originalproduct->image_url, $originalproduct->amount);
       }
 
     /**
