@@ -157,6 +157,7 @@ function loadLanguage(page){
       //search
       $("#finduser").text(profile_find);
       //General
+      $(".buttonText").text(form_file);
       $(".form_close_btn").text(form_close_btn);
       $(".form_dismiss_btn").text(form_dismiss_btn);
       $(".close_friends_btn").text(form_dismiss_btn);
