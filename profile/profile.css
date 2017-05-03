@@ -173,7 +173,7 @@ h6 {
   color: #49c180;
 }
 
-.errormessage {
+.errormessage, .psserrormessage {
   color: red;
 }
 @media (min-width: 601px) and (min-height: 900px){

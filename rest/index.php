@@ -54,7 +54,6 @@ Flight::route('PUT /user/private', function(){
             validateToken(),
             Flight::request()->data->firstname,
             Flight::request()->data->lastname,
-            Flight::request()->data->age,
             Flight::request()->data->gender
         );
     }

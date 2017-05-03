@@ -59,15 +59,13 @@ function setUserPublicInfo($id, $description, $location) {
  * @param $id is the id number of the user
  * @param $firstname
  * @param $lastname
- * @param $age
  * @param $gender
  * @return \RedBeanPHP\OODBBean
  */
-function setUserPrivateInfo($id, $firstname, $lastname, $age, $gender) {
+function setUserPrivateInfo($id, $firstname, $lastname, $gender) {
     $user = R::load( 'user', $id);
     $user->firstname = $firstname;
     $user->lastname = $lastname;
-    $user->age = checkEmpty($age);
     $user->gender = checkEmpty($gender);
     R::store( $user );
     return $user;

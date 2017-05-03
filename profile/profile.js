@@ -80,7 +80,6 @@ $( "#saveprivateprofilebutton" ).click(function() {
     console.log("saveprivateprofilebutton clicked");
     var $newfirstname = $('input[name="newfirstname"]').val();
     var $newlastname = $('input[name="newlastname"]').val();
-    var $age = $('input[name="age"]').val();
     var $gender = $('input[name="gender"]:checked').val();
     var inputOk = checkEditedProfile($newfirstname, $newlastname);
     if (inputOk) {
@@ -89,7 +88,7 @@ $( "#saveprivateprofilebutton" ).click(function() {
             type: "PUT",
             contentType: "application/json",
             dataType: "json",
-            data: JSON.stringify({"firstname": $newfirstname, "lastname": $newlastname, "age": $age, "gender": $gender}),
+            data: JSON.stringify({"firstname": $newfirstname, "lastname": $newlastname, "gender": $gender}),
             success: function (response){
                 //console.log('success');
                 getUserInfo();
@@ -99,7 +98,7 @@ $( "#saveprivateprofilebutton" ).click(function() {
             }
         });
     } else {
-        $('.errormessage').text("Please fill in your first and last name.");
+        $('.errormessage').text($.i18n.prop('form_fillnamemsg',localStorage.getItem("lang")));
     }
 });
 /**
@@ -119,15 +118,15 @@ $( "#savenewpassword" ).click(function() {
             //console.log('success');
             if (response.data){
                 translate(response.data, function(translation){
-                    $(".errormessage").animate({'padding-top': "20px",'padding-bottom': "10px"},300, function(){
-                        $('.errormessage').hide().text(translation).fadeIn('slow');
+                    $(".psserrormessage").animate({'padding-top': "20px",'padding-bottom': "10px"},300, function(){
+                        $('.psserrormessage').hide().text(translation).fadeIn('slow');
                     });
                 });
             }
             else {
                 $('input[name="NewPassword"]').val("");
                 $('input[name="ConfirmPassword"]').val("");
-                $('.errormessage').text("");
+                $('.psserrormessage').text($.i18n.prop('form_psschanged',localStorage.getItem("lang")));
             }
 
         },
