@@ -40,7 +40,7 @@ final class productTest extends TestCase{
 
        public function testgetProductById() {
          $product = getProductById(1);
-         $this->assertEquals('testname', $product['name']);
+         $this->assertEquals('Tesla', $product['name']);
          $product = getProductById(1, 'fi');
          $this->assertEquals('testinimi', $product['name']);
          $product = getProductById(1, 'ja');
