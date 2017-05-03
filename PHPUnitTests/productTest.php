@@ -53,7 +53,7 @@ final class productTest extends TestCase{
 
       public function testupdateProduct() {
           $id = 1;
-          $originalproduct = getProductById($id);
+          $originalproduct = R::load('product', $id);
           $newname = 'testname';
           $newdescription = 'testdescription';
           $newprice = 5555555;
