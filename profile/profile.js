@@ -6,7 +6,6 @@ var sessionId;
         return new Date().toJSON().split('T')[0];
     });
 
-
 function getScoreTable() {
   $.ajax({url: '/rest/score/'+getLastDir()+'?table',
     datatype:'html',success: function(result){$("#highscores").html(result);
@@ -136,6 +135,12 @@ $( "#savenewpassword" ).click(function() {
     });
 });
 
+/**
+ * Checks that the parameters are not empty
+ * @param firstname
+ * @param lastname
+ * @returns {boolean}
+ */
 function checkEditedProfile(firstname, lastname) {
   if (firstname.length > 0 && lastname.length > 0) {
     return true;
