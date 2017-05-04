@@ -267,7 +267,9 @@ function getTranslation($lang, $id) {
 function updateTranslation($id, $lang, $name, $description) {
   if ($lang && array_search('product_' . $lang,R::inspect())!='') {
     $row  = R::findOne( 'product_' . $lang, ' id = ? ', [ $id ] );
-    if ($row || $row != null) {
+    //$row = R::load('product_'.$lang, $id);
+    //return array('message' => $row);
+    if ($row && $row != null) {
       $translation = R::load('product_' . $lang, $id);
       $translation->name = $name;
       $translation->description = $description;
@@ -295,7 +297,8 @@ function updateTranslation($id, $lang, $name, $description) {
 */
 
 function createNewTranslation($id, $lang, $name, $description) {
-  R::exec('INSERT INTO product_'.$lang.' VALUES (:id, :name, :description)', [':id' => $id, ':name' => $name, ':description' => $description]);
+  //return array('message' => $row);
+  R::exec('INSERT INTO product_' . $lang . ' VALUES (:id, :name, :description, :original_edited)', [':id' => $id, ':name' => $name, ':description' => $description, ':original_edited' => 0]);
   return array('message'=>'Translation saved.');
 }
 
