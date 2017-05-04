@@ -276,4 +276,12 @@ function banUser($id){
   return $user->banned;
 }
 
+function isBanned($id){
+  if (R::getCell('select banned from user where id= :id',[':id'=>$id]) > 0) {
+    logout();
+    return false;
+  }
+    return true;
+}
+
 ?>
