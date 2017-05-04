@@ -75,25 +75,12 @@ $( "#savepublicprofilebutton" ).click(function() {
 /**
  * Saving private profile information from the Account Settings form
  */
-$( "#saveprivateprofilebutton" ).click(function() {
-    console.log("saveprivateprofilebutton clicked");
-    var $newfirstname = $('input[name="newfirstname"]').val();
-    var $newlastname = $('input[name="newlastname"]').val();
-    var $gender = $('input[name="gender"]:checked').val();
-    var inputOk = checkEditedProfile($newfirstname, $newlastname);
-    if (inputOk) {
-        $.ajax({
-            url: '/rest/user/private',
-            type: "PUT",
-            contentType: "application/json",
-            dataType: "json",
-            data: JSON.stringify({"firstname": $newfirstname, "lastname": $newlastname, "gender": $gender}),
+$( "#saveprivateprofilebutton" ).click(function(e) {
+    e.preventDefault();
+    if (checkEditedProfile($('input[name="firstname"]').val(), $('input[name="lastname"]').val())) {
+        $.ajax({ url: '/rest/user/private?' + $('#profile-form').serialize(), type: 'PUT',
             success: function (response){
-                //console.log('success');
                 getUserInfo();
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                console.log(textStatus, errorThrown);
             }
         });
     } else {
@@ -103,8 +90,8 @@ $( "#saveprivateprofilebutton" ).click(function() {
 /**
  * Saving a new password from the Account Settings form after it is checked
  */
-$( "#savenewpassword" ).click(function() {
-    console.log("savenewpassword clicked");
+$( "#savenewpassword" ).click(function(e) {
+  e.preventDefault();
     var $newpassword = $('input[name="NewPassword"]').val();
     var $confirmpassword = $('input[name="ConfirmPassword"]').val();
     $.ajax({
@@ -365,28 +352,20 @@ function initFriendActionButton() {
 function prefillEditForm(response) {
   //firstname
   if (response.firstname != null) {
-    $('input[name="newfirstname"]').val(response.firstname);
+    $('input[name="firstname"]').val(response.firstname);
   }
   //lastname
   if (response.lastname != null) {
-    $('input[name="newlastname"]').val(response.lastname);
+    $('input[name="lastname"]').val(response.lastname);
   }
-    //age
-    if (response.age != null) {
-        $('input[name="age"]').val(response.age);
-    }
-    //gender
-    if (response.gender != null) {
-      if(response.gender == "male"){
-          $('input[name="gender"][value="male"]').attr("checked", true);
-      }
-        if(response.gender == "female"){
-            $('input[name="gender"][value="female"]').attr("checked", true);
-        }
-        if(response.gender == "other"){
-            $('input[name="gender"][value="other"]').attr("checked", true);
-        }
-    }
+  //age
+  if (response.age != null) {
+      $('input[name="age"]').val(response.age);
+  }
+  //gender
+  if (response.gender != null) {
+    $('select[name="gender"]').val(response.gender).change();
+  }
   //description
   if (response.description != null) {
     $('input[name="newdescription"]').val(response.description);

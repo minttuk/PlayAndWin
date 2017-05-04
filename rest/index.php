@@ -52,9 +52,9 @@ Flight::route('PUT /user/private', function(){
     if(isToken()) {
         echo setUserPrivateInfo(
             validateToken(),
-            Flight::request()->data->firstname,
-            Flight::request()->data->lastname,
-            Flight::request()->data->gender
+            Flight::request()->query->firstname,
+            Flight::request()->query->lastname,
+            Flight::request()->query->gender
         );
     }
 });
