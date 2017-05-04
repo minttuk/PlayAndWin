@@ -83,8 +83,8 @@ $( "#saveprivateprofilebutton" ).click(function(e) {
         $.ajax({ url: '/rest/user/private?' + $('#profile-form').serialize(), type: 'PUT',
             success: function (response){
                 getUserInfo();
-                console.log("private profiilin response" + response);
-                if (response=='') $('#editprofilemodal').close();
+                //if (response=='') $('#editprofilemodal').close();
+                if (response=='') $('#editprofilemodal #editprofilecancel').click();
                 $('.errormessage').text("");
 
             }
@@ -107,7 +107,6 @@ $( "#savenewpassword" ).click(function(e) {
         dataType: "json",
         data: JSON.stringify({"newpassword": $newpassword, "confirmpassword": $confirmpassword}),
         success: function (response){
-            //console.log('success');
             if (response.data){
                 translate(response.data, function(translation){
                     $(".psserrormessage").animate({'padding-top': "20px",'padding-bottom': "10px"},300, function(){
@@ -116,7 +115,7 @@ $( "#savenewpassword" ).click(function(e) {
                 });
             }
             else {
-                if (response=='') $('#editprofilemodal').close();
+                $('#editprofilemodal #editprofilecancel').click();
                 $('input[name="NewPassword"]').val("");
                 $('input[name="ConfirmPassword"]').val("");
                 $('.psserrormessage').text("");
