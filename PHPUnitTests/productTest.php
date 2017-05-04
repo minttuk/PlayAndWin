@@ -40,9 +40,9 @@ final class productTest extends TestCase{
 
        public function testgetProductById() {
          $product = getProductById(1);
-         $this->assertEquals('Tesla', $product['name']);
+         $this->assertEquals('Tesla car', $product['name']);
          $product = getProductById(1, 'fi');
-         $this->assertEquals('testinimi', $product['name']);
+         $this->assertEquals('Tesla auto', $product['name']);
          $product = getProductById(1, 'ja');
          $this->assertEquals('テスラカー', $product['name']);
        }
@@ -56,7 +56,7 @@ final class productTest extends TestCase{
           $originalproduct = R::load('product', $id);
           $newname = 'testname';
           $newdescription = 'testdescription';
-          $newprice = 5555555;
+          $newprice = 555;
           $newamount = 0;
           $newimageurl = 'testimageurl';
           updateProduct($id, $newname, $newprice, $newdescription, $newimageurl, $newamount);

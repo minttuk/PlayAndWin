@@ -140,15 +140,15 @@ function logOut() {
     global $message;
     $accepted = true;
     if($password != $confirmPass) {
-        $message['data'] .= "Your passwords must match!</br>";
+        $message['data'] .= "Your passwords must match! ";
         $accepted = false;
     }
     if (strlen($password) <= 5) {
-        $message['data'] .= "Your password must contain at least 6 characters!</br>";
+        $message['data'] .= "Your password must contain at least 6 characters! ";
         $accepted = false;
     }
     if(!preg_match("#[0-9]+#",$password)) {
-        $message['data'] .= "Your password must contain at least 1 number!</br>";
+        $message['data'] .= "Your password must contain at least 1 number! ";
         $accepted = false;
     }
     /*if(!preg_match("#[a-z]+#",$password)) {
