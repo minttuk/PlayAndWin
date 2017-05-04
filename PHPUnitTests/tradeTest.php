@@ -15,7 +15,7 @@ final class tradeTest extends TestCase {
     $product = 1;
     $price = 999;
     $desc = 'test';
-    R::exec('UPDATE collection set products = "{"1": 1}" WHERE id = :id', [':id' => $user]);
+    R::exec('UPDATE collection set products = "{""1"": 1}" WHERE id = :id', [':id' => $user]);
     //R::exec('insert into collection VALUES(1, "{"1": 1}")');
     // Testing to insert a new trade
 
