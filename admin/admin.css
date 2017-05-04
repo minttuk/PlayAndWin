@@ -57,6 +57,10 @@ li:hover ,.dropdown-toggle:hover {
   color: lavender !important;
 }
 
+.active {
+  font-weight: bold !important;
+}
+
 /* Mainarea */
 
 .admin_mainarea {

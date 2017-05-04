@@ -65,34 +65,62 @@ var lang;
       });
     });
 
+  /**
+   * Shows bold the active location in nav bar and shows other text in lighter text
+   *
+   * @param {string} classname the class to change active
+   */
+
+  function showWhichTabActive(classname) {
+    var classnames = ['.admin-manage-users-nav', '.admin-manage-chat-nav', '.admin-manage-products-nav', '.dropdown-toggle'];
+    for (i in classnames) {
+      if (classnames[i] == classname) {
+        $(classnames[i]).addClass('active');
+      }
+      else {
+        $(classnames[i]).removeClass('active');
+      }
+    }
+  }
+
+  /**
+   * Shows the content of the active location and hides everything else
+   *
+   * @param {string} divname the div to show
+   */
+
+  function showActiveContent(divname) {
+    var divnames = ['#admin-manage-users', '#admin-manage-chat', '.admin_addtranslationarea', '#admin-manage-products'];
+    for (i in divnames) {
+      if (divnames[i] == divname) {
+        $(divnames[i]).show();
+      }
+      else {
+        $(divnames[i]).hide();
+      }
+    }
+  }
+
   $('.admin-manage-users-nav').click(function() {
-    $('#admin-manage-users').show();
-    $('#admin-manage-chat').hide();
-    $('.admin_addtranslationarea').hide();
-    $('#admin-manage-products').hide();
+    showWhichTabActive('.admin-manage-users-nav');
+    showActiveContent('#admin-manage-users');
   });
 
   $('.admin-manage-chat-nav').click(function() {
-    $('#admin-manage-users').hide();
-    $('#admin-manage-chat').show();
-    $('.admin_addtranslationarea').hide();
-    $('#admin-manage-products').hide();
+    showWhichTabActive('.admin-manage-chat-nav');
+    showActiveContent('#admin-manage-chat');
   });
 
 $('.admin-manage-products-nav').click(function() {
-  $('#admin-manage-users').hide();
-  $('#admin-manage-chat').hide();
-  $('.admin_addtranslationarea').hide();
-  $('#admin-manage-products').show();
+  showWhichTabActive('.admin-manage-products-nav');
+  showActiveContent('#admin-manage-products');
 });
 
 $('.admin-trasnlate-products-nav').click(function() {
-  $('#admin-manage-users').hide();
-  $('#admin-manage-chat').hide();
-  $('#admin-manage-products').hide();
+  showWhichTabActive('.dropdown-toggle');
   lang = $(this).data('lang');
   $('#admin-translate-form-heading').text('Translate [' + lang + ']');
-  $('.admin_addtranslationarea').show();
+  showActiveContent('.admin_addtranslationarea');
   showTranslations();
 });
 
