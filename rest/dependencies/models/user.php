@@ -50,7 +50,6 @@ function setUserPublicInfo($id, $description, $location) {
   $user->description = checkEmpty($description);
   $user->location = checkEmpty($location);
   R::store( $user );
-  return $user;
 }
 
 /**
@@ -68,7 +67,6 @@ function setUserPrivateInfo($id, $firstname, $lastname, $gender) {
     $user->lastname = $lastname;
     $user->gender = checkEmpty($gender);
     R::store( $user );
-    return $user;
 }
 
 /**

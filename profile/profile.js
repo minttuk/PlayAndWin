@@ -65,6 +65,8 @@ $( "#savepublicprofilebutton" ).click(function() {
         success: function (response){
           //console.log('success');
           getUserInfo();
+          if (response=='') $('#editprofilemodal').close();
+
         },
         error: function(jqXHR, textStatus, errorThrown) {
           console.log(textStatus, errorThrown);
@@ -81,7 +83,10 @@ $( "#saveprivateprofilebutton" ).click(function(e) {
         $.ajax({ url: '/rest/user/private?' + $('#profile-form').serialize(), type: 'PUT',
             success: function (response){
                 getUserInfo();
+                console.log("private profiilin response" + response);
                 if (response=='') $('#editprofilemodal').close();
+                $('.errormessage').text("");
+
             }
         });
     } else {
@@ -111,9 +116,12 @@ $( "#savenewpassword" ).click(function(e) {
                 });
             }
             else {
+                if (response=='') $('#editprofilemodal').close();
                 $('input[name="NewPassword"]').val("");
                 $('input[name="ConfirmPassword"]').val("");
-                $('.psserrormessage').text($.i18n.prop('form_psschanged',localStorage.getItem("lang")));
+                $('.psserrormessage').text("");
+
+                //$('.psserrormessage').text($.i18n.prop('form_psschanged',localStorage.getItem("lang")));
             }
 
         },
@@ -135,6 +143,11 @@ function checkEditedProfile(firstname, lastname) {
   }
   return false;
 }
+
+//When Account Settings modal is closed, prefilled information is updated
+$( "#editprofilecancel" ).click(function() {
+    getUserInfo();
+});
 
 function showFriends(){
   getMutualFriends(function(error, response) {
@@ -375,6 +388,12 @@ function prefillEditForm(response) {
   if (response.location != null) {
     $('input[name="newlocation"]').val(response.location);
   }
+  //clear any errormessages and passwords
+    $('input[name="NewPassword"]').val("");
+    $('input[name="ConfirmPassword"]').val("");
+    $('.psserrormessage').text("");
+    $('.errormessage').text("");
+
 }
 
 $('#friendrequeststab').click(function() {
