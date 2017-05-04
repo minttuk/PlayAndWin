@@ -81,6 +81,7 @@ $( "#saveprivateprofilebutton" ).click(function(e) {
         $.ajax({ url: '/rest/user/private?' + $('#profile-form').serialize(), type: 'PUT',
             success: function (response){
                 getUserInfo();
+                if (response=='') $('#editprofilemodal').close();
             }
         });
     } else {
