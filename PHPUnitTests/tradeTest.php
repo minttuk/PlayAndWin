@@ -21,9 +21,6 @@ final class tradeTest extends TestCase {
     R::exec('DELETE FROM trades WHERE seller_id = :id', [':id' => $user]);
     $response = addNewTrade($user, $product, $price, $desc);
     $this->assertEquals('Product has been put for sale!', $response['success']);
-    // Testing to insert the same trade twice
-    $response = addNewTrade($user, $product, $price, $desc);
-    $this->assertEquals('Seems like you are already trading this product! Please choose another product to sell.', $response['error']);
     // Testing to insert a trade with a product that user does not have
     $response = addNewTrade($user, 2, $price, $desc);
     $this->assertEquals('Oops! You don\'t seem to own this product. Make sure you filled in the right product!', $response['error']);
