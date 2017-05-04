@@ -18,7 +18,7 @@ Flight::route('/test', function(){
 
 //Referrals
 Flight::route('POST /refer', function(){
-    if (isToken()) echo referFriend(validateToken(),
+    if (userPrivilages()) echo referFriend(validateToken(),
         Flight::request()->data->email,
         Flight::request()->data->name
     );
@@ -28,44 +28,31 @@ Flight::route('POST /refer', function(){
 Flight::route('PUT /user/location/@location', function($location){
     if(isToken()) echo setUserLocation(validateToken(),$location);
 });
-/*Flight::route('PUT /user', function(){
-    if(isToken()) {
-      echo setUserInfo(
-        validateToken(),
-        Flight::request()->data->firstname,
-        Flight::request()->data->lastname,
-        Flight::request()->data->description,
-        Flight::request()->data->location
-      );
-    }
-});*/
-Flight::route('PUT /user/public', function(){
-    if(isToken()) {
+Flight::route('PUT /user', function(){
+    if (isToken() && (Flight::request()->query->description
+    || Flight::request()->query->location))
         echo setUserPublicInfo(
-            validateToken(),
-            Flight::request()->data->description,
-            Flight::request()->data->location
+        validateToken(),
+        Flight::request()->query->description,
+        Flight::request()->query->location
         );
-    }
-});
-Flight::route('PUT /user/private', function(){
-    if(isToken()) {
+
+    if (isToken() && (Flight::request()->query->firstname
+    && Flight::request()->query->lastname))
         echo setUserPrivateInfo(
             validateToken(),
             Flight::request()->query->firstname,
             Flight::request()->query->lastname,
             Flight::request()->query->gender
         );
-    }
-});
-Flight::route('PUT /user/password', function(){
-    if(isToken()) {
+
+    if (isToken() && (Flight::request()->data->newpassword
+    && Flight::request()->data->confirmpassword))
         echo changePassword(
             validateToken(),
             Flight::request()->data->newpassword,
             Flight::request()->data->confirmpassword
         );
-    }
 });
 Flight::route('PUT /user/ban/@id', function($id){
     if (adminPrivilages()) echo banUser($id);
@@ -90,7 +77,7 @@ Flight::route('/users', function(){
 
 // Collection
 Flight::route('POST /collection/redeem', function(){
-    if (isToken() && Flight::request()->data->product != null)
+    if (userPrivilages() && Flight::request()->data->product != null)
         echo redeemProduct(validateToken(),Flight::request()->data->product);
 });
 Flight::route('/collection/@lang', function($lang){
@@ -168,7 +155,7 @@ Flight::route('POST /product/buy', function(){
 // Translation
 
 Flight::route('/translations/@lang', function($lang) {
-  if (isToken() && getAdmin(validateToken())) {
+  if (adminPrivilages()) {
     Flight::json(getTranslations($lang));
   }
   else {
@@ -177,7 +164,7 @@ Flight::route('/translations/@lang', function($lang) {
 });
 
 Flight::route('/translation/@lang/@id', function($lang, $id) {
-  if (isToken() && getAdmin(validateToken())) {
+  if (adminPrivilages()) {
     Flight::json(getTranslation($lang, $id));
   }
   else {
@@ -186,7 +173,7 @@ Flight::route('/translation/@lang/@id', function($lang, $id) {
 });
 
 Flight::route('PUT /translation', function(){
-    if (isToken() && getAdmin(validateToken())) {
+    if (adminPrivilages()) {
         Flight::json(updateTranslation(
             Flight::request()->data->id,
             Flight::request()->data->lang,
@@ -201,7 +188,7 @@ Flight::route('PUT /translation', function(){
 
 // Highscore
 Flight::route('POST /score', function(){
-    if (isToken()) Flight::json(setHighscore(validateToken()));
+    if (userPrivilages()) Flight::json(setHighscore(validateToken()));
 });
 Flight::route('/score', function(){
     if (isToken()) Flight::json(getHighscores(validateToken()));
@@ -214,24 +201,27 @@ Flight::route('/coins', function(){
 
 // Trade
 Flight::route('POST /trades/new', function() {
-  Flight::json(addNewTrade(
-    validateToken(),
-    Flight::request()->data->product,
-    Flight::request()->data->price,
-    Flight::request()->data->description
-  ));
+    if (userPrivilages()) {
+        Flight::json(addNewTrade(
+            validateToken(),
+            Flight::request()->data->product,
+            Flight::request()->data->price,
+            Flight::request()->data->description
+        ));
+    }
+
 });
 
 Flight::route('/trades/history/@lang', function($lang) {
-  Flight::json(getTradeHistory(validateToken(),$lang));
+  if (isToken()) Flight::json(getTradeHistory(validateToken(),$lang));
 });
 
 Flight::route('/trades/history', function() {
-  Flight::json(getTradeHistory(validateToken()));
+  if (isToken()) Flight::json(getTradeHistory(validateToken()));
 });
 
 flight::route('PUT /trades', function(){
-  if(isToken()) {
+  if(userPrivilages()) {
     Flight::json(editTrade(
       validateToken(),
       Flight::request()->data->id,
@@ -242,11 +232,11 @@ flight::route('PUT /trades', function(){
 });
 
 Flight::route('DELETE /trades', function(){
-  Flight::json(deleteTrade(validateToken(), Flight::request()->query->tradeid));
+  if(userPrivilages()) Flight::json(deleteTrade(validateToken(), Flight::request()->query->tradeid));
 });
 
 Flight::route('/trades/buy', function(){
-    if (isToken() && Flight::request()->query->trade != null) {
+    if (userPrivilages() && Flight::request()->query->trade != null) {
         echo buyTradeProduct(validateToken(),Flight::request()->query->trade);
     }
 });
@@ -314,7 +304,7 @@ flight::route('GET /trades/@lang', function($lang) {
 
 // Chat
 Flight::route('POST /chat', function(){
-    if(isToken()) echo addChat(validateToken());
+    if(userPrivilages()) echo addChat(validateToken());
     else echo addChat(null);
 });
 
@@ -362,4 +352,8 @@ function isToken() {
 function adminPrivilages() {
     if (isToken()) return isAdmin(validateToken());
     else echo 'You must be an administrator to make this request.'; return false;
+}
+
+function userPrivilages() {
+    if (isToken()) return isBanned(validateToken());
 }

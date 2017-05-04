@@ -52,56 +52,36 @@ function getSession() {
 /**
  * Saving public profile information from the Account Settings form
  */
-$( "#savepublicprofilebutton" ).click(function() {
-  console.log("savepublicprofilebutton clicked");
-  var $newdescription = $('input[name="newdescription"]').val();
-  var $newlocation = $('input[name="newlocation"]').val();
-    $.ajax({
-        url: '/rest/user/public',
-        type: "PUT",
-        contentType: "application/json",
-        dataType: "json",
-        data: JSON.stringify({"description": $newdescription, "location": $newlocation}),
-        success: function (response){
-          //console.log('success');
-          getUserInfo();
-          if (response=='') $('#editprofilemodal').close();
-
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-          console.log(textStatus, errorThrown);
-        }
-    });
+$("#public-profile-form").submit(function(e) {
+    e.preventDefault();
+    submitUserInfo($(this).serialize());
 });
 
 /**
  * Saving private profile information from the Account Settings form
  */
-$( "#saveprivateprofilebutton" ).click(function(e) {
+$("#private-profile-form").submit(function(e) {
     e.preventDefault();
-    if (checkEditedProfile($('input[name="firstname"]').val(), $('input[name="lastname"]').val())) {
-        $.ajax({ url: '/rest/user/private?' + $('#profile-form').serialize(), type: 'PUT',
-            success: function (response){
-                getUserInfo();
-                //if (response=='') $('#editprofilemodal').close();
-                if (response=='') $('#editprofilemodal #editprofilecancel').click();
-                $('.errormessage').text("");
-
-            }
-        });
-    } else {
-        $('.errormessage').text($.i18n.prop('form_fillnamemsg',localStorage.getItem("lang")));
-    }
+    submitUserInfo($(this).serialize());
 });
+
+function submitUserInfo(params) {
+    $.ajax({ url: '/rest/user?' + params, type: 'PUT',
+      success: function (response){
+        getUserInfo();
+        if (response=='') $('#editprofilemodal').modal('hide');
+      }
+  });
+}
 /**
  * Saving a new password from the Account Settings form after it is checked
  */
-$( "#savenewpassword" ).click(function(e) {
+$( "#password-profile-form" ).submit(function(e) {
   e.preventDefault();
     var $newpassword = $('input[name="NewPassword"]').val();
     var $confirmpassword = $('input[name="ConfirmPassword"]').val();
     $.ajax({
-        url: '/rest/user/password',
+        url: '/rest/user',
         type: "PUT",
         contentType: "application/json",
         dataType: "json",
@@ -113,35 +93,16 @@ $( "#savenewpassword" ).click(function(e) {
                         $('.psserrormessage').hide().text(translation).fadeIn('slow');
                     });
                 });
-            }
-            else {
-                $('#editprofilemodal #editprofilecancel').click();
+            } else {
+                if (response=='') $('#editprofilemodal').modal('hide');
                 $('input[name="NewPassword"]').val("");
                 $('input[name="ConfirmPassword"]').val("");
                 $('.psserrormessage').text("");
-
                 //$('.psserrormessage').text($.i18n.prop('form_psschanged',localStorage.getItem("lang")));
             }
-
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            console.log(textStatus, errorThrown);
         }
     });
 });
-
-/**
- * Checks that the parameters are not empty
- * @param firstname
- * @param lastname
- * @returns {boolean}
- */
-function checkEditedProfile(firstname, lastname) {
-  if (firstname.length > 0 && lastname.length > 0) {
-    return true;
-  }
-  return false;
-}
 
 //When Account Settings modal is closed, prefilled information is updated
 $( "#editprofilecancel" ).click(function() {
@@ -381,11 +342,11 @@ function prefillEditForm(response) {
   }
   //description
   if (response.description != null) {
-    $('input[name="newdescription"]').val(response.description);
+    $('input[name="description"]').val(response.description);
   }
   //location
   if (response.location != null) {
-    $('input[name="newlocation"]').val(response.location);
+    $('input[name="location"]').val(response.location);
   }
   //clear any errormessages and passwords
     $('input[name="NewPassword"]').val("");

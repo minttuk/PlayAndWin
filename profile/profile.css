@@ -176,6 +176,33 @@ h6 {
 .errormessage, .psserrormessage {
   color: red;
 }
+
+#remote {
+  float:right;
+  display:none;
+  padding-left: 10px;
+}
+
+#search {
+  font-size:1.7em;
+  position: relative;
+  float:right;
+}
+
+#refer-btn {
+  font-size:1.1em;
+  position: absolute;
+  right:15px;
+  top:50px;
+  cursor:pointer;
+}
+
+@media (max-width: 400px) {
+  #refer-btn {
+    top:30px;
+  }
+}
+
 @media (min-width: 601px) and (min-height: 900px){
   .copyright {
     bottom: 25px;

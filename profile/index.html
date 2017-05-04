@@ -78,30 +78,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	</nav>
 	<!-- //Navbar -->
 
-	<!-- Edit Profile Modal -->
-	<!--<div id="editprofilemodal" class="modal fade" role="dialog">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-body">
-					<h2 id="editprofileheading">Edit Profile </h2>
-						<form action="#" method="post">
-							<p id="editprofilefirstname">First name:</p>
-							<input type="text" class="text" name="newfirstname" placeholder="" required="" value="">
-							<p id="editprofilelastname">Last name:</p>
-							<input type="text" class="text" name="newlastname" placeholder="" required="" value="">
-							<p id="editprofiledescription">Description:</p>
-							<input type="text" class="text" name="newdescription" placeholder="" value="">
-							<p id="editprofilelocation">Location:</p>
-							<input type="text" class="text" name="newlocation" placeholder=""  value="">
-							<p class="errormessage">&nbsp;</p>
-							<input id="saveprofilebutton" type="submit" data-toggle="modal" data-target="#editprofilemodal" class="more_btn" value="Save">
-						</form>
-						<button class="form_close_btn" data-dismiss="modal">Cancel</button>
-				</div>
-			</div>
-		</div>
-	</div> -->
-
 	<div id="editprofilemodal" class="modal fade" role="dialog">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -115,22 +91,22 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					</ul>
 					<div class="tab-content">
 						<div class="tab-pane active" id="public">
-							<form action="#" method="post">
+							<form id='public-profile-form'>
 								<p id="editprofiledescription">Description:</p>
-								<input type="text" class="text" name="newdescription" placeholder="" value="">
+								<input type="text" class="text" name="description" placeholder="" value="">
 								<p id="editprofilelocation">Location:</p>
-								<input type="text" class="text" name="newlocation" placeholder=""  value="">
+								<input type="text" class="text" name="location" placeholder=""  value="">
 								<p class="errormessage">&nbsp;</p>
 								<input id="savepublicprofilebutton" type="submit" data-toggle="modal" data-target="#editprofilemodal" class="more_btn" value="Save">
 							</form>
 						</div>
 
 						<div class="tab-pane" id="private">
-							<form id='profile-form' action="#" method="post">
+							<form id='private-profile-form'>
 								<p id="editprofilefirstname">First name:</p>
-								<input type="text" class="text" name="firstname" placeholder="" required="" value="">
+								<input class='edit_name form_required text' type="text" required pattern="[a-zA-Z]{1,16}" name="firstname" placeholder="" required="" value="">
 								<p id="editprofilelastname">Last name:</p>
-								<input type="text" class="text" name="lastname" placeholder="" required="" value="">
+								<input class='edit_name form_required text' type="text" required pattern="[a-zA-Z]{1,16}" name="lastname" placeholder="" required="" value="">
 								<p id="editprofilegender">Gender</p>
 								<select id='gender-input' class="form-style" name='gender'>
 									<option id="gender-select" value="" disabled selected>I am...</option>
@@ -139,7 +115,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									<option id="editprofileother" value='other'>Other</option>
 								</select>
 								<p class="errormessage">&nbsp;</p>
-								<input id="saveprivateprofilebutton" type="submit" data-target="#editprofilemodal" class="more_btn" value="Save">
+								<input id="saveprivateprofilebutton" type="submit" class="more_btn" value="Save">
 							</form>
 						</div>
 						<div class="tab-pane" id="change_picture">
@@ -151,9 +127,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							</form>
 						</div>
 						<div class="tab-pane" id="change_password">
-							<form>
+							<form id='password-profile-form'>
 								<p id="newpassword">New Password</p>
-								<input type="password" class="text" name="NewPassword" pattern="(?=.*\\d).{6,}" required>
+								<input type="password" class="text form_required" name="NewPassword"  required>
 								<p id="confirmpassword">Confirm Password</p>
 								<input type="password" class="text form_required" name="ConfirmPassword" required>
 								<p class="psserrormessage">&nbsp;</p>
@@ -161,7 +137,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							</form>
 
 						</div>
-
 						<button id="editprofilecancel" class="form_close_btn" data-dismiss="modal">Cancel</button>
 					</div>
 				</div>
@@ -169,24 +144,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		</div>
 	</div>
 
-
-	<!-- Edit picture modal
-	<div id="editpicturemodal" class="modal fade" role="dialog">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-body">
-					<h2 id="editpictureheading"> Upload Picture </h2>
-					<form class="" action="/rest/user/image" method="post" enctype="multipart/form-data" id="upload_form">
-						<div class="form-group">
-							<input name="fileToUpload" type="file" class="filestyle form-control"  data-iconName="glyphicon glyphicon-inbox">
-							<input id="uploadpicturebutton" type="submit" value="Upload" style='margin-top:20px;' class="btn btn-primary form-control"/>
-							<button class="btn btn-danger form-control" style='margin-top:20px;' data-dismiss="modal">Close</button>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div> -->
 	<!-- Friends modal -->
 	<div id="friendsmodal" class="modal fade" role="dialog">
 		<div class="modal-dialog">
@@ -223,6 +180,28 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		</div>
 	</div>
 
+		<!--Referral Modal-->
+	<div class="modal fade" id="referModal" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title" id='refer_title'>Refer a Friend</h4>
+				</div>
+				<div class="modal-body">
+					<p class='text-center' id='refer_desc'>Please enter your friends information.</p>
+					<form id='referral_form'>
+						<input id='refer_name' type="text" pattern='[a-zA-Z]{1,16}$' class="text form_required" name="name" placeholder='Name' required title="">
+						<input id='refer_email' type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" class="text form_required" name="email" placeholder='Email' required title="">
+						<input id='refer_submit_btn' type="submit" class="more_btn" name="submit" value="Send Referral">
+						<p id="referral_msg"></p>
+					</form>
+					<button class="form_close_btn" data-toggle="modal" data-target="#referModal">Cancel</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
 <div class="events-section2-agileinfo">
 <div class="container">
 	<div class="blog1-w3ls">
@@ -230,11 +209,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<img class="profilepicture" src="../images/default.png" alt=" " />
 		</div>
 		<div class="col-md-8 blog-text-w3ls">
-      <div id="remote" style="float:right; display:none; padding-left: 10px;">
-        <input id='searchbar' class="typeahead form-control" type="text" placeholder="">
-      </div>
-			<h4 style="float:right; font-size:1.7em; position: relative;" id="search">
+			<div id="remote">
+				<input id='searchbar' class="typeahead form-control" type="text" placeholder="">
+			</div>
+			<h4 id="search">
 				<span class="glyphicon glyphicon-search" style='font-size:0.8em'></span>  <span id="finduser">Find User</span>
+			</h4>
+			<h4 id="refer-btn" data-toggle="modal" data-target="#referModal">
+				<span class="glyphicon glyphicon-thumbs-up" style='font-size:0.8em'></span>  <span id="fp_refer">Refer Friends</span>
 			</h4>
 			<h4 id="username">&nbsp;</h4>
 			<h6><span id="memebersincetext">Member since:</span><span id="membersince">&nbsp;</span></h6>

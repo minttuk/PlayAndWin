@@ -65,64 +65,84 @@ var lang;
       });
     });
 
-  /**
-   * Shows bold the active location in nav bar and shows other text in lighter text
-   *
-   * @param {string} classname the class to change active
-   */
 
-  function showWhichTabActive(classname) {
-    var classnames = ['.admin-manage-users-nav', '.admin-manage-chat-nav', '.admin-manage-products-nav', '.dropdown-toggle'];
-    for (i in classnames) {
-      if (classnames[i] == classname) {
-        $(classnames[i]).addClass('active');
-      }
-      else {
-        $(classnames[i]).removeClass('active');
-      }
-    }
-  }
 
   /**
    * Shows the content of the active location and hides everything else
    *
-   * @param {string} divname the div to show
+   * @param {string} elem_id the id of the element to show
    */
 
-  function showActiveContent(divname) {
-    var divnames = ['#admin-manage-users', '#admin-manage-chat', '.admin_addtranslationarea', '#admin-manage-products'];
-    for (i in divnames) {
-      if (divnames[i] == divname) {
-        $(divnames[i]).show();
-      }
-      else {
-        $(divnames[i]).hide();
-      }
-    }
+  function showWhichTabActive(elem_id) {
+    $.each( $('.admin_mainarea').children(), function () {
+      elem_id == $(this).attr('id') ? $('#'+elem_id).show() : $(this).hide();
+    });
   }
 
-  $('.admin-manage-users-nav').click(function() {
-    showWhichTabActive('.admin-manage-users-nav');
-    showActiveContent('#admin-manage-users');
+  // function showWhichTabActive(classname) {
+  //   var classnames = ['.admin-manage-users-nav', '.admin-manage-chat-nav', '.admin-manage-products-nav', '.dropdown-toggle'];
+  //   for (i in classnames) {
+  //     if (classnames[i] == classname) {
+  //       $(classnames[i]).addClass('active');
+  //     }
+  //     else {
+  //       $(classnames[i]).removeClass('active');
+  //     }
+  //   }
+  // }
+
+  /**
+   * Shows bold the active location in nav bar and shows other text in lighter text
+   *
+   * @param {object} elem the element to change active
+   */
+
+  function showActiveContent(elem) {
+    $.each( $('.admin_sidepanelcontent').find('li[class^=admin-manage],.dropdown-toggle'), function () {
+       $(elem)[0] == $(this)[0] ? $(elem).addClass('active') : $(this).removeClass('active');
+    });
+  }
+
+  // function showActiveContent(divname) {
+  //   var divnames = ['#admin-manage-users', '#admin-manage-chat', '.admin_addtranslationarea', '#admin-manage-products'];
+  //   for (i in divnames) {
+  //     if (divnames[i] == divname) {
+  //       $(divnames[i]).show();
+  //     }
+  //     else {
+  //       $(divnames[i]).hide();
+  //     }
+  //   }
+  // }
+
+  function showWhichTabActive(elem_id) {
+    $.each( $('.admin_mainarea').children(), function () {
+      elem_id == $(this).attr('id') ? $('#'+elem_id).show() : $(this).hide();
+    });
+  }
+
+    $('.admin-manage-users-nav').click(function(){
+    showActiveContent($(this));
+    showWhichTabActive('admin-manage-users');
   });
 
-  $('.admin-manage-chat-nav').click(function() {
-    showWhichTabActive('.admin-manage-chat-nav');
-    showActiveContent('#admin-manage-chat');
+  $('.admin-manage-chat-nav').click(function(){
+    showActiveContent($(this));
+    showWhichTabActive('admin-manage-chat');
   });
 
-$('.admin-manage-products-nav').click(function() {
-  showWhichTabActive('.admin-manage-products-nav');
-  showActiveContent('#admin-manage-products');
-});
+  $('.admin-manage-products-nav').click(function(){
+    showActiveContent($(this));
+    showWhichTabActive('admin-manage-products');
+  });
 
-$('.admin-trasnlate-products-nav').click(function() {
-  showWhichTabActive('.dropdown-toggle');
-  lang = $(this).data('lang');
-  $('#admin-translate-form-heading').text('Translate [' + lang + ']');
-  showActiveContent('.admin_addtranslationarea');
-  showTranslations();
-});
+  $('.admin-trasnlate-products-nav').click(function() {
+    showActiveContent($(this).parent().parent().children(":first"));
+    showWhichTabActive('admin_addtranslationarea');
+    lang = $(this).data('lang');
+    $('#admin-translate-form-heading').text('Translate [' + lang + ']');
+    showTranslations();
+  });
 
 
 // Manage products
@@ -134,12 +154,6 @@ $('#admin_addproductbtn').click(function() {
 $('#admin_addproductcancelbtn').click(function() {
   clearAddproductForm();
   $('.admin_addproductarea').hide();
-});
-
-$('#admin-manage-users-nav').click(function() {
-  $('#admin-manage-users').show();
-  $('.admin_addtranslationarea').hide();
-  $('#admin-manage-products').hide();
 });
 
 /**

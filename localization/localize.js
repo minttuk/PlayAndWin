@@ -137,13 +137,13 @@ function loadLanguage(page){
       $("#editprofilepublic").text(form_public);
       $("#editprofileprivate").text(form_private);
       $("#gender-select").text(form_select_am);
-        $("#editprofilepicture").text(form_changepicture);
-        $("#saveprivateprofilebutton").val(form_save);
+      $("#editprofilepicture").text(form_changepicture);
+      $("#saveprivateprofilebutton").val(form_save);
       $("#savepublicprofilebutton").val(form_save);
-        $("#newpassword").text(form_newpassword);
-        $("#confirmpassword").text(form_confirmpassword);
-        $("#editprofilepassword").text(form_editpassword);
-        $("#savenewpassword").val(form_save);
+      $("#newpassword").text(form_newpassword);
+      $("#confirmpassword").text(form_confirmpassword);
+      $("#editprofilepassword").text(form_editpassword);
+      $("#savenewpassword").val(form_save);
 
 
         //Edit picture modal
@@ -161,6 +161,8 @@ function loadLanguage(page){
       $(".form_close_btn").text(form_close_btn);
       $(".form_dismiss_btn").text(form_dismiss_btn);
       $(".close_friends_btn").text(form_dismiss_btn);
+      $('.edit_name').attr('title',form_valid_name);
+      $('.form_required').attr('oninvalid','this.setCustomValidity("'+form_required+'")');
       $('.form_required').attr('oninvalid','this.setCustomValidity("'+form_required+'")');
       $('.form_required').attr('onchange','this.setCustomValidity("")');
 
