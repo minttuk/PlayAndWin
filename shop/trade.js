@@ -1,9 +1,7 @@
 var opentrades;
 
 /**
- * An ajax call to show all the products the user has.
- *
- * @returns
+ * Submits add trade form
  */
 
 $('#trade_submit_form').click(function () {
@@ -25,6 +23,10 @@ $('#trade_submit_form').click(function () {
     $('#tradeformerrormsg').text("Please make sure that you have chosen the product to sell and set a price for it. Do not use decimals.")
   }
 });
+
+/**
+ * Empties Trade form
+ */
 
 function emptyTradeForm() {
   $('#formTradeName').val("");
@@ -54,6 +56,12 @@ function buyTrade(trade_id) {
         }
     });
 }
+
+/**
+ * Adds a new trade to the database
+ *
+ * @param callback
+ */
 
 function addTrade(callback) {
   var trade = {"product": $('#formTradeProduct').val(), "price": $('#formTradePrice').val(), "description": $('#formTradeDescription').val()};
@@ -119,6 +127,11 @@ $('#formTradeName').focusout(function () {
   $('#user_collection').fadeOut();
 });
 
+/**
+ * Autofills trade form with chosen product information
+ *
+ * @param {object} response product
+ */
 
 function fillTradeForm(response) {
   $('#formTradeName').val(response.name);
@@ -129,6 +142,13 @@ function fillTradeForm(response) {
   $('#tradeformerrormsg').text("");
   $('#tradeformsuccessmsg').text("");
 }
+
+/**
+ * Gets product information
+ *
+ * @param {int} productid
+ * @param {function} callback
+ */
 
 function getProductInfo(productid, callback) {
   $.ajax({
@@ -144,7 +164,12 @@ function getProductInfo(productid, callback) {
   });
 }
 
-//Checks that parameter is int
+/**
+ * Checks that parameter is int
+ * @param {int} val
+ * @returns {boolean}
+ */
+
 function checkInt(val) {
   if (Math.floor(val) == val && $.isNumeric(val) && val != null) {
     return true;
@@ -152,7 +177,12 @@ function checkInt(val) {
   return false;
 }
 
-//Checks that parameter is not null / empty
+/**
+ * Checks that parameter is not empty or null
+ * @param {string} val
+ * @returns {boolean}
+ */
+
 function checkFilled(val) {
   if (val != null && val != "") {
     return true;
@@ -164,6 +194,10 @@ $('#trade_manage_button').click(function () {
   $('#managetrades').toggle();
 });
 
+/**
+ * Shows open trades, buying and selling history
+ */
+
 function getTradeManageInfo() {
   getTradeInfo(function(error, response) {
     opentrades = response['opentrades']
@@ -172,6 +206,12 @@ function getTradeManageInfo() {
     showMyTrades("mysellinghistorycontent", response['sellinghistory']);
   });
 }
+
+/**
+ * Fills trades into table
+ * @param {string} div divname
+ * @param {object} response trades
+ */
 
 function showMyTrades(div, response) {
   $div = $('#' + div);
@@ -204,6 +244,10 @@ function showMyTrades(div, response) {
   resetButtonHandlers();
 }
 
+/**
+ * Resets event handlers for buttons that get greated dynamically
+ */
+
 function resetButtonHandlers() {
   $(".trade_edit_button").off("click");
   $(".trade_delete_button").off("click");
@@ -220,6 +264,11 @@ function resetButtonHandlers() {
   });
 }
 
+/**
+ * Autofills Edit trade form
+ * @param {int} tradeid
+ */
+
 function fillEditTradeForm(tradeid) {
   var tradetoedit;
   for (i in opentrades) {
@@ -232,6 +281,10 @@ function fillEditTradeForm(tradeid) {
   $('#formNewTradePrice').val(tradetoedit.price);
   $('#formNewTradeDescription').val(tradetoedit.description);
 }
+
+/**
+ * submit trade edit form
+ */
 
 $('#trade_submit_edited_form').click(function(){
   if (checkInt($('#formNewTradePrice').val())) {
@@ -252,6 +305,10 @@ $('#trade_submit_edited_form').click(function(){
   }
 });
 
+/**
+ * Sends form data to database
+ */
+
 function saveEditedForm(trade, callback) {
   $.ajax({
       type: "PUT",
@@ -270,6 +327,12 @@ function saveEditedForm(trade, callback) {
   });
 }
 
+/**
+ * Deletes a trade
+ * @param {int} tradeid
+ * @param {function} callback
+ */
+
 function deleteTrade(tradeid, callback) {
   $.ajax({
       type: 'DELETE',
@@ -284,6 +347,11 @@ function deleteTrade(tradeid, callback) {
       }
   });
 }
+
+/**
+ * Gets trade info in the chosen language
+ * @param {function} callback
+ */
 
 function getTradeInfo(callback) {
   //ajax

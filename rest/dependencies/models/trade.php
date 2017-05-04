@@ -8,17 +8,14 @@
 
 function addNewTrade($userid, $productid, $tradeprice, $tradedescription) {
   if (userHasProduct($userid, $productid)) {
-    if (notAlreadyForTrade($userid, $productid)) {
       $trade = R::dispense('trades');
       $trade->seller_id = $userid;
       $trade->product_id = $productid;
       $trade->price = $tradeprice;
       $trade->description = $tradedescription;
       R::store($trade);
+      removeFromCollection($trade->seller_id, $trade->product_id);
       $msg = array("success" => "Product has been put for sale!");
-    } else {
-      $msg = array("error" => "Seems like you are already trading this product! Please choose another product to sell.");
-    }
   } else {
     $msg = array("error" => "Oops! You don't seem to own this product. Make sure you filled in the right product!");
   }
@@ -184,6 +181,7 @@ function deleteTrade($userid, $tradeid) {
   $tradetoremove = R::load('trades', $tradeid);
   $response = array("error" => "Could not delete trade.");
   if ($tradetoremove->seller_id == $userid && $tradetoremove->buyer_id == null) {
+    addToCollection($tradetoremove->product_id, $userid);
     R::trash($tradetoremove);
     $response = array("success" => "Trade deleted successfully!");
   }
@@ -231,11 +229,11 @@ function buyTradeProduct($buyer_id, $trade_id){
     $trade->buyer_id = $buyer_id;
     $trade->trade_time = date("Y-m-d H:i:s");//CURRENT_TIMESTAMP;
     //product added to buyer's collection
-      addToCollection($trade->product_id, $buyer->id);
-      R::store($buyer);
+    addToCollection($trade->product_id, $buyer->id);
+    R::store($buyer);
     //product removed from seller's collection
-      removeFromCollection($trade->seller_id, $trade->product_id);
-      addCoinsToUser($seller_id, $trade->price);
+    //removeFromCollection($trade->seller_id, $trade->product_id);
+    addCoinsToUser($seller_id, $trade->price);
     R::store($trade);
     return 'You have bought this product!';
   }
