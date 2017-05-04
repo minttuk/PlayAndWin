@@ -11,11 +11,12 @@ final class tradeTest extends TestCase {
   */
 
   public function testaddNewTrade() {
-    //R::exec('insert into collection VALUES(1, "{"1": 1}")');
     $user = 1;
     $product = 1;
     $price = 999;
     $desc = 'test';
+    R::exec('UPDATE collection set products = "{""1"": 1}" WHERE id = :id', [':id' => $user]);
+    //R::exec('insert into collection VALUES(1, "{"1": 1}")');
     // Testing to insert a new trade
 
     R::exec('DELETE FROM trades WHERE seller_id = :id', [':id' => $user]);
@@ -37,6 +38,7 @@ final class tradeTest extends TestCase {
     $product = 1;
     $price = 999;
     $desc = 'test';
+    R::exec('UPDATE collection set products = "{""1"": 1}" WHERE id = :id', [':id' => $user]);
     R::exec('DELETE FROM trades WHERE seller_id = :id', [':id' => $user]);
     // Counts rows where seller is user and product is 5
     $this->assertEquals(0, countOpenTrades($user, $product));
@@ -57,6 +59,7 @@ final class tradeTest extends TestCase {
     $newprice = 500;
     $desc = 'test';
     $newdesc = 'uusi testi';
+    R::exec('UPDATE collection set products = "{""1"": 1}" WHERE id = :id', [':id' => $user]);
     R::exec('DELETE FROM trades WHERE seller_id = :id', [':id' => $user]);
     addNewTrade($user, $product, $price, $desc);
     $trades = getOpenTrades($user);
@@ -76,6 +79,7 @@ final class tradeTest extends TestCase {
     $product = 1;
     $price = 999;
     $desc = 'test';
+    R::exec('UPDATE collection set products = "{""1"": 1}" WHERE id = :id', [':id' => $user]);
     R::exec('DELETE FROM trades WHERE seller_id = :id', [':id' => $user]);
     addNewTrade($user, $product, $price, $desc);
     $trades = getOpenTrades($user);
@@ -91,6 +95,7 @@ final class tradeTest extends TestCase {
 
   public function testuserHasProduct() {
     $user = 1;
+    R::exec('UPDATE collection set products = "{""1"": 1}" WHERE id = :id', [':id' => $user]);
     $this->assertEquals(true, userHasProduct($user, 1));
     $this->assertEquals(false, userHasProduct($user, 2));
   }
@@ -112,6 +117,8 @@ final class tradeTest extends TestCase {
      */
 
   public function testremoveFromCollection(){
+      $user = 1;
+      R::exec('UPDATE collection set products = "{""1"": 1}" WHERE id = :id', [':id' => $user]);
       $collection = R::load('collection', 1);
       $products = json_decode($collection->products, true);
       $amount = $products["1"];
