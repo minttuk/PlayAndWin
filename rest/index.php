@@ -107,7 +107,7 @@ Flight::route('GET /friends', function(){
 
 // Product
 Flight::route('POST /product', function(){
-    if (isToken() && getAdmin(validateToken())){
+    if (adminPrivilages()){
         addProduct(
             validateToken(),
             Flight::request()->data->name,
@@ -120,7 +120,7 @@ Flight::route('POST /product', function(){
 });
 
 Flight::route('PUT /product', function(){
-    if (isToken() && getAdmin(validateToken())){
+    if (adminPrivilages()){
         updateProduct(
             Flight::request()->data->id,
             Flight::request()->data->name,
@@ -133,7 +133,7 @@ Flight::route('PUT /product', function(){
 });
 
 Flight::route('/products', function() {
-  if (isToken() && getAdmin(validateToken())) {
+  if (adminPrivilages()) {
     Flight::json(getAllProducts());
   }
   else {
