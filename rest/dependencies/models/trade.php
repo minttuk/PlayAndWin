@@ -40,26 +40,6 @@ function userHasProduct($userid, $productid) {
 }
 
 /**
-* Checks if the user has already as mane trades for some product as he owns them
-*
-*@param userid is the current user and productid is the id of the product
-*@return boolean true or false
-*/
-/*
-function notAlreadyForTrade($userid, $productid) {
-  $products = collection($userid);
-  $opentrades = countOpenTrades($userid, $productid);
-  foreach ($products as $key => $value) {
-    if ($key == $productid) {
-      if ($value > $opentrades) {
-        return true;
-      }
-    }
-  }
-  return false;
-}
-*/
-/**
 * Counts how many trades the current user has for a specific product
 *
 *@param userid is the current user and productid is the id of the product
