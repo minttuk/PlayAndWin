@@ -94,7 +94,7 @@ $( "#password-profile-form" ).submit(function(e) {
                     });
                 });
             } else {
-                if (response=='') $('#editprofilemodal').modal('hide');
+                if (response.data == '') $('#editprofilemodal').modal('hide');
                 $('input[name="NewPassword"]').val("");
                 $('input[name="ConfirmPassword"]').val("");
                 $('.psserrormessage').text("");

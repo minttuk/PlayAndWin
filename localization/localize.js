@@ -162,7 +162,7 @@ function loadLanguage(page){
       $(".form_dismiss_btn").text(form_dismiss_btn);
       $(".close_friends_btn").text(form_dismiss_btn);
       $('.edit_name').attr('title',form_valid_name);
-      $('.form_required').attr('oninvalid','this.setCustomValidity("'+form_required+'")');
+      $('.password_input').attr('title',form_valid_password);
       $('.form_required').attr('oninvalid','this.setCustomValidity("'+form_required+'")');
       $('.form_required').attr('onchange','this.setCustomValidity("")');
 
