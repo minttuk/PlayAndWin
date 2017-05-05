@@ -65,13 +65,13 @@ function notAlreadyForTrade($userid, $productid) {
 *@param userid is the current user and productid is the id of the product
 *@return int count of trades
 */
-/*
+
 function countOpenTrades($userid, $productid) {
   $result = R::getAll('SELECT COUNT(*) AS count FROM trades WHERE seller_id = :userid AND product_id = :productid
     AND buyer_id IS NULL', [':userid' => $userid, ':productid' => $productid]);
   return $result[0]['count'];
 }
-*/
+
 /**
 * Returns all trade rows where the current user is either a seller or buyer
 *
