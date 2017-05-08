@@ -104,10 +104,17 @@ $( "#password-profile-form" ).submit(function(e) {
     });
 });
 
-//When Account Settings modal is closed, prefilled information is updated
+/**
+ * When Account Settings modal is closed, prefilled information is updated
+ */
+
 $( "#editprofilecancel" ).click(function() {
     getUserInfo();
 });
+
+/**
+ * Shows mutual friends, pending and friend requests on the friend modal
+ */
 
 function showFriends(){
   getMutualFriends(function(error, response) {
@@ -132,6 +139,10 @@ function showFriends(){
   }
 }
 
+/**
+ * Gets all the users that are mutual friends with the user
+ */
+
 function getMutualFriends(callback) {
   $.ajax({
       url:'/rest/friends/'+userId,
@@ -145,6 +156,10 @@ function getMutualFriends(callback) {
       }
   });
 }
+
+/**
+ * Gets all the users that the user has sent a friendrequest to but request is not approved or declined yet
+ */
 
 function getPendingFriends(callback) {
   $.ajax({
@@ -160,6 +175,10 @@ function getPendingFriends(callback) {
   });
 }
 
+/**
+ * Gets all the users that have sent a friend request to the user, but the user has not yet approved or declined it
+ */
+
 function getFriendRequests(callback) {
   $.ajax({
       url:'/rest/friends/requests/'+userId,
@@ -173,6 +192,10 @@ function getFriendRequests(callback) {
       }
   });
 }
+
+/**
+ * Shows friend action buttons (add friend, delete friend, accept request, cancel request) depending on the friendship 
+ */
 
 function showFriendActionButton() {
   getFriendship(function(error, response) {
