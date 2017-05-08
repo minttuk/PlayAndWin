@@ -24,23 +24,6 @@ function showMenu(gameID) {
             alert(data.message);
     },'json');
 
-    // $.ajax({
-    //     url: "/rest/score",
-    //     type: "POST",
-    //     dataType: "JSON",
-    //     data: {
-    //         game: gameID,
-    //         score: score
-    //     },
-    //     success: function (data) {
-    //         $('#score').html(data.highscore);
-    //         window.parent.updateCoins();
-    //         if (data.message != '') {
-    //             alert(data.message);
-    //         }
-    //     }
-    // });
-
     startColor();
     $('#result').html(score);
     $('#game_start').text($.i18n.prop('game_again'), localStorage.getItem("lang"));

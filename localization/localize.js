@@ -145,8 +145,7 @@ function loadLanguage(page){
       $("#editprofilepassword").text(form_editpassword);
       $("#savenewpassword").val(form_save);
 
-
-        //Edit picture modal
+      //Edit picture modal
       //$("#editpictureheading").text(profile_changepic);
       $("#uploadpicturebutton").val(form_upload);
       //My friends modal
