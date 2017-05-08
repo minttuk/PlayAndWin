@@ -194,7 +194,7 @@ function getFriendRequests(callback) {
 }
 
 /**
- * Shows friend action buttons (add friend, delete friend, accept request, cancel request) depending on the friendship 
+ * Shows friend action buttons (add friend, delete friend, accept request, cancel request) depending on the friendship
  */
 
 function showFriendActionButton() {
@@ -238,6 +238,10 @@ function showFriendActionButton() {
   });
 }
 
+/**
+ * Gets friendship wether users are mutual friends, the friendship is unconfirmed or no requests at all
+ */
+
 function getFriendship(callback) {
   $.ajax({
       url: '/rest/friends?id='+userId,
@@ -251,6 +255,10 @@ function getFriendship(callback) {
       }
   });
 }
+
+/**
+ * Gets users public information
+ */
 
 function getUserInfo() {
     if (getLastDir()!='') {
@@ -271,6 +279,10 @@ function getUserInfo() {
     });
 }
 
+/**
+ * Updates information on the profile page
+ */
+
 function updateProfile(response) {
   showProfileInformation(response);
   //editprofile button and change picture button only visible in your own profile
@@ -284,6 +296,10 @@ function updateProfile(response) {
   }
   prefillEditForm(response);
 }
+
+/**
+ * Fills fields with user information in the user profile
+ */
 
 function showProfileInformation(response) {
   $('#username').fadeOut(0, function() {
@@ -325,6 +341,10 @@ function showProfileInformation(response) {
   }
 }
 
+/**
+ * Shows edit profile options if user is in his/her own profile
+ */
+
 function showOwnProfileFields() {
   $('#editprofilebutton').fadeOut(0, function() {
     $(this).css('display', 'inline-block').fadeIn(500);
@@ -339,12 +359,20 @@ function showOwnProfileFields() {
   $('#pendingfriendstab').css("display", "inline-block");
 }
 
+/**
+ * Adds current profile user id to friend action buttons
+ */
+
 function initFriendActionButton() {
   $('.addfriendbutton').css('display', 'none');
   $('.addfriendbutton').attr('data-id', userId);
   $('.deletefriendbutton').css('display', 'none');
   $('.deletefriendbutton').attr('data-id', userId);
 }
+
+/**
+ * Prefills user edit form with current data
+ */
 
 function prefillEditForm(response) {
   //firstname
@@ -379,6 +407,10 @@ function prefillEditForm(response) {
 
 }
 
+/**
+ * Shows friend requests in friend modal
+ */
+
 $('#friendrequeststab').click(function() {
   showFriends();
   $('#friendrequeststab').attr('class', 'active');
@@ -388,6 +420,10 @@ $('#friendrequeststab').click(function() {
   $('#pendingfriendstab').removeClass('active');
   $('#showpendingfriendsdiv').css('display', 'none');
 })
+
+/**
+ * Shows pending friend requests in the friend modal
+ */
 
 $('#pendingfriendstab').click(function() {
   showFriends();
@@ -399,6 +435,10 @@ $('#pendingfriendstab').click(function() {
   $('#showfriendrequestsdiv').css('display', 'none');
 })
 
+/**
+ * Shows mutual friends in the friend modal
+ */
+
 $('#mutualfriendstab').click(function() {
   showFriends();
   $('#mutualfriendstab').attr('class', 'active');
@@ -408,6 +448,10 @@ $('#mutualfriendstab').click(function() {
   $('#friendrequeststab').removeClass('active');
   $('#showfriendrequestsdiv').css('display', 'none');
 })
+
+/**
+ * Gets max 8 users that were last logged in
+ */
 
 function getLastLoggedIn() {
   $.ajax({
@@ -424,6 +468,10 @@ function getLastLoggedIn() {
       }
   });
 }
+
+/**
+ * Gets max 8 users that were last signed up on the site
+ */
 
 function getNewUsers() {
   $.ajax({
@@ -451,6 +499,10 @@ function redeemItem(id) {
   });
 }
 
+/**
+ * Gets all the products that the user has and shows them in the collection modal
+ */
+
 function getCollection() {
   $.ajax({
       url:'/rest/collection/'+localStorage.getItem("lang"),
@@ -470,30 +522,6 @@ function getCollection() {
           translate(item.name,function(translation){
             $('.item'+i).text(translation);
           });
-          /*
-          for (var i in response) {
-            var row = $('<div class="collectionrow row">');
-            var left_col = $('<div class="col-md-6 img-w3-agile"></div>');
-            var right_col = $('<div class="col-md-6 img-w3-agile"></div>');
-            var name = $('<h3></h3>');
-            var cost = $('<h4></h4>');
-            var amount = $('<h4></h4>');
-            var img = $('<img></img>');
-            img.attr("src", response[i].picture);
-            img.css({'max-height':'300px','width':'auto','display':'block','margin':'auto'});
-            img.attr("alt", "image of " + response[i].name);
-            name.text(response[i].name);
-            cost.text($.i18n.prop('shop_cost',localStorage.getItem("lang")) + ": " + response[i].price);
-            amount.text($.i18n.prop('shop_amount',localStorage.getItem("lang")) + ": " + response[i].amount);
-            right_col.append(img);
-            left_col.append(name);
-            left_col.append(cost);
-            left_col.append(amount);
-            row.append(right_col);
-            row.append(left_col);
-            $('#mycollection').append(row);
-          }
-          */
         });
       },
       error: function(jqXHR, textStatus, errorThrown) {
@@ -502,7 +530,12 @@ function getCollection() {
   });
 }
 
-//who = element id where people are shown
+/**
+ * Shows last logged in and signed up users
+ * @param {Object} response users list
+ * @param {String} who the element where users are shown
+ */
+
 function showOtherUsers(response, who) {
   $('#' + who + '').empty();
   for (var i in response) {
@@ -536,7 +569,10 @@ function showOtherUsers(response, who) {
   initHandlers();
 }
 
-// click event handlers are called after DOM elements creation too
+
+/**
+ * Recreates event handlers when buttons and such are created with DOM
+ */
 function initHandlers() {
 
   $( ".addfriendbutton" ).click(function() {
@@ -626,8 +662,6 @@ $('#userlocation').click(function(){
 
 getScoreTable();
 getSession();
-//getUserInfo();
 getLastLoggedIn();
 getNewUsers();
-//();
 initHandlers();
