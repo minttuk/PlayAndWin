@@ -16,6 +16,7 @@ $('#trade_submit_form').click(function () {
         $('#tradeformsuccessmsg').text(response.success);
         emptyTradeForm();
         getTradeManageInfo();
+        //createCollection();
       }
     });
   }
@@ -53,6 +54,7 @@ function buyTrade(trade_id) {
             });
             updateCoins();
             generateTrades();
+            createCollection();
         }
     });
 }
@@ -341,6 +343,7 @@ function deleteTrade(tradeid, callback) {
       success: function (response){
         callback(null, response);
         getTradeManageInfo();
+        createCollection();
         },
       error: function(jqXHR, textStatus, errorThrown) {
         callback(errorThrown, null);

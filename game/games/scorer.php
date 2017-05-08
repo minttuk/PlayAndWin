@@ -29,7 +29,7 @@ function update($time, $token) {
 }
 
 function setToken() {
-  $_SESSION['token'] = bin2hex(random_bytes(10));
+  $_SESSION['token'] = sha1(rand());
   echo $_SESSION['token'];
 }
 ?>

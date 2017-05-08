@@ -152,5 +152,6 @@ function buyPrize(product_id) {
             });
             updateCoins();
             generateProducts();
+            createCollection();
     });
 }
