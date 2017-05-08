@@ -6,10 +6,10 @@ echo "xxxxx" . getcwd();
 require_once '../rest/dependencies/require_all.php';
 
 final class tradeTest extends TestCase {
+
   /*
   * Tests that addNewTrade adds a new trade to the database
   */
-
   public function testaddNewTrade() {
     $user = 1;
     $product = 1;
@@ -32,7 +32,6 @@ final class tradeTest extends TestCase {
   /*
   * Tests that countOpenTrades returns the right amount of trades by user.
   */
-
   public function testcountOpenTrades() {
     $user = 1;
     $product = 1;
@@ -51,7 +50,6 @@ final class tradeTest extends TestCase {
   /*
   * Tests that a trades price and description can be edited with editTrade()
   */
-
   public function testeditTrade() {
     $user = 1;
     $product = 1;
@@ -73,7 +71,6 @@ final class tradeTest extends TestCase {
   /*
   * Tests that a trade can be deleted from database with deleteTrade()
   */
-
   public function testdeleteTrade() {
     $user = 1;
     $product = 1;
@@ -92,7 +89,6 @@ final class tradeTest extends TestCase {
   /*
   * Tests that userHasProduct() returns true if user has the product and false if user doesn't have it.
   */
-
   public function testuserHasProduct() {
     $user = 1;
     R::exec('UPDATE collection set products = "{""1"": 1}" WHERE id = :id', [':id' => $user]);
@@ -103,7 +99,6 @@ final class tradeTest extends TestCase {
     /**
      * Tests that coins are added corrected to the user.
      */
-
   public function testaddCoinsToUser(){
       $old_coins = R::getCell('SELECT coins FROM user WHERE id = 1');
       addCoinsToUser(1, 50);
@@ -115,7 +110,6 @@ final class tradeTest extends TestCase {
     /**
      * Tests that a product is removed from collection.
      */
-
   public function testremoveFromCollection(){
       $user = 1;
       R::exec('UPDATE collection set products = "{""1"": 1}" WHERE id = :id', [':id' => $user]);
