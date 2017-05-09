@@ -1,26 +1,32 @@
-
 // Navigation
 var lang;
 
+generateUserTable();
+generateChatTable();
+
+/**
+ * Generates and appends the user table to the page html, as well as adds button click handlers
+ */
+function generateUserTable() {
   $.getJSON('/rest/users', function (data) {
-    $.each(data, function (i,user) {
-      var banned =  user.banned == 0 ? 'Ban' : 'Unban';
-      var btnClass =  user.banned == 0 ? 'btn-warning' : 'btn-success';
+    $.each(data, function (i, user) {
+      var banned = user.banned == 0 ? 'Ban' : 'Unban';
+      var btnClass = user.banned == 0 ? 'btn-warning' : 'btn-success';
       $('#admin-users-table').append(
-      '<tr><td>' + user.username + '</td>' +
-      '<td>' + user.firstname + ' ' + user.lastname + '</td>' +
-      '<td>' + user.email + '</td> ' +
-      '<td>' + user.coins + '</td> ' +
-      '<td>' + user.last_online + '</td> ' +
-      '<td><button type="button" data-userID="' + user.id +
-      '" class="btn ' + btnClass + ' admin-ban-user">' + banned + '</button>' +
-      '<button type="button" data-userid="' + user.id +
-      '" class="btn btn-danger admin-delete-user">Delete</button></td></tr>');
+        '<tr><td>' + user.username + '</td>' +
+        '<td>' + user.firstname + ' ' + user.lastname + '</td>' +
+        '<td>' + user.email + '</td> ' +
+        '<td>' + user.coins + '</td> ' +
+        '<td>' + user.last_online + '</td> ' +
+        '<td><button type="button" data-userID="' + user.id +
+        '" class="btn ' + btnClass + ' admin-ban-user">' + banned + '</button>' +
+        '<button type="button" data-userid="' + user.id +
+        '" class="btn btn-danger admin-delete-user">Delete</button></td></tr>');
     });
-    $('.admin-ban-user').click(function() {
+    $('.admin-ban-user').click(function () {
       $.ajax({
         type: "PUT",
-        url: "/rest/user/ban/"+$(this).data('userid'),
+        url: "/rest/user/ban/" + $(this).data('userid'),
         context: this,
         success: function (response) {
           $(this).text(response == 0 ? 'Ban' : 'Unban');
@@ -28,12 +34,11 @@ var lang;
         }
       });
     });
-
-    $('.admin-delete-user').click(function() {
-      if(confirm('Are you sure you want to delete the user!\nAll the information associated with this account will be lost.')){
+    $('.admin-delete-user').click(function () {
+      if (confirm('Are you sure you want to delete the user!\nAll the information associated with this account will be lost.')) {
         $.ajax({
           type: "DELETE",
-          url: "/rest/user/"+$(this).data('userid'),
+          url: "/rest/user/" + $(this).data('userid'),
           context: this,
           success: function (response) {
             $(this).closest('tr').remove();
@@ -42,122 +47,95 @@ var lang;
       }
     });
   });
+}
 
-
-    $.getJSON('/rest/chat', function (data) {
-      $.each(data, function (i,msg) {
-        $('#admin-chat-table').append(
+/**
+ * Generates and appends the chat table to the page html, as well as adds button click handlers
+ */
+function generateChatTable() {
+  $.getJSON('/rest/chat', function (data) {
+    $.each(data, function (i, msg) {
+      $('#admin-chat-table').append(
         '<tr><td>' + msg.username + '</td>' +
         '<td>' + msg.msg + '</td>' +
         '<td>' + msg.ts + '</td> ' +
         '<td><button type="button" data-msgid="' + msg.id +
         '" class="btn btn-danger admin-delete-msg">Delete</button></tr>');
+    });
+    $('.admin-delete-msg').click(function () {
+      $.ajax({
+        type: "DELETE",
+        url: "/rest/chat/" + $(this).data('msgid'),
+        context: this,
+        success: function (response) {
+          $(this).closest('tr').remove();
+        }
       });
-      $('.admin-delete-msg').click(function() {
-        $.ajax({
-          type: "DELETE",
-          url: "/rest/chat/"+$(this).data('msgid'),
-          context: this,
-          success: function (response) {
-            $(this).closest('tr').remove();
-          }
-        });
-      });
     });
-
-
-
-  /**
-   * Shows the content of the active location and hides everything else
-   *
-   * @param {string} elem_id the id of the element to show
-   */
-
-  function showWhichTabActive(elem_id) {
-    $.each( $('.admin_mainarea').children(), function () {
-      elem_id == $(this).attr('id') ? $('#'+elem_id).show() : $(this).hide();
-    });
-  }
-
-  // function showWhichTabActive(classname) {
-  //   var classnames = ['.admin-manage-users-nav', '.admin-manage-chat-nav', '.admin-manage-products-nav', '.dropdown-toggle'];
-  //   for (i in classnames) {
-  //     if (classnames[i] == classname) {
-  //       $(classnames[i]).addClass('active');
-  //     }
-  //     else {
-  //       $(classnames[i]).removeClass('active');
-  //     }
-  //   }
-  // }
-
-  /**
-   * Shows bold the active location in nav bar and shows other text in lighter text
-   *
-   * @param {object} elem the element to change active
-   */
-
-  function showActiveContent(elem) {
-    $.each( $('.admin_sidepanelcontent').find('li[class^=admin-manage],.dropdown-toggle'), function () {
-       $(elem)[0] == $(this)[0] ? $(elem).addClass('active') : $(this).removeClass('active');
-    });
-  }
-
-  // function showActiveContent(divname) {
-  //   var divnames = ['#admin-manage-users', '#admin-manage-chat', '.admin_addtranslationarea', '#admin-manage-products'];
-  //   for (i in divnames) {
-  //     if (divnames[i] == divname) {
-  //       $(divnames[i]).show();
-  //     }
-  //     else {
-  //       $(divnames[i]).hide();
-  //     }
-  //   }
-  // }
-
-  function showWhichTabActive(elem_id) {
-    $.each( $('.admin_mainarea').children(), function () {
-      elem_id == $(this).attr('id') ? $('#'+elem_id).show() : $(this).hide();
-    });
-  }
-
-    $('.admin-manage-users-nav').click(function(){
-    showActiveContent($(this));
-    showWhichTabActive('admin-manage-users');
   });
+}
 
-  $('.admin-manage-chat-nav').click(function(){
-    showActiveContent($(this));
-    showWhichTabActive('admin-manage-chat');
-  });
+/**
+ * Shows the content of the active location and hides everything else
+ *
+ * @param {string} elem_id the id of the element to show
+ */
 
-  $('.admin-manage-products-nav').click(function(){
-    showActiveContent($(this));
-    showWhichTabActive('admin-manage-products');
+function showWhichTabActive(elem_id) {
+  $.each($('.admin_mainarea').children(), function () {
+    elem_id == $(this).attr('id') ? $('#' + elem_id).show() : $(this).hide();
   });
+}
 
-  $('.admin-trasnlate-products-nav').click(function() {
-    showActiveContent($(this).parent().parent().children(":first"));
-    showWhichTabActive('admin_addtranslationarea');
-    lang = $(this).data('lang');
-    $('#admin-translate-form-heading').text('Translate [' + lang + ']');
-    showTranslations();
+/**
+ * Shows bold the active location in nav bar and shows other text in lighter text
+ *
+ * @param {object} elem the element to change active
+ */
+
+function showActiveContent(elem) {
+  $.each($('.admin_sidepanelcontent').find('li[class^=admin-manage],.dropdown-toggle'), function () {
+    $(elem)[0] == $(this)[0] ? $(elem).addClass('active') : $(this).removeClass('active');
   });
+}
+
+$('.admin-manage-users-nav').click(function () {
+  showActiveContent($(this));
+  showWhichTabActive('admin-manage-users');
+});
+
+$('.admin-manage-chat-nav').click(function () {
+  showActiveContent($(this));
+  showWhichTabActive('admin-manage-chat');
+});
+
+$('.admin-manage-products-nav').click(function () {
+  showActiveContent($(this));
+  showWhichTabActive('admin-manage-products');
+});
+
+$('.admin-trasnlate-products-nav').click(function () {
+  showActiveContent($(this).parent().parent().children(":first"));
+  showWhichTabActive('admin_addtranslationarea');
+  lang = $(this).data('lang');
+  $('#admin-translate-form-heading').text('Translate [' + lang + ']');
+  showTranslations();
+});
 
 
 // Manage products
 
-$('#admin_addproductbtn').click(function() {
+$('#admin_addproductbtn').click(function () {
   $('.admin_addproductarea').show();
 });
 
-$('#admin_addproductcancelbtn').click(function() {
+$('#admin_addproductcancelbtn').click(function () {
   clearAddproductForm();
   $('.admin_addproductarea').hide();
 });
 
 /**
- * unbinds and sets new event handlers for elements after page has loaded
+ * Unbinds and sets new event handlers for elements after page has loaded
  */
 
 function initHandlersForDynamicElements() {
@@ -165,7 +143,10 @@ function initHandlersForDynamicElements() {
   $('.admin_editproductbtn').click(function () {
     prefillAddproductForm($(this).data('productid'));
     $('.admin_addproductarea').show();
-    $('.admin_mainarea').animate({ scrollTop: 0, scrollLeft: 0 }, "fast");
+    $('.admin_mainarea').animate({
+      scrollTop: 0,
+      scrollLeft: 0
+    }, "fast");
   });
 }
 
@@ -189,14 +170,13 @@ function handleAddProductForm() {
     "id": $('#admin-product-name-input').data('addproduct-id')
   };
   //console.log(product.name, product.image_url, product.price, product.amount, product.description, product.id);
-  if(checkName(product.name) && checkPrice(product.price) && checkAmount(product.amount) && checkDescription(product.description)) {
+  if (checkName(product.name) && checkPrice(product.price) && checkAmount(product.amount) && checkDescription(product.description)) {
     if (product.id) {
-      updateProduct(product, function(error, response) {
+      updateProduct(product, function (error, response) {
         displayAllProducts();
       });
-    }
-    else {
-      addProduct(product, function(error, response) {
+    } else {
+      addProduct(product, function (error, response) {
         displayAllProducts();
       });
     }
@@ -214,16 +194,16 @@ function handleAddProductForm() {
 
 function addProduct(product, callback) {
   $.ajax({
-      url:'/rest/product',
-      type: "POST",
-      contentType: "application/json",
-      data: JSON.stringify(product),
-      success: function (response){
-        callback(null, response);
-      },
-      error: function(jqXHR, textStatus, errorThrown) {
-        callback(errorThrown, null);
-      }
+    url: '/rest/product',
+    type: "POST",
+    contentType: "application/json",
+    data: JSON.stringify(product),
+    success: function (response) {
+      callback(null, response);
+    },
+    error: function (jqXHR, textStatus, errorThrown) {
+      callback(errorThrown, null);
+    }
   });
 }
 
@@ -237,17 +217,17 @@ function addProduct(product, callback) {
 
 function updateProduct(product, callback) {
   $.ajax({
-      url:'/rest/product',
-      type: "PUT",
-      contentType: "application/json",
-      dataType: "json",
-      data: JSON.stringify(product),
-      success: function (response){
-        callback(null, response);
-      },
-      error: function(jqXHR, textStatus, errorThrown) {
-        callback(errorThrown, null);
-      }
+    url: '/rest/product',
+    type: "PUT",
+    contentType: "application/json",
+    dataType: "json",
+    data: JSON.stringify(product),
+    success: function (response) {
+      callback(null, response);
+    },
+    error: function (jqXHR, textStatus, errorThrown) {
+      callback(errorThrown, null);
+    }
   });
 }
 
@@ -257,11 +237,10 @@ function updateProduct(product, callback) {
 
 
 function displayAllProducts() {
-  getAllProducts(function(error, response) {
+  getAllProducts(function (error, response) {
     if (response && !response.error) {
       fillProductsTable(response);
-    }
-    else if (response.error) {
+    } else if (response.error) {
       window.location.replace("../");
     }
   });
@@ -278,14 +257,14 @@ displayAllProducts();
 
 function getAllProducts(callback) {
   $.ajax({
-      url:'/rest/products',
-      contentType: "application/json",
-      success: function (response){
-        callback(null, response);
-      },
-      error: function(jqXHR, textStatus, errorThrown) {
-        callback(errorThrown, null);
-      }
+    url: '/rest/products',
+    contentType: "application/json",
+    success: function (response) {
+      callback(null, response);
+    },
+    error: function (jqXHR, textStatus, errorThrown) {
+      callback(errorThrown, null);
+    }
   });
 }
 
@@ -315,15 +294,15 @@ function fillProductsTable(products) {
       '<td>' + products[i].amount + '</td> ' +
       '<td><button type="button" data-productid="' + products[i].id +
       '" class="btn btn-primary admin_editproductbtn">Edit</button>');
-      row.append(content);
-      div.append(row);
-      if ($(window).width() < 992) {
-        $('.contentbox').css('margin',0);
-        $('.admin_managewebstore').css('width',$('#admin-allproducts-table').width()+100);
-        $('.admin_mainarea').scrollLeft(100);
-      }
+    row.append(content);
+    div.append(row);
+    if ($(window).width() < 992) {
+      $('.contentbox').css('margin', 0);
+      $('.admin_managewebstore').css('width', $('#admin-allproducts-table').width() + 100);
+      $('.admin_mainarea').scrollLeft(100);
     }
-    initHandlersForDynamicElements();
+  }
+  initHandlersForDynamicElements();
 }
 
 /**
@@ -335,7 +314,7 @@ function fillProductsTable(products) {
 
 function prefillAddproductForm(id) {
   $('#admin-addproductform-heading').text('Edit Product');
-  getProductById(id, function(error, response) {
+  getProductById(id, function (error, response) {
     $('#admin-product-name-input').val(response.name);
     $('#admin-product-image-input').val(response.image_url);
     $('#admin-product-price-input').val(response.price);
@@ -354,14 +333,14 @@ function prefillAddproductForm(id) {
 
 function getProductById(id, callback) {
   $.ajax({
-      url:'/rest/product/' + id,
-      contentType: "application/json",
-      success: function (response){
-        callback(null, response);
-      },
-      error: function(jqXHR, textStatus, errorThrown) {
-        callback(errorThrown, null);
-      }
+    url: '/rest/product/' + id,
+    contentType: "application/json",
+    success: function (response) {
+      callback(null, response);
+    },
+    error: function (jqXHR, textStatus, errorThrown) {
+      callback(errorThrown, null);
+    }
   });
 }
 
@@ -397,12 +376,12 @@ function clearErrormsg() {
  */
 
 function checkDescription(description) {
-    if (description.length > 0 && description.length < 500 && description.trim().length !== 0) {
-        return true;
-    } else {
-        $('.errormsg').html('Please fill in the product description!');
-        return false;
-    }
+  if (description.length > 0 && description.length < 500 && description.trim().length !== 0) {
+    return true;
+  } else {
+    $('.errormsg').html('Please fill in the product description!');
+    return false;
+  }
 }
 
 /**
@@ -411,12 +390,12 @@ function checkDescription(description) {
  * @returns {boolean}
  */
 function checkName(name) {
-    if (name.length > 0 && name.length < 40 && name.trim().length !== 0) {
-      return true;
-    } else {
-      $('.errormsg').html('Please fill in the product name!');
-      return false;
-    }
+  if (name.length > 0 && name.length < 40 && name.trim().length !== 0) {
+    return true;
+  } else {
+    $('.errormsg').html('Please fill in the product name!');
+    return false;
+  }
 }
 
 /**
@@ -425,12 +404,12 @@ function checkName(name) {
  * @returns {boolean}
  */
 function checkPrice(price) {
-    if (price.length > 0 && price.length < 25 && price != 0) {
-      return true;
-    } else {
-      $('.errormsg').html('Please fill in the product price!');
-      return false;
-    }
+  if (price.length > 0 && price.length < 25 && price != 0) {
+    return true;
+  } else {
+    $('.errormsg').html('Please fill in the product price!');
+    return false;
+  }
 }
 
 /**
@@ -439,12 +418,12 @@ function checkPrice(price) {
  * @returns {boolean}
  */
 function checkAmount(amount) {
-    if (amount.length > 0 && amount.length < 25) {
-      return true;
-    } else {
-      $('.errormsg').html('Please fill in the product amount!');
-      return false;
-    }
+  if (amount.length > 0 && amount.length < 25) {
+    return true;
+  } else {
+    $('.errormsg').html('Please fill in the product amount!');
+    return false;
+  }
 }
 
 // Translate products
@@ -456,7 +435,7 @@ function checkAmount(amount) {
 function showTranslations() {
   $('#admin-translation-table').html('');
   $('#admin-missing-translation-table').html('');
-  getProductTranslations(function(error, response) {
+  getProductTranslations(function (error, response) {
     if (response && !response.error) {
       generateTableHeadings();
       var first = true;
@@ -469,8 +448,7 @@ function showTranslations() {
             prefillTranslationForm(response[i]);
             first = false;
           }
-        }
-        else {
+        } else {
           appendToTranslations(response[i]);
         }
       }
@@ -479,8 +457,7 @@ function showTranslations() {
         clearTranslationForm();
         $('#admin-translation-form').css('display', 'none');
       }
-    }
-    else if (response.error) {
+    } else if (response.error) {
       window.location.replace("../");
     }
   });
@@ -544,9 +521,9 @@ function appendToTranslationMissing(response) {
     row.attr('class', 'greyrow');
   }
   var tablerow = $('<td>' + response.name + '</td> ' +
-  '<td>' + response.description + '</td><td>' + response.trans_name + '</td>' +
-  '<td>' + response.trans_description + '</td> ' +
-  '<td><button type="button" data-productid="' + response.id +'" class="btn btn-primary admin_translateproductbtn">Translate</button></td>');
+    '<td>' + response.description + '</td><td>' + response.trans_name + '</td>' +
+    '<td>' + response.trans_description + '</td> ' +
+    '<td><button type="button" data-productid="' + response.id + '" class="btn btn-primary admin_translateproductbtn">Translate</button></td>');
   row.append(tablerow);
   $('#admin-missing-translation-table').append(row);
 }
@@ -563,10 +540,10 @@ function appendToTranslations(response) {
     row.attr('class', 'greyrow');
   }
   var tablerow = $('<td>' + response.name + '</td>' +
-  '<td>' + response.description + '</td>' +
-  '<td>' + response.trans_name + '</td>' +
-  '<td>' + response.trans_description + '</td>' +
-  '<td><button type="button" data-productid="' + response.id +'" class="btn btn-primary admin_translateproductbtn">Edit</button></td>');
+    '<td>' + response.description + '</td>' +
+    '<td>' + response.trans_name + '</td>' +
+    '<td>' + response.trans_description + '</td>' +
+    '<td><button type="button" data-productid="' + response.id + '" class="btn btn-primary admin_translateproductbtn">Edit</button></td>');
   row.append(tablerow);
   $('#admin-translation-table').append(row);
 }
@@ -579,14 +556,14 @@ function appendToTranslations(response) {
 
 function getProductTranslations(callback) {
   $.ajax({
-      url:'/rest/translations/' + lang,
-      contentType: "application/json",
-      success: function (response){
-        callback(null, response);
-      },
-      error: function(jqXHR, textStatus, errorThrown) {
-        callback(errorThrown, null);
-      }
+    url: '/rest/translations/' + lang,
+    contentType: "application/json",
+    success: function (response) {
+      callback(null, response);
+    },
+    error: function (jqXHR, textStatus, errorThrown) {
+      callback(errorThrown, null);
+    }
   });
 }
 
@@ -599,14 +576,14 @@ function getProductTranslations(callback) {
 
 function getProductTranslationById(id, callback) {
   $.ajax({
-      url:'/rest/translation/' + lang + '/' + id,
-      contentType: "application/json",
-      success: function (response){
-        callback(null, response);
-      },
-      error: function(jqXHR, textStatus, errorThrown) {
-        callback(errorThrown, null);
-      }
+    url: '/rest/translation/' + lang + '/' + id,
+    contentType: "application/json",
+    success: function (response) {
+      callback(null, response);
+    },
+    error: function (jqXHR, textStatus, errorThrown) {
+      callback(errorThrown, null);
+    }
   });
 }
 
@@ -619,18 +596,18 @@ function getProductTranslationById(id, callback) {
 
 function updateTranslation(translation, callback) {
   $.ajax({
-      url:'/rest/translation/',
-      type: 'PUT',
-      contentType: "application/json",
-      dataType: "json",
-      data: JSON.stringify(translation),
-      success: function (response){
-        callback(null, response);
-        showTranslations();
-      },
-      error: function(jqXHR, textStatus, errorThrown) {
-        callback(errorThrown, null);
-      }
+    url: '/rest/translation/',
+    type: 'PUT',
+    contentType: "application/json",
+    dataType: "json",
+    data: JSON.stringify(translation),
+    success: function (response) {
+      callback(null, response);
+      showTranslations();
+    },
+    error: function (jqXHR, textStatus, errorThrown) {
+      callback(errorThrown, null);
+    }
   });
 }
 
@@ -640,9 +617,12 @@ function updateTranslation(translation, callback) {
 
 function initTranslateHandlers() {
   $('.admin_translateproductbtn').unbind();
-  $('.admin_translateproductbtn').click(function() {
+  $('.admin_translateproductbtn').click(function () {
     $('#admin-translation-form').show();
-    $('.admin_mainarea').animate({ scrollTop: 0, scrollLeft: 0 }, "fast");
+    $('.admin_mainarea').animate({
+      scrollTop: 0,
+      scrollLeft: 0
+    }, "fast");
     translateButtonClicked($(this).attr('data-productid'));
     console.log('click');
   });
@@ -655,21 +635,20 @@ function initTranslateHandlers() {
  */
 
 function translateButtonClicked(id) {
-  getProductTranslationById(id, function(error, response) {
+  getProductTranslationById(id, function (error, response) {
     if (response && !response.error) {
       prefillTranslationForm(response);
-    }
-    else if (response.error) {
+    } else if (response.error) {
       window.location.replace("../");
     }
   });
 }
 
-$('#admin-cancel-translation-btn').click(function() {
+$('#admin-cancel-translation-btn').click(function () {
   $('#admin-translation-form').hide();
 });
 
-$('#admin-save-translation-btn').click(function() {
+$('#admin-save-translation-btn').click(function () {
   saveTranslationButtonClicked();
 });
 
@@ -679,9 +658,14 @@ $('#admin-save-translation-btn').click(function() {
 
 function saveTranslationButtonClicked() {
   if (checkName($('#trans-name-form').val()) && checkDescription($('#trans-description-form').val())) {
-    var translation = {"id": $('#original-name').attr('data-id'), "lang": lang, "name": $('#trans-name-form').val(),"description": $('#trans-description-form').val()};
+    var translation = {
+      "id": $('#original-name').attr('data-id'),
+      "lang": lang,
+      "name": $('#trans-name-form').val(),
+      "description": $('#trans-description-form').val()
+    };
     console.log(translation);
-    updateTranslation(translation, function(error, response) {
+    updateTranslation(translation, function (error, response) {
       console.log(error, response);
     });
   }

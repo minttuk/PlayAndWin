@@ -42,8 +42,15 @@ $('.modal').on('shown.bs.modal', function(e) {
 })
 
 $(document).ready(function() {
-    setInterval(update, 1000);
-    $.ajax({
+    setInterval(updateChat, 1000);
+    loadChat();
+});
+
+/**
+ * Loads and appends the user table to the page html
+ */
+function loadChat() {
+        $.ajax({
         url: "/rest/chat?html",
         datatype: 'html',
         success: function(result) {
@@ -65,19 +72,25 @@ $(document).ready(function() {
     $.getJSON("/rest/chat", function(result) {
         prevResult = result[result.length - 1].id;
     });
-});
+}
 
+/**
+ * Sends a chat message to the rest api
+ */
 function sendMsg() {
     $.post("/rest/chat", {
         message: $('#msgbox').val().emojify(),
     }, function(data) {
         $('#msgbox').val('');
         inputFocus();
-        update();
+        updateChat();
     });
 }
 
-function update() {
+/**
+ * Updates the chat and appends new chat messages to the page html
+ */
+function updateChat() {
     $.getJSON("/rest/chat", function(result) {
         if (result[result.length - 1].id != prevResult) {
             doOnce = true;
@@ -98,10 +111,18 @@ function update() {
     });
 }
 
+/**
+ * Places focus on the chat message input field
+ */
 function inputFocus() {
     $('#msgbox').focus();
 }
 
+/**
+ * Alternates between generating two possible CSS background colors based on a boolean value.
+ *
+ * @return string CSS formatted background-color
+ */
 function cardColor() {
     if (colorshift) {
         colorshift = !colorshift;

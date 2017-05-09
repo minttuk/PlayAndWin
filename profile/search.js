@@ -38,6 +38,9 @@ $('#searchbar').focusout(function(){
   setTimeout(function(){search = true;},500);
 });
 
+/**
+ * Toggle the search text off on mobile devices
+ */
 function mobileView(){
   if($( window ).width() < 500)
     $('#search').toggle();

@@ -18,6 +18,9 @@ $(document).ready(function() {
     },'json');
   });
 });
+/**
+ * Generated the "sign up" modal and loads it onto the page
+ */
 function signUpForm() {
   $("#signForm").html('<label>'+$.i18n.prop('form_username',localStorage.getItem("lang"))+'<input type="text" class="text form_required" name="username" placeholder="MrAmazing'+
             '" required title="'+$.i18n.prop('form_valid_username',localStorage.getItem("lang"))+'"></label>'+
@@ -38,6 +41,9 @@ function signUpForm() {
   $('.form_required').attr('onchange','this.setCustomValidity("")');
 
 }
+/**
+ * Generated the "sign in" modal and loads it onto the page
+ */
 function signInForm() {
   if(signedIn) {
     $('.signIn').removeAttr('data-toggle');
@@ -54,20 +60,20 @@ function signInForm() {
     $('.form_required').attr('onchange','this.setCustomValidity("")');
   }
 }
-
+/**
+ * Checks if the user is signed in and changes the navbar buttons accordingly
+ */
 function isSignedIn() {
-  updateLogoutButton();
   if (signedIn) {
+    $('.signIn').text($.i18n.prop('navbar_logout',localStorage.getItem("lang")));
     $('#prof').css('display','block');
     $('.signUp').html('');
     $('.signUp').css({"color": "white", "font-size": "20px",'padding-top':'16px', 'min-width':'95px', 'padding-right':'30px'});
   }
 }
-
-function updateLogoutButton(){
-  if (signedIn) $('.signIn').text($.i18n.prop('navbar_logout',localStorage.getItem("lang")));
-}
-
+/**
+ * Updates the coin amonut show in the navbar if the user is signed in
+ */
 function updateCoins() {
   if (signedIn){
     var html = '<i class="glyphicon glyphicon-copyright-mark"></i> ';
