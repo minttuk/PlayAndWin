@@ -188,9 +188,10 @@ function getLastLoggedIn() {
 }
 
 /**
- * Checks the admin status of the user signed in. Returns a boolean value of the admin status.
+ * Checks the admin status of the user signed in.
  *
  * @param int $id is the id number of the user
+ * @return Array with the value of the admin cell from the user table
  */
 function getAdmin($id){
     if ($id != -1){
@@ -227,6 +228,7 @@ function getCoins($id) {
  * Returns the bought items of a user with product name, amount, picture and price
  *
  * @param int $id is the ID number of the user.
+ * @param String $lang is the language being used
  * @return List of products
  */
 function getCollection($id,$lang=null) {
@@ -259,23 +261,43 @@ function getCollection($id,$lang=null) {
 function collection($id) {
   return json_decode(R::getCell('SELECT products FROM collection WHERE id = :id',[':id' => $id]),true);
 }
-
+/**
+ * Returns a users specified cell value from user table
+ * @param int $id is the ID number of the user.
+ * @param String $attribute is the cell name
+ * @return Value of cell
+ */
 function getUserAttribute($id,$attribute) {
   return R::getCell('SELECT '.$attribute.' FROM user WHERE id = :id',[':id' => $id]);
 }
-
-function getUsers($id){
+/**
+ * Function returns array of all users showing the id, username,
+ * email, coins, firstname, lastname, reg_date last_online, banned of all users.
+ *
+ * @return Array with RedBean objects of the users
+ */
+function getUsers(){
   return R::getAll( 'SELECT id, username,
   email, coins, firstname, lastname, reg_date last_online, banned FROM user' );
 }
-
+/**
+ * Function toggles wether the user is banned or not by setting the "banned" value in the user table.
+ *
+ * @param int $id is the ID number of the user.
+ * @return banned int value from user table
+ */
 function banUser($id){
   $user = R::load('user',$id);
   $user->banned == 0 ? $user->banned = 1 : $user->banned = 0;
   R::store($user);
   return $user->banned;
 }
-
+/**
+ * Checks if the user has been banned.
+ *
+ * @param int $id is the ID number of the user.
+ * @return boolean
+ */
 function isBanned($id){
   if (R::getCell('select banned from user where id= :id',[':id'=>$id]) > 0) {
     logout();

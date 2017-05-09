@@ -30,6 +30,10 @@ function generateTrades() {
     });
 }
 
+/**
+ * Hides confirm buttons after its confirmed
+ */
+
 function hideConfirmButtons() {
     $('.shop_confirm').fadeOut();
     $('.yes_btn').fadeOut();
@@ -37,6 +41,10 @@ function hideConfirmButtons() {
         $('.buy-button').fadeIn();
     });
 }
+
+/**
+ * Shows confirmation buttons after buy-button is clicked
+ */
 
 function showConfirmButtons() {
     $('.buy-button').fadeOut(function () {
@@ -73,6 +81,10 @@ function generateProducts() {
         });
     });
 }
+
+/**
+ * Generates a view with the products
+ */
 
 function generateItemView(url, callback) {
     $('.infos').html('');
