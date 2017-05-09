@@ -30,6 +30,8 @@ function getChat(){
  * Delete a chat entry from the database.
  *
  * Deletes a chat entry from the database based on the given chat message ID
+ * @param int ID of chat message
+ * @return string Message of success
  */
 function deleteChat($id) {
     $msg = R::load('chatroom',$id);

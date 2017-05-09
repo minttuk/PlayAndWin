@@ -1,5 +1,13 @@
 <?php
 
+/**
+* Add a referral to the database
+*
+*@param int $id ID of the referral sender
+*@param String $friendEmail Email address of the referred user
+*@param String $name Name of the referred user
+*@return String Success or error message
+*/
 function referFriend($id,$friendEmail,$name) {
     if (!$friendEmail || !$name) return 'Missing parameters';
     $checkUsers = R::findOne('user','email = :email',[':email'=>$friendEmail]);
@@ -21,6 +29,12 @@ function referFriend($id,$friendEmail,$name) {
     return 'This person is already a registered user!';
 }
 
+/**
+* Check if a referral exists in the database
+*
+*@param Sting $email Email address of a user
+*@return boolean Referral exists or not
+*/
 function handleReferral($email) {
     $referral = R::findOne('referrals','friend_email = :email',[':email'=>$email]);
     if ($referral) {

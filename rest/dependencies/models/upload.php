@@ -1,4 +1,11 @@
 <?php
+
+/**
+* Uploads an image file to the server and names it after the user id, then links the image to the user in the database.
+*
+*@param int $id A user id
+*@return String Possible error message
+*/
 function uploadImage($id) {
     $target_dir = "../images/user/";
     $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
