@@ -7,7 +7,7 @@ var sessionId;
   });
 
 /**
- * Gets the username of the currently signed in user from the server and sets it to a variable
+ * Gets the highscores and adds them to the html of #hihgscores
  */
 function getScoreTable() {
   $.ajax({url: '/rest/score/'+getLastDir()+'?table',
@@ -16,11 +16,13 @@ function getScoreTable() {
 }
 
 /**
- * Gets the username of the currently signed in user from the server and sets it to a variable
+ * Takes the current location and finds the last URI component of the location and return it
+ *
+ *@returns {string} the last URI component
  */
 function getLastDir() {
   var last = window.location.href.split('/');
-  var last = last.pop();
+  last = last.pop();
   if (last == 'profile' || last == '')
     return '';
   return decodeURIComponent(last.replace('#',''));
@@ -66,6 +68,11 @@ $("#private-profile-form").submit(function(e) {
     submitUserInfo($(this).serialize());
 });
 
+/**
+ * Submits the User Info form data and hides the #editprofilemodal if succesful
+ *
+ *@param {string} The serialized User Info form data
+ */
 function submitUserInfo(params) {
     $.ajax({ url: '/rest/user?' + params, type: 'PUT',
       success: function (response){
@@ -241,6 +248,8 @@ function showFriendActionButton() {
 
 /**
  * Gets friendship wether users are mutual friends, the friendship is unconfirmed or no requests at all
+ *
+ *@param {function} a callback function
  */
 
 function getFriendship(callback) {
@@ -282,6 +291,8 @@ function getUserInfo() {
 
 /**
  * Updates information on the profile page
+ *
+ *@param {object} Ajax response object
  */
 
 function updateProfile(response) {
@@ -300,6 +311,8 @@ function updateProfile(response) {
 
 /**
  * Fills fields with user information in the user profile
+ *
+ *@param {object} Ajax response object
  */
 
 function showProfileInformation(response) {
@@ -373,6 +386,8 @@ function initFriendActionButton() {
 
 /**
  * Prefills user edit form with current data
+ *
+ *@param {object} Ajax response object
  */
 
 function prefillEditForm(response) {
@@ -471,7 +486,7 @@ function getLastLoggedIn() {
 }
 
 /**
- * Gets max 8 users that were last signed up on the site
+ * Gets max 8 users that last registered to the site
  */
 
 function getNewUsers() {
@@ -493,7 +508,11 @@ function getNewUsers() {
 $('#mycollectionbutton').click(function (){
   getCollection();
 });
-
+/**
+ * Redeems an item and either fades out the item from view of adjusts the it's amount
+ *
+ *@param {int} Product id
+ */
 function redeemItem(id) {
     $.post('/rest/collection/redeem', {product: id}, function(data){
       data < 1 ? ($('#item_'+id).fadeOut(500)) : ($('#amt_'+id).text(data));
