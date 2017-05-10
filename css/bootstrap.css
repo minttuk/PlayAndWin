@@ -1600,7 +1600,7 @@ pre code {
 }
 @media (min-width: 1200px) {
   .container {
-    width: 1170px;
+    width: 1200px;
   }
 }
 .container-fluid {
@@ -3637,7 +3637,7 @@ tbody.collapse.in {
 }
 @media (min-width: 768px) {
   .navbar-right .dropdown-menu {
-    right: 0;
+    right: 10px;
     left: auto;
   }
   .navbar-right .dropdown-menu-left {
@@ -6566,7 +6566,7 @@ button.close {
   border: 0;
 }
 .hidden {
-  display: none !important;
+  display: none;
 }
 .affix {
   position: fixed;

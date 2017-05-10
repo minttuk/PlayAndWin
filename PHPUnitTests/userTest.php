@@ -3,116 +3,67 @@
 
 use phpunit\Framework\TestCase;
 echo "xxxxx" . getcwd();
-//include './Backend/php/connection.php';
-//require './Backend/php/rb.php';
-require '../Backend/php/user.php';
+require_once '../rest/dependencies/require_all.php';
 
 final class userTest extends TestCase {
 
+  /*
+  * Tests that checkEmpty() function turns empty space into null
+  */
   public function testcheckEmpty() {
     $this->assertEquals(null, checkEmpty(''));
     $this->assertEquals('moi', checkEmpty('moi'));
     $this->assertEquals(null, checkEmpty('   '));
   }
 
+  /*
+  * Tests that getAdmin() returns 1 for a user that is an admin
+  */
+  public function testgetAdmin(){
+        $this->expectOutputString(null, getAdmin(-1));
+        $this->expectOutputString(1, getAdmin(2)['admin']);
+  }
+
+  /*
+  * Tests that getUserInfo returns right information by username
+  */
   public function testgetUserInfo() {
-    $info = getUserInfo('0');
-    $this->assertArrayHasKey('error', $info);
-    $this->assertArrayNotHasKey('username', $info);
-    $info = getUserInfo('1');
-    $this->assertArrayHasKey('username', $info);
-    $info = getUserInfo('100');
-    $this->assertArrayHasKey('error', $info);
-    $this->assertArrayNotHasKey('username', $info);
+    $info = getUserInfo('Bobby');
+    $this->assertEquals('Bobby', $info['username']);
   }
 
-  public function testsetUserInfo() {
-    setUserInfo('2', 'assert', 'equal', '  ', 'Hong Kong');
-    $user = getUserInfo('2');
-    $this->assertEquals('assert', $user['firstname']);
+  /*
+  * Tests that user information can be edited with setUserInfo() function
+  */
+  public function testsetUserPublicInfo() {
+    setUserPublicInfo(2, ' ', 'Hong Kong');
+    $user = getUserInfo('Boss');
+    $this->assertEquals('Hong Kong', $user['location']);
     $this->assertEquals(null, $user['description']);
-    setUserInfo('2', 'admin', 'admin', '', '');
+    setUserPublicInfo(2, '', '');
   }
 
-  public function testgetFriendsCount() {
-    deleteFriend('1', '2');
-    $this->assertEquals("0", getFriendsCount('1'));
-    addFriend('1', '2');
-    $this->assertEquals("0", getFriendsCount('1'));
-    addFriend('2', '1');
-    $this->assertEquals("1", getFriendsCount('1'));
-    deleteFriend('1', '2');
-    $this->assertEquals("0", getFriendsCount('1'));
-  }
+    /**
+     * Tests that user private information is rightly edited
+     */
+    public function testsetUserPrivateInfo() {
+        setUserPrivateInfo(2, 'assert', 'equal', 'male');
+        $user = getUserInfo('Boss');
+        $this->assertEquals('assert', $user['firstname']);
+        setUserPrivateInfo(2, 'admin', 'admin', '', '');
+    }
 
-  public function testaddFriend() {
-    $this->assertEquals(addFriend('-1', '2'), ['message' => 'No session id']);
-    $this->assertEquals(addFriend('1', '2'), ['message' => 'Friend added succesfully!']);
-    $this->assertEquals(addFriend('1', '2'), ['message' => 'Friend has already been added']);
-  }
-
-  public function testdeleteFriend() {
-    $this->assertEquals(deleteFriend('-1', '2'), ['message' => 'No session id']);
-    $this->assertEquals(deleteFriend('1', '2'), ['message' => 'Friend deleted succesfully!']);
-  }
-
-  public function testgetFriendship() {
-    $friendship = getFriendship('1', '2');
-    $rows = count($friendship);
-    $this->assertEquals('0', $rows);
-    addFriend('1', '2');
-    $friendship = getFriendship('1', '2');
-    $rows = count($friendship);
-    $this->assertEquals('1', $rows);
-    addFriend('2', '1');
-    $friendship = getFriendship('1', '2');
-    $rows = count($friendship);
-    $this->assertEquals('2', $rows);
-    deleteFriend('1', '2');
-  }
-
-  public function testgetMutualFriends() {
-    deleteFriend('1', '2');
-    $this->assertEquals('0', count(getMutualFriends('1')));
-    addFriend('1', '2');
-    $this->assertEquals('0', count(getMutualFriends('1')));
-    addFriend('2', '1');
-    $this->assertEquals('1', count(getMutualFriends('1')));
-    $this->assertEquals('Boss', getMutualFriends('1')[0]['username']);
-    deleteFriend('1', '2');
-  }
-
-  public function testgetFriendRequests() {
-    deleteFriend('1', '2');
-    $this->assertEquals('0', count(getFriendRequests('1')));
-    addFriend('2', '1');
-    $this->assertEquals('1', count(getFriendRequests('1')));
-    $this->assertEquals('Boss', getFriendRequests('1')[0]['username']);
-    addFriend('1', '2');
-    $this->assertEquals('0', count(getFriendRequests('1')));
-    deleteFriend('1', '2');
-  }
-
-  public function testgetPendingFriends() {
-    deleteFriend('1', '2');
-    $this->assertEquals('0', count(getPendingFriends('1')));
-    addFriend('2', '1');
-    $this->assertEquals('0', count(getPendingFriends('1')));
-    deleteFriend('1', '2');
-    addFriend('1', '2');
-    $this->assertEquals('1', count(getPendingFriends('1')));
-    $this->assertEquals('Boss', getPendingFriends('1')[0]['username']);
-    addFriend('2', '1');
-    $this->assertEquals('0', count(getPendingFriends('1')));
-    deleteFriend('1', '2');
-  }
-
+  /*
+  * Tests that getLastLoggedIn returns a bunch of users
+  */
   public function testgetLastLoggedIn() {
     $this->assertTrue('1' < count(getLastLoggedIn()));
   }
 
+  /*
+  * Tests that getNewUsers returns a bunch of users
+  */
   public function testgetNewUsers() {
     $this->assertTrue('1' < count(getNewUsers()));
   }
-
 }

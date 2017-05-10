@@ -1,0 +1,85 @@
+body {
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+h4 {
+  font-weight: bold;
+}
+
+@media (max-width: 1200px){}
+
+.modal-content {
+  text-align: center;
+}
+
+.emoji {
+  cursor: pointer; cursor: hand;
+  margin-bottom: 4px;
+}
+
+.modal-body {
+  margin-left: 17px;
+  font-size: 1.2em;
+  height: 45vh;
+  overflow-y: auto;
+}
+
+.modal-dialog {
+  overflow-y: initial !important;
+}
+
+.modal-backdrop {
+  background-color: rgba(255, 255, 255, 0);
+}
+
+.msg {
+  box-shadow: 5px 5px 3px #888888;
+  background-color: #d2e2fa;
+  border-radius: 10px;
+  padding: 10px 10px 10px 10px;
+}
+
+.btn-info {
+  width:250px;
+}
+
+.emoji_btn {
+  font-size: 20px;
+  padding: 6px 6px;
+}
+
+#blue {
+  color: steelblue;
+}
+
+#emoji_search {
+  font-size: 1.5em;
+  font-weight: bold;
+  width:250px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.input-group {
+  visibility: hidden;;
+  margin-top: 20px;
+}
+
+p {
+  font-size: 1.3em;
+  word-wrap: break-word;
+}
+
+#chatbox {
+  position: relative;
+  height: 100%; /* Or whatever you want (eg. 400px) */
+}
+
+img {
+    display: block;
+    margin: 0 auto;
+}
+
+#padding{
+  padding-top: 30vh;
+}

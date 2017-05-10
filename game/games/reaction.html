@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Reaction Tester</title>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/localization/jquery.i18n.properties.min.js"></script>
+    <link href='styles.css' rel='stylesheet' type='text/css'>
+</head>
+
+<body onLoad="startColor()">
+
+    <div id="text">
+        <p><span id='game_yourscore'>Your score</span>: <span id="result"></span></br>
+          <span id='game_yourhighscore'>Your highscore</span>: <span id="score"></span>
+        </p>
+    </div>
+
+    <div id="box"></div>
+
+    <div id="start">
+        <h1 id="game_start">START</h1>
+        <p id='reaction_desc'>Press the shapes as fast as you can 5 times!</p>
+    </div>
+    <script src="/localization/localize.js"></script>
+    <script src="script.js"></script>
+    <script>
+        var timer;
+        var score;
+        var reactionTotal;
+        var boxStyle = document.getElementById("box").style;
+        var startCircle = document.getElementById("start").style;
+        var dialog = document.getElementById("text").style;
+
+        function makeBox() {
+
+            var boxShape = Math.random() * 60 + 5 + "px";
+            var time = (Math.random() * 700);
+            var boxVertical = Math.random() * window.innerHeight - 100;
+            var boxHorizontal = Math.random() * window.innerWidth - 100;
+
+            while (boxVertical < 100) {
+                boxVertical = Math.random() * window.innerHeight - 100;
+            }
+            while (boxHorizontal < 100) {
+                boxHorizontal = Math.random() * window.innerWidth - 100;
+            }
+            setTimeout(function() {
+                var timelimit;
+                boxStyle.borderRadius = boxShape;
+                boxStyle.display = "block";
+                boxStyle.background = '#' + Math.round(0xffffff * Math.random()).toString(16);
+                boxStyle.left = boxHorizontal + "px";
+                boxStyle.top = boxVertical + "px";
+                if (score < 10) timelimit = 2000/parseFloat('1.'+score);
+                else if (score > 20) timelimit = 2100/parseFloat('3.'+score);
+                else timelimit = 1800/parseFloat('2.'+score);
+                timer = setTimeout(gameOver,timelimit);
+                console.log(timelimit);
+            }, time);
+        }
+
+        document.getElementById("box").onclick = function() {
+            clearTimeout(timer);
+            score++;
+            update();
+            this.style.display = "none";
+            makeBox();
+        }
+
+        document.getElementById("start").onclick = function() {
+            score = 0;
+            startCircle.display = "none";
+            dialog.display = "none";
+            begin();
+            makeBox();
+        }
+
+        function gameOver() {
+          document.getElementById("box").style.display = "none";
+          //document.getElementById("again").innerHTML = "Again?";
+          showMenu('reaction');
+        }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,112 @@
+.shop_title {
+    cursor: pointer; cursor: hand;
+}
+
+.shop_add_close {
+    bottom:73px;
+}
+
+.trade_add_close {
+    bottom:81px;
+}
+
+.trade_edit_close {
+    bottom:93px;
+}
+
+#shop_prizes:hover, #shop_trades:hover{
+    transform: scale(1.1);
+    color:#5301eb;
+    font-size: 40px;
+}
+
+.button{
+    margin:auto;
+    display:block;
+    padding: 7px 15px;
+    background-color: transparent;
+    border: 2px solid rgb(2, 24, 136);
+    outline: transparent;
+	color:rgb(2, 24, 136);
+}
+.button:hover {
+	color: #FFf;
+    border: 2px solid #FF166D;
+	background:#FF166D;
+}
+.item_buttons {
+    margin:auto;
+    display:block;
+    padding: 7px 15px;
+    background-color: transparent;
+    border: 2px solid #FFf;
+    outline: transparent;
+  	color: #FFF;
+}
+.item_buttons:hover {
+    color: rgb(2, 24, 136);
+    border: 2px solid rgb(2, 24, 136);
+}
+
+.yes_btn, .no_btn {
+    float:right;
+    display:none;
+}
+
+.yes_btn {
+    margin-right:5px;
+}
+
+.shop_confirm {
+    margin:5px 0 0 0 !important;
+    width:138px !important;
+    display: none;
+    animation:blink normal 1.5s infinite ease-in-out;
+}
+
+@keyframes blink {
+    0% {color: rgba(255,255,255,1)}
+    50% {color: rgba(255,255,255,0.2)}
+    100% {color: rgba(255,255,255,1)}
+}
+
+.trade_btn {
+   display:inline-block;
+   margin-right:5px;
+   margin-bottom: 10px;
+}
+/*.span3 {
+    border-bottom: none;
+    padding: 15px 0px;
+}*/
+.span4 {
+    border-bottom: none;
+    padding: 15px 0px;
+}
+.errormsg {
+    color: red;
+}
+.buy_message {
+		min-height: 42px;
+    padding-top: 15px;
+}
+
+ .product_name, .product_cost, .product_amount {
+   text-transform: uppercase;
+ }
+/*
+@media (min-width: 601px) and (min-height: 1100px){
+  .copyright {
+    bottom: 25px;
+    left: 0;
+    position: absolute;
+    right: 0;
+  }
+  html,body{
+      height: 100%
+  }
+}
+*/
+#addProductButton{
+    display: none;
+}

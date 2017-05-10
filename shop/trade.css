@@ -1,0 +1,128 @@
+#user_collection {
+  cursor: pointer; cursor: hand;
+  margin-top: 10px;
+  border-radius: 5px;
+  position:absolute;
+  width:300px;
+  border: 1px solid lightgrey;
+  background-color: #fff;
+  display: table;
+  margin: 0 auto;
+  left: 50%;
+  margin-left: -150px;
+}
+
+.left {
+  text-align: left;
+}
+
+#addTradeProductModal h2 {
+  font-size: 1.5em;
+}
+
+.item_name {
+  padding-bottom: 5px;
+}
+
+.greyrow {
+  background-color: #fafafa;
+}
+
+.collectionrow {
+  min-height: 70px;
+  padding-top: 10px;
+  left:15px;
+  position: relative;
+  width:298px;
+}
+
+.collectionrow:hover{
+  background-color: #acd5ff;
+}
+
+.item_img {
+  padding-bottom: 10px;
+  padding-left: 15px;
+  float: left;
+  max-height:100px;
+  width:auto;
+  max-width:100px;
+}
+
+.buy-button{
+    margin:auto;
+    display:block;
+    padding: 7px 15px;
+    background-color: transparent;
+    border: 2px solid #FFf;
+    outline: transparent;
+  	color: #FFF;
+}
+.buy-button:hover {
+    color: rgb(2, 24, 136);
+    border: 2px solid rgb(2, 24, 136);
+}
+/*.span3 {
+    border-bottom: none;
+    padding: 15px 0px;
+}*/
+.span4 {
+    border-bottom: none;
+    padding: 15px 0px;
+}
+.errormsg {
+    color: red;
+    padding: 10px;
+    font-weight: bold;
+}
+
+.successmsg {
+  color: green;
+  text-align: center;
+  padding: 10px;
+  font-weight: bold;
+}
+
+.buy_message {
+		min-height: 42px;
+    padding-top: 15px;
+}
+
+ .product_name, .product_cost, .product_amount {
+   text-transform: uppercase;
+ }
+/*
+@media (min-width: 601px) and (min-height: 1100px){
+  .copyright {
+    bottom: 25px;
+    left: 0;
+    position: absolute;
+    right: 0;
+  }
+  html,body{
+      height: 100%
+  }
+}
+*/
+#addTradeProductButton{
+    display: block;
+}
+
+.prefilled {
+  color: grey;
+}
+
+#managetrades {
+  display: none;
+  padding: 50px;
+}
+
+td, th {
+    padding: 5px;
+    border-bottom: 1px #f5f3f3 solid;
+    width: 33%;
+}
+
+.btn {
+  margin-left: 5px;
+}

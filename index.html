@@ -1,76 +1,91 @@
-<!--A Design by W3layouts
-Author: W3layout
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<title>Play and Win</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-<!-- css -->
-<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-<link rel="stylesheet" href="css/flexslider.css" type="text/css" media="screen" property="" />
-<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
-<!--// css -->
-<!-- font -->
-<link href='//fonts.googleapis.com/css?family=Josefin+Sans:400,100,100italic,300,300italic,400italic,600,600italic,700,700italic' rel='stylesheet' type='text/css'>
-<link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
-<!-- //font -->
-<script src="js/jquery.min.js"></script>
-<script src="js/bootstrap.js"></script>
-<!-- flavicon -->
-<link rel="apple-touch-icon" sizes="180x180" href="images/flavicon/apple-touch-icon.png">
-<link rel="icon" type="image/png" href="images/flavicon/favicon-32x32.png" sizes="32x32">
-<link rel="icon" type="image/png" href="images/flavicon/favicon-16x16.png" sizes="16x16">
-<link rel="manifest" href="images/flavicon/manifest.json">
-<link rel="mask-icon" href="images/flavicon/safari-pinned-tab.svg" color="#5bbad5">
-<meta name="theme-color" content="#ffffff">
 
+<head>
+	<title>Play Talk .Win</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<script type="application/x-javascript">
+		addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); }
+	</script>
+	<!-- css -->
+	<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+	<link rel="stylesheet" href="css/flexslider.css" type="text/css" media="screen" property="" />
+	<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="localization/flags/css/flag-icon.min.css" rel="stylesheet" type="text/css" media="all" />
+	<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css"
+	/>
+	<!--// css -->
+	<!-- font -->
+	<link href='//fonts.googleapis.com/css?family=Josefin+Sans:400,100,100italic,300,300italic,400italic,600,600italic,700,700italic'
+	 rel='stylesheet' type='text/css'>
+	<link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic'
+	 rel='stylesheet' type='text/css'>
+	<!-- //font -->
+	<script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.js"></script>
+	<script src="localization/jquery.i18n.properties.min.js"></script>
+	<!-- flavicon -->
+	<link rel="apple-touch-icon" sizes="180x180" href="images/flavicon/apple-touch-icon.png">
+	<link rel="icon" type="image/png" href="images/flavicon/favicon-32x32.png" sizes="32x32">
+	<link rel="icon" type="image/png" href="images/flavicon/favicon-16x16.png" sizes="16x16">
+	<link rel="manifest" href="images/flavicon/manifest.json">
+	<link rel="mask-icon" href="images/flavicon/safari-pinned-tab.svg" color="#5bbad5">
+	<meta name="theme-color" content="#ffffff">
 </head>
+
 <body>
-<!-- Header -->
+	<!-- Header -->
 	<div class="header">
 		<!-- Navbar -->
 		<nav class="navbar navbar-default">
 			<div class="container">
 
 				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+					 aria-controls="navbar">
 						<span class="sr-only">Toggle navigation</span>
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a  href="index.html"><h1>Play and win <img src="images/c1.png" alt=" " /></h1></a>
+					<a href="/">
+						<h1>Play Talk .Win <img src="images/c1.png" alt=" " /></h1>
+					</a>
 				</div>
 
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav navbar-right">
-						<li class="hover-effect"><a href="index.html">Home</a></li>
-						<li class="hover-effect"><a href="webstore.html">Shop</a></li>
-						<li class="hover-effect" id="prof"><a href="profile.html">Profile</a></li>
-						<li class="hover-effect"><a href="community.html">Community</a></li>
-						<li class="sign-in signUp"><a data-toggle="modal" data-target="#loginModal" onclick="signUpForm()">Sign Up</a></li>
-						<li class="sign-in"><a class='signIn' data-toggle="modal" data-target="#loginModal" onclick="signInForm()">Sign in</a></li>
+						<li class="hover-effect"><a id='navbar_home' href="/">Home</a></li>
+						<li class="hover-effect"><a id='navbar_shop' href="/shop">Shop</a></li>
+						<li class="hover-effect" id="prof"><a id='navbar_profile' href="/profile">Profile</a></li>
+						<li class="hover-effect"><a id='navbar_community' href="/community">Community</a></li>
+						<li class="hover-effect sign-in signUp"><a id='navbar_signup' data-toggle="modal" data-target="#loginModal" onclick="signUpForm()">Sign Up</a></li>
+						<li class="hover-effect sign-in"><a id='navbar_signin' class='signIn' data-toggle="modal" data-target="#loginModal" onclick="signInForm()">Sign in</a></li>
+						<li class="dropdown" id='lang'>
+							<a id='navbar_language' class="dropdown-toggle" data-toggle="dropdown" href="/"><span id='curLang'><span class="flag-icon flag-icon-us"></span> EN<span class="caret"></span></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="javascript:changeLanguage('en');"><span class="flag-icon flag-icon-us"></span> EN</a></li>
+								<li><a href="javascript:changeLanguage('fi');"><span class="flag-icon flag-icon-fi"></span> FI</a></li>
+								<li><a href="javascript:changeLanguage('ja');"><span class="flag-icon flag-icon-jp"></span> JP</a></li>
+							</ul>
+						</li>
 					</ul>
+				</div>
+			</div>
+			<div id="loginModal" class="modal fade" role="dialog">
+				<div class="modal-dialog">
+					<div id="login" class="modal-content">
+						<div class="modal-body">
+							<form id="signForm" method="post"></form>
+							<button class="form_close_btn" data-dismiss="modal" data-target="#loginModal">Cancel</button>
+						</div>
+					</div>
 				</div>
 			</div>
 		</nav>
 		<!-- //Navbar -->
-		<div id="loginModal" class="modal fade" role="dialog">
-			<div class="modal-dialog">
-				<div id="login" class="modal-content">
-					<div class="modal-body">
-						<form id="signForm" method="post"/>
-					</div>
-				</div>
-			</div>
-		</div>
-		<script src="js/loginForm.js"></script>
 		<!-- Slider -->
 		<div class="slider">
 			<ul class="rslides" id="slider">
@@ -108,42 +123,42 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<!-- //Header -->
 
 	<!-- new games -->
-	<div class="new-w3-agile" id ='games'>
+	<div class="new-w3-agile" id='games'>
 		<div class="container">
-			<h3>Games</h3>
-			<a href="game.html#reaction">
+			<h3 id='fp_games'>Games</h3>
+			<a href="/game/#reaction">
 				<div class="col-md-3 new-grid-w3l view view-eighth">
 					<img src="images/ng1.png" alt=" " />
 					<div class="mask">
 						<h4>Speed Click</h4>
-						<p>Click to play</p>
+						<p class='fp_click2play'>Click to play</p>
 					</div>
 				</div>
 			</a>
-			<a href="game.html#snake">
+			<a href="/game/#snake">
 				<div class="col-md-3 new-grid-w3l view view-eighth">
 					<img src="images/ng2.png" alt=" " />
 					<div class="mask">
 						<h4>Disco Snake</h4>
-						<p>Click to play</p>
+						<p class='fp_click2play'>Click to play</p>
 					</div>
 				</div>
 			</a>
-			<a href="game.html#flappy">
+			<a href="/game/#flappy">
 				<div class="col-md-3 new-grid-w3l view view-eighth">
 					<img src="images/ng3.png" alt=" " />
 					<div class="mask">
 						<h4>Flutter Bird</h4>
-						<p>Click to play</p>
+						<p class='fp_click2play'>Click to play</p>
 					</div>
 				</div>
 			</a>
-			<a href="game.html#jumper">
+			<a href="/game/#jumper">
 				<div class="col-md-3 new-grid-w3l view view-eighth">
 					<img src="images/ng4.png" alt=" " />
 					<div class="mask">
 						<h4>Jumper Man</h4>
-						<p>Click to play</p>
+						<p class='fp_click2play'>Click to play</p>
 					</div>
 				</div>
 			</a>
@@ -152,44 +167,68 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	</div>
 	<!-- //new games-->
 
-<!-- services-->
-<div class="services-agileits-w3layouts">
-	<div class="container">
-		<h3>Start Today</h3>
-		<div class="col-md-3 service-grid-agileits service-grid-agileits-top">
-			<span class="glyphicon glyphicon-sort-by-attributes" aria-hidden="true"></span>
-			<h4>Create an account</h4>
-			<p>Create an account and sign-in to save your  high-scores, challenge friends, and much more.</p>
-			<a href="">Create Account</a>
+	<!--Referral Modal-->
+	<div class="modal fade" id="referModal" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title" id='refer_title'>Refer a Friend</h4>
+				</div>
+				<div class="modal-body">
+					<p class='text-center' id='refer_desc'>Please enter your friends information.</p>
+					<form id='referral_form'>
+						<input id='refer_name' type="text" pattern='[a-zA-Z]{1,16}$' class="text form_required" name="name" placeholder='Name' required
+						 title="">
+						<input id='refer_email' type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" class="text form_required" name="email"
+						 placeholder='Email' required title="">
+						<input id='refer_submit_btn' type="submit" class="more_btn" name="submit" value="Send Referral">
+						<p id="referral_msg"></p>
+					</form>
+					<button class="form_close_btn" data-toggle="modal" data-target="#referModal">Cancel</button>
+				</div>
+			</div>
 		</div>
-		<div class="col-md-3 service-grid-agileits">
-			<span class="glyphicon glyphicon-random" aria-hidden="true"></span>
-			<h4>Play Games</h4>
-			<p>Play any or all of the games available to you to free and thats not all. Playing will also earn you coins!</p>
-			<a href="javascript:scrollToGames();">Play a Game</a>
-		</div>
-		<div class="col-md-3 service-grid-agileits service-grid-agileits-bottom">
-			<span class="glyphicon glyphicon-yen" aria-hidden="true"></span>
-			<h4>Refer Friends</h4>
-			<p>There is no reason to play alone, so refer friends to challenge. Refering new users will also earn you coins!</p>
-			<a href="profile.html">Refer a Friend</a>
-		</div>
-		<div class="col-md-3 service-grid-agileits service-grid-agileits-bottom">
-			<span class="glyphicon glyphicon-object-align-right" aria-hidden="true"></span>
-			<h4>Spend Coins</h4>
-			<p>Visit the shop to spend your coins on a large variety of merchendise, incuding digital goodies and gift cards.</p>
-			<a href="webstore.html">Visit Shop</a>
-		</div>
-		<div class="clearfix"></div>
 	</div>
-</div>
-<!-- //services-->
 
-<!-- trend -->
-<div class="trend-w3layouts">
-	<div class="container">
-		<h2>Top Sponsors</h2>
-		<ul id="flexiselDemo1">
+	<!-- services-->
+	<div class="services-agileits-w3layouts">
+		<div class="container">
+			<h3 id='fp_starttoday'>Start Today</h3>
+			<div class="col-md-3 service-grid-agileits service-grid-agileits-top">
+				<span class="glyphicon glyphicon-sort-by-attributes" aria-hidden="true"></span>
+				<h4 id='fp_createaccount'>Create an account</h4>
+				<p id='fp_createaccount_text'>Create an account and sign-in to save your high-scores, challenge friends, and much more.</p>
+				<a id='fp_createaccount_btn' data-toggle="modal" data-target="#loginModal" onclick="signUpForm()">Create Account</a>
+			</div>
+			<div class="col-md-3 service-grid-agileits">
+				<span class="glyphicon glyphicon-random" aria-hidden="true"></span>
+				<h4 id='fp_playgames'>Play Games</h4>
+				<p id='fp_playgames_text'>Play any or all of the games available to you to free and thats not all. Playing will also earn you coins!</p>
+				<a id='fp_playgame_btn' href="javascript:scrollToGames();">Play a Game</a>
+			</div>
+			<div class="col-md-3 service-grid-agileits service-grid-agileits-bottom">
+				<span class="glyphicon glyphicon-yen" aria-hidden="true"></span>
+				<h4 id='fp_refer'>Refer Friends</h4>
+				<p id='fp_refer_text'>There is no reason to play alone, so refer friends to challenge. Refering new users will also earn you coins!</p>
+				<a id='fp_refer_btn' data-toggle="modal" data-target="#referModal">Refer a Friend</a>
+			</div>
+			<div class="col-md-3 service-grid-agileits service-grid-agileits-bottom">
+				<span class="glyphicon glyphicon-object-align-right" aria-hidden="true"></span>
+				<h4 id='fp_spendcoins'>Spend Coins</h4>
+				<p id='fp_spendcoins_text'>Visit the shop to spend your coins on a large variety of merchendise, incuding digital goodies and gift cards.</p>
+				<a id='fp_shop_btn' href="/shop">Visit Shop</a>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+	</div>
+	<!-- //services-->
+
+	<!-- trend -->
+	<div class="trend-w3layouts">
+		<div class="container">
+			<h2 id='fp_sponsors'>Top Sponsors</h2>
+			<ul id="flexiselDemo1">
 				<li>
 					<div class="trend-grid">
 						<h4>Coca Cola</h4>
@@ -215,40 +254,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					</div>
 				</li>
 			</ul>
-						<script type="text/javascript">
-							$(window).load(function() {
-								$("#flexiselDemo1").flexisel({
-									visibleItems: 4,
-									animationSpeed: 1000,
-									autoPlay: true,
-									autoPlaySpeed: 3000,
-									pauseOnHover: true,
-									enableResponsiveBreakpoints: true,
-									responsiveBreakpoints: {
-										portrait: {
-											changePoint:480,
-											visibleItems: 2
-										},
-										landscape: {
-											changePoint:640,
-											visibleItems:3
-										},
-										tablet: {
-											changePoint:768,
-											visibleItems: 4
-										}
-									}
-								});
-
-							});
-					</script>
-					<script type="text/javascript" src="js/jquery.flexisel.js"></script>
+		</div>
 	</div>
-</div>
-<!-- //trend -->
-
-
-<div class="services-bottom-w3-agileits">
+	<!-- //trend -->
+	<div class="services-bottom-w3-agileits">
 		<div class="container">
 			<div class="wthree_info">
 				<section class="slider">
@@ -256,115 +265,116 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						<ul class="slides">
 							<li>
 								<div class="wthree_info_grid">
-									<h3>Play games to earn coins!</h3>
-									<p>The better you play the more you can earn.</p>
-									<a href="javascript:scrollToGames();" class="learn">Learn More</a>
+									<h3 id='slider_playgames'>Play games to earn coins!</h3>
+									<p id='slider_playgames_text'>The better you play the more you can earn.</p>
+									<a href="javascript:scrollToGames();" class="learn fp_learnmore_btn">Learn More</a>
 								</div>
 							</li>
 							<li>
 								<div class="wthree_info_grid">
-									<h3>Challenge friends!</h3>
-									<p>Do you think your high score is unbeatable, challenge your friend to see.</p>
-									<a href="community.html" class="learn">Learn More</a>
+									<h3 id='slider_buyprizes'>Buy awesome prizes with your coins!</h3>
+									<p id='slider_buyprizes_text'>Visit the shop to spend your hard earned coins on amazing prizes.</p>
+									<a href="/shop" class="learn fp_learnmore_btn">Learn More</a>
 								</div>
 							</li>
 							<li>
 								<div class="wthree_info_grid">
-									<h3>Buy awesome prizes with your coins!</h3>
-									<p>Visit the shop to spend your hard earned coins on amazing prizes.</p>
-									<a href="webstore.html" class="learn">Learn More</a>
+									<h3 id='slider_challenge'>Challenge friends!</h3>
+									<p id='slider_challenge_text'>Do you think your high score is unbeatable, challenge your friend to see.</p>
+									<a href="/community" class="learn fp_learnmore_btn">Learn More</a>
+								</div>
+							</li>
+							<li>
+								<div class="wthree_info_grid">
+									<h3>Welcome!&nbsp;&nbsp;&nbsp;&nbsp;Tervetuloa!</h3>
+									<h3>歓迎する！</h3>
+									<p>
+										</br>
+										</br>We support English! Language options are in the top bar.</br>
+										</br>Tuemme suomenkieltä! Yläpalkista löytyy kielivaihtoehdot.</br>
+										</br>日本語をサポートしています。上部のバーで言語を変更します。</p>
 								</div>
 							</li>
 						</ul>
 					</div>
 				</section>
-						<!-- flexSlider -->
-
-							<script defer src="js/jquery.flexslider.js"></script>
-							<script type="text/javascript">
-							$(window).load(function(){
-							  $('.flexslider').flexslider({
-								animation: "slide",
-								start: function(slider){
-								  $('body').removeClass('loading');
-								}
-							  });
-							});
-							function scrollToGames(){
-								$('html, body').animate({
-						        scrollTop: $("#games").offset().top
-						    }, 2000);
-							}
-						  </script>
-						<!-- //flexSlider -->
 			</div>
 		</div>
 	</div>
-
-<!-- footer -->
-<div class="footer">
-	<!-- Saved for possible later use
-	<div class="container">
-		<div class="col-md-3 footer-left-w3">
-			<h4>Contact</h4>
-			<ul>
-				<li><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></li>
-				<li><a href="mailto:example@mail.com"><h6>ex@mail.com</h6></a></li>
-			</ul>
-			<ul>
-				<li><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span></li>
-				<li><h6>+18045678834</h6></li>
-			</ul>
-			<ul>
-				<li><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span></li>
-				<li><h6>4th Avenue,London</h6></li>
-			</ul>
-			<ul>
-				<li><span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span></li>
-				<li><h6>(0033)6544 5453 644</h6></li>
-			</ul>
-		</div>
-		<div class="col-md-5 footer-middle-w3">
-			<h4>Latest Games</h4>
-			<div class="col-md-3 img-w3-agile">
-				<a href="single.html"><img src="images/ng1.jpg" alt=" " /></a>
-			</div>
-			<div class="col-md-3 img-w3-agile">
-				<a href="single.html"><img src="images/ng2.jpg" alt=" " /></a>
-			</div>
-			<div class="col-md-3 img-w3-agile">
-				<a href="single.html"><img src="images/ng3.jpg" alt=" " /></a>
-			</div>
-			<div class="col-md-3 img-w3-agile">
-				<a href="single.html"><img src="images/ng4.jpg" alt=" " /></a>
-			</div>
-			<div class="col-md-3 img-w3-agile footer-middle-wthree">
-				<a href="single.html"><img src="images/ng5.jpg" alt=" " /></a>
-			</div>
-			<div class="col-md-3 img-w3-agile footer-middle-wthree">
-				<a href="single.html"><img src="images/ng6.jpg" alt=" " /></a>
-			</div>
-			<div class="col-md-3 img-w3-agile footer-middle-wthree">
-				<a href="single.html"><img src="images/ng7.jpg" alt=" " /></a>
-			</div>
-			<div class="col-md-3 img-w3-agile footer-middle-wthree">
-				<a href="single.html"><img src="images/ng8.jpg" alt=" " /></a>
-			</div>
-			<div class="clearfix"></div>
-		</div>
-		<div class="col-md-4 footer-right-w3">
-			<a href="index.html"><h4>Play and Win <img src="images/f1.png" alt=" " /></h4></a>
-			<p>A website designed to allow users to not only play fun games, but also to earn money by having fun doing it.</p>
-			<p class="agileinfo">Spread to word and help us grow. The prizes will only get better over time.</p>
-		</div>
-	-->
+	<!-- footer -->
+	<div class="footer">
 		<div class="clearfix"></div>
 		<div class="copyright">
-			<p>&copy; 2017 Play and Win. All Rights Reserved <span style='color:#cccccc'>| Design by <a style='color:#cccccc' href="http://w3layouts.com/" target="_blank"> W3layouts </span></a></p>
+			<p>&copy; 2017 Play Talk .Win. <span id='footer_cc'>All Rights Reserved</span> <span style='color:#cccccc'>| <span id='footer_design'>Design by</span>				<a style='color:#cccccc' href="http://w3layouts.com/" target="_blank"> W3layouts </span></a></p>
 		</div>
 	</div>
-</div>
+	</div>
+	<!-- //footer -->
+	<script defer src="js/jquery.flexslider.js"></script>
+	<script src="localization/localize.js"></script>
+	<script src="js/jquery.flexisel.js"></script>
+	<script src="js/jquery.flexisel.js"></script>
+	<script src="js/jquery.mousewheel.min.js"></script>
+	<script src="js/jquery.simplr.smoothscroll.min.js"></script>
+	<script type="text/javascript">
+		$(window).load(function () {
 
-<!-- //footer -->
+			$('.flexslider').flexslider({
+				animation: "slide",
+				start: function (slider) {
+					$('body').removeClass('loading');
+				}
+			});
+			$("#flexiselDemo1").flexisel({
+				visibleItems: 4,
+				animationSpeed: 1000,
+				autoPlay: true,
+				autoPlaySpeed: 3000,
+				pauseOnHover: true,
+				enableResponsiveBreakpoints: true,
+				responsiveBreakpoints: {
+					portrait: {
+						changePoint: 480,
+						visibleItems: 2
+					},
+					landscape: {
+						changePoint: 640,
+						visibleItems: 3
+					},
+					tablet: {
+						changePoint: 768,
+						visibleItems: 4
+					}
+				}
+			});
+		});
+		function scrollToGames() {
+			$('html, body').animate({
+				scrollTop: $("#games").offset().top
+			}, 2000);
+		}
+		function cookieMessage() {
+			window.cookieconsent.initialise({
+				"palette": {
+					"popup": {
+						"background": "#3937a3"
+					},
+					"button": {
+						"background": "#e62576"
+					}
+				},
+				// "position": "top",
+				//"static": true,
+				"content": {
+					"message": $.i18n.prop('cookie_message', localStorage.getItem("lang")),
+					"dismiss": $.i18n.prop('cookie_dismiss', localStorage.getItem("lang")),
+					"link": $.i18n.prop('cookie_learnmore', localStorage.getItem("lang"))
+				}
+			});
+		}
+
+	</script>
+	<script src="js/navbar.js"></script>
 </body>
+
 </html>

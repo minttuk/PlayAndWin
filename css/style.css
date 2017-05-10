@@ -1,13 +1,77 @@
+.form-style {
+    background-color:#fff;
+    width:100%;
+    padding-left:10px;
+    height:51px;
+    border: none;
+    border-left: 1px solid rgb(2, 24, 136);
+    border-bottom: 1px solid rgb(2, 24, 136);
+    border-radius: 0px;
+    -webkit-appearance:none;
+	margin: 0 10px 25px 0;
+}
+
+.form-style:focus{
+    outline: none;
+}
+
+.form-style::-webkit-outer-spin-button,
+.form-style::-webkit-inner-spin-button { margin-top: 12px; }
+
 .glyphicon-copyright-mark {
 	top:4px;
 	font-size: 1.1em;
 	-webkit-font-smoothing: antialiased;
 }
 
+label input[type=date]:invalid::-webkit-datetime-edit {
+    color:rgba(2, 24, 136,0.8) !important;
+}
+
+label ::-webkit-input-placeholder{
+	color:rgba(2, 24, 136,0.5) !important;
+}
+
+label {
+	color: rgb(2, 24, 136);
+	width:100%;
+}
+
+label input {
+	font-weight: 400;
+	color:#000;
+}
+
+.form_close_btn, .form_dismiss_btn {
+	position:relative;
+	bottom: 38px;
+	padding: 7px 15px;
+    background-color: transparent;
+    border: 2px solid rgb(2, 24, 136);
+    outline: transparent;
+    color: rgb(2, 24, 136);
+    margin: auto;
+    display: block;
+	float: right;
+}
+
 @media (max-width: 900px){
 	.advertisement {
 		display: none;
 	}
+	#chat-col {
+		width: 100%;
+	}
+
+	#chat-footer {
+		display:none;
+	}
+}
+
+#errorMsg{
+	text-align: center;
+	color:darkblue;
+	font-weight: bold;
 }
 
 #chatwindow {
@@ -18,6 +82,8 @@
 	overflow: hidden;
 	margin: auto;
 }
+
+
 
 #game {
 	max-width: 1000px;
@@ -54,6 +120,14 @@ body a:hover {
 }
 body a:focus, a:hover {
 	text-decoration: none;
+}
+body {
+    padding-right:0px !important;
+    margin-right:0px !important;
+}
+body.modal-open {
+    overflow-y: auto;
+		overflow-x: hidden;
 }
 input[type="button"], input[type="submit"] {
 	transition: 0.5s all;
@@ -101,11 +175,12 @@ img {
 	padding: 10px 0;
 }
 .navbar-header h1{
+	width:312px;
 	color:#fff;
 	font-size:40px;
 }
 .navbar-header img{
-	width:22%;
+	width:20%;
 }
 .navbar-nav>li {
 	padding: 5px 15px;
@@ -210,6 +285,7 @@ img {
 
 .rslides li {
 	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
 	position: absolute;
 	display: none;
 	width: 100%;
@@ -623,7 +699,7 @@ p.agileinfo{
 	.sub-banner{
 		background:url(../images/banner3.jpg) 0px 0px;
 		background-size: cover;
-		min-height:87px;
+		min-height:84px;
 	}
 /*-- //sub-banner--*/
 /*-- about--*/
@@ -807,6 +883,7 @@ figure.effect-zoe p.description {
     -webkit-transition: opacity 0.35s;
     transition: opacity 0.35s;
     -webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
 }
 
 figure.effect-zoe h3,
@@ -1119,6 +1196,7 @@ img.zoom-img {
 	-moz-transition-duration: .5s;
 	-ms-transition-duration: .5s;
 	-o-transition-duration: .5s;
+	transition-duration: .5s;
 }
 img.zoom-img:hover{
     transform: scale(.9);
@@ -1132,8 +1210,10 @@ img.zoom-img:hover{
 	-moz-transition-duration: 750ms;
 	-ms-transition-timing-function: ease-in-out;
 	-o-transition-timing-function: ease-in-out;
+	transition-timing-function: ease-in-out;
 	-ms-transition-duration: 750ms;
 	-o-transition-duration: 750ms;
+	transition-duration: 750ms;
 	overflow: hidden;
 }
 .span1 {
@@ -2046,11 +2126,43 @@ color:rgb(2, 24, 136) !important;
 		padding: 0 10px;
 	}
 }
+@media screen and (min-width: 1400px){
+	#lang{
+		position:absolute;
+		right:0;
+	}
+}
+
+@media screen and (min-width: 1201px){
+	#profileButtons {
+		height:22px;
+	}
+}
+
 @media screen and (max-width: 1200px){
+
+	.modal{
+		margin-top: 70px;
+	}
+
+	.navbar-collapse {
+		margin-top:10px;
+	  padding-right: 0px;
+	  padding-left: 0px;
+	}
+
+	.dropdown-menu {
+		background-color: transparent !important;
+	}
+
+	.dropdown-menu > li > a {
+	color: white !important;
+	}
 
 	.navbar-header h1 {
 		text-align: left;
 		padding-left: 15px;
+		font-size: 2em;
 	}
 	.navbar-default .navbar-toggle {
 		background: transparent;
@@ -2066,11 +2178,11 @@ color:rgb(2, 24, 136) !important;
 		background-color: transparent;
 	}
 	.navbar-header img {
-		width: 7%;
+		width: 13%;
 	}
 	.navbar-nav {
 		margin: 0;
-		background: #02178e;
+		background:rgba(2, 23, 142, 0.8);
 	}
 	.navbar-collapse.in {
 		overflow-y: inherit;
@@ -2423,7 +2535,7 @@ color:rgb(2, 24, 136) !important;
 		font-size: 27px;
 	}
 	.navbar-header img {
-		width: 8%;
+		width: 13%;
 	}
 	.view .mask, .view .content {
 		padding: 67px 0;
@@ -2528,7 +2640,7 @@ color:rgb(2, 24, 136) !important;
 		height: 225px;
 	}
 	.navbar-header img {
-		width: 10%;
+		width: 13%;
 	}
 	.trend-w3layouts h2, .new-w3-agile h3, .services-agileits-w3layouts h3, .services-bottom-w3-agileits h3, .about-agileinfo h2, .team-w3layouts h3, .gallery-w3layouts h2, .contact-agileinfo h2, .events-w3layouts h2 {
 		font-size: 28px;
@@ -2776,4 +2888,27 @@ color:rgb(2, 24, 136) !important;
 	.w3l_categories h3, .w3l_archives h3, .w3agile_flickr_posts h3, .agileits_reply h3, .wthree_blog_left_grid h3, .newsletter h4 {
 		font-size: 1.2em!important;
 	}
+}
+
+.dropdown-menu {
+	border-radius:5px !important;
+	background-color: rgba(255, 255, 255, 0.6);
+	border:none;
+	min-width:60px !important;
+}
+
+.dropdown-toggle {
+	font-weight: bold !important;
+	color: white !important;
+	background-color: transparent !important;
+}
+
+.dropdown-menu > li > a {
+color: rgb(49, 57, 68);
+font-weight: bold !important;
+}
+
+.dropdown-menu > li > a:hover {
+color: #e91e63 !important;
+font-weight: bold !important;
 }

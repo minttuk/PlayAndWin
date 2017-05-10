@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Jumper Man</title>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/phaser/2.6.2/phaser.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/localization/jquery.i18n.properties.min.js"></script>
+    <link href='styles.css' rel='stylesheet' type='text/css'>
+</head>
+
+<body id='jumper' onload='startColor()'>
+    <div id="text">
+        <p><span id='game_yourscore'>Your score</span>: <span id="result"></span></br>
+          <span id='game_yourhighscore'>Your highscore</span>: <span id="score"></span>
+        </p>
+    </div>
+
+    <div id="start">
+        <h1 id="game_start">START</h1>
+        <p id='jumper_desc'>Jump on the platforms and get higher up!</p>
+    </div>
+    <script src="/localization/localize.js"></script>
+    <script src="script.js"></script>
+    <script>
+        var score;
+        var time = Date.now();
+
+        $('#start').click(function() {
+            score = 0;
+            hideMenu();
+            begin();
+            var hasLanded = false;
+            var Jumper = function() {};
+            Jumper.Play = function() {};
+            Jumper.Play.prototype = {
+
+                preload: function() {
+                    this.load.image('hero', 'res/sprite.png');
+                    this.load.image('pixel', 'res/pixel.png');
+                },
+
+                create: function() {
+                    game.scale.pageAlignHorizontally = true;
+                    game.scale.pageAlignVertically = true;
+                    game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
+                    game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+                    game.scale.refresh();
+                    this.pipes = game.add.group();
+                    game.stage.backgroundColor = '#ffffff';
+                    this.physics.startSystem(Phaser.Physics.ARCADE);
+                    this.cameraYMin = 99999;
+                    this.platformYMin = 99999;
+                    this.platformsCreate();
+                    this.heroCreate();
+                    game.input.addPointer();
+                    this.touch = this.input.addPointer();
+                    this.cursor = this.input.keyboard.createCursorKeys();
+                    this.wasd = {
+                      up: this.input.keyboard.addKey(Phaser.Keyboard.W),
+                      left: this.input.keyboard.addKey(Phaser.Keyboard.A),
+                      right: this.input.keyboard.addKey(Phaser.Keyboard.D),
+                    };
+                },
+
+                update: function() {
+                   if (game.input.pointer1.isDown){
+                     console.log('clicked');
+                   }
+                    this.world.setBounds(0, -this.hero.yChange, this.world.width, this.game.height + this.hero.yChange);
+                    this.cameraYMin = Math.min(this.cameraYMin, this.hero.y - this.game.height + 130);
+                    this.camera.y = this.cameraYMin;
+                    this.physics.arcade.collide(this.hero, this.platforms, function() {
+                        if (hasLanded) {
+                            if (Date.now()-time > 500) {
+                            score++;
+                            hasLanded = false;
+                            update();
+                            }
+                            time = Date.now();
+                        }
+                    });
+                    this.heroMove();
+                    this.platforms.forEachAlive(function(elem) {
+                        this.platformYMin = Math.min(this.platformYMin, elem.y);
+                        if (elem.y > this.camera.y + this.game.height) {
+                            elem.kill();
+                            this.platformsCreateOne(this.rnd.integerInRange(0, this.world.width - 100),
+                            this.platformYMin - 100, Math.floor(Math.random() * 80) + 40);
+                        }
+                    }, this);
+                },
+
+                platformsCreate: function() {
+                    this.platforms = this.add.group();
+                    this.platforms.enableBody = true;
+                    this.platforms.createMultiple(10, 'pixel');
+                    this.platformsCreateOne(-16, this.world.height - 16, this.world.width + 16);
+                    for (var i = 0; i < 9; i++) {
+                        this.platformsCreateOne(this.rnd.integerInRange(0, this.world.width - 100),
+                        this.world.height - 100 - 100 * i, Math.floor(Math.random() * 80) + 40);
+                    }
+                },
+
+                platformsCreateOne: function(x, y, width) {
+                    var platform = this.platforms.getFirstDead();
+                    platform.reset(x, y);
+                    platform.scale.x = width;
+                    platform.scale.y = 16;
+                    platform.body.immovable = true;
+                    return platform;
+                },
+
+                heroCreate: function() {
+                    this.hero = game.add.sprite(this.world.centerX, this.world.height - 36, 'hero');
+                    this.hero.anchor.set(0.5);
+                    this.hero.yOrig = this.hero.y;
+                    this.hero.yChange = 0;
+                    this.physics.arcade.enable(this.hero);
+                    this.hero.body.gravity.y = 500;
+                    this.hero.body.checkCollision.up = false;
+                    this.hero.body.checkCollision.left = false;
+                    this.hero.body.checkCollision.right = false;
+                },
+
+                heroMove: function() {
+                    if (this.cursor.left.isDown || this.wasd.left.isDown || (game.input.x < 210 && game.input.activePointer.isDown)) {
+                        this.hero.body.velocity.x = -200;
+                    } else if (this.cursor.right.isDown || this.wasd.right.isDown || (game.input.x > 280 && game.input.activePointer.isDown)) {
+                        this.hero.body.velocity.x = 200;
+                    } else {
+                        this.hero.body.velocity.x = 0;
+                    }
+
+                    if ((this.cursor.up.isDown || this.wasd.up.isDown || (game.input.activePointer.isDown &&
+                        game.input.y < 300)) && this.hero.body.touching.down) {
+                        //console.log('p:y='+this.hero.y+' m:y='+game.input.y)
+                        hasLanded = true;
+                        this.hero.body.velocity.y = -350;
+                    }
+
+                    this.world.wrap(this.hero, this.hero.width / 2, false);
+                    this.hero.yChange = Math.max(this.hero.yChange, Math.abs(this.hero.y - this.hero.yOrig));
+
+                    if (this.hero.y > this.cameraYMin + this.game.height && this.hero.alive) {
+                        game.destroy();
+                        showMenu('jumper');
+                    }
+                }
+            }
+
+            var game = new Phaser.Game(490, 490);
+            game.state.add('Play', Jumper.Play);
+            game.state.start('Play');
+        });
+
+    </script>
+</body>
+
+</html>

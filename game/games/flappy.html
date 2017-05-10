@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Flappy Bird</title>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/phaser/2.6.2/phaser.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="/localization/jquery.i18n.properties.min.js"></script>
+    <link href='styles.css' rel='stylesheet' type='text/css'>
+</head>
+
+<body onload='startColor()'>
+    <div id="text">
+        <p><span id='game_yourscore'>Your score</span>: <span id="result"></span></br>
+          <span id='game_yourhighscore'>Your highscore</span>: <span id="score"></span>
+        </p>
+    </div>
+
+    <div id="start">
+        <h1 id="game_start">START</h1>
+        <p id='flappy_desc'>Press space to jump the bird through the gaps!</p>
+    </div>
+    <script src="/localization/localize.js"></script>
+    <script src="script.js"></script>
+    <script>
+        var score = 0;
+
+        $('#start').click(function() {
+            score = 0
+            hideMenu();
+            begin();
+            var mainState = {
+                preload: function() {
+                    game.load.image('pipe', 'res/pipe.png');
+                    game.load.image('bird', 'res/bird.png');
+                },
+
+                create: function() {
+                    this.doOnce = false;
+                    game.scale.pageAlignHorizontally = true;
+                    game.scale.pageAlignVertically = true;
+                    game.scale.fullScreenScaleMode = Phaser.ScaleManager.SHOW_ALL;
+                    game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+                    game.scale.refresh();
+                    this.pipes = game.add.group();
+                    game.stage.backgroundColor = '#ffffff';
+                    game.physics.startSystem(Phaser.Physics.ARCADE);
+
+                    this.bird = game.add.sprite(100, 100, 'bird');
+                    game.physics.arcade.enable(this.bird);
+                    this.bird.body.gravity.y = 1000;
+
+                    this.timer = game.time.events.loop(1500, this.addRowOfPipes, this);
+                    this.score = 0;
+                    this.labelScore = game.add.text(20, 20, "0", {
+                        font: "30px Arial",
+                        fill: "#aaaaaa"
+                    });
+
+                    this.spaceKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+                    this.spaceKey.onDown.add(this.jump, this);
+                    game.input.addPointer();
+                    game.input.onDown.add(this.jump, this);
+                },
+
+                update: function() {
+                    game.physics.arcade.overlap(
+                        this.bird, this.pipes, this.gameOver, null, this);
+                    if (this.bird.y < 0 || this.bird.y > 490)
+                        this.gameOver();
+                },
+                jump: function() {
+                    this.bird.body.velocity.y = -350;
+                },
+
+                gameOver: function() {
+                    game.destroy();
+                    showMenu('flappy');
+                },
+
+                addOnePipe: function(x, y) {
+                    var pipe = game.add.sprite(x, y, 'pipe');
+                    this.pipes.add(pipe);
+                    game.physics.arcade.enable(pipe);
+                    pipe.body.velocity.x = -200;
+                    pipe.checkWorldBounds = true;
+                    pipe.outOfBoundsKill = true;
+                },
+
+                addRowOfPipes: function() {
+                    var hole = Math.floor(Math.random() * 5) + 1;
+                    if (this.doOnce) {
+                      score += 1;
+                      update();
+                    }
+                    else this.doOnce = true;
+                    this.labelScore.text = score;
+                    for (var i = 0; i < 8; i++)
+                        if (i != hole && i != hole + 1)
+                            this.addOnePipe(490, i * 60 + 10);
+                },
+            };
+
+            var game = new Phaser.Game(490, 490);
+            game.state.add('main', mainState);
+            game.state.start('main');
+        });
+
+    </script>
+</body>
+
+</html>
