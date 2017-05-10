@@ -5,43 +5,43 @@ var colorshift = true;
 
 $('#chatbox').perfectScrollbar();
 
-$.get("emoji.html", function(data) {
+$.get("emoji.html", function (data) {
     $('.modal-body').html(data);
-    $('.emoji_option').click(function() {
+    $('.emoji_option').click(function () {
         $('#msgbox').val($('#msgbox').val() + ' ' + $(this).text());
         $(".modal").modal('hide');
     });
 });
 
-$("#emoji_search").keyup(function(e) {
+$("#emoji_search").keyup(function (e) {
     var query = $("#emoji_search").val().toLowerCase();
-    $('.emoji_option').each(function(i) {
+    $('.emoji_option').each(function (i) {
         if ($(this).attr('title').includes(query)) $(this).show();
         else $(this).hide();
     });
 });
 
-$("#msgbox").keydown(function(e) {
+$("#msgbox").keydown(function (e) {
     if (e.which == 13) sendMsg();
     if (e.which == 17) $(".modal").modal('show');
 });
 
-$('.modal-body').keydown(function(e) {
+$('.modal-body').keydown(function (e) {
     if (e.which == 13) {
         $('#msgbox').val($('#msgbox').val() + ' ' + $(':focus').text());
         $(".modal").modal('hide');
     }
 });
 
-$('.modal').on('hidden.bs.modal', function() {
+$('.modal').on('hidden.bs.modal', function () {
     setTimeout(inputFocus, 10);
 });
 
-$('.modal').on('shown.bs.modal', function(e) {
+$('.modal').on('shown.bs.modal', function (e) {
     $('#emoji_search').focus();
 })
 
-$(document).ready(function() {
+$(document).ready(function () {
     setInterval(updateChat, 1000);
     loadChat();
 });
@@ -50,18 +50,18 @@ $(document).ready(function() {
  * Loads and appends the user table to the page html
  */
 function loadChat() {
-        $.ajax({
+    $.ajax({
         url: "/rest/chat?html",
         datatype: 'html',
-        success: function(result) {
+        success: function (result) {
             $(".msg-wrap").html(result);
             $('#loading').remove();
             $('#padding').remove();
             $('.input-group').css('visibility', 'visible');
-            $('.user_name').each(function() {
+            $('.user_name').each(function () {
                 if ($(this).text() == 'guest') $(this).text($.i18n.prop('chat_guest'), localStorage.getItem("lang"));
             });
-            $('.timestamp').each(function() {
+            $('.timestamp').each(function () {
                 $(this).text(localizeDateTime($(this).text()));
             });
             $('#chatbox').scrollTop($('#chatbox')[0].scrollHeight);
@@ -69,7 +69,7 @@ function loadChat() {
             inputFocus();
         }
     });
-    $.getJSON("/rest/chat", function(result) {
+    $.getJSON("/rest/chat", function (result) {
         prevResult = result[result.length - 1].id;
     });
 }
@@ -80,7 +80,7 @@ function loadChat() {
 function sendMsg() {
     $.post("/rest/chat", {
         message: $('#msgbox').val().emojify(),
-    }, function(data) {
+    }, function (data) {
         $('#msgbox').val('');
         inputFocus();
         updateChat();
@@ -91,7 +91,7 @@ function sendMsg() {
  * Updates the chat and appends new chat messages to the page html
  */
 function updateChat() {
-    $.getJSON("/rest/chat", function(result) {
+    $.getJSON("/rest/chat", function (result) {
         if (result[result.length - 1].id != prevResult) {
             doOnce = true;
             prevResult = result[result.length - 1].id;

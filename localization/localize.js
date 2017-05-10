@@ -4,7 +4,7 @@ loadLanguage();
  * Loads the needed language file based on a local storage value and
  * changes the text of the html elements on the page to those on the language file
  */
-function loadLanguage(){
+function loadLanguage() {
   if (!localStorage.getItem("lang") || localStorage.getItem("lang") == "undefined")
     localStorage.setItem("lang", 'en');
 
@@ -27,7 +27,7 @@ function loadLanguage(){
     async: true,
     cache: true,
     language: localStorage.getItem("lang"),
-    callback: function() {
+    callback: function () {
       // Frontpage
       $("#fp_games").text(fp_games);
       $(".fp_click2play").text(fp_click2play);
@@ -56,10 +56,10 @@ function loadLanguage(){
       $("#refer_title").text(refer_title);
       $("#refer_desc").text(refer_desc);
       $("#refer_submit_btn").val(refer_submit_btn);
-      $("#refer_name").attr('placeholder',form_name);
-      $("#refer_name").attr('title',form_valid_name);
-      $("#refer_email").attr('placeholder',form_email);
-      $("#refer_email").attr('title',form_valid_email);
+      $("#refer_name").attr('placeholder', form_name);
+      $("#refer_name").attr('title', form_valid_name);
+      $("#refer_email").attr('placeholder', form_email);
+      $("#refer_email").attr('title', form_valid_email);
       // Navbar
       $("#navbar_home").text(navbar_home);
       $("#navbar_shop").text(navbar_shop);
@@ -78,8 +78,8 @@ function loadLanguage(){
       $("#jumper_desc").text(jumper_desc);
       //Chat
       $("#chat_send").text(chat_send);
-      $("#msgbox").attr('placeholder',chat_write);
-      $("#emoji_search").attr('placeholder',chat_emoji);
+      $("#msgbox").attr('placeholder', chat_write);
+      $("#emoji_search").attr('placeholder', chat_emoji);
       //Footer
       $("#footer_cc").text(footer_cc);
       $("#footer_design").text(footer_design);
@@ -165,10 +165,10 @@ function loadLanguage(){
       $(".form_close_btn").text(form_close_btn);
       $(".form_dismiss_btn").text(form_dismiss_btn);
       $(".close_friends_btn").text(form_dismiss_btn);
-      $('.edit_name').attr('title',form_valid_name);
-      $('.password_input').attr('title',form_valid_password);
-      $('.form_required').attr('oninvalid','this.setCustomValidity("'+form_required+'")');
-      $('.form_required').attr('onchange','this.setCustomValidity("")');
+      $('.edit_name').attr('title', form_valid_name);
+      $('.password_input').attr('title', form_valid_password);
+      $('.form_required').attr('oninvalid', 'this.setCustomValidity("' + form_required + '")');
+      $('.form_required').attr('onchange', 'this.setCustomValidity("")');
 
       if (typeof updateLogoutButton == 'function') updateLogoutButton();
       if (typeof generateProducts == 'function') generateProducts();
@@ -183,11 +183,11 @@ function loadLanguage(){
  * Changes the langage setting saved in local storage to the given language and calls the loadLanguage() function
  * @param {string} lang an ISO 639-1 language code
  */
-function changeLanguage(lang){
+function changeLanguage(lang) {
   localStorage.setItem("lang", lang);
   loadLanguage();
-  if(document.getElementById("chatwindow")) document.getElementById('chatwindow').contentWindow.location.reload();
-  if(document.getElementById('game')) document.getElementById('game').contentWindow.loadLanguage();
+  if (document.getElementById("chatwindow")) document.getElementById('chatwindow').contentWindow.location.reload();
+  if (document.getElementById('game')) document.getElementById('game').contentWindow.loadLanguage();
   if (typeof getCollection == 'function') getCollection();
   if (typeof getUsername == 'function') getUsername();
 }
@@ -197,21 +197,21 @@ function changeLanguage(lang){
  * @param {string} text text to be translated
  * @param {function} callback callback function
  */
-function translate(text,callback){
-  $.get( "https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl="+localStorage.getItem("lang")+"&dt=t&q="+ encodeURI(text), function( data ) {
+function translate(text, callback) {
+  $.get("https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=" + localStorage.getItem("lang") + "&dt=t&q=" + encodeURI(text), function (data) {
     callback(JSON.parse(data.split(',,').join(',"",').split(',,').join(',"",'))[0][0][0]);
-  },'text');
+  }, 'text');
 }
 
 /**
  * Localizes a standardized utc datetime to the users timezone and language setting
-* @param {string} dateTime an ISO-8601 datetime string
+ * @param {string} dateTime an ISO-8601 datetime string
  */
 function localizeDateTime(dateTime) {
   // Adjust to user's timezone
   var t = dateTime.split(/[- :]/);
-  var dateTimeUTC = Date.UTC(t[0], t[1]-1, t[2], t[3], t[4], t[5]);
-  dateTime = new Date(dateTimeUTC-new Date().getTimezoneOffset()*60000).toISOString().substring(0, 19).replace('T', ' ');
+  var dateTimeUTC = Date.UTC(t[0], t[1] - 1, t[2], t[3], t[4], t[5]);
+  dateTime = new Date(dateTimeUTC - new Date().getTimezoneOffset() * 60000).toISOString().substring(0, 19).replace('T', ' ');
   // Time
   var time = dateTime.split(" ")[1].split(':');
   var hours = Number(time[0]);
@@ -223,29 +223,29 @@ function localizeDateTime(dateTime) {
   var month = Number(date[1]);
   var year = Number(date[0]);
   // Format time and date
-	switch(localStorage.getItem("lang")) {
+  switch (localStorage.getItem("lang")) {
     case 'en':
-        date = month+'/'+day+'/'+ year;
-        if (hours > 0 && hours <= 12)
-          time= "" + hours;
-        else if (hours > 12)
-          time= "" + (hours - 12);
-        else if (hours == 0)
-          time= "12";
-        time += (minutes < 10) ? ":0" + minutes : ":" + minutes;
-        time += (seconds < 10) ? ":0" + seconds : ":" + seconds;
-        time += (hours >= 12) ? " P.M." : " A.M.";
-        break;
+      date = month + '/' + day + '/' + year;
+      if (hours > 0 && hours <= 12)
+        time = "" + hours;
+      else if (hours > 12)
+        time = "" + (hours - 12);
+      else if (hours == 0)
+        time = "12";
+      time += (minutes < 10) ? ":0" + minutes : ":" + minutes;
+      time += (seconds < 10) ? ":0" + seconds : ":" + seconds;
+      time += (hours >= 12) ? " P.M." : " A.M.";
+      break;
     case 'fi':
-        date = day+'.'+month+'.'+year;
-        time = time[0]+':'+time[1]+':'+time[2];
-        break;
+      date = day + '.' + month + '.' + year;
+      time = time[0] + ':' + time[1] + ':' + time[2];
+      break;
     case 'ja':
-     		date = new Date(dateTimeUTC).toLocaleDateString('ja-JP-u-ca-japanese').substring(0, 4)+'年'+month+'月'+day+'日';
-        time = hours+'時'+minutes+'分'+seconds+'秒';
-        break;
+      date = new Date(dateTimeUTC).toLocaleDateString('ja-JP-u-ca-japanese').substring(0, 4) + '年' + month + '月' + day + '日';
+      time = hours + '時' + minutes + '分' + seconds + '秒';
+      break;
     default:
-        return dateTime;
-	}
+      return dateTime;
+  }
   return date + '\xa0\xa0' + time;
 }

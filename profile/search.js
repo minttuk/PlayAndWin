@@ -13,16 +13,16 @@ $('#remote .typeahead').typeahead(null, {
   displayKey: 'name',
   source: names,
   templates: {
-    empty: ['<h5><b>' + $.i18n.prop('search_nouser',localStorage.getItem("lang")) + '</b></h5>'],
-    suggestion: function(data){
-          return '<a class="resultlink" href="/profile/'+data.name
-          +'"><div class="result"><img class="searchimage" src="/images/user/'
-          +data.image+'"><b>&nbsp;&nbsp;'+data.name+'</b></div></a>';
+    empty: ['<h5><b>' + $.i18n.prop('search_nouser', localStorage.getItem("lang")) + '</b></h5>'],
+    suggestion: function (data) {
+      return '<a class="resultlink" href="/profile/' + data.name +
+        '"><div class="result"><img class="searchimage" src="/images/user/' +
+        data.image + '"><b>&nbsp;&nbsp;' + data.name + '</b></div></a>';
     }
   }
 });
 
-$('#search').click(function(){
+$('#search').click(function () {
   if (search) {
     mobileView();
     $('#remote').toggle(500);
@@ -30,18 +30,20 @@ $('#search').click(function(){
   }
   search = false;
 });
-$('#searchbar').focusout(function(){
+$('#searchbar').focusout(function () {
   $('#remote .typeahead').typeahead('val', '');
-  $('#remote').toggle(500, function(){
+  $('#remote').toggle(500, function () {
     mobileView();
   });
-  setTimeout(function(){search = true;},500);
+  setTimeout(function () {
+    search = true;
+  }, 500);
 });
 
 /**
  * Toggle the search text off on mobile devices
  */
-function mobileView(){
-  if($( window ).width() < 500)
+function mobileView() {
+  if ($(window).width() < 500)
     $('#search').toggle();
 }

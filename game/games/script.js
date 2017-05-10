@@ -28,7 +28,7 @@ function showMenu(gameID) {
         window.parent.updateCoins();
         if (data.message != '')
             alert(data.message);
-    },'json');
+    }, 'json');
     startColor();
     $('#result').html(score);
     $('#game_start').text($.i18n.prop('game_again'), localStorage.getItem("lang"));

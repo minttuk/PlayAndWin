@@ -21,8 +21,10 @@
 	<link href="/localization/flags/css/flag-icon.min.css" rel="stylesheet" type="text/css" media="all" />
 	<!--// css -->
 	<!-- font -->
-	<link href='//fonts.googleapis.com/css?family=Josefin+Sans:400,100,100italic,300,300italic,400italic,600,600italic,700,700italic' rel='stylesheet' type='text/css'>
-	<link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+	<link href='//fonts.googleapis.com/css?family=Josefin+Sans:400,100,100italic,300,300italic,400italic,600,600italic,700,700italic'
+	 rel='stylesheet' type='text/css'>
+	<link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic'
+	 rel='stylesheet' type='text/css'>
 	<!-- //font -->
 	<script src="../js/jquery.min.js"></script>
 	<script src="../js/bootstrap.js"></script>
@@ -35,26 +37,27 @@
 	<link rel="mask-icon" href="../images/flavicon/safari-pinned-tab.svg" color="#5bbad5">
 	<meta name="theme-color" content="#ffffff">
 	<style>
-
-	#content {
-	    padding-top: 15vh;
-	}
-	@media (min-width: 601px) and (min-height: 900px){
-		.copyright {
-			bottom: 25px;
-			left: 0;
-			position: absolute;
-			right: 0;
+		#content {
+			padding-top: 15vh;
 		}
-		html,body{
+
+		@media (min-width: 601px) and (min-height: 900px) {
+			.copyright {
+				bottom: 25px;
+				left: 0;
+				position: absolute;
+				right: 0;
+			}
+			html,
+			body {
 				height: 100%
+			}
 		}
-	}
-	#sad {
-		width:400px;
-		height:400px;
-	}
 
+		#sad {
+			width: 400px;
+			height: 400px;
+		}
 	</style>
 </head>
 
@@ -66,13 +69,16 @@
 			<div class="container">
 
 				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+					 aria-controls="navbar">
 						<span class="sr-only">Toggle navigation</span>
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a href="/"><h1>Play Talk .Win <img src="../images/c1.png" alt=" " /></h1></a>
+					<a href="/">
+						<h1>Play Talk .Win <img src="../images/c1.png" alt=" " /></h1>
+					</a>
 				</div>
 
 				<div id="navbar" class="navbar-collapse collapse">
@@ -119,7 +125,7 @@
 					<br />
 					<h3>Don't worry you will be redirected to the homepage in <span id='seconds'>10 seconds</span>.</h3>
 					<br />
-					<img src='../images/sad.png' id='sad'/>
+					<img src='../images/sad.png' id='sad' />
 				</div>
 			</div>
 		</div>
@@ -132,7 +138,7 @@
 
 	<div class="clearfix"></div>
 	<div class="copyright" id='game-cr'>
-		<p>&copy; 2017 Play Talk .Win. <span id='footer_cc'>All Rights Reserved</span> <span style='color:#cccccc'>| <span id='footer_design'>Design by</span> <a style='color:#cccccc' href="http://w3layouts.com/" target="_blank"> W3layouts </span></a></p>
+		<p>&copy; 2017 Play Talk .Win. <span id='footer_cc'>All Rights Reserved</span> <span style='color:#cccccc'>| <span id='footer_design'>Design by</span>			<a style='color:#cccccc' href="http://w3layouts.com/" target="_blank"> W3layouts </span></a></p>
 	</div>
 	</div>
 
@@ -140,18 +146,18 @@
 	<script src="/localization/localize.js"></script>
 	<script src="/js/navbar.js"></script>
 	<script>
-	var sec=10;
-		setTimeout(function() {
+		var sec = 10;
+		setTimeout(function () {
 			window.location.href = '/';
-		},10000);
-		setInterval(function() {
+		}, 10000);
+		setInterval(function () {
 			sec--;
-			if(sec > 1)
-				$('#seconds').html(sec+' seconds');
+			if (sec > 1)
+				$('#seconds').html(sec + ' seconds');
 			else {
-				$('#seconds').html(sec+' second');
+				$('#seconds').html(sec + ' second');
 			}
-		},1000);
+		}, 1000);
 	</script>
 </body>
 

@@ -14,7 +14,7 @@ function generateTrades() {
         $('#trade_add_button').show();
         $('#trade_manage_button').show();
     }
-    generateItemView('/rest/trades/'+localStorage.getItem("lang"), function () {
+    generateItemView('/rest/trades/' + localStorage.getItem("lang"), function () {
         $('.amount_div').hide();
         $('.buy-button').click(function () {
             showConfirmButtons();
@@ -64,7 +64,7 @@ function generateProducts() {
     $('#trade_add_button').hide();
     $('#trade_manage_button').hide();
     $('#managetrades').hide();
-    generateItemView('/rest/products/'+localStorage.getItem("lang"), function () {
+    generateItemView('/rest/products/' + localStorage.getItem("lang"), function () {
         $('.buy-button').click(function () {
             showConfirmButtons()
         });
@@ -98,7 +98,7 @@ function generateItemView(url, callback) {
                 '<div class="clearfix"></div></div>' +
                 '<div class="span span3 amount_div">' + '<p class="left product_amount"></p><p class="right">' + product.amount + '</p>' +
                 '<div class="clearfix"></div></div>' +
-                '<div class="span span3"><p class="left shop_confirm">Are you sure?</p><button type="button" class="buy-button item_buttons"></button>'+
+                '<div class="span span3"><p class="left shop_confirm">Are you sure?</p><button type="button" class="buy-button item_buttons"></button>' +
                 '<button class="no_btn item_buttons">No</button><button class="yes_btn item_buttons" data-id="' + product.id + '">Yes</button>' +
                 '<div class="clearfix"></div></div>' +
                 '<div class="span buy_message"><p class="buyMessage" style="text-align:center;font-weight:bold;padding-bottom:0;"></p>' +
@@ -160,5 +160,5 @@ function buyPrize(product_id) {
             updateCoins();
             generateProducts();
             createCollection();
-    });
+        });
 }

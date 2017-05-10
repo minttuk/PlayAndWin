@@ -314,6 +314,7 @@ function fillProductsTable(products) {
 
 function prefillAddproductForm(id) {
   $('#admin-addproductform-heading').text('Edit Product');
+  A
   getProductById(id, function (error, response) {
     $('#admin-product-name-input').val(response.name);
     $('#admin-product-image-input').val(response.image_url);

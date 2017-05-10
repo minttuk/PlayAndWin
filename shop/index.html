@@ -1,9 +1,3 @@
-<!--A Design by W3layouts
-Author: W3layout
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,8 +26,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 	<!--// css -->
 	<!-- font -->
-	<link href='//fonts.googleapis.com/css?family=Josefin+Sans:400,100,100italic,300,300italic,400italic,600,600italic,700,700italic' rel='stylesheet' type='text/css'>
-	<link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
+	<link href='//fonts.googleapis.com/css?family=Josefin+Sans:400,100,100italic,300,300italic,400italic,600,600italic,700,700italic'
+	 rel='stylesheet' type='text/css'>
+	<link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic'
+	 rel='stylesheet' type='text/css'>
 	<!-- //font -->
 	<script src="../js/jquery.min.js"></script>
 	<script src="../js/bootstrap.js"></script>
@@ -55,13 +51,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div class="container">
 
 				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+					 aria-controls="navbar">
 						<span class="sr-only">Toggle navigation</span>
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a href="/"><h1>Play Talk .Win <img src="../images/c1.png" alt=" " /></h1></a>
+					<a href="/">
+						<h1>Play Talk .Win <img src="../images/c1.png" alt=" " /></h1>
+					</a>
 				</div>
 
 				<div id="navbar" class="navbar-collapse collapse">
@@ -107,7 +106,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			</div>
 		</div>
 		<div class='text-center'>
-			<button type="button" class="button trade_btn" id="trade_add_button" data-toggle="modal" data-target="#addTradeProductModal" style='display:none;'>New Trade</button>
+			<button type="button" class="button trade_btn" id="trade_add_button" data-toggle="modal" data-target="#addTradeProductModal"
+			 style='display:none;'>New Trade</button>
 			<button type="button" class="button trade_btn" id="trade_manage_button" style='display:none;'>Manage Trades</button>
 
 		</div>
@@ -154,45 +154,48 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-body">
-					<h2 id="trade_new_heading">New Trade<h2>
-					<form>
-						<h4 id="trade_giveinfo">Give trade information:</h4>
-						<div class="span span1">
-							<!-- Drop down search for products owned by the user -->
-							<p class="left"><span id="trade_product">Product</span>:</p>
-							<input id="formTradeName" class="form-control" type="text" placeholder="">
-							<div id="user_collection" style="display:none;">
-								<div id='noitems' class ='row collectionrow'><h3 id='trade_noitems'>No items found in your collection!</h3></div>
-								<div id="item_div"></div>
-							</div>
-							<div class="clearfix"></div>
-						</div>
-						<input type="hidden" id="formTradeProduct">
-						<div class="span span2">
-							<p class="left"><span id="trade_orgcost">Original Cost</span>:</p>
-								<input type="text" disabled="disabled" id="formTradeOrgcost" class="prefilled">
-							<div class="clearfix"></div>
-						</div>
-						<div class="span span3">
-							<p class="left"><span id="trade_description">Description</span>:</p>
-								<textarea type="text" disabled="disabled" id="formTradeOrgdesc" class="prefilled"></textarea>
-							<div class="clearfix"></div>
-						</div>
-						<div class="span span4">
-							<p class="left"><span id="trade_sellingprice">Selling Price</span>:</p>
-							<input type="number" id="formTradePrice">
-							<div class="clearfix"></div>
-						</div>
-						<p id="trade_product_desc">Additional information (optional)</p>
-						<textarea id="formTradeDescription" rows="4" style="min-width: 100%"></textarea>
-						<div class="span span5">
-							<button type="button" class="button" id="trade_submit_form">Put for Sale</button>
-							<p class='errormsg' id="tradeformerrormsg"></p>
-							<p class='successmsg' id="tradeformsuccessmsg"></p>
-							<div class="clearfix"></div>
-						</div>
-					</form>
-					<button class="form_close_btn trade_add_close" data-dismiss='modal'>Cancel</button>
+					<h2 id="trade_new_heading">New Trade
+						<h2>
+							<form>
+								<h4 id="trade_giveinfo">Give trade information:</h4>
+								<div class="span span1">
+									<!-- Drop down search for products owned by the user -->
+									<p class="left"><span id="trade_product">Product</span>:</p>
+									<input id="formTradeName" class="form-control" type="text" placeholder="">
+									<div id="user_collection" style="display:none;">
+										<div id='noitems' class='row collectionrow'>
+											<h3 id='trade_noitems'>No items found in your collection!</h3>
+										</div>
+										<div id="item_div"></div>
+									</div>
+									<div class="clearfix"></div>
+								</div>
+								<input type="hidden" id="formTradeProduct">
+								<div class="span span2">
+									<p class="left"><span id="trade_orgcost">Original Cost</span>:</p>
+									<input type="text" disabled="disabled" id="formTradeOrgcost" class="prefilled">
+									<div class="clearfix"></div>
+								</div>
+								<div class="span span3">
+									<p class="left"><span id="trade_description">Description</span>:</p>
+									<textarea type="text" disabled="disabled" id="formTradeOrgdesc" class="prefilled"></textarea>
+									<div class="clearfix"></div>
+								</div>
+								<div class="span span4">
+									<p class="left"><span id="trade_sellingprice">Selling Price</span>:</p>
+									<input type="number" id="formTradePrice">
+									<div class="clearfix"></div>
+								</div>
+								<p id="trade_product_desc">Additional information (optional)</p>
+								<textarea id="formTradeDescription" rows="4" style="min-width: 100%"></textarea>
+								<div class="span span5">
+									<button type="button" class="button" id="trade_submit_form">Put for Sale</button>
+									<p class='errormsg' id="tradeformerrormsg"></p>
+									<p class='successmsg' id="tradeformsuccessmsg"></p>
+									<div class="clearfix"></div>
+								</div>
+							</form>
+							<button class="form_close_btn trade_add_close" data-dismiss='modal'>Cancel</button>
 				</div>
 			</div>
 		</div>
@@ -203,25 +206,26 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-body">
-					<h2 id="trade_edit_heading">Edit Trade<h2>
-					<h4 id="trade_edit_product_name"></h4>
-					<form>
-						<input id="trade_to_edit_id" type="hidden">
-						<div class="span span1">
-							<p class="left"><span id="trade_sellingprice">Selling Price</span>:</p>
-							<input type="number" id="formNewTradePrice">
-							<div class="clearfix"></div>
-						</div>
-						<p id="trade_product_desc">Additional information (optional)</p>
-						<textarea id="formNewTradeDescription" rows="4" style="min-width: 100%"></textarea>
-						<div class="span span4"><br>
-							<button type="button" class="button" id="trade_submit_edited_form">Save Changes</button>
-							<p class='errormsg' id="tradeformerrormsg"></p>
-							<p class='successmsg' id="tradeformsuccessmsg"></p>
-							<div class="clearfix"></div>
-						</div>
-					</form>
-					<button class="form_close_btn trade_edit_close" data-dismiss='modal'>Cancel</button>
+					<h2 id="trade_edit_heading">Edit Trade
+						<h2>
+							<h4 id="trade_edit_product_name"></h4>
+							<form>
+								<input id="trade_to_edit_id" type="hidden">
+								<div class="span span1">
+									<p class="left"><span id="trade_sellingprice">Selling Price</span>:</p>
+									<input type="number" id="formNewTradePrice">
+									<div class="clearfix"></div>
+								</div>
+								<p id="trade_product_desc">Additional information (optional)</p>
+								<textarea id="formNewTradeDescription" rows="4" style="min-width: 100%"></textarea>
+								<div class="span span4"><br>
+									<button type="button" class="button" id="trade_submit_edited_form">Save Changes</button>
+									<p class='errormsg' id="tradeformerrormsg"></p>
+									<p class='successmsg' id="tradeformsuccessmsg"></p>
+									<div class="clearfix"></div>
+								</div>
+							</form>
+							<button class="form_close_btn trade_edit_close" data-dismiss='modal'>Cancel</button>
 				</div>
 			</div>
 		</div>
@@ -235,19 +239,29 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<h4 id="shop_contact">Contact</h4>
 				<ul>
 					<li><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></li>
-					<li><a href="mailto:support@playtalk.win"><h6>support@playtalk.win</h6></a></li>
+					<li>
+						<a href="mailto:support@playtalk.win">
+							<h6>support@playtalk.win</h6>
+						</a>
+					</li>
 				</ul>
 				<ul>
 					<li><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span></li>
-					<li><h6 id="shop_phonenum">+358-123456789</h6></li>
+					<li>
+						<h6 id="shop_phonenum">+358-123456789</h6>
+					</li>
 				</ul>
 				<ul>
 					<li><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span></li>
-					<li><h6 id='shop_location'>Helsinki, Finland</h6></li>
+					<li>
+						<h6 id='shop_location'>Helsinki, Finland</h6>
+					</li>
 				</ul>
 				<ul>
 					<li><span class="glyphicon glyphicon-user" aria-hidden="true"></span></li>
-					<li><h6 id='shop_livechat'>Live Chat (Offline)</h6></li>
+					<li>
+						<h6 id='shop_livechat'>Live Chat (Offline)</h6>
+					</li>
 				</ul>
 			</div>
 			<div class="col-md-5 footer-middle-w3">
@@ -268,14 +282,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div class="clearfix"></div>
 			</div>
 			<div class="col-md-4 footer-right-w3">
-				<a href="/"><h4>Play Talk .Win <img src="../images/f1.png" alt=" " /> </h4></a>
+				<a href="/">
+					<h4>Play Talk .Win <img src="../images/f1.png" alt=" " /> </h4>
+				</a>
 				<p id="shop_desc1">The shop is where you can spend the coins you have earned on this site on a selection of awesome prizes.</p>
 				<p class="agileinfo" id="shop_desc2">Some prizes are only available for a limited amount of time, but more offers are added frequently so check back soon.</p>
 			</div>
 		</div>
 		<div class="clearfix"></div>
 		<div class="copyright">
-			<p>&copy; 2017 Play Talk .Win. <span id='footer_cc'>All Rights Reserved</span> <span style='color:#cccccc'>| <span id='footer_design'>Design by</span> <a style='color:#cccccc' href="http://w3layouts.com/" target="_blank"> W3layouts </span></a></p>
+			<p>&copy; 2017 Play Talk .Win. <span id='footer_cc'>All Rights Reserved</span> <span style='color:#cccccc'>| <span id='footer_design'>Design by</span>				<a style='color:#cccccc' href="http://w3layouts.com/" target="_blank"> W3layouts </span></a></p>
 		</div>
 	</div>
 	<script src="/localization/localize.js"></script>
