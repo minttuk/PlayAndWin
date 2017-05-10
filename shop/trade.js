@@ -3,7 +3,6 @@ var opentrades;
 /**
  * Submits add trade form
  */
-
 $('#trade_submit_form').click(function () {
   if (checkFilled($('#formTradeName').val()) && checkInt($('#formTradePrice').val()) && checkFilled($('#formTradePrice').val())) {
     $('#tradeformerrormsg').text("");
@@ -28,7 +27,6 @@ $('#trade_submit_form').click(function () {
 /**
  * Empties Trade form
  */
-
 function emptyTradeForm() {
   $('#formTradeName').val("");
   $('#formTradeProduct').val("");
@@ -85,6 +83,9 @@ function addTrade(callback) {
 }
 // Search Stuff
 
+/**
+ * Creates the user collection view with event handlers and appends it to the page html
+ */
 function createCollection(){
   $('#item_div').empty();
   $.getJSON("/rest/collection/"+localStorage.getItem("lang"), function(response){
@@ -151,7 +152,6 @@ function fillTradeForm(response) {
  * @param {int} productid
  * @param {function} callback
  */
-
 function getProductInfo(productid, callback) {
   $.ajax({
       url:'/rest/products/'+productid,
@@ -171,7 +171,6 @@ function getProductInfo(productid, callback) {
  * @param {int} val
  * @returns {boolean}
  */
-
 function checkInt(val) {
   if (Math.floor(val) == val && $.isNumeric(val) && val != null) {
     return true;
@@ -184,7 +183,6 @@ function checkInt(val) {
  * @param {string} val
  * @returns {boolean}
  */
-
 function checkFilled(val) {
   if (val != null && val != "") {
     return true;
@@ -199,7 +197,6 @@ $('#trade_manage_button').click(function () {
 /**
  * Shows open trades, buying and selling history
  */
-
 function getTradeManageInfo() {
   getTradeInfo(function(error, response) {
     opentrades = response['opentrades']
@@ -214,7 +211,6 @@ function getTradeManageInfo() {
  * @param {string} div divname
  * @param {object} response trades
  */
-
 function showMyTrades(div, response) {
   $div = $('#' + div);
   $div.empty();
@@ -249,7 +245,6 @@ function showMyTrades(div, response) {
 /**
  * Resets event handlers for buttons that get greated dynamically
  */
-
 function resetButtonHandlers() {
   $(".trade_edit_button").off("click");
   $(".trade_delete_button").off("click");
@@ -270,7 +265,6 @@ function resetButtonHandlers() {
  * Autofills Edit trade form
  * @param {int} tradeid
  */
-
 function fillEditTradeForm(tradeid) {
   var tradetoedit;
   for (i in opentrades) {
@@ -287,7 +281,6 @@ function fillEditTradeForm(tradeid) {
 /**
  * submit trade edit form
  */
-
 $('#trade_submit_edited_form').click(function(){
   if (checkInt($('#formNewTradePrice').val())) {
     var trade = {"id": $('#trade_to_edit_id').val(), "price": $('#formNewTradePrice').val(), "description": $('#formNewTradeDescription').val()};
@@ -310,7 +303,6 @@ $('#trade_submit_edited_form').click(function(){
 /**
  * Sends form data to database
  */
-
 function saveEditedForm(trade, callback) {
   $.ajax({
       type: "PUT",
@@ -334,7 +326,6 @@ function saveEditedForm(trade, callback) {
  * @param {int} tradeid
  * @param {function} callback
  */
-
 function deleteTrade(tradeid, callback) {
   $.ajax({
       type: 'DELETE',
@@ -355,7 +346,6 @@ function deleteTrade(tradeid, callback) {
  * Gets trade info in the chosen language
  * @param {function} callback
  */
-
 function getTradeInfo(callback) {
   //ajax
   $.ajax({

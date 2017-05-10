@@ -14,7 +14,6 @@ function generateTrades() {
         $('#trade_add_button').show();
         $('#trade_manage_button').show();
     }
-
     generateItemView('/rest/trades/'+localStorage.getItem("lang"), function () {
         $('.amount_div').hide();
         $('.buy-button').click(function () {
@@ -33,7 +32,6 @@ function generateTrades() {
 /**
  * Hides confirm buttons after its confirmed
  */
-
 function hideConfirmButtons() {
     $('.shop_confirm').fadeOut();
     $('.yes_btn').fadeOut();
@@ -45,7 +43,6 @@ function hideConfirmButtons() {
 /**
  * Shows confirmation buttons after buy-button is clicked
  */
-
 function showConfirmButtons() {
     $('.buy-button').fadeOut(function () {
         $('.shop_confirm').fadeIn();
@@ -67,7 +64,6 @@ function generateProducts() {
     $('#trade_add_button').hide();
     $('#trade_manage_button').hide();
     $('#managetrades').hide();
-
     generateItemView('/rest/products/'+localStorage.getItem("lang"), function () {
         $('.buy-button').click(function () {
             showConfirmButtons()
@@ -85,7 +81,6 @@ function generateProducts() {
 /**
  * Generates a view with the products
  */
-
 function generateItemView(url, callback) {
     $('.infos').html('');
     $('.gallery-grid').html('');

@@ -2,24 +2,22 @@ var userId;
 var sessionId;
 
 
-    $('input[type="date"]').attr('max', function(){
-        return new Date().toJSON().split('T')[0];
-    });
+  $('input[type="date"]').attr('max', function(){
+      return new Date().toJSON().split('T')[0];
+  });
 
+/**
+ * Gets the username of the currently signed in user from the server and sets it to a variable
+ */
 function getScoreTable() {
   $.ajax({url: '/rest/score/'+getLastDir()+'?table',
     datatype:'html',success: function(result){$("#highscores").html(result);
   }});
 }
 
-function parseURL(param){
-
-  var results = new RegExp('[\?&]' + param + '=([^&#]*)').exec(window.location.href);
-  if (results==null)
-    return null;
-  return results[1] || 0;
-}
-
+/**
+ * Gets the username of the currently signed in user from the server and sets it to a variable
+ */
 function getLastDir() {
   var last = window.location.href.split('/');
   var last = last.pop();
@@ -28,7 +26,10 @@ function getLastDir() {
   return decodeURIComponent(last.replace('#',''));
 }
 
-function getSession() {
+/**
+ * Gets the username of the currently signed in user from the server and sets it to a variable
+ */
+function getUsername() {
   $.ajax({
       url: "/rest/user",
       type: "get",
@@ -661,7 +662,7 @@ $('#userlocation').click(function(){
 });
 
 getScoreTable();
-getSession();
+getUsername();
 getLastLoggedIn();
 getNewUsers();
 initHandlers();

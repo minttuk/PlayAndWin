@@ -180,7 +180,7 @@ function changeLanguage(lang){
   if(document.getElementById("chatwindow")) document.getElementById('chatwindow').contentWindow.location.reload();
   if(document.getElementById('game')) document.getElementById('game').contentWindow.loadLanguage();
   if (typeof getCollection == 'function') getCollection();
-  if (typeof getSession == 'function') getSession();
+  if (typeof getUsername == 'function') getUsername();
 }
 
 function translate(text,callback){
