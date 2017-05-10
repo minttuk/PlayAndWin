@@ -1,5 +1,10 @@
 loadLanguage();
-function loadLanguage(page){
+
+/**
+ * Loads the needed language file based on a local storage value and
+ * changes the text of the html elements on the page to those on the language file
+ */
+function loadLanguage(){
   if (!localStorage.getItem("lang") || localStorage.getItem("lang") == "undefined")
     localStorage.setItem("lang", 'en');
 
@@ -174,6 +179,10 @@ function loadLanguage(page){
   });
 }
 
+/**
+ * Changes the langage setting saved in local storage to the given language and calls the loadLanguage() function
+ * @param {string} lang an ISO 639-1 language code
+ */
 function changeLanguage(lang){
   localStorage.setItem("lang", lang);
   loadLanguage();
@@ -183,12 +192,21 @@ function changeLanguage(lang){
   if (typeof getUsername == 'function') getUsername();
 }
 
+/**
+ * Translate a given text to the users language settings using the Google Translate API
+ * @param {string} text text to be translated
+ * @param {function} callback callback function
+ */
 function translate(text,callback){
   $.get( "https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl="+localStorage.getItem("lang")+"&dt=t&q="+ encodeURI(text), function( data ) {
     callback(JSON.parse(data.split(',,').join(',"",').split(',,').join(',"",'))[0][0][0]);
   },'text');
 }
 
+/**
+ * Localizes a standardized utc datetime to the users timezone and language setting
+* @param {string} dateTime an ISO-8601 datetime string
+ */
 function localizeDateTime(dateTime) {
   // Adjust to user's timezone
   var t = dateTime.split(/[- :]/);
